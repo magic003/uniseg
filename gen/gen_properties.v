@@ -104,9 +104,15 @@ fn write_grapheme_properties(properties []Property) ! {
 	}
 	file.writeln(emit_module('grapheme') + '\n')!
 	file.writeln(emit_preamble() + '\n')!
+	file.writeln('// GraphemeProp defines the property types used for grapheme cluster boundary detection.')!
 	file.writeln(emit_property_enum('GraphemeProp', unique_property_names(properties), 'gp') + '\n')!
+	file.writeln('// GraphemeCodePoint defines the code point range for a property.')!
 	file.writeln(emit_code_points_struct('GraphemeCodePoint', 'GraphemeProp') + '\n')!
-	file.writeln(emit_property_array(properties, 'GraphemeCodePoint', 'GraphemeProp', 'gp') + '\n')!
+	file.writeln('// grapheme_properties are the properties used for grapheme cluster boundary detection.')!
+	file.writeln('// They are taken from ${grapheme_property_url}\n// and\n// ${emoji_property_url}\n// ("Extended_Pictographic" only).')!
+	file.writeln(
+		emit_property_array('grapheme_properties', properties, 'GraphemeCodePoint', 'GraphemeProp', 'gp') +
+		'\n')!
 }
 
 fn unique_property_names(properties []Property) []string {
@@ -150,10 +156,10 @@ fn emit_code_points_struct(name string, property_enum_name string) string {
 	return res
 }
 
-fn emit_property_array(properties []Property, code_point_struct_name string, enum_name string, prefix string) string {
-	mut res := 'const grapheme_properties = [\n'
+fn emit_property_array(name string, properties []Property, code_point_struct_name string, enum_name string, prefix string) string {
+	mut res := 'const ${name} = [\n'
 	for prop in properties {
-		res += '\t${code_point_struct_name}{0x${prop.from}, 0x${prop.to}, ${enum_name}.${prefix}_${prop.name.to_lower()}},\n'
+		res += '\t${code_point_struct_name}{0x${prop.from}, 0x${prop.to}, ${enum_name}.${prefix}_${prop.name.to_lower()}}, // ${prop.comment}\n'
 	}
 	res += ']'
 	return res
