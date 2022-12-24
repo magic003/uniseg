@@ -1,5 +1,6 @@
 module main
 
+import datatypes
 import net.http
 import regex
 
@@ -59,10 +60,10 @@ fn parse_line(line string) ?Property {
 // unique_property_names extract the unique names from an array of properties, in the same order.
 fn unique_property_names(properties []Property) []string {
 	mut res := []string{}
-	mut prop_set := map[string]Property{}
+	mut prop_set := datatypes.Set[string]{}
 	for prop in properties {
-		if prop.name !in prop_set {
-			prop_set[prop.name] = prop
+		if !prop_set.exists(prop.name) {
+			prop_set.add(prop.name)
 			res << prop.name
 		}
 	}
