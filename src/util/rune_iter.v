@@ -27,6 +27,13 @@ pub fn rune_iter_from_bytes(bytes []u8) RuneIter {
 	}
 }
 
+// rune_iter_from_reader returns a `RuneIter` from a reader.
+pub fn rune_iter_from_reader(reader io.Reader) RuneIter {
+	return ReaderRuneIter{
+		reader: reader
+	}
+}
+
 // BytesRuneIter is a `RuneIter` backed by an array of bytes.
 [noinit]
 struct BytesRuneIter {
@@ -53,7 +60,29 @@ fn (mut self BytesRuneIter) next() ?(rune, int, int) {
 	return r, start, end
 }
 
+// ReaderRuneIter is a `RuneIter` backed by a `io.Reader`.
 [noinit]
 struct ReaderRuneIter {
-	reader io.Reader [required]
+mut:
+	reader        io.Reader [required]
+	current_index int
+}
+
+// next implements the `RuneIter` interface.
+fn (mut self ReaderRuneIter) next() ?(rune, int, int) {
+	mut buf := []u8{len: 1}
+	self.reader.read(mut buf) or { return none }
+
+	ch_len := utf8_char_len(buf[0])
+	start := self.current_index
+	end := self.current_index + ch_len
+	mut ch_bytes := [buf[0]]
+	for _ in (start + 1) .. end {
+		self.reader.read(mut buf) or { return none }
+		ch_bytes << buf[0]
+	}
+	r := ch_bytes.byterune()?
+	self.current_index = end
+
+	return r, start, end
 }
