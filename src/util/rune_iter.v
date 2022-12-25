@@ -1,5 +1,7 @@
 module util
 
+import io
+
 // RuneIter is an interface which iterates over `rune`s. It abstracts the source of the `rune`s and provides
 // a stream-like interface to get `rune` one by one.
 //
@@ -49,4 +51,9 @@ fn (mut self BytesRuneIter) next() ?(rune, int, int) {
 	self.current_index = end
 
 	return r, start, end
+}
+
+[noinit]
+struct ReaderRuneIter {
+	reader io.Reader [required]
 }
