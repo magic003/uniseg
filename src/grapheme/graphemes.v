@@ -13,4 +13,5 @@ pub struct Graphemes {
 }
 
 pub fn (mut self Graphemes) next() ?GraphemeCluster {
+	return none
 }
