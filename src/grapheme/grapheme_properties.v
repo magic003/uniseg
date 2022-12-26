@@ -15,10 +15,10 @@ enum GraphemeProp {
 	gp_l
 	gp_v
 	gp_t
-	gp_regional_indicator
 	gp_zwj
 	gp_lv
 	gp_lvt
+	gp_regional_indicator
 }
 
 // GraphemeCodePoint defines the code point range for a property.
@@ -210,12 +210,9 @@ const grapheme_properties = [
 	GraphemeCodePoint{0x0F8D, 0x0F97, GraphemeProp.gp_extend}, // Mn  [11] TIBETAN SUBJOINED SIGN LCE TSA CAN..TIBETAN SUBJOINED LETTER JA
 	GraphemeCodePoint{0x0F99, 0x0FBC, GraphemeProp.gp_extend}, // Mn  [36] TIBETAN SUBJOINED LETTER NYA..TIBETAN SUBJOINED LETTER FIXED-FORM RA
 	GraphemeCodePoint{0x0FC6, 0x0FC6, GraphemeProp.gp_extend}, // Mn       TIBETAN SYMBOL PADMA GDAN
-	GraphemeCodePoint{0x101FD, 0x101FD, GraphemeProp.gp_extend}, // Mn       PHAISTOS DISC SIGN COMBINING OBLIQUE STROKE
 	GraphemeCodePoint{0x102D, 0x1030, GraphemeProp.gp_extend}, // Mn   [4] MYANMAR VOWEL SIGN I..MYANMAR VOWEL SIGN UU
-	GraphemeCodePoint{0x102E0, 0x102E0, GraphemeProp.gp_extend}, // Mn       COPTIC EPACT THOUSANDS MARK
 	GraphemeCodePoint{0x1031, 0x1031, GraphemeProp.gp_spacingmark}, // Mc       MYANMAR VOWEL SIGN E
 	GraphemeCodePoint{0x1032, 0x1037, GraphemeProp.gp_extend}, // Mn   [6] MYANMAR VOWEL SIGN AI..MYANMAR SIGN DOT BELOW
-	GraphemeCodePoint{0x10376, 0x1037A, GraphemeProp.gp_extend}, // Mn   [5] COMBINING OLD PERMIC LETTER AN..COMBINING OLD PERMIC LETTER SII
 	GraphemeCodePoint{0x1039, 0x103A, GraphemeProp.gp_extend}, // Mn   [2] MYANMAR SIGN VIRAMA..MYANMAR SIGN ASAT
 	GraphemeCodePoint{0x103B, 0x103C, GraphemeProp.gp_spacingmark}, // Mc   [2] MYANMAR CONSONANT SIGN MEDIAL YA..MYANMAR CONSONANT SIGN MEDIAL RA
 	GraphemeCodePoint{0x103D, 0x103E, GraphemeProp.gp_extend}, // Mn   [2] MYANMAR CONSONANT SIGN MEDIAL WA..MYANMAR CONSONANT SIGN MEDIAL HA
@@ -228,197 +225,10 @@ const grapheme_properties = [
 	GraphemeCodePoint{0x1085, 0x1086, GraphemeProp.gp_extend}, // Mn   [2] MYANMAR VOWEL SIGN SHAN E ABOVE..MYANMAR VOWEL SIGN SHAN FINAL Y
 	GraphemeCodePoint{0x108D, 0x108D, GraphemeProp.gp_extend}, // Mn       MYANMAR SIGN SHAN COUNCIL EMPHATIC TONE
 	GraphemeCodePoint{0x109D, 0x109D, GraphemeProp.gp_extend}, // Mn       MYANMAR VOWEL SIGN AITON AI
-	GraphemeCodePoint{0x10A01, 0x10A03, GraphemeProp.gp_extend}, // Mn   [3] KHAROSHTHI VOWEL SIGN I..KHAROSHTHI VOWEL SIGN VOCALIC R
-	GraphemeCodePoint{0x10A05, 0x10A06, GraphemeProp.gp_extend}, // Mn   [2] KHAROSHTHI VOWEL SIGN E..KHAROSHTHI VOWEL SIGN O
-	GraphemeCodePoint{0x10A0C, 0x10A0F, GraphemeProp.gp_extend}, // Mn   [4] KHAROSHTHI VOWEL LENGTH MARK..KHAROSHTHI SIGN VISARGA
-	GraphemeCodePoint{0x10A38, 0x10A3A, GraphemeProp.gp_extend}, // Mn   [3] KHAROSHTHI SIGN BAR ABOVE..KHAROSHTHI SIGN DOT BELOW
-	GraphemeCodePoint{0x10A3F, 0x10A3F, GraphemeProp.gp_extend}, // Mn       KHAROSHTHI VIRAMA
-	GraphemeCodePoint{0x10AE5, 0x10AE6, GraphemeProp.gp_extend}, // Mn   [2] MANICHAEAN ABBREVIATION MARK ABOVE..MANICHAEAN ABBREVIATION MARK BELOW
-	GraphemeCodePoint{0x10D24, 0x10D27, GraphemeProp.gp_extend}, // Mn   [4] HANIFI ROHINGYA SIGN HARBAHAY..HANIFI ROHINGYA SIGN TASSI
-	GraphemeCodePoint{0x10EAB, 0x10EAC, GraphemeProp.gp_extend}, // Mn   [2] YEZIDI COMBINING HAMZA MARK..YEZIDI COMBINING MADDA MARK
-	GraphemeCodePoint{0x10EFD, 0x10EFF, GraphemeProp.gp_extend}, // Mn   [3] ARABIC SMALL LOW WORD SAKTA..ARABIC SMALL LOW WORD MADDA
-	GraphemeCodePoint{0x10F46, 0x10F50, GraphemeProp.gp_extend}, // Mn  [11] SOGDIAN COMBINING DOT BELOW..SOGDIAN COMBINING STROKE BELOW
-	GraphemeCodePoint{0x10F82, 0x10F85, GraphemeProp.gp_extend}, // Mn   [4] OLD UYGHUR COMBINING DOT ABOVE..OLD UYGHUR COMBINING TWO DOTS BELOW
 	GraphemeCodePoint{0x1100, 0x115F, GraphemeProp.gp_l}, // Lo  [96] HANGUL CHOSEONG KIYEOK..HANGUL CHOSEONG FILLER
-	GraphemeCodePoint{0x11000, 0x11000, GraphemeProp.gp_spacingmark}, // Mc       BRAHMI SIGN CANDRABINDU
-	GraphemeCodePoint{0x11001, 0x11001, GraphemeProp.gp_extend}, // Mn       BRAHMI SIGN ANUSVARA
-	GraphemeCodePoint{0x11002, 0x11002, GraphemeProp.gp_spacingmark}, // Mc       BRAHMI SIGN VISARGA
-	GraphemeCodePoint{0x11038, 0x11046, GraphemeProp.gp_extend}, // Mn  [15] BRAHMI VOWEL SIGN AA..BRAHMI VIRAMA
-	GraphemeCodePoint{0x11070, 0x11070, GraphemeProp.gp_extend}, // Mn       BRAHMI SIGN OLD TAMIL VIRAMA
-	GraphemeCodePoint{0x11073, 0x11074, GraphemeProp.gp_extend}, // Mn   [2] BRAHMI VOWEL SIGN OLD TAMIL SHORT E..BRAHMI VOWEL SIGN OLD TAMIL SHORT O
-	GraphemeCodePoint{0x1107F, 0x11081, GraphemeProp.gp_extend}, // Mn   [3] BRAHMI NUMBER JOINER..KAITHI SIGN ANUSVARA
-	GraphemeCodePoint{0x11082, 0x11082, GraphemeProp.gp_spacingmark}, // Mc       KAITHI SIGN VISARGA
-	GraphemeCodePoint{0x110B0, 0x110B2, GraphemeProp.gp_spacingmark}, // Mc   [3] KAITHI VOWEL SIGN AA..KAITHI VOWEL SIGN II
-	GraphemeCodePoint{0x110B3, 0x110B6, GraphemeProp.gp_extend}, // Mn   [4] KAITHI VOWEL SIGN U..KAITHI VOWEL SIGN AI
-	GraphemeCodePoint{0x110B7, 0x110B8, GraphemeProp.gp_spacingmark}, // Mc   [2] KAITHI VOWEL SIGN O..KAITHI VOWEL SIGN AU
-	GraphemeCodePoint{0x110B9, 0x110BA, GraphemeProp.gp_extend}, // Mn   [2] KAITHI SIGN VIRAMA..KAITHI SIGN NUKTA
-	GraphemeCodePoint{0x110BD, 0x110BD, GraphemeProp.gp_prepend}, // Cf       KAITHI NUMBER SIGN
-	GraphemeCodePoint{0x110C2, 0x110C2, GraphemeProp.gp_extend}, // Mn       KAITHI VOWEL SIGN VOCALIC R
-	GraphemeCodePoint{0x110CD, 0x110CD, GraphemeProp.gp_prepend}, // Cf       KAITHI NUMBER SIGN ABOVE
-	GraphemeCodePoint{0x11100, 0x11102, GraphemeProp.gp_extend}, // Mn   [3] CHAKMA SIGN CANDRABINDU..CHAKMA SIGN VISARGA
-	GraphemeCodePoint{0x11127, 0x1112B, GraphemeProp.gp_extend}, // Mn   [5] CHAKMA VOWEL SIGN A..CHAKMA VOWEL SIGN UU
-	GraphemeCodePoint{0x1112C, 0x1112C, GraphemeProp.gp_spacingmark}, // Mc       CHAKMA VOWEL SIGN E
-	GraphemeCodePoint{0x1112D, 0x11134, GraphemeProp.gp_extend}, // Mn   [8] CHAKMA VOWEL SIGN AI..CHAKMA MAAYYAA
-	GraphemeCodePoint{0x11145, 0x11146, GraphemeProp.gp_spacingmark}, // Mc   [2] CHAKMA VOWEL SIGN AA..CHAKMA VOWEL SIGN EI
-	GraphemeCodePoint{0x11173, 0x11173, GraphemeProp.gp_extend}, // Mn       MAHAJANI SIGN NUKTA
-	GraphemeCodePoint{0x11180, 0x11181, GraphemeProp.gp_extend}, // Mn   [2] SHARADA SIGN CANDRABINDU..SHARADA SIGN ANUSVARA
-	GraphemeCodePoint{0x11182, 0x11182, GraphemeProp.gp_spacingmark}, // Mc       SHARADA SIGN VISARGA
-	GraphemeCodePoint{0x111B3, 0x111B5, GraphemeProp.gp_spacingmark}, // Mc   [3] SHARADA VOWEL SIGN AA..SHARADA VOWEL SIGN II
-	GraphemeCodePoint{0x111B6, 0x111BE, GraphemeProp.gp_extend}, // Mn   [9] SHARADA VOWEL SIGN U..SHARADA VOWEL SIGN O
-	GraphemeCodePoint{0x111BF, 0x111C0, GraphemeProp.gp_spacingmark}, // Mc   [2] SHARADA VOWEL SIGN AU..SHARADA SIGN VIRAMA
-	GraphemeCodePoint{0x111C2, 0x111C3, GraphemeProp.gp_prepend}, // Lo   [2] SHARADA SIGN JIHVAMULIYA..SHARADA SIGN UPADHMANIYA
-	GraphemeCodePoint{0x111C9, 0x111CC, GraphemeProp.gp_extend}, // Mn   [4] SHARADA SANDHI MARK..SHARADA EXTRA SHORT VOWEL MARK
-	GraphemeCodePoint{0x111CE, 0x111CE, GraphemeProp.gp_spacingmark}, // Mc       SHARADA VOWEL SIGN PRISHTHAMATRA E
-	GraphemeCodePoint{0x111CF, 0x111CF, GraphemeProp.gp_extend}, // Mn       SHARADA SIGN INVERTED CANDRABINDU
-	GraphemeCodePoint{0x1122C, 0x1122E, GraphemeProp.gp_spacingmark}, // Mc   [3] KHOJKI VOWEL SIGN AA..KHOJKI VOWEL SIGN II
-	GraphemeCodePoint{0x1122F, 0x11231, GraphemeProp.gp_extend}, // Mn   [3] KHOJKI VOWEL SIGN U..KHOJKI VOWEL SIGN AI
-	GraphemeCodePoint{0x11232, 0x11233, GraphemeProp.gp_spacingmark}, // Mc   [2] KHOJKI VOWEL SIGN O..KHOJKI VOWEL SIGN AU
-	GraphemeCodePoint{0x11234, 0x11234, GraphemeProp.gp_extend}, // Mn       KHOJKI SIGN ANUSVARA
-	GraphemeCodePoint{0x11235, 0x11235, GraphemeProp.gp_spacingmark}, // Mc       KHOJKI SIGN VIRAMA
-	GraphemeCodePoint{0x11236, 0x11237, GraphemeProp.gp_extend}, // Mn   [2] KHOJKI SIGN NUKTA..KHOJKI SIGN SHADDA
-	GraphemeCodePoint{0x1123E, 0x1123E, GraphemeProp.gp_extend}, // Mn       KHOJKI SIGN SUKUN
-	GraphemeCodePoint{0x11241, 0x11241, GraphemeProp.gp_extend}, // Mn       KHOJKI VOWEL SIGN VOCALIC R
-	GraphemeCodePoint{0x112DF, 0x112DF, GraphemeProp.gp_extend}, // Mn       KHUDAWADI SIGN ANUSVARA
-	GraphemeCodePoint{0x112E0, 0x112E2, GraphemeProp.gp_spacingmark}, // Mc   [3] KHUDAWADI VOWEL SIGN AA..KHUDAWADI VOWEL SIGN II
-	GraphemeCodePoint{0x112E3, 0x112EA, GraphemeProp.gp_extend}, // Mn   [8] KHUDAWADI VOWEL SIGN U..KHUDAWADI SIGN VIRAMA
-	GraphemeCodePoint{0x11300, 0x11301, GraphemeProp.gp_extend}, // Mn   [2] GRANTHA SIGN COMBINING ANUSVARA ABOVE..GRANTHA SIGN CANDRABINDU
-	GraphemeCodePoint{0x11302, 0x11303, GraphemeProp.gp_spacingmark}, // Mc   [2] GRANTHA SIGN ANUSVARA..GRANTHA SIGN VISARGA
-	GraphemeCodePoint{0x1133B, 0x1133C, GraphemeProp.gp_extend}, // Mn   [2] COMBINING BINDU BELOW..GRANTHA SIGN NUKTA
-	GraphemeCodePoint{0x1133E, 0x1133E, GraphemeProp.gp_extend}, // Mc       GRANTHA VOWEL SIGN AA
-	GraphemeCodePoint{0x1133F, 0x1133F, GraphemeProp.gp_spacingmark}, // Mc       GRANTHA VOWEL SIGN I
-	GraphemeCodePoint{0x11340, 0x11340, GraphemeProp.gp_extend}, // Mn       GRANTHA VOWEL SIGN II
-	GraphemeCodePoint{0x11341, 0x11344, GraphemeProp.gp_spacingmark}, // Mc   [4] GRANTHA VOWEL SIGN U..GRANTHA VOWEL SIGN VOCALIC RR
-	GraphemeCodePoint{0x11347, 0x11348, GraphemeProp.gp_spacingmark}, // Mc   [2] GRANTHA VOWEL SIGN EE..GRANTHA VOWEL SIGN AI
-	GraphemeCodePoint{0x1134B, 0x1134D, GraphemeProp.gp_spacingmark}, // Mc   [3] GRANTHA VOWEL SIGN OO..GRANTHA SIGN VIRAMA
-	GraphemeCodePoint{0x11357, 0x11357, GraphemeProp.gp_extend}, // Mc       GRANTHA AU LENGTH MARK
-	GraphemeCodePoint{0x11362, 0x11363, GraphemeProp.gp_spacingmark}, // Mc   [2] GRANTHA VOWEL SIGN VOCALIC L..GRANTHA VOWEL SIGN VOCALIC LL
-	GraphemeCodePoint{0x11366, 0x1136C, GraphemeProp.gp_extend}, // Mn   [7] COMBINING GRANTHA DIGIT ZERO..COMBINING GRANTHA DIGIT SIX
-	GraphemeCodePoint{0x11370, 0x11374, GraphemeProp.gp_extend}, // Mn   [5] COMBINING GRANTHA LETTER A..COMBINING GRANTHA LETTER PA
-	GraphemeCodePoint{0x11435, 0x11437, GraphemeProp.gp_spacingmark}, // Mc   [3] NEWA VOWEL SIGN AA..NEWA VOWEL SIGN II
-	GraphemeCodePoint{0x11438, 0x1143F, GraphemeProp.gp_extend}, // Mn   [8] NEWA VOWEL SIGN U..NEWA VOWEL SIGN AI
-	GraphemeCodePoint{0x11440, 0x11441, GraphemeProp.gp_spacingmark}, // Mc   [2] NEWA VOWEL SIGN O..NEWA VOWEL SIGN AU
-	GraphemeCodePoint{0x11442, 0x11444, GraphemeProp.gp_extend}, // Mn   [3] NEWA SIGN VIRAMA..NEWA SIGN ANUSVARA
-	GraphemeCodePoint{0x11445, 0x11445, GraphemeProp.gp_spacingmark}, // Mc       NEWA SIGN VISARGA
-	GraphemeCodePoint{0x11446, 0x11446, GraphemeProp.gp_extend}, // Mn       NEWA SIGN NUKTA
-	GraphemeCodePoint{0x1145E, 0x1145E, GraphemeProp.gp_extend}, // Mn       NEWA SANDHI MARK
-	GraphemeCodePoint{0x114B0, 0x114B0, GraphemeProp.gp_extend}, // Mc       TIRHUTA VOWEL SIGN AA
-	GraphemeCodePoint{0x114B1, 0x114B2, GraphemeProp.gp_spacingmark}, // Mc   [2] TIRHUTA VOWEL SIGN I..TIRHUTA VOWEL SIGN II
-	GraphemeCodePoint{0x114B3, 0x114B8, GraphemeProp.gp_extend}, // Mn   [6] TIRHUTA VOWEL SIGN U..TIRHUTA VOWEL SIGN VOCALIC LL
-	GraphemeCodePoint{0x114B9, 0x114B9, GraphemeProp.gp_spacingmark}, // Mc       TIRHUTA VOWEL SIGN E
-	GraphemeCodePoint{0x114BA, 0x114BA, GraphemeProp.gp_extend}, // Mn       TIRHUTA VOWEL SIGN SHORT E
-	GraphemeCodePoint{0x114BB, 0x114BC, GraphemeProp.gp_spacingmark}, // Mc   [2] TIRHUTA VOWEL SIGN AI..TIRHUTA VOWEL SIGN O
-	GraphemeCodePoint{0x114BD, 0x114BD, GraphemeProp.gp_extend}, // Mc       TIRHUTA VOWEL SIGN SHORT O
-	GraphemeCodePoint{0x114BE, 0x114BE, GraphemeProp.gp_spacingmark}, // Mc       TIRHUTA VOWEL SIGN AU
-	GraphemeCodePoint{0x114BF, 0x114C0, GraphemeProp.gp_extend}, // Mn   [2] TIRHUTA SIGN CANDRABINDU..TIRHUTA SIGN ANUSVARA
-	GraphemeCodePoint{0x114C1, 0x114C1, GraphemeProp.gp_spacingmark}, // Mc       TIRHUTA SIGN VISARGA
-	GraphemeCodePoint{0x114C2, 0x114C3, GraphemeProp.gp_extend}, // Mn   [2] TIRHUTA SIGN VIRAMA..TIRHUTA SIGN NUKTA
-	GraphemeCodePoint{0x115AF, 0x115AF, GraphemeProp.gp_extend}, // Mc       SIDDHAM VOWEL SIGN AA
-	GraphemeCodePoint{0x115B0, 0x115B1, GraphemeProp.gp_spacingmark}, // Mc   [2] SIDDHAM VOWEL SIGN I..SIDDHAM VOWEL SIGN II
-	GraphemeCodePoint{0x115B2, 0x115B5, GraphemeProp.gp_extend}, // Mn   [4] SIDDHAM VOWEL SIGN U..SIDDHAM VOWEL SIGN VOCALIC RR
-	GraphemeCodePoint{0x115B8, 0x115BB, GraphemeProp.gp_spacingmark}, // Mc   [4] SIDDHAM VOWEL SIGN E..SIDDHAM VOWEL SIGN AU
-	GraphemeCodePoint{0x115BC, 0x115BD, GraphemeProp.gp_extend}, // Mn   [2] SIDDHAM SIGN CANDRABINDU..SIDDHAM SIGN ANUSVARA
-	GraphemeCodePoint{0x115BE, 0x115BE, GraphemeProp.gp_spacingmark}, // Mc       SIDDHAM SIGN VISARGA
-	GraphemeCodePoint{0x115BF, 0x115C0, GraphemeProp.gp_extend}, // Mn   [2] SIDDHAM SIGN VIRAMA..SIDDHAM SIGN NUKTA
-	GraphemeCodePoint{0x115DC, 0x115DD, GraphemeProp.gp_extend}, // Mn   [2] SIDDHAM VOWEL SIGN ALTERNATE U..SIDDHAM VOWEL SIGN ALTERNATE UU
 	GraphemeCodePoint{0x1160, 0x11A7, GraphemeProp.gp_v}, // Lo  [72] HANGUL JUNGSEONG FILLER..HANGUL JUNGSEONG O-YAE
-	GraphemeCodePoint{0x11630, 0x11632, GraphemeProp.gp_spacingmark}, // Mc   [3] MODI VOWEL SIGN AA..MODI VOWEL SIGN II
-	GraphemeCodePoint{0x11633, 0x1163A, GraphemeProp.gp_extend}, // Mn   [8] MODI VOWEL SIGN U..MODI VOWEL SIGN AI
-	GraphemeCodePoint{0x1163B, 0x1163C, GraphemeProp.gp_spacingmark}, // Mc   [2] MODI VOWEL SIGN O..MODI VOWEL SIGN AU
-	GraphemeCodePoint{0x1163D, 0x1163D, GraphemeProp.gp_extend}, // Mn       MODI SIGN ANUSVARA
-	GraphemeCodePoint{0x1163E, 0x1163E, GraphemeProp.gp_spacingmark}, // Mc       MODI SIGN VISARGA
-	GraphemeCodePoint{0x1163F, 0x11640, GraphemeProp.gp_extend}, // Mn   [2] MODI SIGN VIRAMA..MODI SIGN ARDHACANDRA
-	GraphemeCodePoint{0x116AB, 0x116AB, GraphemeProp.gp_extend}, // Mn       TAKRI SIGN ANUSVARA
-	GraphemeCodePoint{0x116AC, 0x116AC, GraphemeProp.gp_spacingmark}, // Mc       TAKRI SIGN VISARGA
-	GraphemeCodePoint{0x116AD, 0x116AD, GraphemeProp.gp_extend}, // Mn       TAKRI VOWEL SIGN AA
-	GraphemeCodePoint{0x116AE, 0x116AF, GraphemeProp.gp_spacingmark}, // Mc   [2] TAKRI VOWEL SIGN I..TAKRI VOWEL SIGN II
-	GraphemeCodePoint{0x116B0, 0x116B5, GraphemeProp.gp_extend}, // Mn   [6] TAKRI VOWEL SIGN U..TAKRI VOWEL SIGN AU
-	GraphemeCodePoint{0x116B6, 0x116B6, GraphemeProp.gp_spacingmark}, // Mc       TAKRI SIGN VIRAMA
-	GraphemeCodePoint{0x116B7, 0x116B7, GraphemeProp.gp_extend}, // Mn       TAKRI SIGN NUKTA
-	GraphemeCodePoint{0x1171D, 0x1171F, GraphemeProp.gp_extend}, // Mn   [3] AHOM CONSONANT SIGN MEDIAL LA..AHOM CONSONANT SIGN MEDIAL LIGATING RA
-	GraphemeCodePoint{0x11722, 0x11725, GraphemeProp.gp_extend}, // Mn   [4] AHOM VOWEL SIGN I..AHOM VOWEL SIGN UU
-	GraphemeCodePoint{0x11726, 0x11726, GraphemeProp.gp_spacingmark}, // Mc       AHOM VOWEL SIGN E
-	GraphemeCodePoint{0x11727, 0x1172B, GraphemeProp.gp_extend}, // Mn   [5] AHOM VOWEL SIGN AW..AHOM SIGN KILLER
-	GraphemeCodePoint{0x1182C, 0x1182E, GraphemeProp.gp_spacingmark}, // Mc   [3] DOGRA VOWEL SIGN AA..DOGRA VOWEL SIGN II
-	GraphemeCodePoint{0x1182F, 0x11837, GraphemeProp.gp_extend}, // Mn   [9] DOGRA VOWEL SIGN U..DOGRA SIGN ANUSVARA
-	GraphemeCodePoint{0x11838, 0x11838, GraphemeProp.gp_spacingmark}, // Mc       DOGRA SIGN VISARGA
-	GraphemeCodePoint{0x11839, 0x1183A, GraphemeProp.gp_extend}, // Mn   [2] DOGRA SIGN VIRAMA..DOGRA SIGN NUKTA
-	GraphemeCodePoint{0x11930, 0x11930, GraphemeProp.gp_extend}, // Mc       DIVES AKURU VOWEL SIGN AA
-	GraphemeCodePoint{0x11931, 0x11935, GraphemeProp.gp_spacingmark}, // Mc   [5] DIVES AKURU VOWEL SIGN I..DIVES AKURU VOWEL SIGN E
-	GraphemeCodePoint{0x11937, 0x11938, GraphemeProp.gp_spacingmark}, // Mc   [2] DIVES AKURU VOWEL SIGN AI..DIVES AKURU VOWEL SIGN O
-	GraphemeCodePoint{0x1193B, 0x1193C, GraphemeProp.gp_extend}, // Mn   [2] DIVES AKURU SIGN ANUSVARA..DIVES AKURU SIGN CANDRABINDU
-	GraphemeCodePoint{0x1193D, 0x1193D, GraphemeProp.gp_spacingmark}, // Mc       DIVES AKURU SIGN HALANTA
-	GraphemeCodePoint{0x1193E, 0x1193E, GraphemeProp.gp_extend}, // Mn       DIVES AKURU VIRAMA
-	GraphemeCodePoint{0x1193F, 0x1193F, GraphemeProp.gp_prepend}, // Lo       DIVES AKURU PREFIXED NASAL SIGN
-	GraphemeCodePoint{0x11940, 0x11940, GraphemeProp.gp_spacingmark}, // Mc       DIVES AKURU MEDIAL YA
-	GraphemeCodePoint{0x11941, 0x11941, GraphemeProp.gp_prepend}, // Lo       DIVES AKURU INITIAL RA
-	GraphemeCodePoint{0x11942, 0x11942, GraphemeProp.gp_spacingmark}, // Mc       DIVES AKURU MEDIAL RA
-	GraphemeCodePoint{0x11943, 0x11943, GraphemeProp.gp_extend}, // Mn       DIVES AKURU SIGN NUKTA
-	GraphemeCodePoint{0x119D1, 0x119D3, GraphemeProp.gp_spacingmark}, // Mc   [3] NANDINAGARI VOWEL SIGN AA..NANDINAGARI VOWEL SIGN II
-	GraphemeCodePoint{0x119D4, 0x119D7, GraphemeProp.gp_extend}, // Mn   [4] NANDINAGARI VOWEL SIGN U..NANDINAGARI VOWEL SIGN VOCALIC RR
-	GraphemeCodePoint{0x119DA, 0x119DB, GraphemeProp.gp_extend}, // Mn   [2] NANDINAGARI VOWEL SIGN E..NANDINAGARI VOWEL SIGN AI
-	GraphemeCodePoint{0x119DC, 0x119DF, GraphemeProp.gp_spacingmark}, // Mc   [4] NANDINAGARI VOWEL SIGN O..NANDINAGARI SIGN VISARGA
-	GraphemeCodePoint{0x119E0, 0x119E0, GraphemeProp.gp_extend}, // Mn       NANDINAGARI SIGN VIRAMA
-	GraphemeCodePoint{0x119E4, 0x119E4, GraphemeProp.gp_spacingmark}, // Mc       NANDINAGARI VOWEL SIGN PRISHTHAMATRA E
-	GraphemeCodePoint{0x11A01, 0x11A0A, GraphemeProp.gp_extend}, // Mn  [10] ZANABAZAR SQUARE VOWEL SIGN I..ZANABAZAR SQUARE VOWEL LENGTH MARK
-	GraphemeCodePoint{0x11A33, 0x11A38, GraphemeProp.gp_extend}, // Mn   [6] ZANABAZAR SQUARE FINAL CONSONANT MARK..ZANABAZAR SQUARE SIGN ANUSVARA
-	GraphemeCodePoint{0x11A39, 0x11A39, GraphemeProp.gp_spacingmark}, // Mc       ZANABAZAR SQUARE SIGN VISARGA
-	GraphemeCodePoint{0x11A3A, 0x11A3A, GraphemeProp.gp_prepend}, // Lo       ZANABAZAR SQUARE CLUSTER-INITIAL LETTER RA
-	GraphemeCodePoint{0x11A3B, 0x11A3E, GraphemeProp.gp_extend}, // Mn   [4] ZANABAZAR SQUARE CLUSTER-FINAL LETTER YA..ZANABAZAR SQUARE CLUSTER-FINAL LETTER VA
-	GraphemeCodePoint{0x11A47, 0x11A47, GraphemeProp.gp_extend}, // Mn       ZANABAZAR SQUARE SUBJOINER
-	GraphemeCodePoint{0x11A51, 0x11A56, GraphemeProp.gp_extend}, // Mn   [6] SOYOMBO VOWEL SIGN I..SOYOMBO VOWEL SIGN OE
-	GraphemeCodePoint{0x11A57, 0x11A58, GraphemeProp.gp_spacingmark}, // Mc   [2] SOYOMBO VOWEL SIGN AI..SOYOMBO VOWEL SIGN AU
-	GraphemeCodePoint{0x11A59, 0x11A5B, GraphemeProp.gp_extend}, // Mn   [3] SOYOMBO VOWEL SIGN VOCALIC R..SOYOMBO VOWEL LENGTH MARK
 	GraphemeCodePoint{0x11A8, 0x11FF, GraphemeProp.gp_t}, // Lo  [88] HANGUL JONGSEONG KIYEOK..HANGUL JONGSEONG SSANGNIEUN
-	GraphemeCodePoint{0x11A84, 0x11A89, GraphemeProp.gp_prepend}, // Lo   [6] SOYOMBO SIGN JIHVAMULIYA..SOYOMBO CLUSTER-INITIAL LETTER SA
-	GraphemeCodePoint{0x11A8A, 0x11A96, GraphemeProp.gp_extend}, // Mn  [13] SOYOMBO FINAL CONSONANT SIGN G..SOYOMBO SIGN ANUSVARA
-	GraphemeCodePoint{0x11A97, 0x11A97, GraphemeProp.gp_spacingmark}, // Mc       SOYOMBO SIGN VISARGA
-	GraphemeCodePoint{0x11A98, 0x11A99, GraphemeProp.gp_extend}, // Mn   [2] SOYOMBO GEMINATION MARK..SOYOMBO SUBJOINER
-	GraphemeCodePoint{0x11C2F, 0x11C2F, GraphemeProp.gp_spacingmark}, // Mc       BHAIKSUKI VOWEL SIGN AA
-	GraphemeCodePoint{0x11C30, 0x11C36, GraphemeProp.gp_extend}, // Mn   [7] BHAIKSUKI VOWEL SIGN I..BHAIKSUKI VOWEL SIGN VOCALIC L
-	GraphemeCodePoint{0x11C38, 0x11C3D, GraphemeProp.gp_extend}, // Mn   [6] BHAIKSUKI VOWEL SIGN E..BHAIKSUKI SIGN ANUSVARA
-	GraphemeCodePoint{0x11C3E, 0x11C3E, GraphemeProp.gp_spacingmark}, // Mc       BHAIKSUKI SIGN VISARGA
-	GraphemeCodePoint{0x11C3F, 0x11C3F, GraphemeProp.gp_extend}, // Mn       BHAIKSUKI SIGN VIRAMA
-	GraphemeCodePoint{0x11C92, 0x11CA7, GraphemeProp.gp_extend}, // Mn  [22] MARCHEN SUBJOINED LETTER KA..MARCHEN SUBJOINED LETTER ZA
-	GraphemeCodePoint{0x11CA9, 0x11CA9, GraphemeProp.gp_spacingmark}, // Mc       MARCHEN SUBJOINED LETTER YA
-	GraphemeCodePoint{0x11CAA, 0x11CB0, GraphemeProp.gp_extend}, // Mn   [7] MARCHEN SUBJOINED LETTER RA..MARCHEN VOWEL SIGN AA
-	GraphemeCodePoint{0x11CB1, 0x11CB1, GraphemeProp.gp_spacingmark}, // Mc       MARCHEN VOWEL SIGN I
-	GraphemeCodePoint{0x11CB2, 0x11CB3, GraphemeProp.gp_extend}, // Mn   [2] MARCHEN VOWEL SIGN U..MARCHEN VOWEL SIGN E
-	GraphemeCodePoint{0x11CB4, 0x11CB4, GraphemeProp.gp_spacingmark}, // Mc       MARCHEN VOWEL SIGN O
-	GraphemeCodePoint{0x11CB5, 0x11CB6, GraphemeProp.gp_extend}, // Mn   [2] MARCHEN SIGN ANUSVARA..MARCHEN SIGN CANDRABINDU
-	GraphemeCodePoint{0x11D31, 0x11D36, GraphemeProp.gp_extend}, // Mn   [6] MASARAM GONDI VOWEL SIGN AA..MASARAM GONDI VOWEL SIGN VOCALIC R
-	GraphemeCodePoint{0x11D3A, 0x11D3A, GraphemeProp.gp_extend}, // Mn       MASARAM GONDI VOWEL SIGN E
-	GraphemeCodePoint{0x11D3C, 0x11D3D, GraphemeProp.gp_extend}, // Mn   [2] MASARAM GONDI VOWEL SIGN AI..MASARAM GONDI VOWEL SIGN O
-	GraphemeCodePoint{0x11D3F, 0x11D45, GraphemeProp.gp_extend}, // Mn   [7] MASARAM GONDI VOWEL SIGN AU..MASARAM GONDI VIRAMA
-	GraphemeCodePoint{0x11D46, 0x11D46, GraphemeProp.gp_prepend}, // Lo       MASARAM GONDI REPHA
-	GraphemeCodePoint{0x11D47, 0x11D47, GraphemeProp.gp_extend}, // Mn       MASARAM GONDI RA-KARA
-	GraphemeCodePoint{0x11D8A, 0x11D8E, GraphemeProp.gp_spacingmark}, // Mc   [5] GUNJALA GONDI VOWEL SIGN AA..GUNJALA GONDI VOWEL SIGN UU
-	GraphemeCodePoint{0x11D90, 0x11D91, GraphemeProp.gp_extend}, // Mn   [2] GUNJALA GONDI VOWEL SIGN EE..GUNJALA GONDI VOWEL SIGN AI
-	GraphemeCodePoint{0x11D93, 0x11D94, GraphemeProp.gp_spacingmark}, // Mc   [2] GUNJALA GONDI VOWEL SIGN OO..GUNJALA GONDI VOWEL SIGN AU
-	GraphemeCodePoint{0x11D95, 0x11D95, GraphemeProp.gp_extend}, // Mn       GUNJALA GONDI SIGN ANUSVARA
-	GraphemeCodePoint{0x11D96, 0x11D96, GraphemeProp.gp_spacingmark}, // Mc       GUNJALA GONDI SIGN VISARGA
-	GraphemeCodePoint{0x11D97, 0x11D97, GraphemeProp.gp_extend}, // Mn       GUNJALA GONDI VIRAMA
-	GraphemeCodePoint{0x11EF3, 0x11EF4, GraphemeProp.gp_extend}, // Mn   [2] MAKASAR VOWEL SIGN I..MAKASAR VOWEL SIGN U
-	GraphemeCodePoint{0x11EF5, 0x11EF6, GraphemeProp.gp_spacingmark}, // Mc   [2] MAKASAR VOWEL SIGN E..MAKASAR VOWEL SIGN O
-	GraphemeCodePoint{0x11F00, 0x11F01, GraphemeProp.gp_extend}, // Mn   [2] KAWI SIGN CANDRABINDU..KAWI SIGN ANUSVARA
-	GraphemeCodePoint{0x11F02, 0x11F02, GraphemeProp.gp_prepend}, // Lo       KAWI SIGN REPHA
-	GraphemeCodePoint{0x11F03, 0x11F03, GraphemeProp.gp_spacingmark}, // Mc       KAWI SIGN VISARGA
-	GraphemeCodePoint{0x11F34, 0x11F35, GraphemeProp.gp_spacingmark}, // Mc   [2] KAWI VOWEL SIGN AA..KAWI VOWEL SIGN ALTERNATE AA
-	GraphemeCodePoint{0x11F36, 0x11F3A, GraphemeProp.gp_extend}, // Mn   [5] KAWI VOWEL SIGN I..KAWI VOWEL SIGN VOCALIC R
-	GraphemeCodePoint{0x11F3E, 0x11F3F, GraphemeProp.gp_spacingmark}, // Mc   [2] KAWI VOWEL SIGN E..KAWI VOWEL SIGN AI
-	GraphemeCodePoint{0x11F40, 0x11F40, GraphemeProp.gp_extend}, // Mn       KAWI VOWEL SIGN EU
-	GraphemeCodePoint{0x11F41, 0x11F41, GraphemeProp.gp_spacingmark}, // Mc       KAWI SIGN KILLER
-	GraphemeCodePoint{0x11F42, 0x11F42, GraphemeProp.gp_extend}, // Mn       KAWI CONJOINER
-	GraphemeCodePoint{0x13430, 0x1343F, GraphemeProp.gp_control}, // Cf  [16] EGYPTIAN HIEROGLYPH VERTICAL JOINER..EGYPTIAN HIEROGLYPH END WALLED ENCLOSURE
-	GraphemeCodePoint{0x13440, 0x13440, GraphemeProp.gp_extend}, // Mn       EGYPTIAN HIEROGLYPH MIRROR HORIZONTALLY
-	GraphemeCodePoint{0x13447, 0x13455, GraphemeProp.gp_extend}, // Mn  [15] EGYPTIAN HIEROGLYPH MODIFIER DAMAGED AT TOP START..EGYPTIAN HIEROGLYPH MODIFIER DAMAGED
 	GraphemeCodePoint{0x135D, 0x135F, GraphemeProp.gp_extend}, // Mn   [3] ETHIOPIC COMBINING GEMINATION AND VOWEL LENGTH MARK..ETHIOPIC COMBINING GEMINATION MARK
-	GraphemeCodePoint{0x16AF0, 0x16AF4, GraphemeProp.gp_extend}, // Mn   [5] BASSA VAH COMBINING HIGH TONE..BASSA VAH COMBINING HIGH-LOW TONE
-	GraphemeCodePoint{0x16B30, 0x16B36, GraphemeProp.gp_extend}, // Mn   [7] PAHAWH HMONG MARK CIM TUB..PAHAWH HMONG MARK CIM TAUM
-	GraphemeCodePoint{0x16F4F, 0x16F4F, GraphemeProp.gp_extend}, // Mn       MIAO SIGN CONSONANT MODIFIER BAR
-	GraphemeCodePoint{0x16F51, 0x16F87, GraphemeProp.gp_spacingmark}, // Mc  [55] MIAO SIGN ASPIRATION..MIAO VOWEL SIGN UI
-	GraphemeCodePoint{0x16F8F, 0x16F92, GraphemeProp.gp_extend}, // Mn   [4] MIAO TONE RIGHT..MIAO TONE BELOW
-	GraphemeCodePoint{0x16FE4, 0x16FE4, GraphemeProp.gp_extend}, // Mn       KHITAN SMALL SCRIPT FILLER
-	GraphemeCodePoint{0x16FF0, 0x16FF1, GraphemeProp.gp_spacingmark}, // Mc   [2] VIETNAMESE ALTERNATE READING MARK CA..VIETNAMESE ALTERNATE READING MARK NHAY
 	GraphemeCodePoint{0x1712, 0x1714, GraphemeProp.gp_extend}, // Mn   [3] TAGALOG VOWEL SIGN I..TAGALOG SIGN VIRAMA
 	GraphemeCodePoint{0x1715, 0x1715, GraphemeProp.gp_spacingmark}, // Mc       TAGALOG SIGN PAMUDPOD
 	GraphemeCodePoint{0x1732, 0x1733, GraphemeProp.gp_extend}, // Mn   [2] HANUNOO VOWEL SIGN I..HANUNOO VOWEL SIGN U
@@ -481,8 +291,6 @@ const grapheme_properties = [
 	GraphemeCodePoint{0x1BA8, 0x1BA9, GraphemeProp.gp_extend}, // Mn   [2] SUNDANESE VOWEL SIGN PAMEPET..SUNDANESE VOWEL SIGN PANEULEUNG
 	GraphemeCodePoint{0x1BAA, 0x1BAA, GraphemeProp.gp_spacingmark}, // Mc       SUNDANESE SIGN PAMAAEH
 	GraphemeCodePoint{0x1BAB, 0x1BAD, GraphemeProp.gp_extend}, // Mn   [3] SUNDANESE SIGN VIRAMA..SUNDANESE CONSONANT SIGN PASANGAN WA
-	GraphemeCodePoint{0x1BC9D, 0x1BC9E, GraphemeProp.gp_extend}, // Mn   [2] DUPLOYAN THICK LETTER SELECTOR..DUPLOYAN DOUBLE MARK
-	GraphemeCodePoint{0x1BCA0, 0x1BCA3, GraphemeProp.gp_control}, // Cf   [4] SHORTHAND FORMAT LETTER OVERLAP..SHORTHAND FORMAT UP STEP
 	GraphemeCodePoint{0x1BE6, 0x1BE6, GraphemeProp.gp_extend}, // Mn       BATAK SIGN TOMPI
 	GraphemeCodePoint{0x1BE7, 0x1BE7, GraphemeProp.gp_spacingmark}, // Mc       BATAK VOWEL SIGN E
 	GraphemeCodePoint{0x1BE8, 0x1BE9, GraphemeProp.gp_extend}, // Mn   [2] BATAK VOWEL SIGN PAKPAK E..BATAK VOWEL SIGN EE
@@ -500,397 +308,10 @@ const grapheme_properties = [
 	GraphemeCodePoint{0x1CE1, 0x1CE1, GraphemeProp.gp_spacingmark}, // Mc       VEDIC TONE ATHARVAVEDIC INDEPENDENT SVARITA
 	GraphemeCodePoint{0x1CE2, 0x1CE8, GraphemeProp.gp_extend}, // Mn   [7] VEDIC SIGN VISARGA SVARITA..VEDIC SIGN VISARGA ANUDATTA WITH TAIL
 	GraphemeCodePoint{0x1CED, 0x1CED, GraphemeProp.gp_extend}, // Mn       VEDIC SIGN TIRYAK
-	GraphemeCodePoint{0x1CF00, 0x1CF2D, GraphemeProp.gp_extend}, // Mn  [46] ZNAMENNY COMBINING MARK GORAZDO NIZKO S KRYZHEM ON LEFT..ZNAMENNY COMBINING MARK KRYZH ON LEFT
-	GraphemeCodePoint{0x1CF30, 0x1CF46, GraphemeProp.gp_extend}, // Mn  [23] ZNAMENNY COMBINING TONAL RANGE MARK MRACHNO..ZNAMENNY PRIZNAK MODIFIER ROG
 	GraphemeCodePoint{0x1CF4, 0x1CF4, GraphemeProp.gp_extend}, // Mn       VEDIC TONE CANDRA ABOVE
 	GraphemeCodePoint{0x1CF7, 0x1CF7, GraphemeProp.gp_spacingmark}, // Mc       VEDIC SIGN ATIKRAMA
 	GraphemeCodePoint{0x1CF8, 0x1CF9, GraphemeProp.gp_extend}, // Mn   [2] VEDIC TONE RING ABOVE..VEDIC TONE DOUBLE RING ABOVE
-	GraphemeCodePoint{0x1D165, 0x1D165, GraphemeProp.gp_extend}, // Mc       MUSICAL SYMBOL COMBINING STEM
-	GraphemeCodePoint{0x1D166, 0x1D166, GraphemeProp.gp_spacingmark}, // Mc       MUSICAL SYMBOL COMBINING SPRECHGESANG STEM
-	GraphemeCodePoint{0x1D167, 0x1D169, GraphemeProp.gp_extend}, // Mn   [3] MUSICAL SYMBOL COMBINING TREMOLO-1..MUSICAL SYMBOL COMBINING TREMOLO-3
-	GraphemeCodePoint{0x1D16D, 0x1D16D, GraphemeProp.gp_spacingmark}, // Mc       MUSICAL SYMBOL COMBINING AUGMENTATION DOT
-	GraphemeCodePoint{0x1D16E, 0x1D172, GraphemeProp.gp_extend}, // Mc   [5] MUSICAL SYMBOL COMBINING FLAG-1..MUSICAL SYMBOL COMBINING FLAG-5
-	GraphemeCodePoint{0x1D173, 0x1D17A, GraphemeProp.gp_control}, // Cf   [8] MUSICAL SYMBOL BEGIN BEAM..MUSICAL SYMBOL END PHRASE
-	GraphemeCodePoint{0x1D17B, 0x1D182, GraphemeProp.gp_extend}, // Mn   [8] MUSICAL SYMBOL COMBINING ACCENT..MUSICAL SYMBOL COMBINING LOURE
-	GraphemeCodePoint{0x1D185, 0x1D18B, GraphemeProp.gp_extend}, // Mn   [7] MUSICAL SYMBOL COMBINING DOIT..MUSICAL SYMBOL COMBINING TRIPLE TONGUE
-	GraphemeCodePoint{0x1D1AA, 0x1D1AD, GraphemeProp.gp_extend}, // Mn   [4] MUSICAL SYMBOL COMBINING DOWN BOW..MUSICAL SYMBOL COMBINING SNAP PIZZICATO
-	GraphemeCodePoint{0x1D242, 0x1D244, GraphemeProp.gp_extend}, // Mn   [3] COMBINING GREEK MUSICAL TRISEME..COMBINING GREEK MUSICAL PENTASEME
-	GraphemeCodePoint{0x1DA00, 0x1DA36, GraphemeProp.gp_extend}, // Mn  [55] SIGNWRITING HEAD RIM..SIGNWRITING AIR SUCKING IN
-	GraphemeCodePoint{0x1DA3B, 0x1DA6C, GraphemeProp.gp_extend}, // Mn  [50] SIGNWRITING MOUTH CLOSED NEUTRAL..SIGNWRITING EXCITEMENT
-	GraphemeCodePoint{0x1DA75, 0x1DA75, GraphemeProp.gp_extend}, // Mn       SIGNWRITING UPPER BODY TILTING FROM HIP JOINTS
-	GraphemeCodePoint{0x1DA84, 0x1DA84, GraphemeProp.gp_extend}, // Mn       SIGNWRITING LOCATION HEAD NECK
-	GraphemeCodePoint{0x1DA9B, 0x1DA9F, GraphemeProp.gp_extend}, // Mn   [5] SIGNWRITING FILL MODIFIER-2..SIGNWRITING FILL MODIFIER-6
-	GraphemeCodePoint{0x1DAA1, 0x1DAAF, GraphemeProp.gp_extend}, // Mn  [15] SIGNWRITING ROTATION MODIFIER-2..SIGNWRITING ROTATION MODIFIER-16
 	GraphemeCodePoint{0x1DC0, 0x1DFF, GraphemeProp.gp_extend}, // Mn  [64] COMBINING DOTTED GRAVE ACCENT..COMBINING RIGHT ARROWHEAD AND DOWN ARROWHEAD BELOW
-	GraphemeCodePoint{0x1E000, 0x1E006, GraphemeProp.gp_extend}, // Mn   [7] COMBINING GLAGOLITIC LETTER AZU..COMBINING GLAGOLITIC LETTER ZHIVETE
-	GraphemeCodePoint{0x1E008, 0x1E018, GraphemeProp.gp_extend}, // Mn  [17] COMBINING GLAGOLITIC LETTER ZEMLJA..COMBINING GLAGOLITIC LETTER HERU
-	GraphemeCodePoint{0x1E01B, 0x1E021, GraphemeProp.gp_extend}, // Mn   [7] COMBINING GLAGOLITIC LETTER SHTA..COMBINING GLAGOLITIC LETTER YATI
-	GraphemeCodePoint{0x1E023, 0x1E024, GraphemeProp.gp_extend}, // Mn   [2] COMBINING GLAGOLITIC LETTER YU..COMBINING GLAGOLITIC LETTER SMALL YUS
-	GraphemeCodePoint{0x1E026, 0x1E02A, GraphemeProp.gp_extend}, // Mn   [5] COMBINING GLAGOLITIC LETTER YO..COMBINING GLAGOLITIC LETTER FITA
-	GraphemeCodePoint{0x1E08F, 0x1E08F, GraphemeProp.gp_extend}, // Mn       COMBINING CYRILLIC SMALL LETTER BYELORUSSIAN-UKRAINIAN I
-	GraphemeCodePoint{0x1E130, 0x1E136, GraphemeProp.gp_extend}, // Mn   [7] NYIAKENG PUACHUE HMONG TONE-B..NYIAKENG PUACHUE HMONG TONE-D
-	GraphemeCodePoint{0x1E2AE, 0x1E2AE, GraphemeProp.gp_extend}, // Mn       TOTO SIGN RISING TONE
-	GraphemeCodePoint{0x1E2EC, 0x1E2EF, GraphemeProp.gp_extend}, // Mn   [4] WANCHO TONE TUP..WANCHO TONE KOINI
-	GraphemeCodePoint{0x1E4EC, 0x1E4EF, GraphemeProp.gp_extend}, // Mn   [4] NAG MUNDARI SIGN MUHOR..NAG MUNDARI SIGN SUTUH
-	GraphemeCodePoint{0x1E8D0, 0x1E8D6, GraphemeProp.gp_extend}, // Mn   [7] MENDE KIKAKUI COMBINING NUMBER TEENS..MENDE KIKAKUI COMBINING NUMBER MILLIONS
-	GraphemeCodePoint{0x1E944, 0x1E94A, GraphemeProp.gp_extend}, // Mn   [7] ADLAM ALIF LENGTHENER..ADLAM NUKTA
-	GraphemeCodePoint{0x1F000, 0x1F003, GraphemeProp.gp_extended_pictographic}, // E0.0   [4] (🀀..🀃)    MAHJONG TILE EAST WIND..MAHJONG TILE NORTH WIND
-	GraphemeCodePoint{0x1F004, 0x1F004, GraphemeProp.gp_extended_pictographic}, // E0.6   [1] (🀄)       mahjong red dragon
-	GraphemeCodePoint{0x1F005, 0x1F0CE, GraphemeProp.gp_extended_pictographic}, // E0.0 [202] (🀅..🃎)    MAHJONG TILE GREEN DRAGON..PLAYING CARD KING OF DIAMONDS
-	GraphemeCodePoint{0x1F0CF, 0x1F0CF, GraphemeProp.gp_extended_pictographic}, // E0.6   [1] (🃏)       joker
-	GraphemeCodePoint{0x1F0D0, 0x1F0FF, GraphemeProp.gp_extended_pictographic}, // E0.0  [48] (🃐..🃿)    <reserved-1F0D0>..<reserved-1F0FF>
-	GraphemeCodePoint{0x1F10D, 0x1F10F, GraphemeProp.gp_extended_pictographic}, // E0.0   [3] (🄍..🄏)    CIRCLED ZERO WITH SLASH..CIRCLED DOLLAR SIGN WITH OVERLAID BACKSLASH
-	GraphemeCodePoint{0x1F12F, 0x1F12F, GraphemeProp.gp_extended_pictographic}, // E0.0   [1] (🄯)       COPYLEFT SYMBOL
-	GraphemeCodePoint{0x1F16C, 0x1F16F, GraphemeProp.gp_extended_pictographic}, // E0.0   [4] (🅬..🅯)    RAISED MR SIGN..CIRCLED HUMAN FIGURE
-	GraphemeCodePoint{0x1F170, 0x1F171, GraphemeProp.gp_extended_pictographic}, // E0.6   [2] (🅰️..🅱️)    A button (blood type)..B button (blood type)
-	GraphemeCodePoint{0x1F17E, 0x1F17F, GraphemeProp.gp_extended_pictographic}, // E0.6   [2] (🅾️..🅿️)    O button (blood type)..P button
-	GraphemeCodePoint{0x1F18E, 0x1F18E, GraphemeProp.gp_extended_pictographic}, // E0.6   [1] (🆎)       AB button (blood type)
-	GraphemeCodePoint{0x1F191, 0x1F19A, GraphemeProp.gp_extended_pictographic}, // E0.6  [10] (🆑..🆚)    CL button..VS button
-	GraphemeCodePoint{0x1F1AD, 0x1F1E5, GraphemeProp.gp_extended_pictographic}, // E0.0  [57] (🆭..🇥)    MASK WORK SYMBOL..<reserved-1F1E5>
-	GraphemeCodePoint{0x1F1E6, 0x1F1FF, GraphemeProp.gp_regional_indicator}, // So  [26] REGIONAL INDICATOR SYMBOL LETTER A..REGIONAL INDICATOR SYMBOL LETTER Z
-	GraphemeCodePoint{0x1F201, 0x1F202, GraphemeProp.gp_extended_pictographic}, // E0.6   [2] (🈁..🈂️)    Japanese “here” button..Japanese “service charge” button
-	GraphemeCodePoint{0x1F203, 0x1F20F, GraphemeProp.gp_extended_pictographic}, // E0.0  [13] (🈃..🈏)    <reserved-1F203>..<reserved-1F20F>
-	GraphemeCodePoint{0x1F21A, 0x1F21A, GraphemeProp.gp_extended_pictographic}, // E0.6   [1] (🈚)       Japanese “free of charge” button
-	GraphemeCodePoint{0x1F22F, 0x1F22F, GraphemeProp.gp_extended_pictographic}, // E0.6   [1] (🈯)       Japanese “reserved” button
-	GraphemeCodePoint{0x1F232, 0x1F23A, GraphemeProp.gp_extended_pictographic}, // E0.6   [9] (🈲..🈺)    Japanese “prohibited” button..Japanese “open for business” button
-	GraphemeCodePoint{0x1F23C, 0x1F23F, GraphemeProp.gp_extended_pictographic}, // E0.0   [4] (🈼..🈿)    <reserved-1F23C>..<reserved-1F23F>
-	GraphemeCodePoint{0x1F249, 0x1F24F, GraphemeProp.gp_extended_pictographic}, // E0.0   [7] (🉉..🉏)    <reserved-1F249>..<reserved-1F24F>
-	GraphemeCodePoint{0x1F250, 0x1F251, GraphemeProp.gp_extended_pictographic}, // E0.6   [2] (🉐..🉑)    Japanese “bargain” button..Japanese “acceptable” button
-	GraphemeCodePoint{0x1F252, 0x1F2FF, GraphemeProp.gp_extended_pictographic}, // E0.0 [174] (🉒..🋿)    <reserved-1F252>..<reserved-1F2FF>
-	GraphemeCodePoint{0x1F300, 0x1F30C, GraphemeProp.gp_extended_pictographic}, // E0.6  [13] (🌀..🌌)    cyclone..milky way
-	GraphemeCodePoint{0x1F30D, 0x1F30E, GraphemeProp.gp_extended_pictographic}, // E0.7   [2] (🌍..🌎)    globe showing Europe-Africa..globe showing Americas
-	GraphemeCodePoint{0x1F30F, 0x1F30F, GraphemeProp.gp_extended_pictographic}, // E0.6   [1] (🌏)       globe showing Asia-Australia
-	GraphemeCodePoint{0x1F310, 0x1F310, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (🌐)       globe with meridians
-	GraphemeCodePoint{0x1F311, 0x1F311, GraphemeProp.gp_extended_pictographic}, // E0.6   [1] (🌑)       new moon
-	GraphemeCodePoint{0x1F312, 0x1F312, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (🌒)       waxing crescent moon
-	GraphemeCodePoint{0x1F313, 0x1F315, GraphemeProp.gp_extended_pictographic}, // E0.6   [3] (🌓..🌕)    first quarter moon..full moon
-	GraphemeCodePoint{0x1F316, 0x1F318, GraphemeProp.gp_extended_pictographic}, // E1.0   [3] (🌖..🌘)    waning gibbous moon..waning crescent moon
-	GraphemeCodePoint{0x1F319, 0x1F319, GraphemeProp.gp_extended_pictographic}, // E0.6   [1] (🌙)       crescent moon
-	GraphemeCodePoint{0x1F31A, 0x1F31A, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (🌚)       new moon face
-	GraphemeCodePoint{0x1F31B, 0x1F31B, GraphemeProp.gp_extended_pictographic}, // E0.6   [1] (🌛)       first quarter moon face
-	GraphemeCodePoint{0x1F31C, 0x1F31C, GraphemeProp.gp_extended_pictographic}, // E0.7   [1] (🌜)       last quarter moon face
-	GraphemeCodePoint{0x1F31D, 0x1F31E, GraphemeProp.gp_extended_pictographic}, // E1.0   [2] (🌝..🌞)    full moon face..sun with face
-	GraphemeCodePoint{0x1F31F, 0x1F320, GraphemeProp.gp_extended_pictographic}, // E0.6   [2] (🌟..🌠)    glowing star..shooting star
-	GraphemeCodePoint{0x1F321, 0x1F321, GraphemeProp.gp_extended_pictographic}, // E0.7   [1] (🌡️)       thermometer
-	GraphemeCodePoint{0x1F322, 0x1F323, GraphemeProp.gp_extended_pictographic}, // E0.0   [2] (🌢..🌣)    BLACK DROPLET..WHITE SUN
-	GraphemeCodePoint{0x1F324, 0x1F32C, GraphemeProp.gp_extended_pictographic}, // E0.7   [9] (🌤️..🌬️)    sun behind small cloud..wind face
-	GraphemeCodePoint{0x1F32D, 0x1F32F, GraphemeProp.gp_extended_pictographic}, // E1.0   [3] (🌭..🌯)    hot dog..burrito
-	GraphemeCodePoint{0x1F330, 0x1F331, GraphemeProp.gp_extended_pictographic}, // E0.6   [2] (🌰..🌱)    chestnut..seedling
-	GraphemeCodePoint{0x1F332, 0x1F333, GraphemeProp.gp_extended_pictographic}, // E1.0   [2] (🌲..🌳)    evergreen tree..deciduous tree
-	GraphemeCodePoint{0x1F334, 0x1F335, GraphemeProp.gp_extended_pictographic}, // E0.6   [2] (🌴..🌵)    palm tree..cactus
-	GraphemeCodePoint{0x1F336, 0x1F336, GraphemeProp.gp_extended_pictographic}, // E0.7   [1] (🌶️)       hot pepper
-	GraphemeCodePoint{0x1F337, 0x1F34A, GraphemeProp.gp_extended_pictographic}, // E0.6  [20] (🌷..🍊)    tulip..tangerine
-	GraphemeCodePoint{0x1F34B, 0x1F34B, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (🍋)       lemon
-	GraphemeCodePoint{0x1F34C, 0x1F34F, GraphemeProp.gp_extended_pictographic}, // E0.6   [4] (🍌..🍏)    banana..green apple
-	GraphemeCodePoint{0x1F350, 0x1F350, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (🍐)       pear
-	GraphemeCodePoint{0x1F351, 0x1F37B, GraphemeProp.gp_extended_pictographic}, // E0.6  [43] (🍑..🍻)    peach..clinking beer mugs
-	GraphemeCodePoint{0x1F37C, 0x1F37C, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (🍼)       baby bottle
-	GraphemeCodePoint{0x1F37D, 0x1F37D, GraphemeProp.gp_extended_pictographic}, // E0.7   [1] (🍽️)       fork and knife with plate
-	GraphemeCodePoint{0x1F37E, 0x1F37F, GraphemeProp.gp_extended_pictographic}, // E1.0   [2] (🍾..🍿)    bottle with popping cork..popcorn
-	GraphemeCodePoint{0x1F380, 0x1F393, GraphemeProp.gp_extended_pictographic}, // E0.6  [20] (🎀..🎓)    ribbon..graduation cap
-	GraphemeCodePoint{0x1F394, 0x1F395, GraphemeProp.gp_extended_pictographic}, // E0.0   [2] (🎔..🎕)    HEART WITH TIP ON THE LEFT..BOUQUET OF FLOWERS
-	GraphemeCodePoint{0x1F396, 0x1F397, GraphemeProp.gp_extended_pictographic}, // E0.7   [2] (🎖️..🎗️)    military medal..reminder ribbon
-	GraphemeCodePoint{0x1F398, 0x1F398, GraphemeProp.gp_extended_pictographic}, // E0.0   [1] (🎘)       MUSICAL KEYBOARD WITH JACKS
-	GraphemeCodePoint{0x1F399, 0x1F39B, GraphemeProp.gp_extended_pictographic}, // E0.7   [3] (🎙️..🎛️)    studio microphone..control knobs
-	GraphemeCodePoint{0x1F39C, 0x1F39D, GraphemeProp.gp_extended_pictographic}, // E0.0   [2] (🎜..🎝)    BEAMED ASCENDING MUSICAL NOTES..BEAMED DESCENDING MUSICAL NOTES
-	GraphemeCodePoint{0x1F39E, 0x1F39F, GraphemeProp.gp_extended_pictographic}, // E0.7   [2] (🎞️..🎟️)    film frames..admission tickets
-	GraphemeCodePoint{0x1F3A0, 0x1F3C4, GraphemeProp.gp_extended_pictographic}, // E0.6  [37] (🎠..🏄)    carousel horse..person surfing
-	GraphemeCodePoint{0x1F3C5, 0x1F3C5, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (🏅)       sports medal
-	GraphemeCodePoint{0x1F3C6, 0x1F3C6, GraphemeProp.gp_extended_pictographic}, // E0.6   [1] (🏆)       trophy
-	GraphemeCodePoint{0x1F3C7, 0x1F3C7, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (🏇)       horse racing
-	GraphemeCodePoint{0x1F3C8, 0x1F3C8, GraphemeProp.gp_extended_pictographic}, // E0.6   [1] (🏈)       american football
-	GraphemeCodePoint{0x1F3C9, 0x1F3C9, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (🏉)       rugby football
-	GraphemeCodePoint{0x1F3CA, 0x1F3CA, GraphemeProp.gp_extended_pictographic}, // E0.6   [1] (🏊)       person swimming
-	GraphemeCodePoint{0x1F3CB, 0x1F3CE, GraphemeProp.gp_extended_pictographic}, // E0.7   [4] (🏋️..🏎️)    person lifting weights..racing car
-	GraphemeCodePoint{0x1F3CF, 0x1F3D3, GraphemeProp.gp_extended_pictographic}, // E1.0   [5] (🏏..🏓)    cricket game..ping pong
-	GraphemeCodePoint{0x1F3D4, 0x1F3DF, GraphemeProp.gp_extended_pictographic}, // E0.7  [12] (🏔️..🏟️)    snow-capped mountain..stadium
-	GraphemeCodePoint{0x1F3E0, 0x1F3E3, GraphemeProp.gp_extended_pictographic}, // E0.6   [4] (🏠..🏣)    house..Japanese post office
-	GraphemeCodePoint{0x1F3E4, 0x1F3E4, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (🏤)       post office
-	GraphemeCodePoint{0x1F3E5, 0x1F3F0, GraphemeProp.gp_extended_pictographic}, // E0.6  [12] (🏥..🏰)    hospital..castle
-	GraphemeCodePoint{0x1F3F1, 0x1F3F2, GraphemeProp.gp_extended_pictographic}, // E0.0   [2] (🏱..🏲)    WHITE PENNANT..BLACK PENNANT
-	GraphemeCodePoint{0x1F3F3, 0x1F3F3, GraphemeProp.gp_extended_pictographic}, // E0.7   [1] (🏳️)       white flag
-	GraphemeCodePoint{0x1F3F4, 0x1F3F4, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (🏴)       black flag
-	GraphemeCodePoint{0x1F3F5, 0x1F3F5, GraphemeProp.gp_extended_pictographic}, // E0.7   [1] (🏵️)       rosette
-	GraphemeCodePoint{0x1F3F6, 0x1F3F6, GraphemeProp.gp_extended_pictographic}, // E0.0   [1] (🏶)       BLACK ROSETTE
-	GraphemeCodePoint{0x1F3F7, 0x1F3F7, GraphemeProp.gp_extended_pictographic}, // E0.7   [1] (🏷️)       label
-	GraphemeCodePoint{0x1F3F8, 0x1F3FA, GraphemeProp.gp_extended_pictographic}, // E1.0   [3] (🏸..🏺)    badminton..amphora
-	GraphemeCodePoint{0x1F3FB, 0x1F3FF, GraphemeProp.gp_extend}, // Sk   [5] EMOJI MODIFIER FITZPATRICK TYPE-1-2..EMOJI MODIFIER FITZPATRICK TYPE-6
-	GraphemeCodePoint{0x1F400, 0x1F407, GraphemeProp.gp_extended_pictographic}, // E1.0   [8] (🐀..🐇)    rat..rabbit
-	GraphemeCodePoint{0x1F408, 0x1F408, GraphemeProp.gp_extended_pictographic}, // E0.7   [1] (🐈)       cat
-	GraphemeCodePoint{0x1F409, 0x1F40B, GraphemeProp.gp_extended_pictographic}, // E1.0   [3] (🐉..🐋)    dragon..whale
-	GraphemeCodePoint{0x1F40C, 0x1F40E, GraphemeProp.gp_extended_pictographic}, // E0.6   [3] (🐌..🐎)    snail..horse
-	GraphemeCodePoint{0x1F40F, 0x1F410, GraphemeProp.gp_extended_pictographic}, // E1.0   [2] (🐏..🐐)    ram..goat
-	GraphemeCodePoint{0x1F411, 0x1F412, GraphemeProp.gp_extended_pictographic}, // E0.6   [2] (🐑..🐒)    ewe..monkey
-	GraphemeCodePoint{0x1F413, 0x1F413, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (🐓)       rooster
-	GraphemeCodePoint{0x1F414, 0x1F414, GraphemeProp.gp_extended_pictographic}, // E0.6   [1] (🐔)       chicken
-	GraphemeCodePoint{0x1F415, 0x1F415, GraphemeProp.gp_extended_pictographic}, // E0.7   [1] (🐕)       dog
-	GraphemeCodePoint{0x1F416, 0x1F416, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (🐖)       pig
-	GraphemeCodePoint{0x1F417, 0x1F429, GraphemeProp.gp_extended_pictographic}, // E0.6  [19] (🐗..🐩)    boar..poodle
-	GraphemeCodePoint{0x1F42A, 0x1F42A, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (🐪)       camel
-	GraphemeCodePoint{0x1F42B, 0x1F43E, GraphemeProp.gp_extended_pictographic}, // E0.6  [20] (🐫..🐾)    two-hump camel..paw prints
-	GraphemeCodePoint{0x1F43F, 0x1F43F, GraphemeProp.gp_extended_pictographic}, // E0.7   [1] (🐿️)       chipmunk
-	GraphemeCodePoint{0x1F440, 0x1F440, GraphemeProp.gp_extended_pictographic}, // E0.6   [1] (👀)       eyes
-	GraphemeCodePoint{0x1F441, 0x1F441, GraphemeProp.gp_extended_pictographic}, // E0.7   [1] (👁️)       eye
-	GraphemeCodePoint{0x1F442, 0x1F464, GraphemeProp.gp_extended_pictographic}, // E0.6  [35] (👂..👤)    ear..bust in silhouette
-	GraphemeCodePoint{0x1F465, 0x1F465, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (👥)       busts in silhouette
-	GraphemeCodePoint{0x1F466, 0x1F46B, GraphemeProp.gp_extended_pictographic}, // E0.6   [6] (👦..👫)    boy..woman and man holding hands
-	GraphemeCodePoint{0x1F46C, 0x1F46D, GraphemeProp.gp_extended_pictographic}, // E1.0   [2] (👬..👭)    men holding hands..women holding hands
-	GraphemeCodePoint{0x1F46E, 0x1F4AC, GraphemeProp.gp_extended_pictographic}, // E0.6  [63] (👮..💬)    police officer..speech balloon
-	GraphemeCodePoint{0x1F4AD, 0x1F4AD, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (💭)       thought balloon
-	GraphemeCodePoint{0x1F4AE, 0x1F4B5, GraphemeProp.gp_extended_pictographic}, // E0.6   [8] (💮..💵)    white flower..dollar banknote
-	GraphemeCodePoint{0x1F4B6, 0x1F4B7, GraphemeProp.gp_extended_pictographic}, // E1.0   [2] (💶..💷)    euro banknote..pound banknote
-	GraphemeCodePoint{0x1F4B8, 0x1F4EB, GraphemeProp.gp_extended_pictographic}, // E0.6  [52] (💸..📫)    money with wings..closed mailbox with raised flag
-	GraphemeCodePoint{0x1F4EC, 0x1F4ED, GraphemeProp.gp_extended_pictographic}, // E0.7   [2] (📬..📭)    open mailbox with raised flag..open mailbox with lowered flag
-	GraphemeCodePoint{0x1F4EE, 0x1F4EE, GraphemeProp.gp_extended_pictographic}, // E0.6   [1] (📮)       postbox
-	GraphemeCodePoint{0x1F4EF, 0x1F4EF, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (📯)       postal horn
-	GraphemeCodePoint{0x1F4F0, 0x1F4F4, GraphemeProp.gp_extended_pictographic}, // E0.6   [5] (📰..📴)    newspaper..mobile phone off
-	GraphemeCodePoint{0x1F4F5, 0x1F4F5, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (📵)       no mobile phones
-	GraphemeCodePoint{0x1F4F6, 0x1F4F7, GraphemeProp.gp_extended_pictographic}, // E0.6   [2] (📶..📷)    antenna bars..camera
-	GraphemeCodePoint{0x1F4F8, 0x1F4F8, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (📸)       camera with flash
-	GraphemeCodePoint{0x1F4F9, 0x1F4FC, GraphemeProp.gp_extended_pictographic}, // E0.6   [4] (📹..📼)    video camera..videocassette
-	GraphemeCodePoint{0x1F4FD, 0x1F4FD, GraphemeProp.gp_extended_pictographic}, // E0.7   [1] (📽️)       film projector
-	GraphemeCodePoint{0x1F4FE, 0x1F4FE, GraphemeProp.gp_extended_pictographic}, // E0.0   [1] (📾)       PORTABLE STEREO
-	GraphemeCodePoint{0x1F4FF, 0x1F502, GraphemeProp.gp_extended_pictographic}, // E1.0   [4] (📿..🔂)    prayer beads..repeat single button
-	GraphemeCodePoint{0x1F503, 0x1F503, GraphemeProp.gp_extended_pictographic}, // E0.6   [1] (🔃)       clockwise vertical arrows
-	GraphemeCodePoint{0x1F504, 0x1F507, GraphemeProp.gp_extended_pictographic}, // E1.0   [4] (🔄..🔇)    counterclockwise arrows button..muted speaker
-	GraphemeCodePoint{0x1F508, 0x1F508, GraphemeProp.gp_extended_pictographic}, // E0.7   [1] (🔈)       speaker low volume
-	GraphemeCodePoint{0x1F509, 0x1F509, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (🔉)       speaker medium volume
-	GraphemeCodePoint{0x1F50A, 0x1F514, GraphemeProp.gp_extended_pictographic}, // E0.6  [11] (🔊..🔔)    speaker high volume..bell
-	GraphemeCodePoint{0x1F515, 0x1F515, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (🔕)       bell with slash
-	GraphemeCodePoint{0x1F516, 0x1F52B, GraphemeProp.gp_extended_pictographic}, // E0.6  [22] (🔖..🔫)    bookmark..water pistol
-	GraphemeCodePoint{0x1F52C, 0x1F52D, GraphemeProp.gp_extended_pictographic}, // E1.0   [2] (🔬..🔭)    microscope..telescope
-	GraphemeCodePoint{0x1F52E, 0x1F53D, GraphemeProp.gp_extended_pictographic}, // E0.6  [16] (🔮..🔽)    crystal ball..downwards button
-	GraphemeCodePoint{0x1F546, 0x1F548, GraphemeProp.gp_extended_pictographic}, // E0.0   [3] (🕆..🕈)    WHITE LATIN CROSS..CELTIC CROSS
-	GraphemeCodePoint{0x1F549, 0x1F54A, GraphemeProp.gp_extended_pictographic}, // E0.7   [2] (🕉️..🕊️)    om..dove
-	GraphemeCodePoint{0x1F54B, 0x1F54E, GraphemeProp.gp_extended_pictographic}, // E1.0   [4] (🕋..🕎)    kaaba..menorah
-	GraphemeCodePoint{0x1F54F, 0x1F54F, GraphemeProp.gp_extended_pictographic}, // E0.0   [1] (🕏)       BOWL OF HYGIEIA
-	GraphemeCodePoint{0x1F550, 0x1F55B, GraphemeProp.gp_extended_pictographic}, // E0.6  [12] (🕐..🕛)    one o’clock..twelve o’clock
-	GraphemeCodePoint{0x1F55C, 0x1F567, GraphemeProp.gp_extended_pictographic}, // E0.7  [12] (🕜..🕧)    one-thirty..twelve-thirty
-	GraphemeCodePoint{0x1F568, 0x1F56E, GraphemeProp.gp_extended_pictographic}, // E0.0   [7] (🕨..🕮)    RIGHT SPEAKER..BOOK
-	GraphemeCodePoint{0x1F56F, 0x1F570, GraphemeProp.gp_extended_pictographic}, // E0.7   [2] (🕯️..🕰️)    candle..mantelpiece clock
-	GraphemeCodePoint{0x1F571, 0x1F572, GraphemeProp.gp_extended_pictographic}, // E0.0   [2] (🕱..🕲)    BLACK SKULL AND CROSSBONES..NO PIRACY
-	GraphemeCodePoint{0x1F573, 0x1F579, GraphemeProp.gp_extended_pictographic}, // E0.7   [7] (🕳️..🕹️)    hole..joystick
-	GraphemeCodePoint{0x1F57A, 0x1F57A, GraphemeProp.gp_extended_pictographic}, // E3.0   [1] (🕺)       man dancing
-	GraphemeCodePoint{0x1F57B, 0x1F586, GraphemeProp.gp_extended_pictographic}, // E0.0  [12] (🕻..🖆)    LEFT HAND TELEPHONE RECEIVER..PEN OVER STAMPED ENVELOPE
-	GraphemeCodePoint{0x1F587, 0x1F587, GraphemeProp.gp_extended_pictographic}, // E0.7   [1] (🖇️)       linked paperclips
-	GraphemeCodePoint{0x1F588, 0x1F589, GraphemeProp.gp_extended_pictographic}, // E0.0   [2] (🖈..🖉)    BLACK PUSHPIN..LOWER LEFT PENCIL
-	GraphemeCodePoint{0x1F58A, 0x1F58D, GraphemeProp.gp_extended_pictographic}, // E0.7   [4] (🖊️..🖍️)    pen..crayon
-	GraphemeCodePoint{0x1F58E, 0x1F58F, GraphemeProp.gp_extended_pictographic}, // E0.0   [2] (🖎..🖏)    LEFT WRITING HAND..TURNED OK HAND SIGN
-	GraphemeCodePoint{0x1F590, 0x1F590, GraphemeProp.gp_extended_pictographic}, // E0.7   [1] (🖐️)       hand with fingers splayed
-	GraphemeCodePoint{0x1F591, 0x1F594, GraphemeProp.gp_extended_pictographic}, // E0.0   [4] (🖑..🖔)    REVERSED RAISED HAND WITH FINGERS SPLAYED..REVERSED VICTORY HAND
-	GraphemeCodePoint{0x1F595, 0x1F596, GraphemeProp.gp_extended_pictographic}, // E1.0   [2] (🖕..🖖)    middle finger..vulcan salute
-	GraphemeCodePoint{0x1F597, 0x1F5A3, GraphemeProp.gp_extended_pictographic}, // E0.0  [13] (🖗..🖣)    WHITE DOWN POINTING LEFT HAND INDEX..BLACK DOWN POINTING BACKHAND INDEX
-	GraphemeCodePoint{0x1F5A4, 0x1F5A4, GraphemeProp.gp_extended_pictographic}, // E3.0   [1] (🖤)       black heart
-	GraphemeCodePoint{0x1F5A5, 0x1F5A5, GraphemeProp.gp_extended_pictographic}, // E0.7   [1] (🖥️)       desktop computer
-	GraphemeCodePoint{0x1F5A6, 0x1F5A7, GraphemeProp.gp_extended_pictographic}, // E0.0   [2] (🖦..🖧)    KEYBOARD AND MOUSE..THREE NETWORKED COMPUTERS
-	GraphemeCodePoint{0x1F5A8, 0x1F5A8, GraphemeProp.gp_extended_pictographic}, // E0.7   [1] (🖨️)       printer
-	GraphemeCodePoint{0x1F5A9, 0x1F5B0, GraphemeProp.gp_extended_pictographic}, // E0.0   [8] (🖩..🖰)    POCKET CALCULATOR..TWO BUTTON MOUSE
-	GraphemeCodePoint{0x1F5B1, 0x1F5B2, GraphemeProp.gp_extended_pictographic}, // E0.7   [2] (🖱️..🖲️)    computer mouse..trackball
-	GraphemeCodePoint{0x1F5B3, 0x1F5BB, GraphemeProp.gp_extended_pictographic}, // E0.0   [9] (🖳..🖻)    OLD PERSONAL COMPUTER..DOCUMENT WITH PICTURE
-	GraphemeCodePoint{0x1F5BC, 0x1F5BC, GraphemeProp.gp_extended_pictographic}, // E0.7   [1] (🖼️)       framed picture
-	GraphemeCodePoint{0x1F5BD, 0x1F5C1, GraphemeProp.gp_extended_pictographic}, // E0.0   [5] (🖽..🗁)    FRAME WITH TILES..OPEN FOLDER
-	GraphemeCodePoint{0x1F5C2, 0x1F5C4, GraphemeProp.gp_extended_pictographic}, // E0.7   [3] (🗂️..🗄️)    card index dividers..file cabinet
-	GraphemeCodePoint{0x1F5C5, 0x1F5D0, GraphemeProp.gp_extended_pictographic}, // E0.0  [12] (🗅..🗐)    EMPTY NOTE..PAGES
-	GraphemeCodePoint{0x1F5D1, 0x1F5D3, GraphemeProp.gp_extended_pictographic}, // E0.7   [3] (🗑️..🗓️)    wastebasket..spiral calendar
-	GraphemeCodePoint{0x1F5D4, 0x1F5DB, GraphemeProp.gp_extended_pictographic}, // E0.0   [8] (🗔..🗛)    DESKTOP WINDOW..DECREASE FONT SIZE SYMBOL
-	GraphemeCodePoint{0x1F5DC, 0x1F5DE, GraphemeProp.gp_extended_pictographic}, // E0.7   [3] (🗜️..🗞️)    clamp..rolled-up newspaper
-	GraphemeCodePoint{0x1F5DF, 0x1F5E0, GraphemeProp.gp_extended_pictographic}, // E0.0   [2] (🗟..🗠)    PAGE WITH CIRCLED TEXT..STOCK CHART
-	GraphemeCodePoint{0x1F5E1, 0x1F5E1, GraphemeProp.gp_extended_pictographic}, // E0.7   [1] (🗡️)       dagger
-	GraphemeCodePoint{0x1F5E2, 0x1F5E2, GraphemeProp.gp_extended_pictographic}, // E0.0   [1] (🗢)       LIPS
-	GraphemeCodePoint{0x1F5E3, 0x1F5E3, GraphemeProp.gp_extended_pictographic}, // E0.7   [1] (🗣️)       speaking head
-	GraphemeCodePoint{0x1F5E4, 0x1F5E7, GraphemeProp.gp_extended_pictographic}, // E0.0   [4] (🗤..🗧)    THREE RAYS ABOVE..THREE RAYS RIGHT
-	GraphemeCodePoint{0x1F5E8, 0x1F5E8, GraphemeProp.gp_extended_pictographic}, // E2.0   [1] (🗨️)       left speech bubble
-	GraphemeCodePoint{0x1F5E9, 0x1F5EE, GraphemeProp.gp_extended_pictographic}, // E0.0   [6] (🗩..🗮)    RIGHT SPEECH BUBBLE..LEFT ANGER BUBBLE
-	GraphemeCodePoint{0x1F5EF, 0x1F5EF, GraphemeProp.gp_extended_pictographic}, // E0.7   [1] (🗯️)       right anger bubble
-	GraphemeCodePoint{0x1F5F0, 0x1F5F2, GraphemeProp.gp_extended_pictographic}, // E0.0   [3] (🗰..🗲)    MOOD BUBBLE..LIGHTNING MOOD
-	GraphemeCodePoint{0x1F5F3, 0x1F5F3, GraphemeProp.gp_extended_pictographic}, // E0.7   [1] (🗳️)       ballot box with ballot
-	GraphemeCodePoint{0x1F5F4, 0x1F5F9, GraphemeProp.gp_extended_pictographic}, // E0.0   [6] (🗴..🗹)    BALLOT SCRIPT X..BALLOT BOX WITH BOLD CHECK
-	GraphemeCodePoint{0x1F5FA, 0x1F5FA, GraphemeProp.gp_extended_pictographic}, // E0.7   [1] (🗺️)       world map
-	GraphemeCodePoint{0x1F5FB, 0x1F5FF, GraphemeProp.gp_extended_pictographic}, // E0.6   [5] (🗻..🗿)    mount fuji..moai
-	GraphemeCodePoint{0x1F600, 0x1F600, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (😀)       grinning face
-	GraphemeCodePoint{0x1F601, 0x1F606, GraphemeProp.gp_extended_pictographic}, // E0.6   [6] (😁..😆)    beaming face with smiling eyes..grinning squinting face
-	GraphemeCodePoint{0x1F607, 0x1F608, GraphemeProp.gp_extended_pictographic}, // E1.0   [2] (😇..😈)    smiling face with halo..smiling face with horns
-	GraphemeCodePoint{0x1F609, 0x1F60D, GraphemeProp.gp_extended_pictographic}, // E0.6   [5] (😉..😍)    winking face..smiling face with heart-eyes
-	GraphemeCodePoint{0x1F60E, 0x1F60E, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (😎)       smiling face with sunglasses
-	GraphemeCodePoint{0x1F60F, 0x1F60F, GraphemeProp.gp_extended_pictographic}, // E0.6   [1] (😏)       smirking face
-	GraphemeCodePoint{0x1F610, 0x1F610, GraphemeProp.gp_extended_pictographic}, // E0.7   [1] (😐)       neutral face
-	GraphemeCodePoint{0x1F611, 0x1F611, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (😑)       expressionless face
-	GraphemeCodePoint{0x1F612, 0x1F614, GraphemeProp.gp_extended_pictographic}, // E0.6   [3] (😒..😔)    unamused face..pensive face
-	GraphemeCodePoint{0x1F615, 0x1F615, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (😕)       confused face
-	GraphemeCodePoint{0x1F616, 0x1F616, GraphemeProp.gp_extended_pictographic}, // E0.6   [1] (😖)       confounded face
-	GraphemeCodePoint{0x1F617, 0x1F617, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (😗)       kissing face
-	GraphemeCodePoint{0x1F618, 0x1F618, GraphemeProp.gp_extended_pictographic}, // E0.6   [1] (😘)       face blowing a kiss
-	GraphemeCodePoint{0x1F619, 0x1F619, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (😙)       kissing face with smiling eyes
-	GraphemeCodePoint{0x1F61A, 0x1F61A, GraphemeProp.gp_extended_pictographic}, // E0.6   [1] (😚)       kissing face with closed eyes
-	GraphemeCodePoint{0x1F61B, 0x1F61B, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (😛)       face with tongue
-	GraphemeCodePoint{0x1F61C, 0x1F61E, GraphemeProp.gp_extended_pictographic}, // E0.6   [3] (😜..😞)    winking face with tongue..disappointed face
-	GraphemeCodePoint{0x1F61F, 0x1F61F, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (😟)       worried face
-	GraphemeCodePoint{0x1F620, 0x1F625, GraphemeProp.gp_extended_pictographic}, // E0.6   [6] (😠..😥)    angry face..sad but relieved face
-	GraphemeCodePoint{0x1F626, 0x1F627, GraphemeProp.gp_extended_pictographic}, // E1.0   [2] (😦..😧)    frowning face with open mouth..anguished face
-	GraphemeCodePoint{0x1F628, 0x1F62B, GraphemeProp.gp_extended_pictographic}, // E0.6   [4] (😨..😫)    fearful face..tired face
-	GraphemeCodePoint{0x1F62C, 0x1F62C, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (😬)       grimacing face
-	GraphemeCodePoint{0x1F62D, 0x1F62D, GraphemeProp.gp_extended_pictographic}, // E0.6   [1] (😭)       loudly crying face
-	GraphemeCodePoint{0x1F62E, 0x1F62F, GraphemeProp.gp_extended_pictographic}, // E1.0   [2] (😮..😯)    face with open mouth..hushed face
-	GraphemeCodePoint{0x1F630, 0x1F633, GraphemeProp.gp_extended_pictographic}, // E0.6   [4] (😰..😳)    anxious face with sweat..flushed face
-	GraphemeCodePoint{0x1F634, 0x1F634, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (😴)       sleeping face
-	GraphemeCodePoint{0x1F635, 0x1F635, GraphemeProp.gp_extended_pictographic}, // E0.6   [1] (😵)       face with crossed-out eyes
-	GraphemeCodePoint{0x1F636, 0x1F636, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (😶)       face without mouth
-	GraphemeCodePoint{0x1F637, 0x1F640, GraphemeProp.gp_extended_pictographic}, // E0.6  [10] (😷..🙀)    face with medical mask..weary cat
-	GraphemeCodePoint{0x1F641, 0x1F644, GraphemeProp.gp_extended_pictographic}, // E1.0   [4] (🙁..🙄)    slightly frowning face..face with rolling eyes
-	GraphemeCodePoint{0x1F645, 0x1F64F, GraphemeProp.gp_extended_pictographic}, // E0.6  [11] (🙅..🙏)    person gesturing NO..folded hands
-	GraphemeCodePoint{0x1F680, 0x1F680, GraphemeProp.gp_extended_pictographic}, // E0.6   [1] (🚀)       rocket
-	GraphemeCodePoint{0x1F681, 0x1F682, GraphemeProp.gp_extended_pictographic}, // E1.0   [2] (🚁..🚂)    helicopter..locomotive
-	GraphemeCodePoint{0x1F683, 0x1F685, GraphemeProp.gp_extended_pictographic}, // E0.6   [3] (🚃..🚅)    railway car..bullet train
-	GraphemeCodePoint{0x1F686, 0x1F686, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (🚆)       train
-	GraphemeCodePoint{0x1F687, 0x1F687, GraphemeProp.gp_extended_pictographic}, // E0.6   [1] (🚇)       metro
-	GraphemeCodePoint{0x1F688, 0x1F688, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (🚈)       light rail
-	GraphemeCodePoint{0x1F689, 0x1F689, GraphemeProp.gp_extended_pictographic}, // E0.6   [1] (🚉)       station
-	GraphemeCodePoint{0x1F68A, 0x1F68B, GraphemeProp.gp_extended_pictographic}, // E1.0   [2] (🚊..🚋)    tram..tram car
-	GraphemeCodePoint{0x1F68C, 0x1F68C, GraphemeProp.gp_extended_pictographic}, // E0.6   [1] (🚌)       bus
-	GraphemeCodePoint{0x1F68D, 0x1F68D, GraphemeProp.gp_extended_pictographic}, // E0.7   [1] (🚍)       oncoming bus
-	GraphemeCodePoint{0x1F68E, 0x1F68E, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (🚎)       trolleybus
-	GraphemeCodePoint{0x1F68F, 0x1F68F, GraphemeProp.gp_extended_pictographic}, // E0.6   [1] (🚏)       bus stop
-	GraphemeCodePoint{0x1F690, 0x1F690, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (🚐)       minibus
-	GraphemeCodePoint{0x1F691, 0x1F693, GraphemeProp.gp_extended_pictographic}, // E0.6   [3] (🚑..🚓)    ambulance..police car
-	GraphemeCodePoint{0x1F694, 0x1F694, GraphemeProp.gp_extended_pictographic}, // E0.7   [1] (🚔)       oncoming police car
-	GraphemeCodePoint{0x1F695, 0x1F695, GraphemeProp.gp_extended_pictographic}, // E0.6   [1] (🚕)       taxi
-	GraphemeCodePoint{0x1F696, 0x1F696, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (🚖)       oncoming taxi
-	GraphemeCodePoint{0x1F697, 0x1F697, GraphemeProp.gp_extended_pictographic}, // E0.6   [1] (🚗)       automobile
-	GraphemeCodePoint{0x1F698, 0x1F698, GraphemeProp.gp_extended_pictographic}, // E0.7   [1] (🚘)       oncoming automobile
-	GraphemeCodePoint{0x1F699, 0x1F69A, GraphemeProp.gp_extended_pictographic}, // E0.6   [2] (🚙..🚚)    sport utility vehicle..delivery truck
-	GraphemeCodePoint{0x1F69B, 0x1F6A1, GraphemeProp.gp_extended_pictographic}, // E1.0   [7] (🚛..🚡)    articulated lorry..aerial tramway
-	GraphemeCodePoint{0x1F6A2, 0x1F6A2, GraphemeProp.gp_extended_pictographic}, // E0.6   [1] (🚢)       ship
-	GraphemeCodePoint{0x1F6A3, 0x1F6A3, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (🚣)       person rowing boat
-	GraphemeCodePoint{0x1F6A4, 0x1F6A5, GraphemeProp.gp_extended_pictographic}, // E0.6   [2] (🚤..🚥)    speedboat..horizontal traffic light
-	GraphemeCodePoint{0x1F6A6, 0x1F6A6, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (🚦)       vertical traffic light
-	GraphemeCodePoint{0x1F6A7, 0x1F6AD, GraphemeProp.gp_extended_pictographic}, // E0.6   [7] (🚧..🚭)    construction..no smoking
-	GraphemeCodePoint{0x1F6AE, 0x1F6B1, GraphemeProp.gp_extended_pictographic}, // E1.0   [4] (🚮..🚱)    litter in bin sign..non-potable water
-	GraphemeCodePoint{0x1F6B2, 0x1F6B2, GraphemeProp.gp_extended_pictographic}, // E0.6   [1] (🚲)       bicycle
-	GraphemeCodePoint{0x1F6B3, 0x1F6B5, GraphemeProp.gp_extended_pictographic}, // E1.0   [3] (🚳..🚵)    no bicycles..person mountain biking
-	GraphemeCodePoint{0x1F6B6, 0x1F6B6, GraphemeProp.gp_extended_pictographic}, // E0.6   [1] (🚶)       person walking
-	GraphemeCodePoint{0x1F6B7, 0x1F6B8, GraphemeProp.gp_extended_pictographic}, // E1.0   [2] (🚷..🚸)    no pedestrians..children crossing
-	GraphemeCodePoint{0x1F6B9, 0x1F6BE, GraphemeProp.gp_extended_pictographic}, // E0.6   [6] (🚹..🚾)    men’s room..water closet
-	GraphemeCodePoint{0x1F6BF, 0x1F6BF, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (🚿)       shower
-	GraphemeCodePoint{0x1F6C0, 0x1F6C0, GraphemeProp.gp_extended_pictographic}, // E0.6   [1] (🛀)       person taking bath
-	GraphemeCodePoint{0x1F6C1, 0x1F6C5, GraphemeProp.gp_extended_pictographic}, // E1.0   [5] (🛁..🛅)    bathtub..left luggage
-	GraphemeCodePoint{0x1F6C6, 0x1F6CA, GraphemeProp.gp_extended_pictographic}, // E0.0   [5] (🛆..🛊)    TRIANGLE WITH ROUNDED CORNERS..GIRLS SYMBOL
-	GraphemeCodePoint{0x1F6CB, 0x1F6CB, GraphemeProp.gp_extended_pictographic}, // E0.7   [1] (🛋️)       couch and lamp
-	GraphemeCodePoint{0x1F6CC, 0x1F6CC, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (🛌)       person in bed
-	GraphemeCodePoint{0x1F6CD, 0x1F6CF, GraphemeProp.gp_extended_pictographic}, // E0.7   [3] (🛍️..🛏️)    shopping bags..bed
-	GraphemeCodePoint{0x1F6D0, 0x1F6D0, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (🛐)       place of worship
-	GraphemeCodePoint{0x1F6D1, 0x1F6D2, GraphemeProp.gp_extended_pictographic}, // E3.0   [2] (🛑..🛒)    stop sign..shopping cart
-	GraphemeCodePoint{0x1F6D3, 0x1F6D4, GraphemeProp.gp_extended_pictographic}, // E0.0   [2] (🛓..🛔)    STUPA..PAGODA
-	GraphemeCodePoint{0x1F6D5, 0x1F6D5, GraphemeProp.gp_extended_pictographic}, // E12.0  [1] (🛕)       hindu temple
-	GraphemeCodePoint{0x1F6D6, 0x1F6D7, GraphemeProp.gp_extended_pictographic}, // E13.0  [2] (🛖..🛗)    hut..elevator
-	GraphemeCodePoint{0x1F6D8, 0x1F6DB, GraphemeProp.gp_extended_pictographic}, // E0.0   [4] (🛘..🛛)    <reserved-1F6D8>..<reserved-1F6DB>
-	GraphemeCodePoint{0x1F6DC, 0x1F6DC, GraphemeProp.gp_extended_pictographic}, // E15.0  [1] (🛜)       wireless
-	GraphemeCodePoint{0x1F6DD, 0x1F6DF, GraphemeProp.gp_extended_pictographic}, // E14.0  [3] (🛝..🛟)    playground slide..ring buoy
-	GraphemeCodePoint{0x1F6E0, 0x1F6E5, GraphemeProp.gp_extended_pictographic}, // E0.7   [6] (🛠️..🛥️)    hammer and wrench..motor boat
-	GraphemeCodePoint{0x1F6E6, 0x1F6E8, GraphemeProp.gp_extended_pictographic}, // E0.0   [3] (🛦..🛨)    UP-POINTING MILITARY AIRPLANE..UP-POINTING SMALL AIRPLANE
-	GraphemeCodePoint{0x1F6E9, 0x1F6E9, GraphemeProp.gp_extended_pictographic}, // E0.7   [1] (🛩️)       small airplane
-	GraphemeCodePoint{0x1F6EA, 0x1F6EA, GraphemeProp.gp_extended_pictographic}, // E0.0   [1] (🛪)       NORTHEAST-POINTING AIRPLANE
-	GraphemeCodePoint{0x1F6EB, 0x1F6EC, GraphemeProp.gp_extended_pictographic}, // E1.0   [2] (🛫..🛬)    airplane departure..airplane arrival
-	GraphemeCodePoint{0x1F6ED, 0x1F6EF, GraphemeProp.gp_extended_pictographic}, // E0.0   [3] (🛭..🛯)    <reserved-1F6ED>..<reserved-1F6EF>
-	GraphemeCodePoint{0x1F6F0, 0x1F6F0, GraphemeProp.gp_extended_pictographic}, // E0.7   [1] (🛰️)       satellite
-	GraphemeCodePoint{0x1F6F1, 0x1F6F2, GraphemeProp.gp_extended_pictographic}, // E0.0   [2] (🛱..🛲)    ONCOMING FIRE ENGINE..DIESEL LOCOMOTIVE
-	GraphemeCodePoint{0x1F6F3, 0x1F6F3, GraphemeProp.gp_extended_pictographic}, // E0.7   [1] (🛳️)       passenger ship
-	GraphemeCodePoint{0x1F6F4, 0x1F6F6, GraphemeProp.gp_extended_pictographic}, // E3.0   [3] (🛴..🛶)    kick scooter..canoe
-	GraphemeCodePoint{0x1F6F7, 0x1F6F8, GraphemeProp.gp_extended_pictographic}, // E5.0   [2] (🛷..🛸)    sled..flying saucer
-	GraphemeCodePoint{0x1F6F9, 0x1F6F9, GraphemeProp.gp_extended_pictographic}, // E11.0  [1] (🛹)       skateboard
-	GraphemeCodePoint{0x1F6FA, 0x1F6FA, GraphemeProp.gp_extended_pictographic}, // E12.0  [1] (🛺)       auto rickshaw
-	GraphemeCodePoint{0x1F6FB, 0x1F6FC, GraphemeProp.gp_extended_pictographic}, // E13.0  [2] (🛻..🛼)    pickup truck..roller skate
-	GraphemeCodePoint{0x1F6FD, 0x1F6FF, GraphemeProp.gp_extended_pictographic}, // E0.0   [3] (🛽..🛿)    <reserved-1F6FD>..<reserved-1F6FF>
-	GraphemeCodePoint{0x1F774, 0x1F77F, GraphemeProp.gp_extended_pictographic}, // E0.0  [12] (🝴..🝿)    LOT OF FORTUNE..ORCUS
-	GraphemeCodePoint{0x1F7D5, 0x1F7DF, GraphemeProp.gp_extended_pictographic}, // E0.0  [11] (🟕..🟟)    CIRCLED TRIANGLE..<reserved-1F7DF>
-	GraphemeCodePoint{0x1F7E0, 0x1F7EB, GraphemeProp.gp_extended_pictographic}, // E12.0 [12] (🟠..🟫)    orange circle..brown square
-	GraphemeCodePoint{0x1F7EC, 0x1F7EF, GraphemeProp.gp_extended_pictographic}, // E0.0   [4] (🟬..🟯)    <reserved-1F7EC>..<reserved-1F7EF>
-	GraphemeCodePoint{0x1F7F0, 0x1F7F0, GraphemeProp.gp_extended_pictographic}, // E14.0  [1] (🟰)       heavy equals sign
-	GraphemeCodePoint{0x1F7F1, 0x1F7FF, GraphemeProp.gp_extended_pictographic}, // E0.0  [15] (🟱..🟿)    <reserved-1F7F1>..<reserved-1F7FF>
-	GraphemeCodePoint{0x1F80C, 0x1F80F, GraphemeProp.gp_extended_pictographic}, // E0.0   [4] (🠌..🠏)    <reserved-1F80C>..<reserved-1F80F>
-	GraphemeCodePoint{0x1F848, 0x1F84F, GraphemeProp.gp_extended_pictographic}, // E0.0   [8] (🡈..🡏)    <reserved-1F848>..<reserved-1F84F>
-	GraphemeCodePoint{0x1F85A, 0x1F85F, GraphemeProp.gp_extended_pictographic}, // E0.0   [6] (🡚..🡟)    <reserved-1F85A>..<reserved-1F85F>
-	GraphemeCodePoint{0x1F888, 0x1F88F, GraphemeProp.gp_extended_pictographic}, // E0.0   [8] (🢈..🢏)    <reserved-1F888>..<reserved-1F88F>
-	GraphemeCodePoint{0x1F8AE, 0x1F8FF, GraphemeProp.gp_extended_pictographic}, // E0.0  [82] (🢮..🣿)    <reserved-1F8AE>..<reserved-1F8FF>
-	GraphemeCodePoint{0x1F90C, 0x1F90C, GraphemeProp.gp_extended_pictographic}, // E13.0  [1] (🤌)       pinched fingers
-	GraphemeCodePoint{0x1F90D, 0x1F90F, GraphemeProp.gp_extended_pictographic}, // E12.0  [3] (🤍..🤏)    white heart..pinching hand
-	GraphemeCodePoint{0x1F910, 0x1F918, GraphemeProp.gp_extended_pictographic}, // E1.0   [9] (🤐..🤘)    zipper-mouth face..sign of the horns
-	GraphemeCodePoint{0x1F919, 0x1F91E, GraphemeProp.gp_extended_pictographic}, // E3.0   [6] (🤙..🤞)    call me hand..crossed fingers
-	GraphemeCodePoint{0x1F91F, 0x1F91F, GraphemeProp.gp_extended_pictographic}, // E5.0   [1] (🤟)       love-you gesture
-	GraphemeCodePoint{0x1F920, 0x1F927, GraphemeProp.gp_extended_pictographic}, // E3.0   [8] (🤠..🤧)    cowboy hat face..sneezing face
-	GraphemeCodePoint{0x1F928, 0x1F92F, GraphemeProp.gp_extended_pictographic}, // E5.0   [8] (🤨..🤯)    face with raised eyebrow..exploding head
-	GraphemeCodePoint{0x1F930, 0x1F930, GraphemeProp.gp_extended_pictographic}, // E3.0   [1] (🤰)       pregnant woman
-	GraphemeCodePoint{0x1F931, 0x1F932, GraphemeProp.gp_extended_pictographic}, // E5.0   [2] (🤱..🤲)    breast-feeding..palms up together
-	GraphemeCodePoint{0x1F933, 0x1F93A, GraphemeProp.gp_extended_pictographic}, // E3.0   [8] (🤳..🤺)    selfie..person fencing
-	GraphemeCodePoint{0x1F93C, 0x1F93E, GraphemeProp.gp_extended_pictographic}, // E3.0   [3] (🤼..🤾)    people wrestling..person playing handball
-	GraphemeCodePoint{0x1F93F, 0x1F93F, GraphemeProp.gp_extended_pictographic}, // E12.0  [1] (🤿)       diving mask
-	GraphemeCodePoint{0x1F940, 0x1F945, GraphemeProp.gp_extended_pictographic}, // E3.0   [6] (🥀..🥅)    wilted flower..goal net
-	GraphemeCodePoint{0x1F947, 0x1F94B, GraphemeProp.gp_extended_pictographic}, // E3.0   [5] (🥇..🥋)    1st place medal..martial arts uniform
-	GraphemeCodePoint{0x1F94C, 0x1F94C, GraphemeProp.gp_extended_pictographic}, // E5.0   [1] (🥌)       curling stone
-	GraphemeCodePoint{0x1F94D, 0x1F94F, GraphemeProp.gp_extended_pictographic}, // E11.0  [3] (🥍..🥏)    lacrosse..flying disc
-	GraphemeCodePoint{0x1F950, 0x1F95E, GraphemeProp.gp_extended_pictographic}, // E3.0  [15] (🥐..🥞)    croissant..pancakes
-	GraphemeCodePoint{0x1F95F, 0x1F96B, GraphemeProp.gp_extended_pictographic}, // E5.0  [13] (🥟..🥫)    dumpling..canned food
-	GraphemeCodePoint{0x1F96C, 0x1F970, GraphemeProp.gp_extended_pictographic}, // E11.0  [5] (🥬..🥰)    leafy green..smiling face with hearts
-	GraphemeCodePoint{0x1F971, 0x1F971, GraphemeProp.gp_extended_pictographic}, // E12.0  [1] (🥱)       yawning face
-	GraphemeCodePoint{0x1F972, 0x1F972, GraphemeProp.gp_extended_pictographic}, // E13.0  [1] (🥲)       smiling face with tear
-	GraphemeCodePoint{0x1F973, 0x1F976, GraphemeProp.gp_extended_pictographic}, // E11.0  [4] (🥳..🥶)    partying face..cold face
-	GraphemeCodePoint{0x1F977, 0x1F978, GraphemeProp.gp_extended_pictographic}, // E13.0  [2] (🥷..🥸)    ninja..disguised face
-	GraphemeCodePoint{0x1F979, 0x1F979, GraphemeProp.gp_extended_pictographic}, // E14.0  [1] (🥹)       face holding back tears
-	GraphemeCodePoint{0x1F97A, 0x1F97A, GraphemeProp.gp_extended_pictographic}, // E11.0  [1] (🥺)       pleading face
-	GraphemeCodePoint{0x1F97B, 0x1F97B, GraphemeProp.gp_extended_pictographic}, // E12.0  [1] (🥻)       sari
-	GraphemeCodePoint{0x1F97C, 0x1F97F, GraphemeProp.gp_extended_pictographic}, // E11.0  [4] (🥼..🥿)    lab coat..flat shoe
-	GraphemeCodePoint{0x1F980, 0x1F984, GraphemeProp.gp_extended_pictographic}, // E1.0   [5] (🦀..🦄)    crab..unicorn
-	GraphemeCodePoint{0x1F985, 0x1F991, GraphemeProp.gp_extended_pictographic}, // E3.0  [13] (🦅..🦑)    eagle..squid
-	GraphemeCodePoint{0x1F992, 0x1F997, GraphemeProp.gp_extended_pictographic}, // E5.0   [6] (🦒..🦗)    giraffe..cricket
-	GraphemeCodePoint{0x1F998, 0x1F9A2, GraphemeProp.gp_extended_pictographic}, // E11.0 [11] (🦘..🦢)    kangaroo..swan
-	GraphemeCodePoint{0x1F9A3, 0x1F9A4, GraphemeProp.gp_extended_pictographic}, // E13.0  [2] (🦣..🦤)    mammoth..dodo
-	GraphemeCodePoint{0x1F9A5, 0x1F9AA, GraphemeProp.gp_extended_pictographic}, // E12.0  [6] (🦥..🦪)    sloth..oyster
-	GraphemeCodePoint{0x1F9AB, 0x1F9AD, GraphemeProp.gp_extended_pictographic}, // E13.0  [3] (🦫..🦭)    beaver..seal
-	GraphemeCodePoint{0x1F9AE, 0x1F9AF, GraphemeProp.gp_extended_pictographic}, // E12.0  [2] (🦮..🦯)    guide dog..white cane
-	GraphemeCodePoint{0x1F9B0, 0x1F9B9, GraphemeProp.gp_extended_pictographic}, // E11.0 [10] (🦰..🦹)    red hair..supervillain
-	GraphemeCodePoint{0x1F9BA, 0x1F9BF, GraphemeProp.gp_extended_pictographic}, // E12.0  [6] (🦺..🦿)    safety vest..mechanical leg
-	GraphemeCodePoint{0x1F9C0, 0x1F9C0, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (🧀)       cheese wedge
-	GraphemeCodePoint{0x1F9C1, 0x1F9C2, GraphemeProp.gp_extended_pictographic}, // E11.0  [2] (🧁..🧂)    cupcake..salt
-	GraphemeCodePoint{0x1F9C3, 0x1F9CA, GraphemeProp.gp_extended_pictographic}, // E12.0  [8] (🧃..🧊)    beverage box..ice
-	GraphemeCodePoint{0x1F9CB, 0x1F9CB, GraphemeProp.gp_extended_pictographic}, // E13.0  [1] (🧋)       bubble tea
-	GraphemeCodePoint{0x1F9CC, 0x1F9CC, GraphemeProp.gp_extended_pictographic}, // E14.0  [1] (🧌)       troll
-	GraphemeCodePoint{0x1F9CD, 0x1F9CF, GraphemeProp.gp_extended_pictographic}, // E12.0  [3] (🧍..🧏)    person standing..deaf person
-	GraphemeCodePoint{0x1F9D0, 0x1F9E6, GraphemeProp.gp_extended_pictographic}, // E5.0  [23] (🧐..🧦)    face with monocle..socks
-	GraphemeCodePoint{0x1F9E7, 0x1F9FF, GraphemeProp.gp_extended_pictographic}, // E11.0 [25] (🧧..🧿)    red envelope..nazar amulet
-	GraphemeCodePoint{0x1FA00, 0x1FA6F, GraphemeProp.gp_extended_pictographic}, // E0.0 [112] (🨀..🩯)    NEUTRAL CHESS KING..<reserved-1FA6F>
-	GraphemeCodePoint{0x1FA70, 0x1FA73, GraphemeProp.gp_extended_pictographic}, // E12.0  [4] (🩰..🩳)    ballet shoes..shorts
-	GraphemeCodePoint{0x1FA74, 0x1FA74, GraphemeProp.gp_extended_pictographic}, // E13.0  [1] (🩴)       thong sandal
-	GraphemeCodePoint{0x1FA75, 0x1FA77, GraphemeProp.gp_extended_pictographic}, // E15.0  [3] (🩵..🩷)    light blue heart..pink heart
-	GraphemeCodePoint{0x1FA78, 0x1FA7A, GraphemeProp.gp_extended_pictographic}, // E12.0  [3] (🩸..🩺)    drop of blood..stethoscope
-	GraphemeCodePoint{0x1FA7B, 0x1FA7C, GraphemeProp.gp_extended_pictographic}, // E14.0  [2] (🩻..🩼)    x-ray..crutch
-	GraphemeCodePoint{0x1FA7D, 0x1FA7F, GraphemeProp.gp_extended_pictographic}, // E0.0   [3] (🩽..🩿)    <reserved-1FA7D>..<reserved-1FA7F>
-	GraphemeCodePoint{0x1FA80, 0x1FA82, GraphemeProp.gp_extended_pictographic}, // E12.0  [3] (🪀..🪂)    yo-yo..parachute
-	GraphemeCodePoint{0x1FA83, 0x1FA86, GraphemeProp.gp_extended_pictographic}, // E13.0  [4] (🪃..🪆)    boomerang..nesting dolls
-	GraphemeCodePoint{0x1FA87, 0x1FA88, GraphemeProp.gp_extended_pictographic}, // E15.0  [2] (🪇..🪈)    maracas..flute
-	GraphemeCodePoint{0x1FA89, 0x1FA8F, GraphemeProp.gp_extended_pictographic}, // E0.0   [7] (🪉..🪏)    <reserved-1FA89>..<reserved-1FA8F>
-	GraphemeCodePoint{0x1FA90, 0x1FA95, GraphemeProp.gp_extended_pictographic}, // E12.0  [6] (🪐..🪕)    ringed planet..banjo
-	GraphemeCodePoint{0x1FA96, 0x1FAA8, GraphemeProp.gp_extended_pictographic}, // E13.0 [19] (🪖..🪨)    military helmet..rock
-	GraphemeCodePoint{0x1FAA9, 0x1FAAC, GraphemeProp.gp_extended_pictographic}, // E14.0  [4] (🪩..🪬)    mirror ball..hamsa
-	GraphemeCodePoint{0x1FAAD, 0x1FAAF, GraphemeProp.gp_extended_pictographic}, // E15.0  [3] (🪭..🪯)    folding hand fan..khanda
-	GraphemeCodePoint{0x1FAB0, 0x1FAB6, GraphemeProp.gp_extended_pictographic}, // E13.0  [7] (🪰..🪶)    fly..feather
-	GraphemeCodePoint{0x1FAB7, 0x1FABA, GraphemeProp.gp_extended_pictographic}, // E14.0  [4] (🪷..🪺)    lotus..nest with eggs
-	GraphemeCodePoint{0x1FABB, 0x1FABD, GraphemeProp.gp_extended_pictographic}, // E15.0  [3] (🪻..🪽)    hyacinth..wing
-	GraphemeCodePoint{0x1FABE, 0x1FABE, GraphemeProp.gp_extended_pictographic}, // E0.0   [1] (🪾)       <reserved-1FABE>
-	GraphemeCodePoint{0x1FABF, 0x1FABF, GraphemeProp.gp_extended_pictographic}, // E15.0  [1] (🪿)       goose
-	GraphemeCodePoint{0x1FAC0, 0x1FAC2, GraphemeProp.gp_extended_pictographic}, // E13.0  [3] (🫀..🫂)    anatomical heart..people hugging
-	GraphemeCodePoint{0x1FAC3, 0x1FAC5, GraphemeProp.gp_extended_pictographic}, // E14.0  [3] (🫃..🫅)    pregnant man..person with crown
-	GraphemeCodePoint{0x1FAC6, 0x1FACD, GraphemeProp.gp_extended_pictographic}, // E0.0   [8] (🫆..🫍)    <reserved-1FAC6>..<reserved-1FACD>
-	GraphemeCodePoint{0x1FACE, 0x1FACF, GraphemeProp.gp_extended_pictographic}, // E15.0  [2] (🫎..🫏)    moose..donkey
-	GraphemeCodePoint{0x1FAD0, 0x1FAD6, GraphemeProp.gp_extended_pictographic}, // E13.0  [7] (🫐..🫖)    blueberries..teapot
-	GraphemeCodePoint{0x1FAD7, 0x1FAD9, GraphemeProp.gp_extended_pictographic}, // E14.0  [3] (🫗..🫙)    pouring liquid..jar
-	GraphemeCodePoint{0x1FADA, 0x1FADB, GraphemeProp.gp_extended_pictographic}, // E15.0  [2] (🫚..🫛)    ginger root..pea pod
-	GraphemeCodePoint{0x1FADC, 0x1FADF, GraphemeProp.gp_extended_pictographic}, // E0.0   [4] (🫜..🫟)    <reserved-1FADC>..<reserved-1FADF>
-	GraphemeCodePoint{0x1FAE0, 0x1FAE7, GraphemeProp.gp_extended_pictographic}, // E14.0  [8] (🫠..🫧)    melting face..bubbles
-	GraphemeCodePoint{0x1FAE8, 0x1FAE8, GraphemeProp.gp_extended_pictographic}, // E15.0  [1] (🫨)       shaking face
-	GraphemeCodePoint{0x1FAE9, 0x1FAEF, GraphemeProp.gp_extended_pictographic}, // E0.0   [7] (🫩..🫯)    <reserved-1FAE9>..<reserved-1FAEF>
-	GraphemeCodePoint{0x1FAF0, 0x1FAF6, GraphemeProp.gp_extended_pictographic}, // E14.0  [7] (🫰..🫶)    hand with index finger and thumb crossed..heart hands
-	GraphemeCodePoint{0x1FAF7, 0x1FAF8, GraphemeProp.gp_extended_pictographic}, // E15.0  [2] (🫷..🫸)    leftwards pushing hand..rightwards pushing hand
-	GraphemeCodePoint{0x1FAF9, 0x1FAFF, GraphemeProp.gp_extended_pictographic}, // E0.0   [7] (🫹..🫿)    <reserved-1FAF9>..<reserved-1FAFF>
-	GraphemeCodePoint{0x1FC00, 0x1FFFD, GraphemeProp.gp_extended_pictographic}, // E0.0[1022] (🰀..🿽)    <reserved-1FC00>..<reserved-1FFFD>
 	GraphemeCodePoint{0x200B, 0x200B, GraphemeProp.gp_control}, // Cf       ZERO WIDTH SPACE
 	GraphemeCodePoint{0x200C, 0x200C, GraphemeProp.gp_extend}, // Cf       ZERO WIDTH NON-JOINER
 	GraphemeCodePoint{0x200D, 0x200D, GraphemeProp.gp_zwj}, // Cf       ZERO WIDTH JOINER
@@ -1922,13 +1343,6 @@ const grapheme_properties = [
 	GraphemeCodePoint{0xD789, 0xD7A3, GraphemeProp.gp_lvt}, // Lo  [27] HANGUL SYLLABLE HIG..HANGUL SYLLABLE HIH
 	GraphemeCodePoint{0xD7B0, 0xD7C6, GraphemeProp.gp_v}, // Lo  [23] HANGUL JUNGSEONG O-YEO..HANGUL JUNGSEONG ARAEA-E
 	GraphemeCodePoint{0xD7CB, 0xD7FB, GraphemeProp.gp_t}, // Lo  [49] HANGUL JONGSEONG NIEUN-RIEUL..HANGUL JONGSEONG PHIEUPH-THIEUTH
-	GraphemeCodePoint{0xE0000, 0xE0000, GraphemeProp.gp_control}, // Cn       <reserved-E0000>
-	GraphemeCodePoint{0xE0001, 0xE0001, GraphemeProp.gp_control}, // Cf       LANGUAGE TAG
-	GraphemeCodePoint{0xE0002, 0xE001F, GraphemeProp.gp_control}, // Cn  [30] <reserved-E0002>..<reserved-E001F>
-	GraphemeCodePoint{0xE0020, 0xE007F, GraphemeProp.gp_extend}, // Cf  [96] TAG SPACE..CANCEL TAG
-	GraphemeCodePoint{0xE0080, 0xE00FF, GraphemeProp.gp_control}, // Cn [128] <reserved-E0080>..<reserved-E00FF>
-	GraphemeCodePoint{0xE0100, 0xE01EF, GraphemeProp.gp_extend}, // Mn [240] VARIATION SELECTOR-17..VARIATION SELECTOR-256
-	GraphemeCodePoint{0xE01F0, 0xE0FFF, GraphemeProp.gp_control}, // Cn [3600] <reserved-E01F0>..<reserved-E0FFF>
 	GraphemeCodePoint{0xFB1E, 0xFB1E, GraphemeProp.gp_extend}, // Mn       HEBREW POINT JUDEO-SPANISH VARIKA
 	GraphemeCodePoint{0xFE00, 0xFE0F, GraphemeProp.gp_extend}, // Mn  [16] VARIATION SELECTOR-1..VARIATION SELECTOR-16
 	GraphemeCodePoint{0xFE20, 0xFE2F, GraphemeProp.gp_extend}, // Mn  [16] COMBINING LIGATURE LEFT HALF..COMBINING CYRILLIC TITLO RIGHT HALF
@@ -1936,4 +1350,590 @@ const grapheme_properties = [
 	GraphemeCodePoint{0xFF9E, 0xFF9F, GraphemeProp.gp_extend}, // Lm   [2] HALFWIDTH KATAKANA VOICED SOUND MARK..HALFWIDTH KATAKANA SEMI-VOICED SOUND MARK
 	GraphemeCodePoint{0xFFF0, 0xFFF8, GraphemeProp.gp_control}, // Cn   [9] <reserved-FFF0>..<reserved-FFF8>
 	GraphemeCodePoint{0xFFF9, 0xFFFB, GraphemeProp.gp_control}, // Cf   [3] INTERLINEAR ANNOTATION ANCHOR..INTERLINEAR ANNOTATION TERMINATOR
+	GraphemeCodePoint{0x101FD, 0x101FD, GraphemeProp.gp_extend}, // Mn       PHAISTOS DISC SIGN COMBINING OBLIQUE STROKE
+	GraphemeCodePoint{0x102E0, 0x102E0, GraphemeProp.gp_extend}, // Mn       COPTIC EPACT THOUSANDS MARK
+	GraphemeCodePoint{0x10376, 0x1037A, GraphemeProp.gp_extend}, // Mn   [5] COMBINING OLD PERMIC LETTER AN..COMBINING OLD PERMIC LETTER SII
+	GraphemeCodePoint{0x10A01, 0x10A03, GraphemeProp.gp_extend}, // Mn   [3] KHAROSHTHI VOWEL SIGN I..KHAROSHTHI VOWEL SIGN VOCALIC R
+	GraphemeCodePoint{0x10A05, 0x10A06, GraphemeProp.gp_extend}, // Mn   [2] KHAROSHTHI VOWEL SIGN E..KHAROSHTHI VOWEL SIGN O
+	GraphemeCodePoint{0x10A0C, 0x10A0F, GraphemeProp.gp_extend}, // Mn   [4] KHAROSHTHI VOWEL LENGTH MARK..KHAROSHTHI SIGN VISARGA
+	GraphemeCodePoint{0x10A38, 0x10A3A, GraphemeProp.gp_extend}, // Mn   [3] KHAROSHTHI SIGN BAR ABOVE..KHAROSHTHI SIGN DOT BELOW
+	GraphemeCodePoint{0x10A3F, 0x10A3F, GraphemeProp.gp_extend}, // Mn       KHAROSHTHI VIRAMA
+	GraphemeCodePoint{0x10AE5, 0x10AE6, GraphemeProp.gp_extend}, // Mn   [2] MANICHAEAN ABBREVIATION MARK ABOVE..MANICHAEAN ABBREVIATION MARK BELOW
+	GraphemeCodePoint{0x10D24, 0x10D27, GraphemeProp.gp_extend}, // Mn   [4] HANIFI ROHINGYA SIGN HARBAHAY..HANIFI ROHINGYA SIGN TASSI
+	GraphemeCodePoint{0x10EAB, 0x10EAC, GraphemeProp.gp_extend}, // Mn   [2] YEZIDI COMBINING HAMZA MARK..YEZIDI COMBINING MADDA MARK
+	GraphemeCodePoint{0x10EFD, 0x10EFF, GraphemeProp.gp_extend}, // Mn   [3] ARABIC SMALL LOW WORD SAKTA..ARABIC SMALL LOW WORD MADDA
+	GraphemeCodePoint{0x10F46, 0x10F50, GraphemeProp.gp_extend}, // Mn  [11] SOGDIAN COMBINING DOT BELOW..SOGDIAN COMBINING STROKE BELOW
+	GraphemeCodePoint{0x10F82, 0x10F85, GraphemeProp.gp_extend}, // Mn   [4] OLD UYGHUR COMBINING DOT ABOVE..OLD UYGHUR COMBINING TWO DOTS BELOW
+	GraphemeCodePoint{0x11000, 0x11000, GraphemeProp.gp_spacingmark}, // Mc       BRAHMI SIGN CANDRABINDU
+	GraphemeCodePoint{0x11001, 0x11001, GraphemeProp.gp_extend}, // Mn       BRAHMI SIGN ANUSVARA
+	GraphemeCodePoint{0x11002, 0x11002, GraphemeProp.gp_spacingmark}, // Mc       BRAHMI SIGN VISARGA
+	GraphemeCodePoint{0x11038, 0x11046, GraphemeProp.gp_extend}, // Mn  [15] BRAHMI VOWEL SIGN AA..BRAHMI VIRAMA
+	GraphemeCodePoint{0x11070, 0x11070, GraphemeProp.gp_extend}, // Mn       BRAHMI SIGN OLD TAMIL VIRAMA
+	GraphemeCodePoint{0x11073, 0x11074, GraphemeProp.gp_extend}, // Mn   [2] BRAHMI VOWEL SIGN OLD TAMIL SHORT E..BRAHMI VOWEL SIGN OLD TAMIL SHORT O
+	GraphemeCodePoint{0x1107F, 0x11081, GraphemeProp.gp_extend}, // Mn   [3] BRAHMI NUMBER JOINER..KAITHI SIGN ANUSVARA
+	GraphemeCodePoint{0x11082, 0x11082, GraphemeProp.gp_spacingmark}, // Mc       KAITHI SIGN VISARGA
+	GraphemeCodePoint{0x110B0, 0x110B2, GraphemeProp.gp_spacingmark}, // Mc   [3] KAITHI VOWEL SIGN AA..KAITHI VOWEL SIGN II
+	GraphemeCodePoint{0x110B3, 0x110B6, GraphemeProp.gp_extend}, // Mn   [4] KAITHI VOWEL SIGN U..KAITHI VOWEL SIGN AI
+	GraphemeCodePoint{0x110B7, 0x110B8, GraphemeProp.gp_spacingmark}, // Mc   [2] KAITHI VOWEL SIGN O..KAITHI VOWEL SIGN AU
+	GraphemeCodePoint{0x110B9, 0x110BA, GraphemeProp.gp_extend}, // Mn   [2] KAITHI SIGN VIRAMA..KAITHI SIGN NUKTA
+	GraphemeCodePoint{0x110BD, 0x110BD, GraphemeProp.gp_prepend}, // Cf       KAITHI NUMBER SIGN
+	GraphemeCodePoint{0x110C2, 0x110C2, GraphemeProp.gp_extend}, // Mn       KAITHI VOWEL SIGN VOCALIC R
+	GraphemeCodePoint{0x110CD, 0x110CD, GraphemeProp.gp_prepend}, // Cf       KAITHI NUMBER SIGN ABOVE
+	GraphemeCodePoint{0x11100, 0x11102, GraphemeProp.gp_extend}, // Mn   [3] CHAKMA SIGN CANDRABINDU..CHAKMA SIGN VISARGA
+	GraphemeCodePoint{0x11127, 0x1112B, GraphemeProp.gp_extend}, // Mn   [5] CHAKMA VOWEL SIGN A..CHAKMA VOWEL SIGN UU
+	GraphemeCodePoint{0x1112C, 0x1112C, GraphemeProp.gp_spacingmark}, // Mc       CHAKMA VOWEL SIGN E
+	GraphemeCodePoint{0x1112D, 0x11134, GraphemeProp.gp_extend}, // Mn   [8] CHAKMA VOWEL SIGN AI..CHAKMA MAAYYAA
+	GraphemeCodePoint{0x11145, 0x11146, GraphemeProp.gp_spacingmark}, // Mc   [2] CHAKMA VOWEL SIGN AA..CHAKMA VOWEL SIGN EI
+	GraphemeCodePoint{0x11173, 0x11173, GraphemeProp.gp_extend}, // Mn       MAHAJANI SIGN NUKTA
+	GraphemeCodePoint{0x11180, 0x11181, GraphemeProp.gp_extend}, // Mn   [2] SHARADA SIGN CANDRABINDU..SHARADA SIGN ANUSVARA
+	GraphemeCodePoint{0x11182, 0x11182, GraphemeProp.gp_spacingmark}, // Mc       SHARADA SIGN VISARGA
+	GraphemeCodePoint{0x111B3, 0x111B5, GraphemeProp.gp_spacingmark}, // Mc   [3] SHARADA VOWEL SIGN AA..SHARADA VOWEL SIGN II
+	GraphemeCodePoint{0x111B6, 0x111BE, GraphemeProp.gp_extend}, // Mn   [9] SHARADA VOWEL SIGN U..SHARADA VOWEL SIGN O
+	GraphemeCodePoint{0x111BF, 0x111C0, GraphemeProp.gp_spacingmark}, // Mc   [2] SHARADA VOWEL SIGN AU..SHARADA SIGN VIRAMA
+	GraphemeCodePoint{0x111C2, 0x111C3, GraphemeProp.gp_prepend}, // Lo   [2] SHARADA SIGN JIHVAMULIYA..SHARADA SIGN UPADHMANIYA
+	GraphemeCodePoint{0x111C9, 0x111CC, GraphemeProp.gp_extend}, // Mn   [4] SHARADA SANDHI MARK..SHARADA EXTRA SHORT VOWEL MARK
+	GraphemeCodePoint{0x111CE, 0x111CE, GraphemeProp.gp_spacingmark}, // Mc       SHARADA VOWEL SIGN PRISHTHAMATRA E
+	GraphemeCodePoint{0x111CF, 0x111CF, GraphemeProp.gp_extend}, // Mn       SHARADA SIGN INVERTED CANDRABINDU
+	GraphemeCodePoint{0x1122C, 0x1122E, GraphemeProp.gp_spacingmark}, // Mc   [3] KHOJKI VOWEL SIGN AA..KHOJKI VOWEL SIGN II
+	GraphemeCodePoint{0x1122F, 0x11231, GraphemeProp.gp_extend}, // Mn   [3] KHOJKI VOWEL SIGN U..KHOJKI VOWEL SIGN AI
+	GraphemeCodePoint{0x11232, 0x11233, GraphemeProp.gp_spacingmark}, // Mc   [2] KHOJKI VOWEL SIGN O..KHOJKI VOWEL SIGN AU
+	GraphemeCodePoint{0x11234, 0x11234, GraphemeProp.gp_extend}, // Mn       KHOJKI SIGN ANUSVARA
+	GraphemeCodePoint{0x11235, 0x11235, GraphemeProp.gp_spacingmark}, // Mc       KHOJKI SIGN VIRAMA
+	GraphemeCodePoint{0x11236, 0x11237, GraphemeProp.gp_extend}, // Mn   [2] KHOJKI SIGN NUKTA..KHOJKI SIGN SHADDA
+	GraphemeCodePoint{0x1123E, 0x1123E, GraphemeProp.gp_extend}, // Mn       KHOJKI SIGN SUKUN
+	GraphemeCodePoint{0x11241, 0x11241, GraphemeProp.gp_extend}, // Mn       KHOJKI VOWEL SIGN VOCALIC R
+	GraphemeCodePoint{0x112DF, 0x112DF, GraphemeProp.gp_extend}, // Mn       KHUDAWADI SIGN ANUSVARA
+	GraphemeCodePoint{0x112E0, 0x112E2, GraphemeProp.gp_spacingmark}, // Mc   [3] KHUDAWADI VOWEL SIGN AA..KHUDAWADI VOWEL SIGN II
+	GraphemeCodePoint{0x112E3, 0x112EA, GraphemeProp.gp_extend}, // Mn   [8] KHUDAWADI VOWEL SIGN U..KHUDAWADI SIGN VIRAMA
+	GraphemeCodePoint{0x11300, 0x11301, GraphemeProp.gp_extend}, // Mn   [2] GRANTHA SIGN COMBINING ANUSVARA ABOVE..GRANTHA SIGN CANDRABINDU
+	GraphemeCodePoint{0x11302, 0x11303, GraphemeProp.gp_spacingmark}, // Mc   [2] GRANTHA SIGN ANUSVARA..GRANTHA SIGN VISARGA
+	GraphemeCodePoint{0x1133B, 0x1133C, GraphemeProp.gp_extend}, // Mn   [2] COMBINING BINDU BELOW..GRANTHA SIGN NUKTA
+	GraphemeCodePoint{0x1133E, 0x1133E, GraphemeProp.gp_extend}, // Mc       GRANTHA VOWEL SIGN AA
+	GraphemeCodePoint{0x1133F, 0x1133F, GraphemeProp.gp_spacingmark}, // Mc       GRANTHA VOWEL SIGN I
+	GraphemeCodePoint{0x11340, 0x11340, GraphemeProp.gp_extend}, // Mn       GRANTHA VOWEL SIGN II
+	GraphemeCodePoint{0x11341, 0x11344, GraphemeProp.gp_spacingmark}, // Mc   [4] GRANTHA VOWEL SIGN U..GRANTHA VOWEL SIGN VOCALIC RR
+	GraphemeCodePoint{0x11347, 0x11348, GraphemeProp.gp_spacingmark}, // Mc   [2] GRANTHA VOWEL SIGN EE..GRANTHA VOWEL SIGN AI
+	GraphemeCodePoint{0x1134B, 0x1134D, GraphemeProp.gp_spacingmark}, // Mc   [3] GRANTHA VOWEL SIGN OO..GRANTHA SIGN VIRAMA
+	GraphemeCodePoint{0x11357, 0x11357, GraphemeProp.gp_extend}, // Mc       GRANTHA AU LENGTH MARK
+	GraphemeCodePoint{0x11362, 0x11363, GraphemeProp.gp_spacingmark}, // Mc   [2] GRANTHA VOWEL SIGN VOCALIC L..GRANTHA VOWEL SIGN VOCALIC LL
+	GraphemeCodePoint{0x11366, 0x1136C, GraphemeProp.gp_extend}, // Mn   [7] COMBINING GRANTHA DIGIT ZERO..COMBINING GRANTHA DIGIT SIX
+	GraphemeCodePoint{0x11370, 0x11374, GraphemeProp.gp_extend}, // Mn   [5] COMBINING GRANTHA LETTER A..COMBINING GRANTHA LETTER PA
+	GraphemeCodePoint{0x11435, 0x11437, GraphemeProp.gp_spacingmark}, // Mc   [3] NEWA VOWEL SIGN AA..NEWA VOWEL SIGN II
+	GraphemeCodePoint{0x11438, 0x1143F, GraphemeProp.gp_extend}, // Mn   [8] NEWA VOWEL SIGN U..NEWA VOWEL SIGN AI
+	GraphemeCodePoint{0x11440, 0x11441, GraphemeProp.gp_spacingmark}, // Mc   [2] NEWA VOWEL SIGN O..NEWA VOWEL SIGN AU
+	GraphemeCodePoint{0x11442, 0x11444, GraphemeProp.gp_extend}, // Mn   [3] NEWA SIGN VIRAMA..NEWA SIGN ANUSVARA
+	GraphemeCodePoint{0x11445, 0x11445, GraphemeProp.gp_spacingmark}, // Mc       NEWA SIGN VISARGA
+	GraphemeCodePoint{0x11446, 0x11446, GraphemeProp.gp_extend}, // Mn       NEWA SIGN NUKTA
+	GraphemeCodePoint{0x1145E, 0x1145E, GraphemeProp.gp_extend}, // Mn       NEWA SANDHI MARK
+	GraphemeCodePoint{0x114B0, 0x114B0, GraphemeProp.gp_extend}, // Mc       TIRHUTA VOWEL SIGN AA
+	GraphemeCodePoint{0x114B1, 0x114B2, GraphemeProp.gp_spacingmark}, // Mc   [2] TIRHUTA VOWEL SIGN I..TIRHUTA VOWEL SIGN II
+	GraphemeCodePoint{0x114B3, 0x114B8, GraphemeProp.gp_extend}, // Mn   [6] TIRHUTA VOWEL SIGN U..TIRHUTA VOWEL SIGN VOCALIC LL
+	GraphemeCodePoint{0x114B9, 0x114B9, GraphemeProp.gp_spacingmark}, // Mc       TIRHUTA VOWEL SIGN E
+	GraphemeCodePoint{0x114BA, 0x114BA, GraphemeProp.gp_extend}, // Mn       TIRHUTA VOWEL SIGN SHORT E
+	GraphemeCodePoint{0x114BB, 0x114BC, GraphemeProp.gp_spacingmark}, // Mc   [2] TIRHUTA VOWEL SIGN AI..TIRHUTA VOWEL SIGN O
+	GraphemeCodePoint{0x114BD, 0x114BD, GraphemeProp.gp_extend}, // Mc       TIRHUTA VOWEL SIGN SHORT O
+	GraphemeCodePoint{0x114BE, 0x114BE, GraphemeProp.gp_spacingmark}, // Mc       TIRHUTA VOWEL SIGN AU
+	GraphemeCodePoint{0x114BF, 0x114C0, GraphemeProp.gp_extend}, // Mn   [2] TIRHUTA SIGN CANDRABINDU..TIRHUTA SIGN ANUSVARA
+	GraphemeCodePoint{0x114C1, 0x114C1, GraphemeProp.gp_spacingmark}, // Mc       TIRHUTA SIGN VISARGA
+	GraphemeCodePoint{0x114C2, 0x114C3, GraphemeProp.gp_extend}, // Mn   [2] TIRHUTA SIGN VIRAMA..TIRHUTA SIGN NUKTA
+	GraphemeCodePoint{0x115AF, 0x115AF, GraphemeProp.gp_extend}, // Mc       SIDDHAM VOWEL SIGN AA
+	GraphemeCodePoint{0x115B0, 0x115B1, GraphemeProp.gp_spacingmark}, // Mc   [2] SIDDHAM VOWEL SIGN I..SIDDHAM VOWEL SIGN II
+	GraphemeCodePoint{0x115B2, 0x115B5, GraphemeProp.gp_extend}, // Mn   [4] SIDDHAM VOWEL SIGN U..SIDDHAM VOWEL SIGN VOCALIC RR
+	GraphemeCodePoint{0x115B8, 0x115BB, GraphemeProp.gp_spacingmark}, // Mc   [4] SIDDHAM VOWEL SIGN E..SIDDHAM VOWEL SIGN AU
+	GraphemeCodePoint{0x115BC, 0x115BD, GraphemeProp.gp_extend}, // Mn   [2] SIDDHAM SIGN CANDRABINDU..SIDDHAM SIGN ANUSVARA
+	GraphemeCodePoint{0x115BE, 0x115BE, GraphemeProp.gp_spacingmark}, // Mc       SIDDHAM SIGN VISARGA
+	GraphemeCodePoint{0x115BF, 0x115C0, GraphemeProp.gp_extend}, // Mn   [2] SIDDHAM SIGN VIRAMA..SIDDHAM SIGN NUKTA
+	GraphemeCodePoint{0x115DC, 0x115DD, GraphemeProp.gp_extend}, // Mn   [2] SIDDHAM VOWEL SIGN ALTERNATE U..SIDDHAM VOWEL SIGN ALTERNATE UU
+	GraphemeCodePoint{0x11630, 0x11632, GraphemeProp.gp_spacingmark}, // Mc   [3] MODI VOWEL SIGN AA..MODI VOWEL SIGN II
+	GraphemeCodePoint{0x11633, 0x1163A, GraphemeProp.gp_extend}, // Mn   [8] MODI VOWEL SIGN U..MODI VOWEL SIGN AI
+	GraphemeCodePoint{0x1163B, 0x1163C, GraphemeProp.gp_spacingmark}, // Mc   [2] MODI VOWEL SIGN O..MODI VOWEL SIGN AU
+	GraphemeCodePoint{0x1163D, 0x1163D, GraphemeProp.gp_extend}, // Mn       MODI SIGN ANUSVARA
+	GraphemeCodePoint{0x1163E, 0x1163E, GraphemeProp.gp_spacingmark}, // Mc       MODI SIGN VISARGA
+	GraphemeCodePoint{0x1163F, 0x11640, GraphemeProp.gp_extend}, // Mn   [2] MODI SIGN VIRAMA..MODI SIGN ARDHACANDRA
+	GraphemeCodePoint{0x116AB, 0x116AB, GraphemeProp.gp_extend}, // Mn       TAKRI SIGN ANUSVARA
+	GraphemeCodePoint{0x116AC, 0x116AC, GraphemeProp.gp_spacingmark}, // Mc       TAKRI SIGN VISARGA
+	GraphemeCodePoint{0x116AD, 0x116AD, GraphemeProp.gp_extend}, // Mn       TAKRI VOWEL SIGN AA
+	GraphemeCodePoint{0x116AE, 0x116AF, GraphemeProp.gp_spacingmark}, // Mc   [2] TAKRI VOWEL SIGN I..TAKRI VOWEL SIGN II
+	GraphemeCodePoint{0x116B0, 0x116B5, GraphemeProp.gp_extend}, // Mn   [6] TAKRI VOWEL SIGN U..TAKRI VOWEL SIGN AU
+	GraphemeCodePoint{0x116B6, 0x116B6, GraphemeProp.gp_spacingmark}, // Mc       TAKRI SIGN VIRAMA
+	GraphemeCodePoint{0x116B7, 0x116B7, GraphemeProp.gp_extend}, // Mn       TAKRI SIGN NUKTA
+	GraphemeCodePoint{0x1171D, 0x1171F, GraphemeProp.gp_extend}, // Mn   [3] AHOM CONSONANT SIGN MEDIAL LA..AHOM CONSONANT SIGN MEDIAL LIGATING RA
+	GraphemeCodePoint{0x11722, 0x11725, GraphemeProp.gp_extend}, // Mn   [4] AHOM VOWEL SIGN I..AHOM VOWEL SIGN UU
+	GraphemeCodePoint{0x11726, 0x11726, GraphemeProp.gp_spacingmark}, // Mc       AHOM VOWEL SIGN E
+	GraphemeCodePoint{0x11727, 0x1172B, GraphemeProp.gp_extend}, // Mn   [5] AHOM VOWEL SIGN AW..AHOM SIGN KILLER
+	GraphemeCodePoint{0x1182C, 0x1182E, GraphemeProp.gp_spacingmark}, // Mc   [3] DOGRA VOWEL SIGN AA..DOGRA VOWEL SIGN II
+	GraphemeCodePoint{0x1182F, 0x11837, GraphemeProp.gp_extend}, // Mn   [9] DOGRA VOWEL SIGN U..DOGRA SIGN ANUSVARA
+	GraphemeCodePoint{0x11838, 0x11838, GraphemeProp.gp_spacingmark}, // Mc       DOGRA SIGN VISARGA
+	GraphemeCodePoint{0x11839, 0x1183A, GraphemeProp.gp_extend}, // Mn   [2] DOGRA SIGN VIRAMA..DOGRA SIGN NUKTA
+	GraphemeCodePoint{0x11930, 0x11930, GraphemeProp.gp_extend}, // Mc       DIVES AKURU VOWEL SIGN AA
+	GraphemeCodePoint{0x11931, 0x11935, GraphemeProp.gp_spacingmark}, // Mc   [5] DIVES AKURU VOWEL SIGN I..DIVES AKURU VOWEL SIGN E
+	GraphemeCodePoint{0x11937, 0x11938, GraphemeProp.gp_spacingmark}, // Mc   [2] DIVES AKURU VOWEL SIGN AI..DIVES AKURU VOWEL SIGN O
+	GraphemeCodePoint{0x1193B, 0x1193C, GraphemeProp.gp_extend}, // Mn   [2] DIVES AKURU SIGN ANUSVARA..DIVES AKURU SIGN CANDRABINDU
+	GraphemeCodePoint{0x1193D, 0x1193D, GraphemeProp.gp_spacingmark}, // Mc       DIVES AKURU SIGN HALANTA
+	GraphemeCodePoint{0x1193E, 0x1193E, GraphemeProp.gp_extend}, // Mn       DIVES AKURU VIRAMA
+	GraphemeCodePoint{0x1193F, 0x1193F, GraphemeProp.gp_prepend}, // Lo       DIVES AKURU PREFIXED NASAL SIGN
+	GraphemeCodePoint{0x11940, 0x11940, GraphemeProp.gp_spacingmark}, // Mc       DIVES AKURU MEDIAL YA
+	GraphemeCodePoint{0x11941, 0x11941, GraphemeProp.gp_prepend}, // Lo       DIVES AKURU INITIAL RA
+	GraphemeCodePoint{0x11942, 0x11942, GraphemeProp.gp_spacingmark}, // Mc       DIVES AKURU MEDIAL RA
+	GraphemeCodePoint{0x11943, 0x11943, GraphemeProp.gp_extend}, // Mn       DIVES AKURU SIGN NUKTA
+	GraphemeCodePoint{0x119D1, 0x119D3, GraphemeProp.gp_spacingmark}, // Mc   [3] NANDINAGARI VOWEL SIGN AA..NANDINAGARI VOWEL SIGN II
+	GraphemeCodePoint{0x119D4, 0x119D7, GraphemeProp.gp_extend}, // Mn   [4] NANDINAGARI VOWEL SIGN U..NANDINAGARI VOWEL SIGN VOCALIC RR
+	GraphemeCodePoint{0x119DA, 0x119DB, GraphemeProp.gp_extend}, // Mn   [2] NANDINAGARI VOWEL SIGN E..NANDINAGARI VOWEL SIGN AI
+	GraphemeCodePoint{0x119DC, 0x119DF, GraphemeProp.gp_spacingmark}, // Mc   [4] NANDINAGARI VOWEL SIGN O..NANDINAGARI SIGN VISARGA
+	GraphemeCodePoint{0x119E0, 0x119E0, GraphemeProp.gp_extend}, // Mn       NANDINAGARI SIGN VIRAMA
+	GraphemeCodePoint{0x119E4, 0x119E4, GraphemeProp.gp_spacingmark}, // Mc       NANDINAGARI VOWEL SIGN PRISHTHAMATRA E
+	GraphemeCodePoint{0x11A01, 0x11A0A, GraphemeProp.gp_extend}, // Mn  [10] ZANABAZAR SQUARE VOWEL SIGN I..ZANABAZAR SQUARE VOWEL LENGTH MARK
+	GraphemeCodePoint{0x11A33, 0x11A38, GraphemeProp.gp_extend}, // Mn   [6] ZANABAZAR SQUARE FINAL CONSONANT MARK..ZANABAZAR SQUARE SIGN ANUSVARA
+	GraphemeCodePoint{0x11A39, 0x11A39, GraphemeProp.gp_spacingmark}, // Mc       ZANABAZAR SQUARE SIGN VISARGA
+	GraphemeCodePoint{0x11A3A, 0x11A3A, GraphemeProp.gp_prepend}, // Lo       ZANABAZAR SQUARE CLUSTER-INITIAL LETTER RA
+	GraphemeCodePoint{0x11A3B, 0x11A3E, GraphemeProp.gp_extend}, // Mn   [4] ZANABAZAR SQUARE CLUSTER-FINAL LETTER YA..ZANABAZAR SQUARE CLUSTER-FINAL LETTER VA
+	GraphemeCodePoint{0x11A47, 0x11A47, GraphemeProp.gp_extend}, // Mn       ZANABAZAR SQUARE SUBJOINER
+	GraphemeCodePoint{0x11A51, 0x11A56, GraphemeProp.gp_extend}, // Mn   [6] SOYOMBO VOWEL SIGN I..SOYOMBO VOWEL SIGN OE
+	GraphemeCodePoint{0x11A57, 0x11A58, GraphemeProp.gp_spacingmark}, // Mc   [2] SOYOMBO VOWEL SIGN AI..SOYOMBO VOWEL SIGN AU
+	GraphemeCodePoint{0x11A59, 0x11A5B, GraphemeProp.gp_extend}, // Mn   [3] SOYOMBO VOWEL SIGN VOCALIC R..SOYOMBO VOWEL LENGTH MARK
+	GraphemeCodePoint{0x11A84, 0x11A89, GraphemeProp.gp_prepend}, // Lo   [6] SOYOMBO SIGN JIHVAMULIYA..SOYOMBO CLUSTER-INITIAL LETTER SA
+	GraphemeCodePoint{0x11A8A, 0x11A96, GraphemeProp.gp_extend}, // Mn  [13] SOYOMBO FINAL CONSONANT SIGN G..SOYOMBO SIGN ANUSVARA
+	GraphemeCodePoint{0x11A97, 0x11A97, GraphemeProp.gp_spacingmark}, // Mc       SOYOMBO SIGN VISARGA
+	GraphemeCodePoint{0x11A98, 0x11A99, GraphemeProp.gp_extend}, // Mn   [2] SOYOMBO GEMINATION MARK..SOYOMBO SUBJOINER
+	GraphemeCodePoint{0x11C2F, 0x11C2F, GraphemeProp.gp_spacingmark}, // Mc       BHAIKSUKI VOWEL SIGN AA
+	GraphemeCodePoint{0x11C30, 0x11C36, GraphemeProp.gp_extend}, // Mn   [7] BHAIKSUKI VOWEL SIGN I..BHAIKSUKI VOWEL SIGN VOCALIC L
+	GraphemeCodePoint{0x11C38, 0x11C3D, GraphemeProp.gp_extend}, // Mn   [6] BHAIKSUKI VOWEL SIGN E..BHAIKSUKI SIGN ANUSVARA
+	GraphemeCodePoint{0x11C3E, 0x11C3E, GraphemeProp.gp_spacingmark}, // Mc       BHAIKSUKI SIGN VISARGA
+	GraphemeCodePoint{0x11C3F, 0x11C3F, GraphemeProp.gp_extend}, // Mn       BHAIKSUKI SIGN VIRAMA
+	GraphemeCodePoint{0x11C92, 0x11CA7, GraphemeProp.gp_extend}, // Mn  [22] MARCHEN SUBJOINED LETTER KA..MARCHEN SUBJOINED LETTER ZA
+	GraphemeCodePoint{0x11CA9, 0x11CA9, GraphemeProp.gp_spacingmark}, // Mc       MARCHEN SUBJOINED LETTER YA
+	GraphemeCodePoint{0x11CAA, 0x11CB0, GraphemeProp.gp_extend}, // Mn   [7] MARCHEN SUBJOINED LETTER RA..MARCHEN VOWEL SIGN AA
+	GraphemeCodePoint{0x11CB1, 0x11CB1, GraphemeProp.gp_spacingmark}, // Mc       MARCHEN VOWEL SIGN I
+	GraphemeCodePoint{0x11CB2, 0x11CB3, GraphemeProp.gp_extend}, // Mn   [2] MARCHEN VOWEL SIGN U..MARCHEN VOWEL SIGN E
+	GraphemeCodePoint{0x11CB4, 0x11CB4, GraphemeProp.gp_spacingmark}, // Mc       MARCHEN VOWEL SIGN O
+	GraphemeCodePoint{0x11CB5, 0x11CB6, GraphemeProp.gp_extend}, // Mn   [2] MARCHEN SIGN ANUSVARA..MARCHEN SIGN CANDRABINDU
+	GraphemeCodePoint{0x11D31, 0x11D36, GraphemeProp.gp_extend}, // Mn   [6] MASARAM GONDI VOWEL SIGN AA..MASARAM GONDI VOWEL SIGN VOCALIC R
+	GraphemeCodePoint{0x11D3A, 0x11D3A, GraphemeProp.gp_extend}, // Mn       MASARAM GONDI VOWEL SIGN E
+	GraphemeCodePoint{0x11D3C, 0x11D3D, GraphemeProp.gp_extend}, // Mn   [2] MASARAM GONDI VOWEL SIGN AI..MASARAM GONDI VOWEL SIGN O
+	GraphemeCodePoint{0x11D3F, 0x11D45, GraphemeProp.gp_extend}, // Mn   [7] MASARAM GONDI VOWEL SIGN AU..MASARAM GONDI VIRAMA
+	GraphemeCodePoint{0x11D46, 0x11D46, GraphemeProp.gp_prepend}, // Lo       MASARAM GONDI REPHA
+	GraphemeCodePoint{0x11D47, 0x11D47, GraphemeProp.gp_extend}, // Mn       MASARAM GONDI RA-KARA
+	GraphemeCodePoint{0x11D8A, 0x11D8E, GraphemeProp.gp_spacingmark}, // Mc   [5] GUNJALA GONDI VOWEL SIGN AA..GUNJALA GONDI VOWEL SIGN UU
+	GraphemeCodePoint{0x11D90, 0x11D91, GraphemeProp.gp_extend}, // Mn   [2] GUNJALA GONDI VOWEL SIGN EE..GUNJALA GONDI VOWEL SIGN AI
+	GraphemeCodePoint{0x11D93, 0x11D94, GraphemeProp.gp_spacingmark}, // Mc   [2] GUNJALA GONDI VOWEL SIGN OO..GUNJALA GONDI VOWEL SIGN AU
+	GraphemeCodePoint{0x11D95, 0x11D95, GraphemeProp.gp_extend}, // Mn       GUNJALA GONDI SIGN ANUSVARA
+	GraphemeCodePoint{0x11D96, 0x11D96, GraphemeProp.gp_spacingmark}, // Mc       GUNJALA GONDI SIGN VISARGA
+	GraphemeCodePoint{0x11D97, 0x11D97, GraphemeProp.gp_extend}, // Mn       GUNJALA GONDI VIRAMA
+	GraphemeCodePoint{0x11EF3, 0x11EF4, GraphemeProp.gp_extend}, // Mn   [2] MAKASAR VOWEL SIGN I..MAKASAR VOWEL SIGN U
+	GraphemeCodePoint{0x11EF5, 0x11EF6, GraphemeProp.gp_spacingmark}, // Mc   [2] MAKASAR VOWEL SIGN E..MAKASAR VOWEL SIGN O
+	GraphemeCodePoint{0x11F00, 0x11F01, GraphemeProp.gp_extend}, // Mn   [2] KAWI SIGN CANDRABINDU..KAWI SIGN ANUSVARA
+	GraphemeCodePoint{0x11F02, 0x11F02, GraphemeProp.gp_prepend}, // Lo       KAWI SIGN REPHA
+	GraphemeCodePoint{0x11F03, 0x11F03, GraphemeProp.gp_spacingmark}, // Mc       KAWI SIGN VISARGA
+	GraphemeCodePoint{0x11F34, 0x11F35, GraphemeProp.gp_spacingmark}, // Mc   [2] KAWI VOWEL SIGN AA..KAWI VOWEL SIGN ALTERNATE AA
+	GraphemeCodePoint{0x11F36, 0x11F3A, GraphemeProp.gp_extend}, // Mn   [5] KAWI VOWEL SIGN I..KAWI VOWEL SIGN VOCALIC R
+	GraphemeCodePoint{0x11F3E, 0x11F3F, GraphemeProp.gp_spacingmark}, // Mc   [2] KAWI VOWEL SIGN E..KAWI VOWEL SIGN AI
+	GraphemeCodePoint{0x11F40, 0x11F40, GraphemeProp.gp_extend}, // Mn       KAWI VOWEL SIGN EU
+	GraphemeCodePoint{0x11F41, 0x11F41, GraphemeProp.gp_spacingmark}, // Mc       KAWI SIGN KILLER
+	GraphemeCodePoint{0x11F42, 0x11F42, GraphemeProp.gp_extend}, // Mn       KAWI CONJOINER
+	GraphemeCodePoint{0x13430, 0x1343F, GraphemeProp.gp_control}, // Cf  [16] EGYPTIAN HIEROGLYPH VERTICAL JOINER..EGYPTIAN HIEROGLYPH END WALLED ENCLOSURE
+	GraphemeCodePoint{0x13440, 0x13440, GraphemeProp.gp_extend}, // Mn       EGYPTIAN HIEROGLYPH MIRROR HORIZONTALLY
+	GraphemeCodePoint{0x13447, 0x13455, GraphemeProp.gp_extend}, // Mn  [15] EGYPTIAN HIEROGLYPH MODIFIER DAMAGED AT TOP START..EGYPTIAN HIEROGLYPH MODIFIER DAMAGED
+	GraphemeCodePoint{0x16AF0, 0x16AF4, GraphemeProp.gp_extend}, // Mn   [5] BASSA VAH COMBINING HIGH TONE..BASSA VAH COMBINING HIGH-LOW TONE
+	GraphemeCodePoint{0x16B30, 0x16B36, GraphemeProp.gp_extend}, // Mn   [7] PAHAWH HMONG MARK CIM TUB..PAHAWH HMONG MARK CIM TAUM
+	GraphemeCodePoint{0x16F4F, 0x16F4F, GraphemeProp.gp_extend}, // Mn       MIAO SIGN CONSONANT MODIFIER BAR
+	GraphemeCodePoint{0x16F51, 0x16F87, GraphemeProp.gp_spacingmark}, // Mc  [55] MIAO SIGN ASPIRATION..MIAO VOWEL SIGN UI
+	GraphemeCodePoint{0x16F8F, 0x16F92, GraphemeProp.gp_extend}, // Mn   [4] MIAO TONE RIGHT..MIAO TONE BELOW
+	GraphemeCodePoint{0x16FE4, 0x16FE4, GraphemeProp.gp_extend}, // Mn       KHITAN SMALL SCRIPT FILLER
+	GraphemeCodePoint{0x16FF0, 0x16FF1, GraphemeProp.gp_spacingmark}, // Mc   [2] VIETNAMESE ALTERNATE READING MARK CA..VIETNAMESE ALTERNATE READING MARK NHAY
+	GraphemeCodePoint{0x1BC9D, 0x1BC9E, GraphemeProp.gp_extend}, // Mn   [2] DUPLOYAN THICK LETTER SELECTOR..DUPLOYAN DOUBLE MARK
+	GraphemeCodePoint{0x1BCA0, 0x1BCA3, GraphemeProp.gp_control}, // Cf   [4] SHORTHAND FORMAT LETTER OVERLAP..SHORTHAND FORMAT UP STEP
+	GraphemeCodePoint{0x1CF00, 0x1CF2D, GraphemeProp.gp_extend}, // Mn  [46] ZNAMENNY COMBINING MARK GORAZDO NIZKO S KRYZHEM ON LEFT..ZNAMENNY COMBINING MARK KRYZH ON LEFT
+	GraphemeCodePoint{0x1CF30, 0x1CF46, GraphemeProp.gp_extend}, // Mn  [23] ZNAMENNY COMBINING TONAL RANGE MARK MRACHNO..ZNAMENNY PRIZNAK MODIFIER ROG
+	GraphemeCodePoint{0x1D165, 0x1D165, GraphemeProp.gp_extend}, // Mc       MUSICAL SYMBOL COMBINING STEM
+	GraphemeCodePoint{0x1D166, 0x1D166, GraphemeProp.gp_spacingmark}, // Mc       MUSICAL SYMBOL COMBINING SPRECHGESANG STEM
+	GraphemeCodePoint{0x1D167, 0x1D169, GraphemeProp.gp_extend}, // Mn   [3] MUSICAL SYMBOL COMBINING TREMOLO-1..MUSICAL SYMBOL COMBINING TREMOLO-3
+	GraphemeCodePoint{0x1D16D, 0x1D16D, GraphemeProp.gp_spacingmark}, // Mc       MUSICAL SYMBOL COMBINING AUGMENTATION DOT
+	GraphemeCodePoint{0x1D16E, 0x1D172, GraphemeProp.gp_extend}, // Mc   [5] MUSICAL SYMBOL COMBINING FLAG-1..MUSICAL SYMBOL COMBINING FLAG-5
+	GraphemeCodePoint{0x1D173, 0x1D17A, GraphemeProp.gp_control}, // Cf   [8] MUSICAL SYMBOL BEGIN BEAM..MUSICAL SYMBOL END PHRASE
+	GraphemeCodePoint{0x1D17B, 0x1D182, GraphemeProp.gp_extend}, // Mn   [8] MUSICAL SYMBOL COMBINING ACCENT..MUSICAL SYMBOL COMBINING LOURE
+	GraphemeCodePoint{0x1D185, 0x1D18B, GraphemeProp.gp_extend}, // Mn   [7] MUSICAL SYMBOL COMBINING DOIT..MUSICAL SYMBOL COMBINING TRIPLE TONGUE
+	GraphemeCodePoint{0x1D1AA, 0x1D1AD, GraphemeProp.gp_extend}, // Mn   [4] MUSICAL SYMBOL COMBINING DOWN BOW..MUSICAL SYMBOL COMBINING SNAP PIZZICATO
+	GraphemeCodePoint{0x1D242, 0x1D244, GraphemeProp.gp_extend}, // Mn   [3] COMBINING GREEK MUSICAL TRISEME..COMBINING GREEK MUSICAL PENTASEME
+	GraphemeCodePoint{0x1DA00, 0x1DA36, GraphemeProp.gp_extend}, // Mn  [55] SIGNWRITING HEAD RIM..SIGNWRITING AIR SUCKING IN
+	GraphemeCodePoint{0x1DA3B, 0x1DA6C, GraphemeProp.gp_extend}, // Mn  [50] SIGNWRITING MOUTH CLOSED NEUTRAL..SIGNWRITING EXCITEMENT
+	GraphemeCodePoint{0x1DA75, 0x1DA75, GraphemeProp.gp_extend}, // Mn       SIGNWRITING UPPER BODY TILTING FROM HIP JOINTS
+	GraphemeCodePoint{0x1DA84, 0x1DA84, GraphemeProp.gp_extend}, // Mn       SIGNWRITING LOCATION HEAD NECK
+	GraphemeCodePoint{0x1DA9B, 0x1DA9F, GraphemeProp.gp_extend}, // Mn   [5] SIGNWRITING FILL MODIFIER-2..SIGNWRITING FILL MODIFIER-6
+	GraphemeCodePoint{0x1DAA1, 0x1DAAF, GraphemeProp.gp_extend}, // Mn  [15] SIGNWRITING ROTATION MODIFIER-2..SIGNWRITING ROTATION MODIFIER-16
+	GraphemeCodePoint{0x1E000, 0x1E006, GraphemeProp.gp_extend}, // Mn   [7] COMBINING GLAGOLITIC LETTER AZU..COMBINING GLAGOLITIC LETTER ZHIVETE
+	GraphemeCodePoint{0x1E008, 0x1E018, GraphemeProp.gp_extend}, // Mn  [17] COMBINING GLAGOLITIC LETTER ZEMLJA..COMBINING GLAGOLITIC LETTER HERU
+	GraphemeCodePoint{0x1E01B, 0x1E021, GraphemeProp.gp_extend}, // Mn   [7] COMBINING GLAGOLITIC LETTER SHTA..COMBINING GLAGOLITIC LETTER YATI
+	GraphemeCodePoint{0x1E023, 0x1E024, GraphemeProp.gp_extend}, // Mn   [2] COMBINING GLAGOLITIC LETTER YU..COMBINING GLAGOLITIC LETTER SMALL YUS
+	GraphemeCodePoint{0x1E026, 0x1E02A, GraphemeProp.gp_extend}, // Mn   [5] COMBINING GLAGOLITIC LETTER YO..COMBINING GLAGOLITIC LETTER FITA
+	GraphemeCodePoint{0x1E08F, 0x1E08F, GraphemeProp.gp_extend}, // Mn       COMBINING CYRILLIC SMALL LETTER BYELORUSSIAN-UKRAINIAN I
+	GraphemeCodePoint{0x1E130, 0x1E136, GraphemeProp.gp_extend}, // Mn   [7] NYIAKENG PUACHUE HMONG TONE-B..NYIAKENG PUACHUE HMONG TONE-D
+	GraphemeCodePoint{0x1E2AE, 0x1E2AE, GraphemeProp.gp_extend}, // Mn       TOTO SIGN RISING TONE
+	GraphemeCodePoint{0x1E2EC, 0x1E2EF, GraphemeProp.gp_extend}, // Mn   [4] WANCHO TONE TUP..WANCHO TONE KOINI
+	GraphemeCodePoint{0x1E4EC, 0x1E4EF, GraphemeProp.gp_extend}, // Mn   [4] NAG MUNDARI SIGN MUHOR..NAG MUNDARI SIGN SUTUH
+	GraphemeCodePoint{0x1E8D0, 0x1E8D6, GraphemeProp.gp_extend}, // Mn   [7] MENDE KIKAKUI COMBINING NUMBER TEENS..MENDE KIKAKUI COMBINING NUMBER MILLIONS
+	GraphemeCodePoint{0x1E944, 0x1E94A, GraphemeProp.gp_extend}, // Mn   [7] ADLAM ALIF LENGTHENER..ADLAM NUKTA
+	GraphemeCodePoint{0x1F000, 0x1F003, GraphemeProp.gp_extended_pictographic}, // E0.0   [4] (🀀..🀃)    MAHJONG TILE EAST WIND..MAHJONG TILE NORTH WIND
+	GraphemeCodePoint{0x1F004, 0x1F004, GraphemeProp.gp_extended_pictographic}, // E0.6   [1] (🀄)       mahjong red dragon
+	GraphemeCodePoint{0x1F005, 0x1F0CE, GraphemeProp.gp_extended_pictographic}, // E0.0 [202] (🀅..🃎)    MAHJONG TILE GREEN DRAGON..PLAYING CARD KING OF DIAMONDS
+	GraphemeCodePoint{0x1F0CF, 0x1F0CF, GraphemeProp.gp_extended_pictographic}, // E0.6   [1] (🃏)       joker
+	GraphemeCodePoint{0x1F0D0, 0x1F0FF, GraphemeProp.gp_extended_pictographic}, // E0.0  [48] (🃐..🃿)    <reserved-1F0D0>..<reserved-1F0FF>
+	GraphemeCodePoint{0x1F10D, 0x1F10F, GraphemeProp.gp_extended_pictographic}, // E0.0   [3] (🄍..🄏)    CIRCLED ZERO WITH SLASH..CIRCLED DOLLAR SIGN WITH OVERLAID BACKSLASH
+	GraphemeCodePoint{0x1F12F, 0x1F12F, GraphemeProp.gp_extended_pictographic}, // E0.0   [1] (🄯)       COPYLEFT SYMBOL
+	GraphemeCodePoint{0x1F16C, 0x1F16F, GraphemeProp.gp_extended_pictographic}, // E0.0   [4] (🅬..🅯)    RAISED MR SIGN..CIRCLED HUMAN FIGURE
+	GraphemeCodePoint{0x1F170, 0x1F171, GraphemeProp.gp_extended_pictographic}, // E0.6   [2] (🅰️..🅱️)    A button (blood type)..B button (blood type)
+	GraphemeCodePoint{0x1F17E, 0x1F17F, GraphemeProp.gp_extended_pictographic}, // E0.6   [2] (🅾️..🅿️)    O button (blood type)..P button
+	GraphemeCodePoint{0x1F18E, 0x1F18E, GraphemeProp.gp_extended_pictographic}, // E0.6   [1] (🆎)       AB button (blood type)
+	GraphemeCodePoint{0x1F191, 0x1F19A, GraphemeProp.gp_extended_pictographic}, // E0.6  [10] (🆑..🆚)    CL button..VS button
+	GraphemeCodePoint{0x1F1AD, 0x1F1E5, GraphemeProp.gp_extended_pictographic}, // E0.0  [57] (🆭..🇥)    MASK WORK SYMBOL..<reserved-1F1E5>
+	GraphemeCodePoint{0x1F1E6, 0x1F1FF, GraphemeProp.gp_regional_indicator}, // So  [26] REGIONAL INDICATOR SYMBOL LETTER A..REGIONAL INDICATOR SYMBOL LETTER Z
+	GraphemeCodePoint{0x1F201, 0x1F202, GraphemeProp.gp_extended_pictographic}, // E0.6   [2] (🈁..🈂️)    Japanese “here” button..Japanese “service charge” button
+	GraphemeCodePoint{0x1F203, 0x1F20F, GraphemeProp.gp_extended_pictographic}, // E0.0  [13] (🈃..🈏)    <reserved-1F203>..<reserved-1F20F>
+	GraphemeCodePoint{0x1F21A, 0x1F21A, GraphemeProp.gp_extended_pictographic}, // E0.6   [1] (🈚)       Japanese “free of charge” button
+	GraphemeCodePoint{0x1F22F, 0x1F22F, GraphemeProp.gp_extended_pictographic}, // E0.6   [1] (🈯)       Japanese “reserved” button
+	GraphemeCodePoint{0x1F232, 0x1F23A, GraphemeProp.gp_extended_pictographic}, // E0.6   [9] (🈲..🈺)    Japanese “prohibited” button..Japanese “open for business” button
+	GraphemeCodePoint{0x1F23C, 0x1F23F, GraphemeProp.gp_extended_pictographic}, // E0.0   [4] (🈼..🈿)    <reserved-1F23C>..<reserved-1F23F>
+	GraphemeCodePoint{0x1F249, 0x1F24F, GraphemeProp.gp_extended_pictographic}, // E0.0   [7] (🉉..🉏)    <reserved-1F249>..<reserved-1F24F>
+	GraphemeCodePoint{0x1F250, 0x1F251, GraphemeProp.gp_extended_pictographic}, // E0.6   [2] (🉐..🉑)    Japanese “bargain” button..Japanese “acceptable” button
+	GraphemeCodePoint{0x1F252, 0x1F2FF, GraphemeProp.gp_extended_pictographic}, // E0.0 [174] (🉒..🋿)    <reserved-1F252>..<reserved-1F2FF>
+	GraphemeCodePoint{0x1F300, 0x1F30C, GraphemeProp.gp_extended_pictographic}, // E0.6  [13] (🌀..🌌)    cyclone..milky way
+	GraphemeCodePoint{0x1F30D, 0x1F30E, GraphemeProp.gp_extended_pictographic}, // E0.7   [2] (🌍..🌎)    globe showing Europe-Africa..globe showing Americas
+	GraphemeCodePoint{0x1F30F, 0x1F30F, GraphemeProp.gp_extended_pictographic}, // E0.6   [1] (🌏)       globe showing Asia-Australia
+	GraphemeCodePoint{0x1F310, 0x1F310, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (🌐)       globe with meridians
+	GraphemeCodePoint{0x1F311, 0x1F311, GraphemeProp.gp_extended_pictographic}, // E0.6   [1] (🌑)       new moon
+	GraphemeCodePoint{0x1F312, 0x1F312, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (🌒)       waxing crescent moon
+	GraphemeCodePoint{0x1F313, 0x1F315, GraphemeProp.gp_extended_pictographic}, // E0.6   [3] (🌓..🌕)    first quarter moon..full moon
+	GraphemeCodePoint{0x1F316, 0x1F318, GraphemeProp.gp_extended_pictographic}, // E1.0   [3] (🌖..🌘)    waning gibbous moon..waning crescent moon
+	GraphemeCodePoint{0x1F319, 0x1F319, GraphemeProp.gp_extended_pictographic}, // E0.6   [1] (🌙)       crescent moon
+	GraphemeCodePoint{0x1F31A, 0x1F31A, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (🌚)       new moon face
+	GraphemeCodePoint{0x1F31B, 0x1F31B, GraphemeProp.gp_extended_pictographic}, // E0.6   [1] (🌛)       first quarter moon face
+	GraphemeCodePoint{0x1F31C, 0x1F31C, GraphemeProp.gp_extended_pictographic}, // E0.7   [1] (🌜)       last quarter moon face
+	GraphemeCodePoint{0x1F31D, 0x1F31E, GraphemeProp.gp_extended_pictographic}, // E1.0   [2] (🌝..🌞)    full moon face..sun with face
+	GraphemeCodePoint{0x1F31F, 0x1F320, GraphemeProp.gp_extended_pictographic}, // E0.6   [2] (🌟..🌠)    glowing star..shooting star
+	GraphemeCodePoint{0x1F321, 0x1F321, GraphemeProp.gp_extended_pictographic}, // E0.7   [1] (🌡️)       thermometer
+	GraphemeCodePoint{0x1F322, 0x1F323, GraphemeProp.gp_extended_pictographic}, // E0.0   [2] (🌢..🌣)    BLACK DROPLET..WHITE SUN
+	GraphemeCodePoint{0x1F324, 0x1F32C, GraphemeProp.gp_extended_pictographic}, // E0.7   [9] (🌤️..🌬️)    sun behind small cloud..wind face
+	GraphemeCodePoint{0x1F32D, 0x1F32F, GraphemeProp.gp_extended_pictographic}, // E1.0   [3] (🌭..🌯)    hot dog..burrito
+	GraphemeCodePoint{0x1F330, 0x1F331, GraphemeProp.gp_extended_pictographic}, // E0.6   [2] (🌰..🌱)    chestnut..seedling
+	GraphemeCodePoint{0x1F332, 0x1F333, GraphemeProp.gp_extended_pictographic}, // E1.0   [2] (🌲..🌳)    evergreen tree..deciduous tree
+	GraphemeCodePoint{0x1F334, 0x1F335, GraphemeProp.gp_extended_pictographic}, // E0.6   [2] (🌴..🌵)    palm tree..cactus
+	GraphemeCodePoint{0x1F336, 0x1F336, GraphemeProp.gp_extended_pictographic}, // E0.7   [1] (🌶️)       hot pepper
+	GraphemeCodePoint{0x1F337, 0x1F34A, GraphemeProp.gp_extended_pictographic}, // E0.6  [20] (🌷..🍊)    tulip..tangerine
+	GraphemeCodePoint{0x1F34B, 0x1F34B, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (🍋)       lemon
+	GraphemeCodePoint{0x1F34C, 0x1F34F, GraphemeProp.gp_extended_pictographic}, // E0.6   [4] (🍌..🍏)    banana..green apple
+	GraphemeCodePoint{0x1F350, 0x1F350, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (🍐)       pear
+	GraphemeCodePoint{0x1F351, 0x1F37B, GraphemeProp.gp_extended_pictographic}, // E0.6  [43] (🍑..🍻)    peach..clinking beer mugs
+	GraphemeCodePoint{0x1F37C, 0x1F37C, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (🍼)       baby bottle
+	GraphemeCodePoint{0x1F37D, 0x1F37D, GraphemeProp.gp_extended_pictographic}, // E0.7   [1] (🍽️)       fork and knife with plate
+	GraphemeCodePoint{0x1F37E, 0x1F37F, GraphemeProp.gp_extended_pictographic}, // E1.0   [2] (🍾..🍿)    bottle with popping cork..popcorn
+	GraphemeCodePoint{0x1F380, 0x1F393, GraphemeProp.gp_extended_pictographic}, // E0.6  [20] (🎀..🎓)    ribbon..graduation cap
+	GraphemeCodePoint{0x1F394, 0x1F395, GraphemeProp.gp_extended_pictographic}, // E0.0   [2] (🎔..🎕)    HEART WITH TIP ON THE LEFT..BOUQUET OF FLOWERS
+	GraphemeCodePoint{0x1F396, 0x1F397, GraphemeProp.gp_extended_pictographic}, // E0.7   [2] (🎖️..🎗️)    military medal..reminder ribbon
+	GraphemeCodePoint{0x1F398, 0x1F398, GraphemeProp.gp_extended_pictographic}, // E0.0   [1] (🎘)       MUSICAL KEYBOARD WITH JACKS
+	GraphemeCodePoint{0x1F399, 0x1F39B, GraphemeProp.gp_extended_pictographic}, // E0.7   [3] (🎙️..🎛️)    studio microphone..control knobs
+	GraphemeCodePoint{0x1F39C, 0x1F39D, GraphemeProp.gp_extended_pictographic}, // E0.0   [2] (🎜..🎝)    BEAMED ASCENDING MUSICAL NOTES..BEAMED DESCENDING MUSICAL NOTES
+	GraphemeCodePoint{0x1F39E, 0x1F39F, GraphemeProp.gp_extended_pictographic}, // E0.7   [2] (🎞️..🎟️)    film frames..admission tickets
+	GraphemeCodePoint{0x1F3A0, 0x1F3C4, GraphemeProp.gp_extended_pictographic}, // E0.6  [37] (🎠..🏄)    carousel horse..person surfing
+	GraphemeCodePoint{0x1F3C5, 0x1F3C5, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (🏅)       sports medal
+	GraphemeCodePoint{0x1F3C6, 0x1F3C6, GraphemeProp.gp_extended_pictographic}, // E0.6   [1] (🏆)       trophy
+	GraphemeCodePoint{0x1F3C7, 0x1F3C7, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (🏇)       horse racing
+	GraphemeCodePoint{0x1F3C8, 0x1F3C8, GraphemeProp.gp_extended_pictographic}, // E0.6   [1] (🏈)       american football
+	GraphemeCodePoint{0x1F3C9, 0x1F3C9, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (🏉)       rugby football
+	GraphemeCodePoint{0x1F3CA, 0x1F3CA, GraphemeProp.gp_extended_pictographic}, // E0.6   [1] (🏊)       person swimming
+	GraphemeCodePoint{0x1F3CB, 0x1F3CE, GraphemeProp.gp_extended_pictographic}, // E0.7   [4] (🏋️..🏎️)    person lifting weights..racing car
+	GraphemeCodePoint{0x1F3CF, 0x1F3D3, GraphemeProp.gp_extended_pictographic}, // E1.0   [5] (🏏..🏓)    cricket game..ping pong
+	GraphemeCodePoint{0x1F3D4, 0x1F3DF, GraphemeProp.gp_extended_pictographic}, // E0.7  [12] (🏔️..🏟️)    snow-capped mountain..stadium
+	GraphemeCodePoint{0x1F3E0, 0x1F3E3, GraphemeProp.gp_extended_pictographic}, // E0.6   [4] (🏠..🏣)    house..Japanese post office
+	GraphemeCodePoint{0x1F3E4, 0x1F3E4, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (🏤)       post office
+	GraphemeCodePoint{0x1F3E5, 0x1F3F0, GraphemeProp.gp_extended_pictographic}, // E0.6  [12] (🏥..🏰)    hospital..castle
+	GraphemeCodePoint{0x1F3F1, 0x1F3F2, GraphemeProp.gp_extended_pictographic}, // E0.0   [2] (🏱..🏲)    WHITE PENNANT..BLACK PENNANT
+	GraphemeCodePoint{0x1F3F3, 0x1F3F3, GraphemeProp.gp_extended_pictographic}, // E0.7   [1] (🏳️)       white flag
+	GraphemeCodePoint{0x1F3F4, 0x1F3F4, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (🏴)       black flag
+	GraphemeCodePoint{0x1F3F5, 0x1F3F5, GraphemeProp.gp_extended_pictographic}, // E0.7   [1] (🏵️)       rosette
+	GraphemeCodePoint{0x1F3F6, 0x1F3F6, GraphemeProp.gp_extended_pictographic}, // E0.0   [1] (🏶)       BLACK ROSETTE
+	GraphemeCodePoint{0x1F3F7, 0x1F3F7, GraphemeProp.gp_extended_pictographic}, // E0.7   [1] (🏷️)       label
+	GraphemeCodePoint{0x1F3F8, 0x1F3FA, GraphemeProp.gp_extended_pictographic}, // E1.0   [3] (🏸..🏺)    badminton..amphora
+	GraphemeCodePoint{0x1F3FB, 0x1F3FF, GraphemeProp.gp_extend}, // Sk   [5] EMOJI MODIFIER FITZPATRICK TYPE-1-2..EMOJI MODIFIER FITZPATRICK TYPE-6
+	GraphemeCodePoint{0x1F400, 0x1F407, GraphemeProp.gp_extended_pictographic}, // E1.0   [8] (🐀..🐇)    rat..rabbit
+	GraphemeCodePoint{0x1F408, 0x1F408, GraphemeProp.gp_extended_pictographic}, // E0.7   [1] (🐈)       cat
+	GraphemeCodePoint{0x1F409, 0x1F40B, GraphemeProp.gp_extended_pictographic}, // E1.0   [3] (🐉..🐋)    dragon..whale
+	GraphemeCodePoint{0x1F40C, 0x1F40E, GraphemeProp.gp_extended_pictographic}, // E0.6   [3] (🐌..🐎)    snail..horse
+	GraphemeCodePoint{0x1F40F, 0x1F410, GraphemeProp.gp_extended_pictographic}, // E1.0   [2] (🐏..🐐)    ram..goat
+	GraphemeCodePoint{0x1F411, 0x1F412, GraphemeProp.gp_extended_pictographic}, // E0.6   [2] (🐑..🐒)    ewe..monkey
+	GraphemeCodePoint{0x1F413, 0x1F413, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (🐓)       rooster
+	GraphemeCodePoint{0x1F414, 0x1F414, GraphemeProp.gp_extended_pictographic}, // E0.6   [1] (🐔)       chicken
+	GraphemeCodePoint{0x1F415, 0x1F415, GraphemeProp.gp_extended_pictographic}, // E0.7   [1] (🐕)       dog
+	GraphemeCodePoint{0x1F416, 0x1F416, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (🐖)       pig
+	GraphemeCodePoint{0x1F417, 0x1F429, GraphemeProp.gp_extended_pictographic}, // E0.6  [19] (🐗..🐩)    boar..poodle
+	GraphemeCodePoint{0x1F42A, 0x1F42A, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (🐪)       camel
+	GraphemeCodePoint{0x1F42B, 0x1F43E, GraphemeProp.gp_extended_pictographic}, // E0.6  [20] (🐫..🐾)    two-hump camel..paw prints
+	GraphemeCodePoint{0x1F43F, 0x1F43F, GraphemeProp.gp_extended_pictographic}, // E0.7   [1] (🐿️)       chipmunk
+	GraphemeCodePoint{0x1F440, 0x1F440, GraphemeProp.gp_extended_pictographic}, // E0.6   [1] (👀)       eyes
+	GraphemeCodePoint{0x1F441, 0x1F441, GraphemeProp.gp_extended_pictographic}, // E0.7   [1] (👁️)       eye
+	GraphemeCodePoint{0x1F442, 0x1F464, GraphemeProp.gp_extended_pictographic}, // E0.6  [35] (👂..👤)    ear..bust in silhouette
+	GraphemeCodePoint{0x1F465, 0x1F465, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (👥)       busts in silhouette
+	GraphemeCodePoint{0x1F466, 0x1F46B, GraphemeProp.gp_extended_pictographic}, // E0.6   [6] (👦..👫)    boy..woman and man holding hands
+	GraphemeCodePoint{0x1F46C, 0x1F46D, GraphemeProp.gp_extended_pictographic}, // E1.0   [2] (👬..👭)    men holding hands..women holding hands
+	GraphemeCodePoint{0x1F46E, 0x1F4AC, GraphemeProp.gp_extended_pictographic}, // E0.6  [63] (👮..💬)    police officer..speech balloon
+	GraphemeCodePoint{0x1F4AD, 0x1F4AD, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (💭)       thought balloon
+	GraphemeCodePoint{0x1F4AE, 0x1F4B5, GraphemeProp.gp_extended_pictographic}, // E0.6   [8] (💮..💵)    white flower..dollar banknote
+	GraphemeCodePoint{0x1F4B6, 0x1F4B7, GraphemeProp.gp_extended_pictographic}, // E1.0   [2] (💶..💷)    euro banknote..pound banknote
+	GraphemeCodePoint{0x1F4B8, 0x1F4EB, GraphemeProp.gp_extended_pictographic}, // E0.6  [52] (💸..📫)    money with wings..closed mailbox with raised flag
+	GraphemeCodePoint{0x1F4EC, 0x1F4ED, GraphemeProp.gp_extended_pictographic}, // E0.7   [2] (📬..📭)    open mailbox with raised flag..open mailbox with lowered flag
+	GraphemeCodePoint{0x1F4EE, 0x1F4EE, GraphemeProp.gp_extended_pictographic}, // E0.6   [1] (📮)       postbox
+	GraphemeCodePoint{0x1F4EF, 0x1F4EF, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (📯)       postal horn
+	GraphemeCodePoint{0x1F4F0, 0x1F4F4, GraphemeProp.gp_extended_pictographic}, // E0.6   [5] (📰..📴)    newspaper..mobile phone off
+	GraphemeCodePoint{0x1F4F5, 0x1F4F5, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (📵)       no mobile phones
+	GraphemeCodePoint{0x1F4F6, 0x1F4F7, GraphemeProp.gp_extended_pictographic}, // E0.6   [2] (📶..📷)    antenna bars..camera
+	GraphemeCodePoint{0x1F4F8, 0x1F4F8, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (📸)       camera with flash
+	GraphemeCodePoint{0x1F4F9, 0x1F4FC, GraphemeProp.gp_extended_pictographic}, // E0.6   [4] (📹..📼)    video camera..videocassette
+	GraphemeCodePoint{0x1F4FD, 0x1F4FD, GraphemeProp.gp_extended_pictographic}, // E0.7   [1] (📽️)       film projector
+	GraphemeCodePoint{0x1F4FE, 0x1F4FE, GraphemeProp.gp_extended_pictographic}, // E0.0   [1] (📾)       PORTABLE STEREO
+	GraphemeCodePoint{0x1F4FF, 0x1F502, GraphemeProp.gp_extended_pictographic}, // E1.0   [4] (📿..🔂)    prayer beads..repeat single button
+	GraphemeCodePoint{0x1F503, 0x1F503, GraphemeProp.gp_extended_pictographic}, // E0.6   [1] (🔃)       clockwise vertical arrows
+	GraphemeCodePoint{0x1F504, 0x1F507, GraphemeProp.gp_extended_pictographic}, // E1.0   [4] (🔄..🔇)    counterclockwise arrows button..muted speaker
+	GraphemeCodePoint{0x1F508, 0x1F508, GraphemeProp.gp_extended_pictographic}, // E0.7   [1] (🔈)       speaker low volume
+	GraphemeCodePoint{0x1F509, 0x1F509, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (🔉)       speaker medium volume
+	GraphemeCodePoint{0x1F50A, 0x1F514, GraphemeProp.gp_extended_pictographic}, // E0.6  [11] (🔊..🔔)    speaker high volume..bell
+	GraphemeCodePoint{0x1F515, 0x1F515, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (🔕)       bell with slash
+	GraphemeCodePoint{0x1F516, 0x1F52B, GraphemeProp.gp_extended_pictographic}, // E0.6  [22] (🔖..🔫)    bookmark..water pistol
+	GraphemeCodePoint{0x1F52C, 0x1F52D, GraphemeProp.gp_extended_pictographic}, // E1.0   [2] (🔬..🔭)    microscope..telescope
+	GraphemeCodePoint{0x1F52E, 0x1F53D, GraphemeProp.gp_extended_pictographic}, // E0.6  [16] (🔮..🔽)    crystal ball..downwards button
+	GraphemeCodePoint{0x1F546, 0x1F548, GraphemeProp.gp_extended_pictographic}, // E0.0   [3] (🕆..🕈)    WHITE LATIN CROSS..CELTIC CROSS
+	GraphemeCodePoint{0x1F549, 0x1F54A, GraphemeProp.gp_extended_pictographic}, // E0.7   [2] (🕉️..🕊️)    om..dove
+	GraphemeCodePoint{0x1F54B, 0x1F54E, GraphemeProp.gp_extended_pictographic}, // E1.0   [4] (🕋..🕎)    kaaba..menorah
+	GraphemeCodePoint{0x1F54F, 0x1F54F, GraphemeProp.gp_extended_pictographic}, // E0.0   [1] (🕏)       BOWL OF HYGIEIA
+	GraphemeCodePoint{0x1F550, 0x1F55B, GraphemeProp.gp_extended_pictographic}, // E0.6  [12] (🕐..🕛)    one o’clock..twelve o’clock
+	GraphemeCodePoint{0x1F55C, 0x1F567, GraphemeProp.gp_extended_pictographic}, // E0.7  [12] (🕜..🕧)    one-thirty..twelve-thirty
+	GraphemeCodePoint{0x1F568, 0x1F56E, GraphemeProp.gp_extended_pictographic}, // E0.0   [7] (🕨..🕮)    RIGHT SPEAKER..BOOK
+	GraphemeCodePoint{0x1F56F, 0x1F570, GraphemeProp.gp_extended_pictographic}, // E0.7   [2] (🕯️..🕰️)    candle..mantelpiece clock
+	GraphemeCodePoint{0x1F571, 0x1F572, GraphemeProp.gp_extended_pictographic}, // E0.0   [2] (🕱..🕲)    BLACK SKULL AND CROSSBONES..NO PIRACY
+	GraphemeCodePoint{0x1F573, 0x1F579, GraphemeProp.gp_extended_pictographic}, // E0.7   [7] (🕳️..🕹️)    hole..joystick
+	GraphemeCodePoint{0x1F57A, 0x1F57A, GraphemeProp.gp_extended_pictographic}, // E3.0   [1] (🕺)       man dancing
+	GraphemeCodePoint{0x1F57B, 0x1F586, GraphemeProp.gp_extended_pictographic}, // E0.0  [12] (🕻..🖆)    LEFT HAND TELEPHONE RECEIVER..PEN OVER STAMPED ENVELOPE
+	GraphemeCodePoint{0x1F587, 0x1F587, GraphemeProp.gp_extended_pictographic}, // E0.7   [1] (🖇️)       linked paperclips
+	GraphemeCodePoint{0x1F588, 0x1F589, GraphemeProp.gp_extended_pictographic}, // E0.0   [2] (🖈..🖉)    BLACK PUSHPIN..LOWER LEFT PENCIL
+	GraphemeCodePoint{0x1F58A, 0x1F58D, GraphemeProp.gp_extended_pictographic}, // E0.7   [4] (🖊️..🖍️)    pen..crayon
+	GraphemeCodePoint{0x1F58E, 0x1F58F, GraphemeProp.gp_extended_pictographic}, // E0.0   [2] (🖎..🖏)    LEFT WRITING HAND..TURNED OK HAND SIGN
+	GraphemeCodePoint{0x1F590, 0x1F590, GraphemeProp.gp_extended_pictographic}, // E0.7   [1] (🖐️)       hand with fingers splayed
+	GraphemeCodePoint{0x1F591, 0x1F594, GraphemeProp.gp_extended_pictographic}, // E0.0   [4] (🖑..🖔)    REVERSED RAISED HAND WITH FINGERS SPLAYED..REVERSED VICTORY HAND
+	GraphemeCodePoint{0x1F595, 0x1F596, GraphemeProp.gp_extended_pictographic}, // E1.0   [2] (🖕..🖖)    middle finger..vulcan salute
+	GraphemeCodePoint{0x1F597, 0x1F5A3, GraphemeProp.gp_extended_pictographic}, // E0.0  [13] (🖗..🖣)    WHITE DOWN POINTING LEFT HAND INDEX..BLACK DOWN POINTING BACKHAND INDEX
+	GraphemeCodePoint{0x1F5A4, 0x1F5A4, GraphemeProp.gp_extended_pictographic}, // E3.0   [1] (🖤)       black heart
+	GraphemeCodePoint{0x1F5A5, 0x1F5A5, GraphemeProp.gp_extended_pictographic}, // E0.7   [1] (🖥️)       desktop computer
+	GraphemeCodePoint{0x1F5A6, 0x1F5A7, GraphemeProp.gp_extended_pictographic}, // E0.0   [2] (🖦..🖧)    KEYBOARD AND MOUSE..THREE NETWORKED COMPUTERS
+	GraphemeCodePoint{0x1F5A8, 0x1F5A8, GraphemeProp.gp_extended_pictographic}, // E0.7   [1] (🖨️)       printer
+	GraphemeCodePoint{0x1F5A9, 0x1F5B0, GraphemeProp.gp_extended_pictographic}, // E0.0   [8] (🖩..🖰)    POCKET CALCULATOR..TWO BUTTON MOUSE
+	GraphemeCodePoint{0x1F5B1, 0x1F5B2, GraphemeProp.gp_extended_pictographic}, // E0.7   [2] (🖱️..🖲️)    computer mouse..trackball
+	GraphemeCodePoint{0x1F5B3, 0x1F5BB, GraphemeProp.gp_extended_pictographic}, // E0.0   [9] (🖳..🖻)    OLD PERSONAL COMPUTER..DOCUMENT WITH PICTURE
+	GraphemeCodePoint{0x1F5BC, 0x1F5BC, GraphemeProp.gp_extended_pictographic}, // E0.7   [1] (🖼️)       framed picture
+	GraphemeCodePoint{0x1F5BD, 0x1F5C1, GraphemeProp.gp_extended_pictographic}, // E0.0   [5] (🖽..🗁)    FRAME WITH TILES..OPEN FOLDER
+	GraphemeCodePoint{0x1F5C2, 0x1F5C4, GraphemeProp.gp_extended_pictographic}, // E0.7   [3] (🗂️..🗄️)    card index dividers..file cabinet
+	GraphemeCodePoint{0x1F5C5, 0x1F5D0, GraphemeProp.gp_extended_pictographic}, // E0.0  [12] (🗅..🗐)    EMPTY NOTE..PAGES
+	GraphemeCodePoint{0x1F5D1, 0x1F5D3, GraphemeProp.gp_extended_pictographic}, // E0.7   [3] (🗑️..🗓️)    wastebasket..spiral calendar
+	GraphemeCodePoint{0x1F5D4, 0x1F5DB, GraphemeProp.gp_extended_pictographic}, // E0.0   [8] (🗔..🗛)    DESKTOP WINDOW..DECREASE FONT SIZE SYMBOL
+	GraphemeCodePoint{0x1F5DC, 0x1F5DE, GraphemeProp.gp_extended_pictographic}, // E0.7   [3] (🗜️..🗞️)    clamp..rolled-up newspaper
+	GraphemeCodePoint{0x1F5DF, 0x1F5E0, GraphemeProp.gp_extended_pictographic}, // E0.0   [2] (🗟..🗠)    PAGE WITH CIRCLED TEXT..STOCK CHART
+	GraphemeCodePoint{0x1F5E1, 0x1F5E1, GraphemeProp.gp_extended_pictographic}, // E0.7   [1] (🗡️)       dagger
+	GraphemeCodePoint{0x1F5E2, 0x1F5E2, GraphemeProp.gp_extended_pictographic}, // E0.0   [1] (🗢)       LIPS
+	GraphemeCodePoint{0x1F5E3, 0x1F5E3, GraphemeProp.gp_extended_pictographic}, // E0.7   [1] (🗣️)       speaking head
+	GraphemeCodePoint{0x1F5E4, 0x1F5E7, GraphemeProp.gp_extended_pictographic}, // E0.0   [4] (🗤..🗧)    THREE RAYS ABOVE..THREE RAYS RIGHT
+	GraphemeCodePoint{0x1F5E8, 0x1F5E8, GraphemeProp.gp_extended_pictographic}, // E2.0   [1] (🗨️)       left speech bubble
+	GraphemeCodePoint{0x1F5E9, 0x1F5EE, GraphemeProp.gp_extended_pictographic}, // E0.0   [6] (🗩..🗮)    RIGHT SPEECH BUBBLE..LEFT ANGER BUBBLE
+	GraphemeCodePoint{0x1F5EF, 0x1F5EF, GraphemeProp.gp_extended_pictographic}, // E0.7   [1] (🗯️)       right anger bubble
+	GraphemeCodePoint{0x1F5F0, 0x1F5F2, GraphemeProp.gp_extended_pictographic}, // E0.0   [3] (🗰..🗲)    MOOD BUBBLE..LIGHTNING MOOD
+	GraphemeCodePoint{0x1F5F3, 0x1F5F3, GraphemeProp.gp_extended_pictographic}, // E0.7   [1] (🗳️)       ballot box with ballot
+	GraphemeCodePoint{0x1F5F4, 0x1F5F9, GraphemeProp.gp_extended_pictographic}, // E0.0   [6] (🗴..🗹)    BALLOT SCRIPT X..BALLOT BOX WITH BOLD CHECK
+	GraphemeCodePoint{0x1F5FA, 0x1F5FA, GraphemeProp.gp_extended_pictographic}, // E0.7   [1] (🗺️)       world map
+	GraphemeCodePoint{0x1F5FB, 0x1F5FF, GraphemeProp.gp_extended_pictographic}, // E0.6   [5] (🗻..🗿)    mount fuji..moai
+	GraphemeCodePoint{0x1F600, 0x1F600, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (😀)       grinning face
+	GraphemeCodePoint{0x1F601, 0x1F606, GraphemeProp.gp_extended_pictographic}, // E0.6   [6] (😁..😆)    beaming face with smiling eyes..grinning squinting face
+	GraphemeCodePoint{0x1F607, 0x1F608, GraphemeProp.gp_extended_pictographic}, // E1.0   [2] (😇..😈)    smiling face with halo..smiling face with horns
+	GraphemeCodePoint{0x1F609, 0x1F60D, GraphemeProp.gp_extended_pictographic}, // E0.6   [5] (😉..😍)    winking face..smiling face with heart-eyes
+	GraphemeCodePoint{0x1F60E, 0x1F60E, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (😎)       smiling face with sunglasses
+	GraphemeCodePoint{0x1F60F, 0x1F60F, GraphemeProp.gp_extended_pictographic}, // E0.6   [1] (😏)       smirking face
+	GraphemeCodePoint{0x1F610, 0x1F610, GraphemeProp.gp_extended_pictographic}, // E0.7   [1] (😐)       neutral face
+	GraphemeCodePoint{0x1F611, 0x1F611, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (😑)       expressionless face
+	GraphemeCodePoint{0x1F612, 0x1F614, GraphemeProp.gp_extended_pictographic}, // E0.6   [3] (😒..😔)    unamused face..pensive face
+	GraphemeCodePoint{0x1F615, 0x1F615, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (😕)       confused face
+	GraphemeCodePoint{0x1F616, 0x1F616, GraphemeProp.gp_extended_pictographic}, // E0.6   [1] (😖)       confounded face
+	GraphemeCodePoint{0x1F617, 0x1F617, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (😗)       kissing face
+	GraphemeCodePoint{0x1F618, 0x1F618, GraphemeProp.gp_extended_pictographic}, // E0.6   [1] (😘)       face blowing a kiss
+	GraphemeCodePoint{0x1F619, 0x1F619, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (😙)       kissing face with smiling eyes
+	GraphemeCodePoint{0x1F61A, 0x1F61A, GraphemeProp.gp_extended_pictographic}, // E0.6   [1] (😚)       kissing face with closed eyes
+	GraphemeCodePoint{0x1F61B, 0x1F61B, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (😛)       face with tongue
+	GraphemeCodePoint{0x1F61C, 0x1F61E, GraphemeProp.gp_extended_pictographic}, // E0.6   [3] (😜..😞)    winking face with tongue..disappointed face
+	GraphemeCodePoint{0x1F61F, 0x1F61F, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (😟)       worried face
+	GraphemeCodePoint{0x1F620, 0x1F625, GraphemeProp.gp_extended_pictographic}, // E0.6   [6] (😠..😥)    angry face..sad but relieved face
+	GraphemeCodePoint{0x1F626, 0x1F627, GraphemeProp.gp_extended_pictographic}, // E1.0   [2] (😦..😧)    frowning face with open mouth..anguished face
+	GraphemeCodePoint{0x1F628, 0x1F62B, GraphemeProp.gp_extended_pictographic}, // E0.6   [4] (😨..😫)    fearful face..tired face
+	GraphemeCodePoint{0x1F62C, 0x1F62C, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (😬)       grimacing face
+	GraphemeCodePoint{0x1F62D, 0x1F62D, GraphemeProp.gp_extended_pictographic}, // E0.6   [1] (😭)       loudly crying face
+	GraphemeCodePoint{0x1F62E, 0x1F62F, GraphemeProp.gp_extended_pictographic}, // E1.0   [2] (😮..😯)    face with open mouth..hushed face
+	GraphemeCodePoint{0x1F630, 0x1F633, GraphemeProp.gp_extended_pictographic}, // E0.6   [4] (😰..😳)    anxious face with sweat..flushed face
+	GraphemeCodePoint{0x1F634, 0x1F634, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (😴)       sleeping face
+	GraphemeCodePoint{0x1F635, 0x1F635, GraphemeProp.gp_extended_pictographic}, // E0.6   [1] (😵)       face with crossed-out eyes
+	GraphemeCodePoint{0x1F636, 0x1F636, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (😶)       face without mouth
+	GraphemeCodePoint{0x1F637, 0x1F640, GraphemeProp.gp_extended_pictographic}, // E0.6  [10] (😷..🙀)    face with medical mask..weary cat
+	GraphemeCodePoint{0x1F641, 0x1F644, GraphemeProp.gp_extended_pictographic}, // E1.0   [4] (🙁..🙄)    slightly frowning face..face with rolling eyes
+	GraphemeCodePoint{0x1F645, 0x1F64F, GraphemeProp.gp_extended_pictographic}, // E0.6  [11] (🙅..🙏)    person gesturing NO..folded hands
+	GraphemeCodePoint{0x1F680, 0x1F680, GraphemeProp.gp_extended_pictographic}, // E0.6   [1] (🚀)       rocket
+	GraphemeCodePoint{0x1F681, 0x1F682, GraphemeProp.gp_extended_pictographic}, // E1.0   [2] (🚁..🚂)    helicopter..locomotive
+	GraphemeCodePoint{0x1F683, 0x1F685, GraphemeProp.gp_extended_pictographic}, // E0.6   [3] (🚃..🚅)    railway car..bullet train
+	GraphemeCodePoint{0x1F686, 0x1F686, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (🚆)       train
+	GraphemeCodePoint{0x1F687, 0x1F687, GraphemeProp.gp_extended_pictographic}, // E0.6   [1] (🚇)       metro
+	GraphemeCodePoint{0x1F688, 0x1F688, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (🚈)       light rail
+	GraphemeCodePoint{0x1F689, 0x1F689, GraphemeProp.gp_extended_pictographic}, // E0.6   [1] (🚉)       station
+	GraphemeCodePoint{0x1F68A, 0x1F68B, GraphemeProp.gp_extended_pictographic}, // E1.0   [2] (🚊..🚋)    tram..tram car
+	GraphemeCodePoint{0x1F68C, 0x1F68C, GraphemeProp.gp_extended_pictographic}, // E0.6   [1] (🚌)       bus
+	GraphemeCodePoint{0x1F68D, 0x1F68D, GraphemeProp.gp_extended_pictographic}, // E0.7   [1] (🚍)       oncoming bus
+	GraphemeCodePoint{0x1F68E, 0x1F68E, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (🚎)       trolleybus
+	GraphemeCodePoint{0x1F68F, 0x1F68F, GraphemeProp.gp_extended_pictographic}, // E0.6   [1] (🚏)       bus stop
+	GraphemeCodePoint{0x1F690, 0x1F690, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (🚐)       minibus
+	GraphemeCodePoint{0x1F691, 0x1F693, GraphemeProp.gp_extended_pictographic}, // E0.6   [3] (🚑..🚓)    ambulance..police car
+	GraphemeCodePoint{0x1F694, 0x1F694, GraphemeProp.gp_extended_pictographic}, // E0.7   [1] (🚔)       oncoming police car
+	GraphemeCodePoint{0x1F695, 0x1F695, GraphemeProp.gp_extended_pictographic}, // E0.6   [1] (🚕)       taxi
+	GraphemeCodePoint{0x1F696, 0x1F696, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (🚖)       oncoming taxi
+	GraphemeCodePoint{0x1F697, 0x1F697, GraphemeProp.gp_extended_pictographic}, // E0.6   [1] (🚗)       automobile
+	GraphemeCodePoint{0x1F698, 0x1F698, GraphemeProp.gp_extended_pictographic}, // E0.7   [1] (🚘)       oncoming automobile
+	GraphemeCodePoint{0x1F699, 0x1F69A, GraphemeProp.gp_extended_pictographic}, // E0.6   [2] (🚙..🚚)    sport utility vehicle..delivery truck
+	GraphemeCodePoint{0x1F69B, 0x1F6A1, GraphemeProp.gp_extended_pictographic}, // E1.0   [7] (🚛..🚡)    articulated lorry..aerial tramway
+	GraphemeCodePoint{0x1F6A2, 0x1F6A2, GraphemeProp.gp_extended_pictographic}, // E0.6   [1] (🚢)       ship
+	GraphemeCodePoint{0x1F6A3, 0x1F6A3, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (🚣)       person rowing boat
+	GraphemeCodePoint{0x1F6A4, 0x1F6A5, GraphemeProp.gp_extended_pictographic}, // E0.6   [2] (🚤..🚥)    speedboat..horizontal traffic light
+	GraphemeCodePoint{0x1F6A6, 0x1F6A6, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (🚦)       vertical traffic light
+	GraphemeCodePoint{0x1F6A7, 0x1F6AD, GraphemeProp.gp_extended_pictographic}, // E0.6   [7] (🚧..🚭)    construction..no smoking
+	GraphemeCodePoint{0x1F6AE, 0x1F6B1, GraphemeProp.gp_extended_pictographic}, // E1.0   [4] (🚮..🚱)    litter in bin sign..non-potable water
+	GraphemeCodePoint{0x1F6B2, 0x1F6B2, GraphemeProp.gp_extended_pictographic}, // E0.6   [1] (🚲)       bicycle
+	GraphemeCodePoint{0x1F6B3, 0x1F6B5, GraphemeProp.gp_extended_pictographic}, // E1.0   [3] (🚳..🚵)    no bicycles..person mountain biking
+	GraphemeCodePoint{0x1F6B6, 0x1F6B6, GraphemeProp.gp_extended_pictographic}, // E0.6   [1] (🚶)       person walking
+	GraphemeCodePoint{0x1F6B7, 0x1F6B8, GraphemeProp.gp_extended_pictographic}, // E1.0   [2] (🚷..🚸)    no pedestrians..children crossing
+	GraphemeCodePoint{0x1F6B9, 0x1F6BE, GraphemeProp.gp_extended_pictographic}, // E0.6   [6] (🚹..🚾)    men’s room..water closet
+	GraphemeCodePoint{0x1F6BF, 0x1F6BF, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (🚿)       shower
+	GraphemeCodePoint{0x1F6C0, 0x1F6C0, GraphemeProp.gp_extended_pictographic}, // E0.6   [1] (🛀)       person taking bath
+	GraphemeCodePoint{0x1F6C1, 0x1F6C5, GraphemeProp.gp_extended_pictographic}, // E1.0   [5] (🛁..🛅)    bathtub..left luggage
+	GraphemeCodePoint{0x1F6C6, 0x1F6CA, GraphemeProp.gp_extended_pictographic}, // E0.0   [5] (🛆..🛊)    TRIANGLE WITH ROUNDED CORNERS..GIRLS SYMBOL
+	GraphemeCodePoint{0x1F6CB, 0x1F6CB, GraphemeProp.gp_extended_pictographic}, // E0.7   [1] (🛋️)       couch and lamp
+	GraphemeCodePoint{0x1F6CC, 0x1F6CC, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (🛌)       person in bed
+	GraphemeCodePoint{0x1F6CD, 0x1F6CF, GraphemeProp.gp_extended_pictographic}, // E0.7   [3] (🛍️..🛏️)    shopping bags..bed
+	GraphemeCodePoint{0x1F6D0, 0x1F6D0, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (🛐)       place of worship
+	GraphemeCodePoint{0x1F6D1, 0x1F6D2, GraphemeProp.gp_extended_pictographic}, // E3.0   [2] (🛑..🛒)    stop sign..shopping cart
+	GraphemeCodePoint{0x1F6D3, 0x1F6D4, GraphemeProp.gp_extended_pictographic}, // E0.0   [2] (🛓..🛔)    STUPA..PAGODA
+	GraphemeCodePoint{0x1F6D5, 0x1F6D5, GraphemeProp.gp_extended_pictographic}, // E12.0  [1] (🛕)       hindu temple
+	GraphemeCodePoint{0x1F6D6, 0x1F6D7, GraphemeProp.gp_extended_pictographic}, // E13.0  [2] (🛖..🛗)    hut..elevator
+	GraphemeCodePoint{0x1F6D8, 0x1F6DB, GraphemeProp.gp_extended_pictographic}, // E0.0   [4] (🛘..🛛)    <reserved-1F6D8>..<reserved-1F6DB>
+	GraphemeCodePoint{0x1F6DC, 0x1F6DC, GraphemeProp.gp_extended_pictographic}, // E15.0  [1] (🛜)       wireless
+	GraphemeCodePoint{0x1F6DD, 0x1F6DF, GraphemeProp.gp_extended_pictographic}, // E14.0  [3] (🛝..🛟)    playground slide..ring buoy
+	GraphemeCodePoint{0x1F6E0, 0x1F6E5, GraphemeProp.gp_extended_pictographic}, // E0.7   [6] (🛠️..🛥️)    hammer and wrench..motor boat
+	GraphemeCodePoint{0x1F6E6, 0x1F6E8, GraphemeProp.gp_extended_pictographic}, // E0.0   [3] (🛦..🛨)    UP-POINTING MILITARY AIRPLANE..UP-POINTING SMALL AIRPLANE
+	GraphemeCodePoint{0x1F6E9, 0x1F6E9, GraphemeProp.gp_extended_pictographic}, // E0.7   [1] (🛩️)       small airplane
+	GraphemeCodePoint{0x1F6EA, 0x1F6EA, GraphemeProp.gp_extended_pictographic}, // E0.0   [1] (🛪)       NORTHEAST-POINTING AIRPLANE
+	GraphemeCodePoint{0x1F6EB, 0x1F6EC, GraphemeProp.gp_extended_pictographic}, // E1.0   [2] (🛫..🛬)    airplane departure..airplane arrival
+	GraphemeCodePoint{0x1F6ED, 0x1F6EF, GraphemeProp.gp_extended_pictographic}, // E0.0   [3] (🛭..🛯)    <reserved-1F6ED>..<reserved-1F6EF>
+	GraphemeCodePoint{0x1F6F0, 0x1F6F0, GraphemeProp.gp_extended_pictographic}, // E0.7   [1] (🛰️)       satellite
+	GraphemeCodePoint{0x1F6F1, 0x1F6F2, GraphemeProp.gp_extended_pictographic}, // E0.0   [2] (🛱..🛲)    ONCOMING FIRE ENGINE..DIESEL LOCOMOTIVE
+	GraphemeCodePoint{0x1F6F3, 0x1F6F3, GraphemeProp.gp_extended_pictographic}, // E0.7   [1] (🛳️)       passenger ship
+	GraphemeCodePoint{0x1F6F4, 0x1F6F6, GraphemeProp.gp_extended_pictographic}, // E3.0   [3] (🛴..🛶)    kick scooter..canoe
+	GraphemeCodePoint{0x1F6F7, 0x1F6F8, GraphemeProp.gp_extended_pictographic}, // E5.0   [2] (🛷..🛸)    sled..flying saucer
+	GraphemeCodePoint{0x1F6F9, 0x1F6F9, GraphemeProp.gp_extended_pictographic}, // E11.0  [1] (🛹)       skateboard
+	GraphemeCodePoint{0x1F6FA, 0x1F6FA, GraphemeProp.gp_extended_pictographic}, // E12.0  [1] (🛺)       auto rickshaw
+	GraphemeCodePoint{0x1F6FB, 0x1F6FC, GraphemeProp.gp_extended_pictographic}, // E13.0  [2] (🛻..🛼)    pickup truck..roller skate
+	GraphemeCodePoint{0x1F6FD, 0x1F6FF, GraphemeProp.gp_extended_pictographic}, // E0.0   [3] (🛽..🛿)    <reserved-1F6FD>..<reserved-1F6FF>
+	GraphemeCodePoint{0x1F774, 0x1F77F, GraphemeProp.gp_extended_pictographic}, // E0.0  [12] (🝴..🝿)    LOT OF FORTUNE..ORCUS
+	GraphemeCodePoint{0x1F7D5, 0x1F7DF, GraphemeProp.gp_extended_pictographic}, // E0.0  [11] (🟕..🟟)    CIRCLED TRIANGLE..<reserved-1F7DF>
+	GraphemeCodePoint{0x1F7E0, 0x1F7EB, GraphemeProp.gp_extended_pictographic}, // E12.0 [12] (🟠..🟫)    orange circle..brown square
+	GraphemeCodePoint{0x1F7EC, 0x1F7EF, GraphemeProp.gp_extended_pictographic}, // E0.0   [4] (🟬..🟯)    <reserved-1F7EC>..<reserved-1F7EF>
+	GraphemeCodePoint{0x1F7F0, 0x1F7F0, GraphemeProp.gp_extended_pictographic}, // E14.0  [1] (🟰)       heavy equals sign
+	GraphemeCodePoint{0x1F7F1, 0x1F7FF, GraphemeProp.gp_extended_pictographic}, // E0.0  [15] (🟱..🟿)    <reserved-1F7F1>..<reserved-1F7FF>
+	GraphemeCodePoint{0x1F80C, 0x1F80F, GraphemeProp.gp_extended_pictographic}, // E0.0   [4] (🠌..🠏)    <reserved-1F80C>..<reserved-1F80F>
+	GraphemeCodePoint{0x1F848, 0x1F84F, GraphemeProp.gp_extended_pictographic}, // E0.0   [8] (🡈..🡏)    <reserved-1F848>..<reserved-1F84F>
+	GraphemeCodePoint{0x1F85A, 0x1F85F, GraphemeProp.gp_extended_pictographic}, // E0.0   [6] (🡚..🡟)    <reserved-1F85A>..<reserved-1F85F>
+	GraphemeCodePoint{0x1F888, 0x1F88F, GraphemeProp.gp_extended_pictographic}, // E0.0   [8] (🢈..🢏)    <reserved-1F888>..<reserved-1F88F>
+	GraphemeCodePoint{0x1F8AE, 0x1F8FF, GraphemeProp.gp_extended_pictographic}, // E0.0  [82] (🢮..🣿)    <reserved-1F8AE>..<reserved-1F8FF>
+	GraphemeCodePoint{0x1F90C, 0x1F90C, GraphemeProp.gp_extended_pictographic}, // E13.0  [1] (🤌)       pinched fingers
+	GraphemeCodePoint{0x1F90D, 0x1F90F, GraphemeProp.gp_extended_pictographic}, // E12.0  [3] (🤍..🤏)    white heart..pinching hand
+	GraphemeCodePoint{0x1F910, 0x1F918, GraphemeProp.gp_extended_pictographic}, // E1.0   [9] (🤐..🤘)    zipper-mouth face..sign of the horns
+	GraphemeCodePoint{0x1F919, 0x1F91E, GraphemeProp.gp_extended_pictographic}, // E3.0   [6] (🤙..🤞)    call me hand..crossed fingers
+	GraphemeCodePoint{0x1F91F, 0x1F91F, GraphemeProp.gp_extended_pictographic}, // E5.0   [1] (🤟)       love-you gesture
+	GraphemeCodePoint{0x1F920, 0x1F927, GraphemeProp.gp_extended_pictographic}, // E3.0   [8] (🤠..🤧)    cowboy hat face..sneezing face
+	GraphemeCodePoint{0x1F928, 0x1F92F, GraphemeProp.gp_extended_pictographic}, // E5.0   [8] (🤨..🤯)    face with raised eyebrow..exploding head
+	GraphemeCodePoint{0x1F930, 0x1F930, GraphemeProp.gp_extended_pictographic}, // E3.0   [1] (🤰)       pregnant woman
+	GraphemeCodePoint{0x1F931, 0x1F932, GraphemeProp.gp_extended_pictographic}, // E5.0   [2] (🤱..🤲)    breast-feeding..palms up together
+	GraphemeCodePoint{0x1F933, 0x1F93A, GraphemeProp.gp_extended_pictographic}, // E3.0   [8] (🤳..🤺)    selfie..person fencing
+	GraphemeCodePoint{0x1F93C, 0x1F93E, GraphemeProp.gp_extended_pictographic}, // E3.0   [3] (🤼..🤾)    people wrestling..person playing handball
+	GraphemeCodePoint{0x1F93F, 0x1F93F, GraphemeProp.gp_extended_pictographic}, // E12.0  [1] (🤿)       diving mask
+	GraphemeCodePoint{0x1F940, 0x1F945, GraphemeProp.gp_extended_pictographic}, // E3.0   [6] (🥀..🥅)    wilted flower..goal net
+	GraphemeCodePoint{0x1F947, 0x1F94B, GraphemeProp.gp_extended_pictographic}, // E3.0   [5] (🥇..🥋)    1st place medal..martial arts uniform
+	GraphemeCodePoint{0x1F94C, 0x1F94C, GraphemeProp.gp_extended_pictographic}, // E5.0   [1] (🥌)       curling stone
+	GraphemeCodePoint{0x1F94D, 0x1F94F, GraphemeProp.gp_extended_pictographic}, // E11.0  [3] (🥍..🥏)    lacrosse..flying disc
+	GraphemeCodePoint{0x1F950, 0x1F95E, GraphemeProp.gp_extended_pictographic}, // E3.0  [15] (🥐..🥞)    croissant..pancakes
+	GraphemeCodePoint{0x1F95F, 0x1F96B, GraphemeProp.gp_extended_pictographic}, // E5.0  [13] (🥟..🥫)    dumpling..canned food
+	GraphemeCodePoint{0x1F96C, 0x1F970, GraphemeProp.gp_extended_pictographic}, // E11.0  [5] (🥬..🥰)    leafy green..smiling face with hearts
+	GraphemeCodePoint{0x1F971, 0x1F971, GraphemeProp.gp_extended_pictographic}, // E12.0  [1] (🥱)       yawning face
+	GraphemeCodePoint{0x1F972, 0x1F972, GraphemeProp.gp_extended_pictographic}, // E13.0  [1] (🥲)       smiling face with tear
+	GraphemeCodePoint{0x1F973, 0x1F976, GraphemeProp.gp_extended_pictographic}, // E11.0  [4] (🥳..🥶)    partying face..cold face
+	GraphemeCodePoint{0x1F977, 0x1F978, GraphemeProp.gp_extended_pictographic}, // E13.0  [2] (🥷..🥸)    ninja..disguised face
+	GraphemeCodePoint{0x1F979, 0x1F979, GraphemeProp.gp_extended_pictographic}, // E14.0  [1] (🥹)       face holding back tears
+	GraphemeCodePoint{0x1F97A, 0x1F97A, GraphemeProp.gp_extended_pictographic}, // E11.0  [1] (🥺)       pleading face
+	GraphemeCodePoint{0x1F97B, 0x1F97B, GraphemeProp.gp_extended_pictographic}, // E12.0  [1] (🥻)       sari
+	GraphemeCodePoint{0x1F97C, 0x1F97F, GraphemeProp.gp_extended_pictographic}, // E11.0  [4] (🥼..🥿)    lab coat..flat shoe
+	GraphemeCodePoint{0x1F980, 0x1F984, GraphemeProp.gp_extended_pictographic}, // E1.0   [5] (🦀..🦄)    crab..unicorn
+	GraphemeCodePoint{0x1F985, 0x1F991, GraphemeProp.gp_extended_pictographic}, // E3.0  [13] (🦅..🦑)    eagle..squid
+	GraphemeCodePoint{0x1F992, 0x1F997, GraphemeProp.gp_extended_pictographic}, // E5.0   [6] (🦒..🦗)    giraffe..cricket
+	GraphemeCodePoint{0x1F998, 0x1F9A2, GraphemeProp.gp_extended_pictographic}, // E11.0 [11] (🦘..🦢)    kangaroo..swan
+	GraphemeCodePoint{0x1F9A3, 0x1F9A4, GraphemeProp.gp_extended_pictographic}, // E13.0  [2] (🦣..🦤)    mammoth..dodo
+	GraphemeCodePoint{0x1F9A5, 0x1F9AA, GraphemeProp.gp_extended_pictographic}, // E12.0  [6] (🦥..🦪)    sloth..oyster
+	GraphemeCodePoint{0x1F9AB, 0x1F9AD, GraphemeProp.gp_extended_pictographic}, // E13.0  [3] (🦫..🦭)    beaver..seal
+	GraphemeCodePoint{0x1F9AE, 0x1F9AF, GraphemeProp.gp_extended_pictographic}, // E12.0  [2] (🦮..🦯)    guide dog..white cane
+	GraphemeCodePoint{0x1F9B0, 0x1F9B9, GraphemeProp.gp_extended_pictographic}, // E11.0 [10] (🦰..🦹)    red hair..supervillain
+	GraphemeCodePoint{0x1F9BA, 0x1F9BF, GraphemeProp.gp_extended_pictographic}, // E12.0  [6] (🦺..🦿)    safety vest..mechanical leg
+	GraphemeCodePoint{0x1F9C0, 0x1F9C0, GraphemeProp.gp_extended_pictographic}, // E1.0   [1] (🧀)       cheese wedge
+	GraphemeCodePoint{0x1F9C1, 0x1F9C2, GraphemeProp.gp_extended_pictographic}, // E11.0  [2] (🧁..🧂)    cupcake..salt
+	GraphemeCodePoint{0x1F9C3, 0x1F9CA, GraphemeProp.gp_extended_pictographic}, // E12.0  [8] (🧃..🧊)    beverage box..ice
+	GraphemeCodePoint{0x1F9CB, 0x1F9CB, GraphemeProp.gp_extended_pictographic}, // E13.0  [1] (🧋)       bubble tea
+	GraphemeCodePoint{0x1F9CC, 0x1F9CC, GraphemeProp.gp_extended_pictographic}, // E14.0  [1] (🧌)       troll
+	GraphemeCodePoint{0x1F9CD, 0x1F9CF, GraphemeProp.gp_extended_pictographic}, // E12.0  [3] (🧍..🧏)    person standing..deaf person
+	GraphemeCodePoint{0x1F9D0, 0x1F9E6, GraphemeProp.gp_extended_pictographic}, // E5.0  [23] (🧐..🧦)    face with monocle..socks
+	GraphemeCodePoint{0x1F9E7, 0x1F9FF, GraphemeProp.gp_extended_pictographic}, // E11.0 [25] (🧧..🧿)    red envelope..nazar amulet
+	GraphemeCodePoint{0x1FA00, 0x1FA6F, GraphemeProp.gp_extended_pictographic}, // E0.0 [112] (🨀..🩯)    NEUTRAL CHESS KING..<reserved-1FA6F>
+	GraphemeCodePoint{0x1FA70, 0x1FA73, GraphemeProp.gp_extended_pictographic}, // E12.0  [4] (🩰..🩳)    ballet shoes..shorts
+	GraphemeCodePoint{0x1FA74, 0x1FA74, GraphemeProp.gp_extended_pictographic}, // E13.0  [1] (🩴)       thong sandal
+	GraphemeCodePoint{0x1FA75, 0x1FA77, GraphemeProp.gp_extended_pictographic}, // E15.0  [3] (🩵..🩷)    light blue heart..pink heart
+	GraphemeCodePoint{0x1FA78, 0x1FA7A, GraphemeProp.gp_extended_pictographic}, // E12.0  [3] (🩸..🩺)    drop of blood..stethoscope
+	GraphemeCodePoint{0x1FA7B, 0x1FA7C, GraphemeProp.gp_extended_pictographic}, // E14.0  [2] (🩻..🩼)    x-ray..crutch
+	GraphemeCodePoint{0x1FA7D, 0x1FA7F, GraphemeProp.gp_extended_pictographic}, // E0.0   [3] (🩽..🩿)    <reserved-1FA7D>..<reserved-1FA7F>
+	GraphemeCodePoint{0x1FA80, 0x1FA82, GraphemeProp.gp_extended_pictographic}, // E12.0  [3] (🪀..🪂)    yo-yo..parachute
+	GraphemeCodePoint{0x1FA83, 0x1FA86, GraphemeProp.gp_extended_pictographic}, // E13.0  [4] (🪃..🪆)    boomerang..nesting dolls
+	GraphemeCodePoint{0x1FA87, 0x1FA88, GraphemeProp.gp_extended_pictographic}, // E15.0  [2] (🪇..🪈)    maracas..flute
+	GraphemeCodePoint{0x1FA89, 0x1FA8F, GraphemeProp.gp_extended_pictographic}, // E0.0   [7] (🪉..🪏)    <reserved-1FA89>..<reserved-1FA8F>
+	GraphemeCodePoint{0x1FA90, 0x1FA95, GraphemeProp.gp_extended_pictographic}, // E12.0  [6] (🪐..🪕)    ringed planet..banjo
+	GraphemeCodePoint{0x1FA96, 0x1FAA8, GraphemeProp.gp_extended_pictographic}, // E13.0 [19] (🪖..🪨)    military helmet..rock
+	GraphemeCodePoint{0x1FAA9, 0x1FAAC, GraphemeProp.gp_extended_pictographic}, // E14.0  [4] (🪩..🪬)    mirror ball..hamsa
+	GraphemeCodePoint{0x1FAAD, 0x1FAAF, GraphemeProp.gp_extended_pictographic}, // E15.0  [3] (🪭..🪯)    folding hand fan..khanda
+	GraphemeCodePoint{0x1FAB0, 0x1FAB6, GraphemeProp.gp_extended_pictographic}, // E13.0  [7] (🪰..🪶)    fly..feather
+	GraphemeCodePoint{0x1FAB7, 0x1FABA, GraphemeProp.gp_extended_pictographic}, // E14.0  [4] (🪷..🪺)    lotus..nest with eggs
+	GraphemeCodePoint{0x1FABB, 0x1FABD, GraphemeProp.gp_extended_pictographic}, // E15.0  [3] (🪻..🪽)    hyacinth..wing
+	GraphemeCodePoint{0x1FABE, 0x1FABE, GraphemeProp.gp_extended_pictographic}, // E0.0   [1] (🪾)       <reserved-1FABE>
+	GraphemeCodePoint{0x1FABF, 0x1FABF, GraphemeProp.gp_extended_pictographic}, // E15.0  [1] (🪿)       goose
+	GraphemeCodePoint{0x1FAC0, 0x1FAC2, GraphemeProp.gp_extended_pictographic}, // E13.0  [3] (🫀..🫂)    anatomical heart..people hugging
+	GraphemeCodePoint{0x1FAC3, 0x1FAC5, GraphemeProp.gp_extended_pictographic}, // E14.0  [3] (🫃..🫅)    pregnant man..person with crown
+	GraphemeCodePoint{0x1FAC6, 0x1FACD, GraphemeProp.gp_extended_pictographic}, // E0.0   [8] (🫆..🫍)    <reserved-1FAC6>..<reserved-1FACD>
+	GraphemeCodePoint{0x1FACE, 0x1FACF, GraphemeProp.gp_extended_pictographic}, // E15.0  [2] (🫎..🫏)    moose..donkey
+	GraphemeCodePoint{0x1FAD0, 0x1FAD6, GraphemeProp.gp_extended_pictographic}, // E13.0  [7] (🫐..🫖)    blueberries..teapot
+	GraphemeCodePoint{0x1FAD7, 0x1FAD9, GraphemeProp.gp_extended_pictographic}, // E14.0  [3] (🫗..🫙)    pouring liquid..jar
+	GraphemeCodePoint{0x1FADA, 0x1FADB, GraphemeProp.gp_extended_pictographic}, // E15.0  [2] (🫚..🫛)    ginger root..pea pod
+	GraphemeCodePoint{0x1FADC, 0x1FADF, GraphemeProp.gp_extended_pictographic}, // E0.0   [4] (🫜..🫟)    <reserved-1FADC>..<reserved-1FADF>
+	GraphemeCodePoint{0x1FAE0, 0x1FAE7, GraphemeProp.gp_extended_pictographic}, // E14.0  [8] (🫠..🫧)    melting face..bubbles
+	GraphemeCodePoint{0x1FAE8, 0x1FAE8, GraphemeProp.gp_extended_pictographic}, // E15.0  [1] (🫨)       shaking face
+	GraphemeCodePoint{0x1FAE9, 0x1FAEF, GraphemeProp.gp_extended_pictographic}, // E0.0   [7] (🫩..🫯)    <reserved-1FAE9>..<reserved-1FAEF>
+	GraphemeCodePoint{0x1FAF0, 0x1FAF6, GraphemeProp.gp_extended_pictographic}, // E14.0  [7] (🫰..🫶)    hand with index finger and thumb crossed..heart hands
+	GraphemeCodePoint{0x1FAF7, 0x1FAF8, GraphemeProp.gp_extended_pictographic}, // E15.0  [2] (🫷..🫸)    leftwards pushing hand..rightwards pushing hand
+	GraphemeCodePoint{0x1FAF9, 0x1FAFF, GraphemeProp.gp_extended_pictographic}, // E0.0   [7] (🫹..🫿)    <reserved-1FAF9>..<reserved-1FAFF>
+	GraphemeCodePoint{0x1FC00, 0x1FFFD, GraphemeProp.gp_extended_pictographic}, // E0.0[1022] (🰀..🿽)    <reserved-1FC00>..<reserved-1FFFD>
+	GraphemeCodePoint{0xE0000, 0xE0000, GraphemeProp.gp_control}, // Cn       <reserved-E0000>
+	GraphemeCodePoint{0xE0001, 0xE0001, GraphemeProp.gp_control}, // Cf       LANGUAGE TAG
+	GraphemeCodePoint{0xE0002, 0xE001F, GraphemeProp.gp_control}, // Cn  [30] <reserved-E0002>..<reserved-E001F>
+	GraphemeCodePoint{0xE0020, 0xE007F, GraphemeProp.gp_extend}, // Cf  [96] TAG SPACE..CANCEL TAG
+	GraphemeCodePoint{0xE0080, 0xE00FF, GraphemeProp.gp_control}, // Cn [128] <reserved-E0080>..<reserved-E00FF>
+	GraphemeCodePoint{0xE0100, 0xE01EF, GraphemeProp.gp_extend}, // Mn [240] VARIATION SELECTOR-17..VARIATION SELECTOR-256
+	GraphemeCodePoint{0xE01F0, 0xE0FFF, GraphemeProp.gp_control}, // Cn [3600] <reserved-E01F0>..<reserved-E0FFF>
 ]

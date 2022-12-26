@@ -19,7 +19,9 @@ fn gen_grapheme_properties() {
 		return line.contains('Extended_Pictographic')
 	})
 
-	properties.sort(a.from < b.from)
+	properties.sort_with_compare(fn (a &Property, b &Property) int {
+		return '0x${a.from}'.int() - '0x${b.from}'.int()
+	})
 
 	write_grapheme_properties(properties) or { panic(error) }
 }
