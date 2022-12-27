@@ -36,7 +36,7 @@ fn write_grapheme_properties(properties []Property) ! {
 		println('Finish saving file ${vfile_path}.')
 	}
 	file.writeln(emit_module('grapheme') + '\n')!
-	file.writeln(emit_preamble() + '\n')!
+	file.writeln(emit_preamble('gen/gen_properties.v') + '\n')!
 	file.writeln('// GraphemeProp defines the property types used for grapheme cluster boundary detection.')!
 	file.writeln(emit_property_enum('GraphemeProp', unique_property_names(properties), 'gp') + '\n')!
 	file.writeln('// GraphemeCodePoint defines the code point range for a property.')!
