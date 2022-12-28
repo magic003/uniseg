@@ -47,8 +47,8 @@ mut:
 	iter         util.RuneIter   [required]
 	state        State           [required]
 	builder      strings.Builder = strings.new_builder(1) // keep the rune seen so far
-	offset_start int = 0 // offset of the first byte of the builder
-	offset_end   int = 0 // offset which doesn't include the last byte of the builder
+	offset_start int // offset of the first byte of the builder
+	offset_end   int // offset which doesn't include the last byte of the builder
 }
 
 // next implements the iteration interface, returning the next grapheme cluster.

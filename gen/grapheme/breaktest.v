@@ -29,7 +29,7 @@ pub fn gen_grapheme_breaktest() {
 
 // write_grapheme_breaktest writes the test cases to a grapheme break test vlang file.
 fn write_grapheme_breaktest(tests [][]string) ! {
-	vfile_path := 'src/grapheme/graphemebreak_test.v'
+	vfile_path := 'src/grapheme/grapheme_breaktest.v'
 	println('Saving to file ${vfile_path}...')
 	mut file := os.create(vfile_path)!
 	defer {
@@ -38,6 +38,7 @@ fn write_grapheme_breaktest(tests [][]string) ! {
 	}
 	file.writeln(common.emit_module('grapheme') + '\n')!
 	file.writeln(common.emit_preamble('gen/gen.v grapheme_breaktest') + '\n')!
+	file.writeln(emit_test_case_struct() + '\n')!
 	file.writeln('// grapheme_break_test_cases are the grapheme cluster break test cases.')!
 	file.writeln('// They are taken from ${grapheme.grapheme_breaktest_url}.')!
 	file.writeln('const grapheme_break_test_cases = [')!
@@ -46,6 +47,11 @@ fn write_grapheme_breaktest(tests [][]string) ! {
 		file.writeln(emit_test_case(input, expected))!
 	}
 	file.writeln(']')!
+}
+
+fn emit_test_case_struct() string {
+	return 'struct TestCase {\n' + 'input string [required]\n' +
+		'expected []GraphemeCluster [required]\n' + '}'
 }
 
 // emit_test_case generates the vlang code for a single test case.
