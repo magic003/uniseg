@@ -44,7 +44,7 @@ fn write_grapheme_breaktest(tests [][]string) ! {
 	file.writeln('const grapheme_break_test_cases = [')!
 	for test in tests {
 		input, expected := parse_input_and_expectation(test[0])
-		file.writeln(emit_test_case(input, expected))!
+		file.writeln(emit_test_case(input, expected, test[1]))!
 	}
 	file.writeln(']')!
 }
@@ -55,8 +55,8 @@ fn emit_test_case_struct() string {
 }
 
 // emit_test_case generates the vlang code for a single test case.
-fn emit_test_case(input string, expected string) string {
-	return 'TestCase{ input: ${input}, expected: ${expected} }'
+fn emit_test_case(input string, expected string, comment string) string {
+	return '// ${comment}\nTestCase{ input: ${input}, expected: ${expected} }'
 }
 
 // parse_input_and_expectation constructs the input and expectation of a test case from the test string.
