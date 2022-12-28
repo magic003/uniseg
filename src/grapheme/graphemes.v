@@ -59,8 +59,13 @@ pub fn (mut self Graphemes) next() ?GraphemeCluster {
 
 	for {
 		r, start, end := self.iter.next() or {
+			prev_state := self.state
 			self.state = State.st_eot
-			return GraphemeCluster{self.offset_start, self.offset_end, self.builder.str()}
+			return if prev_state == State.st_sot {
+				none
+			} else {
+				GraphemeCluster{self.offset_start, self.offset_end, self.builder.str()}
+			}
 		}
 		next_state, is_boundary := check_boundary(self.state, r)
 		self.state = next_state
