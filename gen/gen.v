@@ -5,7 +5,9 @@ module main
 // It accepts one argument of the following values:
 //   - grapheme: grapheme properties
 //   - grapheme_breaktest: grapheme break test cases
+//   - word: word properties
 import gen.grapheme
+import gen.word
 import os
 
 fn main() {
@@ -21,6 +23,9 @@ fn main() {
 		}
 		'grapheme_breaktest' {
 			grapheme.gen_grapheme_breaktest()
+		}
+		'word' {
+			word.gen_word_properties()
 		}
 		else {
 			println('Unrecognized argument: ${file_type}')
