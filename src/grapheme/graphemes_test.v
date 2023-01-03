@@ -346,6 +346,6 @@ fn test_graphemes_basic_cases() {
 
 fn test_graphemes_breaktest() {
 	for test in grapheme_break_test_cases {
-		assert test.expected == run_graphemes(test.input)
+		assert test.expected == run_graphemes(test.input), test.desc
 	}
 }

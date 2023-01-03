@@ -5,12 +5,12 @@ module grapheme
 struct TestCase {
 	input    string            [required]
 	expected []GraphemeCluster [required]
+	desc     string
 }
 
 // grapheme_break_test_cases are the grapheme cluster break test cases.
 // They are taken from https://www.unicode.org/Public/15.0.0/ucd/auxiliary/GraphemeBreakTest.txt.
 const grapheme_break_test_cases = [
-	// ÷ [0.2] SPACE (Other) ÷ [999.0] SPACE (Other) ÷ [0.3]
 	TestCase{
 		input: '\u0020\u0020'
 		expected: [
@@ -25,8 +25,8 @@ const grapheme_break_test_cases = [
 				offset_end: 2
 			},
 		]
-	}
-	// ÷ [0.2] SPACE (Other) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] SPACE (Other) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (Other) ÷ [999.0] SPACE (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u0308\u0020'
 		expected: [
@@ -41,8 +41,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] SPACE (Other) ÷ [5.0] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (Other) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] SPACE (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u000D'
 		expected: [
@@ -57,8 +57,8 @@ const grapheme_break_test_cases = [
 				offset_end: 2
 			},
 		]
-	}
-	// ÷ [0.2] SPACE (Other) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (Other) ÷ [5.0] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u0308\u000D'
 		expected: [
@@ -73,8 +73,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] SPACE (Other) ÷ [5.0] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (Other) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u000A'
 		expected: [
@@ -89,8 +89,8 @@ const grapheme_break_test_cases = [
 				offset_end: 2
 			},
 		]
-	}
-	// ÷ [0.2] SPACE (Other) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (Other) ÷ [5.0] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u0308\u000A'
 		expected: [
@@ -105,8 +105,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] SPACE (Other) ÷ [5.0] <START OF HEADING> (Control) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (Other) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u0001'
 		expected: [
@@ -121,8 +121,8 @@ const grapheme_break_test_cases = [
 				offset_end: 2
 			},
 		]
-	}
-	// ÷ [0.2] SPACE (Other) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <START OF HEADING> (Control) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (Other) ÷ [5.0] <START OF HEADING> (Control) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u0308\u0001'
 		expected: [
@@ -137,8 +137,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] SPACE (Other) × [9.0] COMBINING GRAPHEME JOINER (Extend) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (Other) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <START OF HEADING> (Control) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u034F'
 		expected: [
@@ -148,8 +148,8 @@ const grapheme_break_test_cases = [
 				offset_end: 3
 			},
 		]
-	}
-	// ÷ [0.2] SPACE (Other) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] COMBINING GRAPHEME JOINER (Extend) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (Other) × [9.0] COMBINING GRAPHEME JOINER (Extend) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u0308\u034F'
 		expected: [
@@ -159,8 +159,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] SPACE (Other) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (Other) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] COMBINING GRAPHEME JOINER (Extend) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\U0001F1E6'
 		expected: [
@@ -175,8 +175,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] SPACE (Other) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (Other) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u0308\U0001F1E6'
 		expected: [
@@ -191,8 +191,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] SPACE (Other) ÷ [999.0] ARABIC NUMBER SIGN (Prepend) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (Other) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u0600'
 		expected: [
@@ -207,8 +207,8 @@ const grapheme_break_test_cases = [
 				offset_end: 3
 			},
 		]
-	}
-	// ÷ [0.2] SPACE (Other) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] ARABIC NUMBER SIGN (Prepend) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (Other) ÷ [999.0] ARABIC NUMBER SIGN (Prepend) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u0308\u0600'
 		expected: [
@@ -223,8 +223,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] SPACE (Other) × [9.1] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (Other) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] ARABIC NUMBER SIGN (Prepend) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u0903'
 		expected: [
@@ -234,8 +234,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] SPACE (Other) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.1] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (Other) × [9.1] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u0308\u0903'
 		expected: [
@@ -245,8 +245,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] SPACE (Other) ÷ [999.0] HANGUL CHOSEONG KIYEOK (L) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (Other) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.1] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u1100'
 		expected: [
@@ -261,8 +261,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] SPACE (Other) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL CHOSEONG KIYEOK (L) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (Other) ÷ [999.0] HANGUL CHOSEONG KIYEOK (L) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u0308\u1100'
 		expected: [
@@ -277,8 +277,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] SPACE (Other) ÷ [999.0] HANGUL JUNGSEONG FILLER (V) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (Other) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL CHOSEONG KIYEOK (L) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u1160'
 		expected: [
@@ -293,8 +293,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] SPACE (Other) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL JUNGSEONG FILLER (V) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (Other) ÷ [999.0] HANGUL JUNGSEONG FILLER (V) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u0308\u1160'
 		expected: [
@@ -309,8 +309,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] SPACE (Other) ÷ [999.0] HANGUL JONGSEONG KIYEOK (T) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (Other) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL JUNGSEONG FILLER (V) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u11A8'
 		expected: [
@@ -325,8 +325,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] SPACE (Other) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL JONGSEONG KIYEOK (T) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (Other) ÷ [999.0] HANGUL JONGSEONG KIYEOK (T) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u0308\u11A8'
 		expected: [
@@ -341,8 +341,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] SPACE (Other) ÷ [999.0] HANGUL SYLLABLE GA (LV) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (Other) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL JONGSEONG KIYEOK (T) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\uAC00'
 		expected: [
@@ -357,8 +357,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] SPACE (Other) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL SYLLABLE GA (LV) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (Other) ÷ [999.0] HANGUL SYLLABLE GA (LV) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u0308\uAC00'
 		expected: [
@@ -373,8 +373,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] SPACE (Other) ÷ [999.0] HANGUL SYLLABLE GAG (LVT) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (Other) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL SYLLABLE GA (LV) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\uAC01'
 		expected: [
@@ -389,8 +389,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] SPACE (Other) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL SYLLABLE GAG (LVT) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (Other) ÷ [999.0] HANGUL SYLLABLE GAG (LVT) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u0308\uAC01'
 		expected: [
@@ -405,8 +405,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] SPACE (Other) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (Other) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL SYLLABLE GAG (LVT) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u231A'
 		expected: [
@@ -421,8 +421,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] SPACE (Other) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (Other) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u0308\u231A'
 		expected: [
@@ -437,8 +437,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] SPACE (Other) × [9.0] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (Other) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u0300'
 		expected: [
@@ -448,8 +448,8 @@ const grapheme_break_test_cases = [
 				offset_end: 3
 			},
 		]
-	}
-	// ÷ [0.2] SPACE (Other) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (Other) × [9.0] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u0308\u0300'
 		expected: [
@@ -459,8 +459,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] SPACE (Other) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (Other) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u200D'
 		expected: [
@@ -470,8 +470,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] SPACE (Other) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (Other) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u0308\u200D'
 		expected: [
@@ -481,8 +481,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] SPACE (Other) ÷ [999.0] <reserved-0378> (Other) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (Other) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u0378'
 		expected: [
@@ -497,8 +497,8 @@ const grapheme_break_test_cases = [
 				offset_end: 3
 			},
 		]
-	}
-	// ÷ [0.2] SPACE (Other) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] <reserved-0378> (Other) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (Other) ÷ [999.0] <reserved-0378> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u0308\u0378'
 		expected: [
@@ -513,8 +513,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [4.0] SPACE (Other) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (Other) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] <reserved-0378> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u0020'
 		expected: [
@@ -529,8 +529,8 @@ const grapheme_break_test_cases = [
 				offset_end: 2
 			},
 		]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] SPACE (Other) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [4.0] SPACE (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u0308\u0020'
 		expected: [
@@ -550,8 +550,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [4.0] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] SPACE (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u000D'
 		expected: [
@@ -566,8 +566,8 @@ const grapheme_break_test_cases = [
 				offset_end: 2
 			},
 		]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [4.0] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u0308\u000D'
 		expected: [
@@ -587,8 +587,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) × [3.0] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u000A'
 		expected: [
@@ -598,8 +598,8 @@ const grapheme_break_test_cases = [
 				offset_end: 2
 			},
 		]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) × [3.0] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u0308\u000A'
 		expected: [
@@ -619,8 +619,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [4.0] <START OF HEADING> (Control) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u0001'
 		expected: [
@@ -635,8 +635,8 @@ const grapheme_break_test_cases = [
 				offset_end: 2
 			},
 		]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <START OF HEADING> (Control) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [4.0] <START OF HEADING> (Control) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u0308\u0001'
 		expected: [
@@ -656,8 +656,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [4.0] COMBINING GRAPHEME JOINER (Extend) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <START OF HEADING> (Control) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u034F'
 		expected: [
@@ -672,8 +672,8 @@ const grapheme_break_test_cases = [
 				offset_end: 3
 			},
 		]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] COMBINING GRAPHEME JOINER (Extend) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [4.0] COMBINING GRAPHEME JOINER (Extend) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u0308\u034F'
 		expected: [
@@ -688,8 +688,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [4.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] COMBINING GRAPHEME JOINER (Extend) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\U0001F1E6'
 		expected: [
@@ -704,8 +704,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [4.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u0308\U0001F1E6'
 		expected: [
@@ -725,8 +725,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [4.0] ARABIC NUMBER SIGN (Prepend) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u0600'
 		expected: [
@@ -741,8 +741,8 @@ const grapheme_break_test_cases = [
 				offset_end: 3
 			},
 		]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] ARABIC NUMBER SIGN (Prepend) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [4.0] ARABIC NUMBER SIGN (Prepend) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u0308\u0600'
 		expected: [
@@ -762,8 +762,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [4.0] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] ARABIC NUMBER SIGN (Prepend) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u0903'
 		expected: [
@@ -778,8 +778,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.1] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [4.0] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u0308\u0903'
 		expected: [
@@ -794,8 +794,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [4.0] HANGUL CHOSEONG KIYEOK (L) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.1] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u1100'
 		expected: [
@@ -810,8 +810,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL CHOSEONG KIYEOK (L) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [4.0] HANGUL CHOSEONG KIYEOK (L) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u0308\u1100'
 		expected: [
@@ -831,8 +831,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [4.0] HANGUL JUNGSEONG FILLER (V) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL CHOSEONG KIYEOK (L) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u1160'
 		expected: [
@@ -847,8 +847,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL JUNGSEONG FILLER (V) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [4.0] HANGUL JUNGSEONG FILLER (V) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u0308\u1160'
 		expected: [
@@ -868,8 +868,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [4.0] HANGUL JONGSEONG KIYEOK (T) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL JUNGSEONG FILLER (V) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u11A8'
 		expected: [
@@ -884,8 +884,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL JONGSEONG KIYEOK (T) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [4.0] HANGUL JONGSEONG KIYEOK (T) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u0308\u11A8'
 		expected: [
@@ -905,8 +905,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [4.0] HANGUL SYLLABLE GA (LV) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL JONGSEONG KIYEOK (T) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\uAC00'
 		expected: [
@@ -921,8 +921,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL SYLLABLE GA (LV) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [4.0] HANGUL SYLLABLE GA (LV) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u0308\uAC00'
 		expected: [
@@ -942,8 +942,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [4.0] HANGUL SYLLABLE GAG (LVT) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL SYLLABLE GA (LV) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\uAC01'
 		expected: [
@@ -958,8 +958,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL SYLLABLE GAG (LVT) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [4.0] HANGUL SYLLABLE GAG (LVT) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u0308\uAC01'
 		expected: [
@@ -979,8 +979,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [4.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL SYLLABLE GAG (LVT) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u231A'
 		expected: [
@@ -995,8 +995,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [4.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u0308\u231A'
 		expected: [
@@ -1016,8 +1016,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [4.0] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u0300'
 		expected: [
@@ -1032,8 +1032,8 @@ const grapheme_break_test_cases = [
 				offset_end: 3
 			},
 		]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [4.0] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u0308\u0300'
 		expected: [
@@ -1048,8 +1048,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [4.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u200D'
 		expected: [
@@ -1064,8 +1064,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [4.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u0308\u200D'
 		expected: [
@@ -1080,8 +1080,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [4.0] <reserved-0378> (Other) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u0378'
 		expected: [
@@ -1096,8 +1096,8 @@ const grapheme_break_test_cases = [
 				offset_end: 3
 			},
 		]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] <reserved-0378> (Other) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [4.0] <reserved-0378> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u0308\u0378'
 		expected: [
@@ -1117,8 +1117,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [4.0] SPACE (Other) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] <reserved-0378> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u0020'
 		expected: [
@@ -1133,8 +1133,8 @@ const grapheme_break_test_cases = [
 				offset_end: 2
 			},
 		]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] SPACE (Other) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [4.0] SPACE (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u0308\u0020'
 		expected: [
@@ -1154,8 +1154,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [4.0] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] SPACE (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u000D'
 		expected: [
@@ -1170,8 +1170,8 @@ const grapheme_break_test_cases = [
 				offset_end: 2
 			},
 		]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [4.0] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u0308\u000D'
 		expected: [
@@ -1191,8 +1191,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [4.0] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u000A'
 		expected: [
@@ -1207,8 +1207,8 @@ const grapheme_break_test_cases = [
 				offset_end: 2
 			},
 		]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [4.0] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u0308\u000A'
 		expected: [
@@ -1228,8 +1228,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [4.0] <START OF HEADING> (Control) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u0001'
 		expected: [
@@ -1244,8 +1244,8 @@ const grapheme_break_test_cases = [
 				offset_end: 2
 			},
 		]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <START OF HEADING> (Control) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [4.0] <START OF HEADING> (Control) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u0308\u0001'
 		expected: [
@@ -1265,8 +1265,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [4.0] COMBINING GRAPHEME JOINER (Extend) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <START OF HEADING> (Control) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u034F'
 		expected: [
@@ -1281,8 +1281,8 @@ const grapheme_break_test_cases = [
 				offset_end: 3
 			},
 		]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] COMBINING GRAPHEME JOINER (Extend) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [4.0] COMBINING GRAPHEME JOINER (Extend) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u0308\u034F'
 		expected: [
@@ -1297,8 +1297,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [4.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] COMBINING GRAPHEME JOINER (Extend) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\U0001F1E6'
 		expected: [
@@ -1313,8 +1313,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [4.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u0308\U0001F1E6'
 		expected: [
@@ -1334,8 +1334,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [4.0] ARABIC NUMBER SIGN (Prepend) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u0600'
 		expected: [
@@ -1350,8 +1350,8 @@ const grapheme_break_test_cases = [
 				offset_end: 3
 			},
 		]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] ARABIC NUMBER SIGN (Prepend) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [4.0] ARABIC NUMBER SIGN (Prepend) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u0308\u0600'
 		expected: [
@@ -1371,8 +1371,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [4.0] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] ARABIC NUMBER SIGN (Prepend) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u0903'
 		expected: [
@@ -1387,8 +1387,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.1] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [4.0] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u0308\u0903'
 		expected: [
@@ -1403,8 +1403,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [4.0] HANGUL CHOSEONG KIYEOK (L) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.1] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u1100'
 		expected: [
@@ -1419,8 +1419,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL CHOSEONG KIYEOK (L) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [4.0] HANGUL CHOSEONG KIYEOK (L) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u0308\u1100'
 		expected: [
@@ -1440,8 +1440,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [4.0] HANGUL JUNGSEONG FILLER (V) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL CHOSEONG KIYEOK (L) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u1160'
 		expected: [
@@ -1456,8 +1456,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL JUNGSEONG FILLER (V) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [4.0] HANGUL JUNGSEONG FILLER (V) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u0308\u1160'
 		expected: [
@@ -1477,8 +1477,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [4.0] HANGUL JONGSEONG KIYEOK (T) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL JUNGSEONG FILLER (V) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u11A8'
 		expected: [
@@ -1493,8 +1493,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL JONGSEONG KIYEOK (T) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [4.0] HANGUL JONGSEONG KIYEOK (T) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u0308\u11A8'
 		expected: [
@@ -1514,8 +1514,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [4.0] HANGUL SYLLABLE GA (LV) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL JONGSEONG KIYEOK (T) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\uAC00'
 		expected: [
@@ -1530,8 +1530,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL SYLLABLE GA (LV) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [4.0] HANGUL SYLLABLE GA (LV) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u0308\uAC00'
 		expected: [
@@ -1551,8 +1551,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [4.0] HANGUL SYLLABLE GAG (LVT) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL SYLLABLE GA (LV) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\uAC01'
 		expected: [
@@ -1567,8 +1567,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL SYLLABLE GAG (LVT) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [4.0] HANGUL SYLLABLE GAG (LVT) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u0308\uAC01'
 		expected: [
@@ -1588,8 +1588,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [4.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL SYLLABLE GAG (LVT) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u231A'
 		expected: [
@@ -1604,8 +1604,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [4.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u0308\u231A'
 		expected: [
@@ -1625,8 +1625,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [4.0] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u0300'
 		expected: [
@@ -1641,8 +1641,8 @@ const grapheme_break_test_cases = [
 				offset_end: 3
 			},
 		]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [4.0] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u0308\u0300'
 		expected: [
@@ -1657,8 +1657,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [4.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u200D'
 		expected: [
@@ -1673,8 +1673,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [4.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u0308\u200D'
 		expected: [
@@ -1689,8 +1689,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [4.0] <reserved-0378> (Other) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u0378'
 		expected: [
@@ -1705,8 +1705,8 @@ const grapheme_break_test_cases = [
 				offset_end: 3
 			},
 		]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] <reserved-0378> (Other) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [4.0] <reserved-0378> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u0308\u0378'
 		expected: [
@@ -1726,8 +1726,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] <START OF HEADING> (Control) ÷ [4.0] SPACE (Other) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] <reserved-0378> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u0020'
 		expected: [
@@ -1742,8 +1742,8 @@ const grapheme_break_test_cases = [
 				offset_end: 2
 			},
 		]
-	}
-	// ÷ [0.2] <START OF HEADING> (Control) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] SPACE (Other) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Control) ÷ [4.0] SPACE (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u0308\u0020'
 		expected: [
@@ -1763,8 +1763,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] <START OF HEADING> (Control) ÷ [4.0] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Control) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] SPACE (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u000D'
 		expected: [
@@ -1779,8 +1779,8 @@ const grapheme_break_test_cases = [
 				offset_end: 2
 			},
 		]
-	}
-	// ÷ [0.2] <START OF HEADING> (Control) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Control) ÷ [4.0] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u0308\u000D'
 		expected: [
@@ -1800,8 +1800,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] <START OF HEADING> (Control) ÷ [4.0] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Control) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u000A'
 		expected: [
@@ -1816,8 +1816,8 @@ const grapheme_break_test_cases = [
 				offset_end: 2
 			},
 		]
-	}
-	// ÷ [0.2] <START OF HEADING> (Control) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Control) ÷ [4.0] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u0308\u000A'
 		expected: [
@@ -1837,8 +1837,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] <START OF HEADING> (Control) ÷ [4.0] <START OF HEADING> (Control) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Control) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u0001'
 		expected: [
@@ -1853,8 +1853,8 @@ const grapheme_break_test_cases = [
 				offset_end: 2
 			},
 		]
-	}
-	// ÷ [0.2] <START OF HEADING> (Control) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <START OF HEADING> (Control) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Control) ÷ [4.0] <START OF HEADING> (Control) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u0308\u0001'
 		expected: [
@@ -1874,8 +1874,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] <START OF HEADING> (Control) ÷ [4.0] COMBINING GRAPHEME JOINER (Extend) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Control) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <START OF HEADING> (Control) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u034F'
 		expected: [
@@ -1890,8 +1890,8 @@ const grapheme_break_test_cases = [
 				offset_end: 3
 			},
 		]
-	}
-	// ÷ [0.2] <START OF HEADING> (Control) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] COMBINING GRAPHEME JOINER (Extend) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Control) ÷ [4.0] COMBINING GRAPHEME JOINER (Extend) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u0308\u034F'
 		expected: [
@@ -1906,8 +1906,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] <START OF HEADING> (Control) ÷ [4.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Control) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] COMBINING GRAPHEME JOINER (Extend) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\U0001F1E6'
 		expected: [
@@ -1922,8 +1922,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] <START OF HEADING> (Control) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Control) ÷ [4.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u0308\U0001F1E6'
 		expected: [
@@ -1943,8 +1943,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] <START OF HEADING> (Control) ÷ [4.0] ARABIC NUMBER SIGN (Prepend) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Control) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u0600'
 		expected: [
@@ -1959,8 +1959,8 @@ const grapheme_break_test_cases = [
 				offset_end: 3
 			},
 		]
-	}
-	// ÷ [0.2] <START OF HEADING> (Control) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] ARABIC NUMBER SIGN (Prepend) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Control) ÷ [4.0] ARABIC NUMBER SIGN (Prepend) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u0308\u0600'
 		expected: [
@@ -1980,8 +1980,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] <START OF HEADING> (Control) ÷ [4.0] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Control) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] ARABIC NUMBER SIGN (Prepend) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u0903'
 		expected: [
@@ -1996,8 +1996,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] <START OF HEADING> (Control) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.1] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Control) ÷ [4.0] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u0308\u0903'
 		expected: [
@@ -2012,8 +2012,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] <START OF HEADING> (Control) ÷ [4.0] HANGUL CHOSEONG KIYEOK (L) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Control) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.1] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u1100'
 		expected: [
@@ -2028,8 +2028,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] <START OF HEADING> (Control) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL CHOSEONG KIYEOK (L) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Control) ÷ [4.0] HANGUL CHOSEONG KIYEOK (L) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u0308\u1100'
 		expected: [
@@ -2049,8 +2049,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] <START OF HEADING> (Control) ÷ [4.0] HANGUL JUNGSEONG FILLER (V) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Control) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL CHOSEONG KIYEOK (L) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u1160'
 		expected: [
@@ -2065,8 +2065,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] <START OF HEADING> (Control) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL JUNGSEONG FILLER (V) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Control) ÷ [4.0] HANGUL JUNGSEONG FILLER (V) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u0308\u1160'
 		expected: [
@@ -2086,8 +2086,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] <START OF HEADING> (Control) ÷ [4.0] HANGUL JONGSEONG KIYEOK (T) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Control) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL JUNGSEONG FILLER (V) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u11A8'
 		expected: [
@@ -2102,8 +2102,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] <START OF HEADING> (Control) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL JONGSEONG KIYEOK (T) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Control) ÷ [4.0] HANGUL JONGSEONG KIYEOK (T) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u0308\u11A8'
 		expected: [
@@ -2123,8 +2123,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] <START OF HEADING> (Control) ÷ [4.0] HANGUL SYLLABLE GA (LV) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Control) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL JONGSEONG KIYEOK (T) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\uAC00'
 		expected: [
@@ -2139,8 +2139,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] <START OF HEADING> (Control) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL SYLLABLE GA (LV) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Control) ÷ [4.0] HANGUL SYLLABLE GA (LV) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u0308\uAC00'
 		expected: [
@@ -2160,8 +2160,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] <START OF HEADING> (Control) ÷ [4.0] HANGUL SYLLABLE GAG (LVT) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Control) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL SYLLABLE GA (LV) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\uAC01'
 		expected: [
@@ -2176,8 +2176,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] <START OF HEADING> (Control) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL SYLLABLE GAG (LVT) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Control) ÷ [4.0] HANGUL SYLLABLE GAG (LVT) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u0308\uAC01'
 		expected: [
@@ -2197,8 +2197,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] <START OF HEADING> (Control) ÷ [4.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Control) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL SYLLABLE GAG (LVT) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u231A'
 		expected: [
@@ -2213,8 +2213,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] <START OF HEADING> (Control) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Control) ÷ [4.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u0308\u231A'
 		expected: [
@@ -2234,8 +2234,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] <START OF HEADING> (Control) ÷ [4.0] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Control) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u0300'
 		expected: [
@@ -2250,8 +2250,8 @@ const grapheme_break_test_cases = [
 				offset_end: 3
 			},
 		]
-	}
-	// ÷ [0.2] <START OF HEADING> (Control) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Control) ÷ [4.0] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u0308\u0300'
 		expected: [
@@ -2266,8 +2266,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] <START OF HEADING> (Control) ÷ [4.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Control) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u200D'
 		expected: [
@@ -2282,8 +2282,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] <START OF HEADING> (Control) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Control) ÷ [4.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u0308\u200D'
 		expected: [
@@ -2298,8 +2298,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] <START OF HEADING> (Control) ÷ [4.0] <reserved-0378> (Other) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Control) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u0378'
 		expected: [
@@ -2314,8 +2314,8 @@ const grapheme_break_test_cases = [
 				offset_end: 3
 			},
 		]
-	}
-	// ÷ [0.2] <START OF HEADING> (Control) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] <reserved-0378> (Other) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Control) ÷ [4.0] <reserved-0378> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u0308\u0378'
 		expected: [
@@ -2335,8 +2335,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] COMBINING GRAPHEME JOINER (Extend) ÷ [999.0] SPACE (Other) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Control) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] <reserved-0378> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u034F\u0020'
 		expected: [
@@ -2351,8 +2351,8 @@ const grapheme_break_test_cases = [
 				offset_end: 3
 			},
 		]
-	}
-	// ÷ [0.2] COMBINING GRAPHEME JOINER (Extend) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] SPACE (Other) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAPHEME JOINER (Extend) ÷ [999.0] SPACE (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u034F\u0308\u0020'
 		expected: [
@@ -2367,8 +2367,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] COMBINING GRAPHEME JOINER (Extend) ÷ [5.0] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAPHEME JOINER (Extend) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] SPACE (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u034F\u000D'
 		expected: [
@@ -2383,8 +2383,8 @@ const grapheme_break_test_cases = [
 				offset_end: 3
 			},
 		]
-	}
-	// ÷ [0.2] COMBINING GRAPHEME JOINER (Extend) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAPHEME JOINER (Extend) ÷ [5.0] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u034F\u0308\u000D'
 		expected: [
@@ -2399,8 +2399,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] COMBINING GRAPHEME JOINER (Extend) ÷ [5.0] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAPHEME JOINER (Extend) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u034F\u000A'
 		expected: [
@@ -2415,8 +2415,8 @@ const grapheme_break_test_cases = [
 				offset_end: 3
 			},
 		]
-	}
-	// ÷ [0.2] COMBINING GRAPHEME JOINER (Extend) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAPHEME JOINER (Extend) ÷ [5.0] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u034F\u0308\u000A'
 		expected: [
@@ -2431,8 +2431,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] COMBINING GRAPHEME JOINER (Extend) ÷ [5.0] <START OF HEADING> (Control) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAPHEME JOINER (Extend) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u034F\u0001'
 		expected: [
@@ -2447,8 +2447,8 @@ const grapheme_break_test_cases = [
 				offset_end: 3
 			},
 		]
-	}
-	// ÷ [0.2] COMBINING GRAPHEME JOINER (Extend) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <START OF HEADING> (Control) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAPHEME JOINER (Extend) ÷ [5.0] <START OF HEADING> (Control) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u034F\u0308\u0001'
 		expected: [
@@ -2463,8 +2463,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] COMBINING GRAPHEME JOINER (Extend) × [9.0] COMBINING GRAPHEME JOINER (Extend) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAPHEME JOINER (Extend) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <START OF HEADING> (Control) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u034F\u034F'
 		expected: [
@@ -2474,8 +2474,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] COMBINING GRAPHEME JOINER (Extend) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] COMBINING GRAPHEME JOINER (Extend) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAPHEME JOINER (Extend) × [9.0] COMBINING GRAPHEME JOINER (Extend) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u034F\u0308\u034F'
 		expected: [
@@ -2485,8 +2485,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] COMBINING GRAPHEME JOINER (Extend) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAPHEME JOINER (Extend) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] COMBINING GRAPHEME JOINER (Extend) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u034F\U0001F1E6'
 		expected: [
@@ -2501,8 +2501,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] COMBINING GRAPHEME JOINER (Extend) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAPHEME JOINER (Extend) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u034F\u0308\U0001F1E6'
 		expected: [
@@ -2517,8 +2517,8 @@ const grapheme_break_test_cases = [
 				offset_end: 8
 			},
 		]
-	}
-	// ÷ [0.2] COMBINING GRAPHEME JOINER (Extend) ÷ [999.0] ARABIC NUMBER SIGN (Prepend) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAPHEME JOINER (Extend) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u034F\u0600'
 		expected: [
@@ -2533,8 +2533,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] COMBINING GRAPHEME JOINER (Extend) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] ARABIC NUMBER SIGN (Prepend) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAPHEME JOINER (Extend) ÷ [999.0] ARABIC NUMBER SIGN (Prepend) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u034F\u0308\u0600'
 		expected: [
@@ -2549,8 +2549,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] COMBINING GRAPHEME JOINER (Extend) × [9.1] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAPHEME JOINER (Extend) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] ARABIC NUMBER SIGN (Prepend) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u034F\u0903'
 		expected: [
@@ -2560,8 +2560,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] COMBINING GRAPHEME JOINER (Extend) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.1] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAPHEME JOINER (Extend) × [9.1] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u034F\u0308\u0903'
 		expected: [
@@ -2571,8 +2571,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] COMBINING GRAPHEME JOINER (Extend) ÷ [999.0] HANGUL CHOSEONG KIYEOK (L) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAPHEME JOINER (Extend) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.1] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u034F\u1100'
 		expected: [
@@ -2587,8 +2587,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] COMBINING GRAPHEME JOINER (Extend) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL CHOSEONG KIYEOK (L) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAPHEME JOINER (Extend) ÷ [999.0] HANGUL CHOSEONG KIYEOK (L) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u034F\u0308\u1100'
 		expected: [
@@ -2603,8 +2603,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] COMBINING GRAPHEME JOINER (Extend) ÷ [999.0] HANGUL JUNGSEONG FILLER (V) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAPHEME JOINER (Extend) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL CHOSEONG KIYEOK (L) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u034F\u1160'
 		expected: [
@@ -2619,8 +2619,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] COMBINING GRAPHEME JOINER (Extend) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL JUNGSEONG FILLER (V) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAPHEME JOINER (Extend) ÷ [999.0] HANGUL JUNGSEONG FILLER (V) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u034F\u0308\u1160'
 		expected: [
@@ -2635,8 +2635,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] COMBINING GRAPHEME JOINER (Extend) ÷ [999.0] HANGUL JONGSEONG KIYEOK (T) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAPHEME JOINER (Extend) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL JUNGSEONG FILLER (V) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u034F\u11A8'
 		expected: [
@@ -2651,8 +2651,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] COMBINING GRAPHEME JOINER (Extend) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL JONGSEONG KIYEOK (T) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAPHEME JOINER (Extend) ÷ [999.0] HANGUL JONGSEONG KIYEOK (T) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u034F\u0308\u11A8'
 		expected: [
@@ -2667,8 +2667,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] COMBINING GRAPHEME JOINER (Extend) ÷ [999.0] HANGUL SYLLABLE GA (LV) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAPHEME JOINER (Extend) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL JONGSEONG KIYEOK (T) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u034F\uAC00'
 		expected: [
@@ -2683,8 +2683,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] COMBINING GRAPHEME JOINER (Extend) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL SYLLABLE GA (LV) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAPHEME JOINER (Extend) ÷ [999.0] HANGUL SYLLABLE GA (LV) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u034F\u0308\uAC00'
 		expected: [
@@ -2699,8 +2699,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] COMBINING GRAPHEME JOINER (Extend) ÷ [999.0] HANGUL SYLLABLE GAG (LVT) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAPHEME JOINER (Extend) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL SYLLABLE GA (LV) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u034F\uAC01'
 		expected: [
@@ -2715,8 +2715,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] COMBINING GRAPHEME JOINER (Extend) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL SYLLABLE GAG (LVT) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAPHEME JOINER (Extend) ÷ [999.0] HANGUL SYLLABLE GAG (LVT) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u034F\u0308\uAC01'
 		expected: [
@@ -2731,8 +2731,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] COMBINING GRAPHEME JOINER (Extend) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAPHEME JOINER (Extend) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL SYLLABLE GAG (LVT) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u034F\u231A'
 		expected: [
@@ -2747,8 +2747,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] COMBINING GRAPHEME JOINER (Extend) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAPHEME JOINER (Extend) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u034F\u0308\u231A'
 		expected: [
@@ -2763,8 +2763,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] COMBINING GRAPHEME JOINER (Extend) × [9.0] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAPHEME JOINER (Extend) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u034F\u0300'
 		expected: [
@@ -2774,8 +2774,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] COMBINING GRAPHEME JOINER (Extend) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAPHEME JOINER (Extend) × [9.0] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u034F\u0308\u0300'
 		expected: [
@@ -2785,8 +2785,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] COMBINING GRAPHEME JOINER (Extend) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAPHEME JOINER (Extend) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u034F\u200D'
 		expected: [
@@ -2796,8 +2796,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] COMBINING GRAPHEME JOINER (Extend) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAPHEME JOINER (Extend) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u034F\u0308\u200D'
 		expected: [
@@ -2807,8 +2807,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] COMBINING GRAPHEME JOINER (Extend) ÷ [999.0] <reserved-0378> (Other) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAPHEME JOINER (Extend) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u034F\u0378'
 		expected: [
@@ -2823,8 +2823,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] COMBINING GRAPHEME JOINER (Extend) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] <reserved-0378> (Other) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAPHEME JOINER (Extend) ÷ [999.0] <reserved-0378> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u034F\u0308\u0378'
 		expected: [
@@ -2839,8 +2839,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [999.0] SPACE (Other) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAPHEME JOINER (Extend) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] <reserved-0378> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u0020'
 		expected: [
@@ -2855,8 +2855,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] SPACE (Other) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [999.0] SPACE (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u0308\u0020'
 		expected: [
@@ -2871,8 +2871,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [5.0] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] SPACE (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u000D'
 		expected: [
@@ -2887,8 +2887,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [5.0] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u0308\u000D'
 		expected: [
@@ -2903,8 +2903,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [5.0] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u000A'
 		expected: [
@@ -2919,8 +2919,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [5.0] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u0308\u000A'
 		expected: [
@@ -2935,8 +2935,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [5.0] <START OF HEADING> (Control) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u0001'
 		expected: [
@@ -2951,8 +2951,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <START OF HEADING> (Control) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [5.0] <START OF HEADING> (Control) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u0308\u0001'
 		expected: [
@@ -2967,8 +2967,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [9.0] COMBINING GRAPHEME JOINER (Extend) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <START OF HEADING> (Control) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u034F'
 		expected: [
@@ -2978,8 +2978,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] COMBINING GRAPHEME JOINER (Extend) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [9.0] COMBINING GRAPHEME JOINER (Extend) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u0308\u034F'
 		expected: [
@@ -2989,8 +2989,8 @@ const grapheme_break_test_cases = [
 				offset_end: 8
 			},
 		]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [12.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] COMBINING GRAPHEME JOINER (Extend) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\U0001F1E6'
 		expected: [
@@ -3000,8 +3000,8 @@ const grapheme_break_test_cases = [
 				offset_end: 8
 			},
 		]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [12.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u0308\U0001F1E6'
 		expected: [
@@ -3016,8 +3016,8 @@ const grapheme_break_test_cases = [
 				offset_end: 10
 			},
 		]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [999.0] ARABIC NUMBER SIGN (Prepend) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u0600'
 		expected: [
@@ -3032,8 +3032,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] ARABIC NUMBER SIGN (Prepend) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [999.0] ARABIC NUMBER SIGN (Prepend) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u0308\u0600'
 		expected: [
@@ -3048,8 +3048,8 @@ const grapheme_break_test_cases = [
 				offset_end: 8
 			},
 		]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [9.1] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] ARABIC NUMBER SIGN (Prepend) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u0903'
 		expected: [
@@ -3059,8 +3059,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.1] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [9.1] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u0308\u0903'
 		expected: [
@@ -3070,8 +3070,8 @@ const grapheme_break_test_cases = [
 				offset_end: 9
 			},
 		]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [999.0] HANGUL CHOSEONG KIYEOK (L) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.1] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u1100'
 		expected: [
@@ -3086,8 +3086,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL CHOSEONG KIYEOK (L) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [999.0] HANGUL CHOSEONG KIYEOK (L) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u0308\u1100'
 		expected: [
@@ -3102,8 +3102,8 @@ const grapheme_break_test_cases = [
 				offset_end: 9
 			},
 		]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [999.0] HANGUL JUNGSEONG FILLER (V) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL CHOSEONG KIYEOK (L) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u1160'
 		expected: [
@@ -3118,8 +3118,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL JUNGSEONG FILLER (V) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [999.0] HANGUL JUNGSEONG FILLER (V) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u0308\u1160'
 		expected: [
@@ -3134,8 +3134,8 @@ const grapheme_break_test_cases = [
 				offset_end: 9
 			},
 		]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [999.0] HANGUL JONGSEONG KIYEOK (T) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL JUNGSEONG FILLER (V) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u11A8'
 		expected: [
@@ -3150,8 +3150,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL JONGSEONG KIYEOK (T) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [999.0] HANGUL JONGSEONG KIYEOK (T) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u0308\u11A8'
 		expected: [
@@ -3166,8 +3166,8 @@ const grapheme_break_test_cases = [
 				offset_end: 9
 			},
 		]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [999.0] HANGUL SYLLABLE GA (LV) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL JONGSEONG KIYEOK (T) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\uAC00'
 		expected: [
@@ -3182,8 +3182,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL SYLLABLE GA (LV) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [999.0] HANGUL SYLLABLE GA (LV) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u0308\uAC00'
 		expected: [
@@ -3198,8 +3198,8 @@ const grapheme_break_test_cases = [
 				offset_end: 9
 			},
 		]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [999.0] HANGUL SYLLABLE GAG (LVT) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL SYLLABLE GA (LV) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\uAC01'
 		expected: [
@@ -3214,8 +3214,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL SYLLABLE GAG (LVT) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [999.0] HANGUL SYLLABLE GAG (LVT) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u0308\uAC01'
 		expected: [
@@ -3230,8 +3230,8 @@ const grapheme_break_test_cases = [
 				offset_end: 9
 			},
 		]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL SYLLABLE GAG (LVT) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u231A'
 		expected: [
@@ -3246,8 +3246,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u0308\u231A'
 		expected: [
@@ -3262,8 +3262,8 @@ const grapheme_break_test_cases = [
 				offset_end: 9
 			},
 		]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [9.0] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u0300'
 		expected: [
@@ -3273,8 +3273,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [9.0] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u0308\u0300'
 		expected: [
@@ -3284,8 +3284,8 @@ const grapheme_break_test_cases = [
 				offset_end: 8
 			},
 		]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u200D'
 		expected: [
@@ -3295,8 +3295,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u0308\u200D'
 		expected: [
@@ -3306,8 +3306,8 @@ const grapheme_break_test_cases = [
 				offset_end: 9
 			},
 		]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [999.0] <reserved-0378> (Other) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u0378'
 		expected: [
@@ -3322,8 +3322,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] <reserved-0378> (Other) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [999.0] <reserved-0378> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u0308\u0378'
 		expected: [
@@ -3338,8 +3338,8 @@ const grapheme_break_test_cases = [
 				offset_end: 8
 			},
 		]
-	}
-	// ÷ [0.2] ARABIC NUMBER SIGN (Prepend) × [9.2] SPACE (Other) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] <reserved-0378> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0600\u0020'
 		expected: [
@@ -3349,8 +3349,8 @@ const grapheme_break_test_cases = [
 				offset_end: 3
 			},
 		]
-	}
-	// ÷ [0.2] ARABIC NUMBER SIGN (Prepend) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] SPACE (Other) ÷ [0.3]
+		desc: '÷ [0.2] ARABIC NUMBER SIGN (Prepend) × [9.2] SPACE (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0600\u0308\u0020'
 		expected: [
@@ -3365,8 +3365,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] ARABIC NUMBER SIGN (Prepend) ÷ [5.0] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] ARABIC NUMBER SIGN (Prepend) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] SPACE (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0600\u000D'
 		expected: [
@@ -3381,8 +3381,8 @@ const grapheme_break_test_cases = [
 				offset_end: 3
 			},
 		]
-	}
-	// ÷ [0.2] ARABIC NUMBER SIGN (Prepend) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] ARABIC NUMBER SIGN (Prepend) ÷ [5.0] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0600\u0308\u000D'
 		expected: [
@@ -3397,8 +3397,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] ARABIC NUMBER SIGN (Prepend) ÷ [5.0] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] ARABIC NUMBER SIGN (Prepend) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0600\u000A'
 		expected: [
@@ -3413,8 +3413,8 @@ const grapheme_break_test_cases = [
 				offset_end: 3
 			},
 		]
-	}
-	// ÷ [0.2] ARABIC NUMBER SIGN (Prepend) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] ARABIC NUMBER SIGN (Prepend) ÷ [5.0] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0600\u0308\u000A'
 		expected: [
@@ -3429,8 +3429,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] ARABIC NUMBER SIGN (Prepend) ÷ [5.0] <START OF HEADING> (Control) ÷ [0.3]
+		desc: '÷ [0.2] ARABIC NUMBER SIGN (Prepend) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0600\u0001'
 		expected: [
@@ -3445,8 +3445,8 @@ const grapheme_break_test_cases = [
 				offset_end: 3
 			},
 		]
-	}
-	// ÷ [0.2] ARABIC NUMBER SIGN (Prepend) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <START OF HEADING> (Control) ÷ [0.3]
+		desc: '÷ [0.2] ARABIC NUMBER SIGN (Prepend) ÷ [5.0] <START OF HEADING> (Control) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0600\u0308\u0001'
 		expected: [
@@ -3461,8 +3461,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] ARABIC NUMBER SIGN (Prepend) × [9.0] COMBINING GRAPHEME JOINER (Extend) ÷ [0.3]
+		desc: '÷ [0.2] ARABIC NUMBER SIGN (Prepend) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <START OF HEADING> (Control) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0600\u034F'
 		expected: [
@@ -3472,8 +3472,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] ARABIC NUMBER SIGN (Prepend) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] COMBINING GRAPHEME JOINER (Extend) ÷ [0.3]
+		desc: '÷ [0.2] ARABIC NUMBER SIGN (Prepend) × [9.0] COMBINING GRAPHEME JOINER (Extend) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0600\u0308\u034F'
 		expected: [
@@ -3483,8 +3483,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] ARABIC NUMBER SIGN (Prepend) × [9.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] ARABIC NUMBER SIGN (Prepend) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] COMBINING GRAPHEME JOINER (Extend) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0600\U0001F1E6'
 		expected: [
@@ -3494,8 +3494,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] ARABIC NUMBER SIGN (Prepend) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] ARABIC NUMBER SIGN (Prepend) × [9.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0600\u0308\U0001F1E6'
 		expected: [
@@ -3510,8 +3510,8 @@ const grapheme_break_test_cases = [
 				offset_end: 8
 			},
 		]
-	}
-	// ÷ [0.2] ARABIC NUMBER SIGN (Prepend) × [9.2] ARABIC NUMBER SIGN (Prepend) ÷ [0.3]
+		desc: '÷ [0.2] ARABIC NUMBER SIGN (Prepend) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0600\u0600'
 		expected: [
@@ -3521,8 +3521,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] ARABIC NUMBER SIGN (Prepend) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] ARABIC NUMBER SIGN (Prepend) ÷ [0.3]
+		desc: '÷ [0.2] ARABIC NUMBER SIGN (Prepend) × [9.2] ARABIC NUMBER SIGN (Prepend) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0600\u0308\u0600'
 		expected: [
@@ -3537,8 +3537,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] ARABIC NUMBER SIGN (Prepend) × [9.1] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [0.3]
+		desc: '÷ [0.2] ARABIC NUMBER SIGN (Prepend) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] ARABIC NUMBER SIGN (Prepend) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0600\u0903'
 		expected: [
@@ -3548,8 +3548,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] ARABIC NUMBER SIGN (Prepend) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.1] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [0.3]
+		desc: '÷ [0.2] ARABIC NUMBER SIGN (Prepend) × [9.1] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0600\u0308\u0903'
 		expected: [
@@ -3559,8 +3559,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] ARABIC NUMBER SIGN (Prepend) × [9.2] HANGUL CHOSEONG KIYEOK (L) ÷ [0.3]
+		desc: '÷ [0.2] ARABIC NUMBER SIGN (Prepend) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.1] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0600\u1100'
 		expected: [
@@ -3570,8 +3570,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] ARABIC NUMBER SIGN (Prepend) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL CHOSEONG KIYEOK (L) ÷ [0.3]
+		desc: '÷ [0.2] ARABIC NUMBER SIGN (Prepend) × [9.2] HANGUL CHOSEONG KIYEOK (L) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0600\u0308\u1100'
 		expected: [
@@ -3586,8 +3586,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] ARABIC NUMBER SIGN (Prepend) × [9.2] HANGUL JUNGSEONG FILLER (V) ÷ [0.3]
+		desc: '÷ [0.2] ARABIC NUMBER SIGN (Prepend) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL CHOSEONG KIYEOK (L) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0600\u1160'
 		expected: [
@@ -3597,8 +3597,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] ARABIC NUMBER SIGN (Prepend) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL JUNGSEONG FILLER (V) ÷ [0.3]
+		desc: '÷ [0.2] ARABIC NUMBER SIGN (Prepend) × [9.2] HANGUL JUNGSEONG FILLER (V) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0600\u0308\u1160'
 		expected: [
@@ -3613,8 +3613,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] ARABIC NUMBER SIGN (Prepend) × [9.2] HANGUL JONGSEONG KIYEOK (T) ÷ [0.3]
+		desc: '÷ [0.2] ARABIC NUMBER SIGN (Prepend) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL JUNGSEONG FILLER (V) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0600\u11A8'
 		expected: [
@@ -3624,8 +3624,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] ARABIC NUMBER SIGN (Prepend) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL JONGSEONG KIYEOK (T) ÷ [0.3]
+		desc: '÷ [0.2] ARABIC NUMBER SIGN (Prepend) × [9.2] HANGUL JONGSEONG KIYEOK (T) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0600\u0308\u11A8'
 		expected: [
@@ -3640,8 +3640,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] ARABIC NUMBER SIGN (Prepend) × [9.2] HANGUL SYLLABLE GA (LV) ÷ [0.3]
+		desc: '÷ [0.2] ARABIC NUMBER SIGN (Prepend) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL JONGSEONG KIYEOK (T) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0600\uAC00'
 		expected: [
@@ -3651,8 +3651,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] ARABIC NUMBER SIGN (Prepend) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL SYLLABLE GA (LV) ÷ [0.3]
+		desc: '÷ [0.2] ARABIC NUMBER SIGN (Prepend) × [9.2] HANGUL SYLLABLE GA (LV) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0600\u0308\uAC00'
 		expected: [
@@ -3667,8 +3667,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] ARABIC NUMBER SIGN (Prepend) × [9.2] HANGUL SYLLABLE GAG (LVT) ÷ [0.3]
+		desc: '÷ [0.2] ARABIC NUMBER SIGN (Prepend) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL SYLLABLE GA (LV) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0600\uAC01'
 		expected: [
@@ -3678,8 +3678,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] ARABIC NUMBER SIGN (Prepend) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL SYLLABLE GAG (LVT) ÷ [0.3]
+		desc: '÷ [0.2] ARABIC NUMBER SIGN (Prepend) × [9.2] HANGUL SYLLABLE GAG (LVT) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0600\u0308\uAC01'
 		expected: [
@@ -3694,8 +3694,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] ARABIC NUMBER SIGN (Prepend) × [9.2] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] ARABIC NUMBER SIGN (Prepend) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL SYLLABLE GAG (LVT) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0600\u231A'
 		expected: [
@@ -3705,8 +3705,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] ARABIC NUMBER SIGN (Prepend) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] ARABIC NUMBER SIGN (Prepend) × [9.2] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0600\u0308\u231A'
 		expected: [
@@ -3721,8 +3721,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] ARABIC NUMBER SIGN (Prepend) × [9.0] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [0.3]
+		desc: '÷ [0.2] ARABIC NUMBER SIGN (Prepend) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0600\u0300'
 		expected: [
@@ -3732,8 +3732,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] ARABIC NUMBER SIGN (Prepend) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [0.3]
+		desc: '÷ [0.2] ARABIC NUMBER SIGN (Prepend) × [9.0] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0600\u0308\u0300'
 		expected: [
@@ -3743,8 +3743,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] ARABIC NUMBER SIGN (Prepend) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [0.3]
+		desc: '÷ [0.2] ARABIC NUMBER SIGN (Prepend) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0600\u200D'
 		expected: [
@@ -3754,8 +3754,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] ARABIC NUMBER SIGN (Prepend) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [0.3]
+		desc: '÷ [0.2] ARABIC NUMBER SIGN (Prepend) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0600\u0308\u200D'
 		expected: [
@@ -3765,8 +3765,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] ARABIC NUMBER SIGN (Prepend) × [9.2] <reserved-0378> (Other) ÷ [0.3]
+		desc: '÷ [0.2] ARABIC NUMBER SIGN (Prepend) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0600\u0378'
 		expected: [
@@ -3776,8 +3776,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] ARABIC NUMBER SIGN (Prepend) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] <reserved-0378> (Other) ÷ [0.3]
+		desc: '÷ [0.2] ARABIC NUMBER SIGN (Prepend) × [9.2] <reserved-0378> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0600\u0308\u0378'
 		expected: [
@@ -3792,8 +3792,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [999.0] SPACE (Other) ÷ [0.3]
+		desc: '÷ [0.2] ARABIC NUMBER SIGN (Prepend) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] <reserved-0378> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0903\u0020'
 		expected: [
@@ -3808,8 +3808,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] DEVANAGARI SIGN VISARGA (SpacingMark) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] SPACE (Other) ÷ [0.3]
+		desc: '÷ [0.2] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [999.0] SPACE (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0903\u0308\u0020'
 		expected: [
@@ -3824,8 +3824,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [5.0] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] DEVANAGARI SIGN VISARGA (SpacingMark) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] SPACE (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0903\u000D'
 		expected: [
@@ -3840,8 +3840,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] DEVANAGARI SIGN VISARGA (SpacingMark) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [5.0] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0903\u0308\u000D'
 		expected: [
@@ -3856,8 +3856,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [5.0] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] DEVANAGARI SIGN VISARGA (SpacingMark) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0903\u000A'
 		expected: [
@@ -3872,8 +3872,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] DEVANAGARI SIGN VISARGA (SpacingMark) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [5.0] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0903\u0308\u000A'
 		expected: [
@@ -3888,8 +3888,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [5.0] <START OF HEADING> (Control) ÷ [0.3]
+		desc: '÷ [0.2] DEVANAGARI SIGN VISARGA (SpacingMark) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0903\u0001'
 		expected: [
@@ -3904,8 +3904,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] DEVANAGARI SIGN VISARGA (SpacingMark) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <START OF HEADING> (Control) ÷ [0.3]
+		desc: '÷ [0.2] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [5.0] <START OF HEADING> (Control) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0903\u0308\u0001'
 		expected: [
@@ -3920,8 +3920,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] DEVANAGARI SIGN VISARGA (SpacingMark) × [9.0] COMBINING GRAPHEME JOINER (Extend) ÷ [0.3]
+		desc: '÷ [0.2] DEVANAGARI SIGN VISARGA (SpacingMark) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <START OF HEADING> (Control) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0903\u034F'
 		expected: [
@@ -3931,8 +3931,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] DEVANAGARI SIGN VISARGA (SpacingMark) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] COMBINING GRAPHEME JOINER (Extend) ÷ [0.3]
+		desc: '÷ [0.2] DEVANAGARI SIGN VISARGA (SpacingMark) × [9.0] COMBINING GRAPHEME JOINER (Extend) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0903\u0308\u034F'
 		expected: [
@@ -3942,8 +3942,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] DEVANAGARI SIGN VISARGA (SpacingMark) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] COMBINING GRAPHEME JOINER (Extend) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0903\U0001F1E6'
 		expected: [
@@ -3958,8 +3958,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] DEVANAGARI SIGN VISARGA (SpacingMark) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0903\u0308\U0001F1E6'
 		expected: [
@@ -3974,8 +3974,8 @@ const grapheme_break_test_cases = [
 				offset_end: 9
 			},
 		]
-	}
-	// ÷ [0.2] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [999.0] ARABIC NUMBER SIGN (Prepend) ÷ [0.3]
+		desc: '÷ [0.2] DEVANAGARI SIGN VISARGA (SpacingMark) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0903\u0600'
 		expected: [
@@ -3990,8 +3990,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] DEVANAGARI SIGN VISARGA (SpacingMark) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] ARABIC NUMBER SIGN (Prepend) ÷ [0.3]
+		desc: '÷ [0.2] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [999.0] ARABIC NUMBER SIGN (Prepend) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0903\u0308\u0600'
 		expected: [
@@ -4006,8 +4006,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] DEVANAGARI SIGN VISARGA (SpacingMark) × [9.1] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [0.3]
+		desc: '÷ [0.2] DEVANAGARI SIGN VISARGA (SpacingMark) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] ARABIC NUMBER SIGN (Prepend) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0903\u0903'
 		expected: [
@@ -4017,8 +4017,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] DEVANAGARI SIGN VISARGA (SpacingMark) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.1] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [0.3]
+		desc: '÷ [0.2] DEVANAGARI SIGN VISARGA (SpacingMark) × [9.1] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0903\u0308\u0903'
 		expected: [
@@ -4028,8 +4028,8 @@ const grapheme_break_test_cases = [
 				offset_end: 8
 			},
 		]
-	}
-	// ÷ [0.2] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [999.0] HANGUL CHOSEONG KIYEOK (L) ÷ [0.3]
+		desc: '÷ [0.2] DEVANAGARI SIGN VISARGA (SpacingMark) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.1] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0903\u1100'
 		expected: [
@@ -4044,8 +4044,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] DEVANAGARI SIGN VISARGA (SpacingMark) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL CHOSEONG KIYEOK (L) ÷ [0.3]
+		desc: '÷ [0.2] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [999.0] HANGUL CHOSEONG KIYEOK (L) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0903\u0308\u1100'
 		expected: [
@@ -4060,8 +4060,8 @@ const grapheme_break_test_cases = [
 				offset_end: 8
 			},
 		]
-	}
-	// ÷ [0.2] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [999.0] HANGUL JUNGSEONG FILLER (V) ÷ [0.3]
+		desc: '÷ [0.2] DEVANAGARI SIGN VISARGA (SpacingMark) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL CHOSEONG KIYEOK (L) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0903\u1160'
 		expected: [
@@ -4076,8 +4076,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] DEVANAGARI SIGN VISARGA (SpacingMark) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL JUNGSEONG FILLER (V) ÷ [0.3]
+		desc: '÷ [0.2] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [999.0] HANGUL JUNGSEONG FILLER (V) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0903\u0308\u1160'
 		expected: [
@@ -4092,8 +4092,8 @@ const grapheme_break_test_cases = [
 				offset_end: 8
 			},
 		]
-	}
-	// ÷ [0.2] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [999.0] HANGUL JONGSEONG KIYEOK (T) ÷ [0.3]
+		desc: '÷ [0.2] DEVANAGARI SIGN VISARGA (SpacingMark) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL JUNGSEONG FILLER (V) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0903\u11A8'
 		expected: [
@@ -4108,8 +4108,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] DEVANAGARI SIGN VISARGA (SpacingMark) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL JONGSEONG KIYEOK (T) ÷ [0.3]
+		desc: '÷ [0.2] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [999.0] HANGUL JONGSEONG KIYEOK (T) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0903\u0308\u11A8'
 		expected: [
@@ -4124,8 +4124,8 @@ const grapheme_break_test_cases = [
 				offset_end: 8
 			},
 		]
-	}
-	// ÷ [0.2] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [999.0] HANGUL SYLLABLE GA (LV) ÷ [0.3]
+		desc: '÷ [0.2] DEVANAGARI SIGN VISARGA (SpacingMark) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL JONGSEONG KIYEOK (T) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0903\uAC00'
 		expected: [
@@ -4140,8 +4140,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] DEVANAGARI SIGN VISARGA (SpacingMark) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL SYLLABLE GA (LV) ÷ [0.3]
+		desc: '÷ [0.2] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [999.0] HANGUL SYLLABLE GA (LV) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0903\u0308\uAC00'
 		expected: [
@@ -4156,8 +4156,8 @@ const grapheme_break_test_cases = [
 				offset_end: 8
 			},
 		]
-	}
-	// ÷ [0.2] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [999.0] HANGUL SYLLABLE GAG (LVT) ÷ [0.3]
+		desc: '÷ [0.2] DEVANAGARI SIGN VISARGA (SpacingMark) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL SYLLABLE GA (LV) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0903\uAC01'
 		expected: [
@@ -4172,8 +4172,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] DEVANAGARI SIGN VISARGA (SpacingMark) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL SYLLABLE GAG (LVT) ÷ [0.3]
+		desc: '÷ [0.2] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [999.0] HANGUL SYLLABLE GAG (LVT) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0903\u0308\uAC01'
 		expected: [
@@ -4188,8 +4188,8 @@ const grapheme_break_test_cases = [
 				offset_end: 8
 			},
 		]
-	}
-	// ÷ [0.2] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] DEVANAGARI SIGN VISARGA (SpacingMark) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL SYLLABLE GAG (LVT) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0903\u231A'
 		expected: [
@@ -4204,8 +4204,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] DEVANAGARI SIGN VISARGA (SpacingMark) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0903\u0308\u231A'
 		expected: [
@@ -4220,8 +4220,8 @@ const grapheme_break_test_cases = [
 				offset_end: 8
 			},
 		]
-	}
-	// ÷ [0.2] DEVANAGARI SIGN VISARGA (SpacingMark) × [9.0] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [0.3]
+		desc: '÷ [0.2] DEVANAGARI SIGN VISARGA (SpacingMark) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0903\u0300'
 		expected: [
@@ -4231,8 +4231,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] DEVANAGARI SIGN VISARGA (SpacingMark) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [0.3]
+		desc: '÷ [0.2] DEVANAGARI SIGN VISARGA (SpacingMark) × [9.0] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0903\u0308\u0300'
 		expected: [
@@ -4242,8 +4242,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] DEVANAGARI SIGN VISARGA (SpacingMark) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [0.3]
+		desc: '÷ [0.2] DEVANAGARI SIGN VISARGA (SpacingMark) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0903\u200D'
 		expected: [
@@ -4253,8 +4253,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] DEVANAGARI SIGN VISARGA (SpacingMark) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [0.3]
+		desc: '÷ [0.2] DEVANAGARI SIGN VISARGA (SpacingMark) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0903\u0308\u200D'
 		expected: [
@@ -4264,8 +4264,8 @@ const grapheme_break_test_cases = [
 				offset_end: 8
 			},
 		]
-	}
-	// ÷ [0.2] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [999.0] <reserved-0378> (Other) ÷ [0.3]
+		desc: '÷ [0.2] DEVANAGARI SIGN VISARGA (SpacingMark) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0903\u0378'
 		expected: [
@@ -4280,8 +4280,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] DEVANAGARI SIGN VISARGA (SpacingMark) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] <reserved-0378> (Other) ÷ [0.3]
+		desc: '÷ [0.2] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [999.0] <reserved-0378> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0903\u0308\u0378'
 		expected: [
@@ -4296,8 +4296,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL CHOSEONG KIYEOK (L) ÷ [999.0] SPACE (Other) ÷ [0.3]
+		desc: '÷ [0.2] DEVANAGARI SIGN VISARGA (SpacingMark) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] <reserved-0378> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u1100\u0020'
 		expected: [
@@ -4312,8 +4312,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL CHOSEONG KIYEOK (L) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] SPACE (Other) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL CHOSEONG KIYEOK (L) ÷ [999.0] SPACE (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u1100\u0308\u0020'
 		expected: [
@@ -4328,8 +4328,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL CHOSEONG KIYEOK (L) ÷ [5.0] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL CHOSEONG KIYEOK (L) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] SPACE (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u1100\u000D'
 		expected: [
@@ -4344,8 +4344,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL CHOSEONG KIYEOK (L) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL CHOSEONG KIYEOK (L) ÷ [5.0] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u1100\u0308\u000D'
 		expected: [
@@ -4360,8 +4360,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL CHOSEONG KIYEOK (L) ÷ [5.0] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL CHOSEONG KIYEOK (L) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u1100\u000A'
 		expected: [
@@ -4376,8 +4376,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL CHOSEONG KIYEOK (L) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL CHOSEONG KIYEOK (L) ÷ [5.0] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u1100\u0308\u000A'
 		expected: [
@@ -4392,8 +4392,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL CHOSEONG KIYEOK (L) ÷ [5.0] <START OF HEADING> (Control) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL CHOSEONG KIYEOK (L) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u1100\u0001'
 		expected: [
@@ -4408,8 +4408,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL CHOSEONG KIYEOK (L) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <START OF HEADING> (Control) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL CHOSEONG KIYEOK (L) ÷ [5.0] <START OF HEADING> (Control) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u1100\u0308\u0001'
 		expected: [
@@ -4424,8 +4424,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL CHOSEONG KIYEOK (L) × [9.0] COMBINING GRAPHEME JOINER (Extend) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL CHOSEONG KIYEOK (L) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <START OF HEADING> (Control) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u1100\u034F'
 		expected: [
@@ -4435,8 +4435,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL CHOSEONG KIYEOK (L) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] COMBINING GRAPHEME JOINER (Extend) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL CHOSEONG KIYEOK (L) × [9.0] COMBINING GRAPHEME JOINER (Extend) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u1100\u0308\u034F'
 		expected: [
@@ -4446,8 +4446,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL CHOSEONG KIYEOK (L) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL CHOSEONG KIYEOK (L) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] COMBINING GRAPHEME JOINER (Extend) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u1100\U0001F1E6'
 		expected: [
@@ -4462,8 +4462,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL CHOSEONG KIYEOK (L) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL CHOSEONG KIYEOK (L) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u1100\u0308\U0001F1E6'
 		expected: [
@@ -4478,8 +4478,8 @@ const grapheme_break_test_cases = [
 				offset_end: 9
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL CHOSEONG KIYEOK (L) ÷ [999.0] ARABIC NUMBER SIGN (Prepend) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL CHOSEONG KIYEOK (L) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u1100\u0600'
 		expected: [
@@ -4494,8 +4494,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL CHOSEONG KIYEOK (L) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] ARABIC NUMBER SIGN (Prepend) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL CHOSEONG KIYEOK (L) ÷ [999.0] ARABIC NUMBER SIGN (Prepend) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u1100\u0308\u0600'
 		expected: [
@@ -4510,8 +4510,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL CHOSEONG KIYEOK (L) × [9.1] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL CHOSEONG KIYEOK (L) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] ARABIC NUMBER SIGN (Prepend) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u1100\u0903'
 		expected: [
@@ -4521,8 +4521,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL CHOSEONG KIYEOK (L) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.1] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL CHOSEONG KIYEOK (L) × [9.1] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u1100\u0308\u0903'
 		expected: [
@@ -4532,8 +4532,8 @@ const grapheme_break_test_cases = [
 				offset_end: 8
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL CHOSEONG KIYEOK (L) × [6.0] HANGUL CHOSEONG KIYEOK (L) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL CHOSEONG KIYEOK (L) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.1] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u1100\u1100'
 		expected: [
@@ -4543,8 +4543,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL CHOSEONG KIYEOK (L) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL CHOSEONG KIYEOK (L) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL CHOSEONG KIYEOK (L) × [6.0] HANGUL CHOSEONG KIYEOK (L) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u1100\u0308\u1100'
 		expected: [
@@ -4559,8 +4559,8 @@ const grapheme_break_test_cases = [
 				offset_end: 8
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL CHOSEONG KIYEOK (L) × [6.0] HANGUL JUNGSEONG FILLER (V) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL CHOSEONG KIYEOK (L) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL CHOSEONG KIYEOK (L) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u1100\u1160'
 		expected: [
@@ -4570,8 +4570,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL CHOSEONG KIYEOK (L) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL JUNGSEONG FILLER (V) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL CHOSEONG KIYEOK (L) × [6.0] HANGUL JUNGSEONG FILLER (V) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u1100\u0308\u1160'
 		expected: [
@@ -4586,8 +4586,8 @@ const grapheme_break_test_cases = [
 				offset_end: 8
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL CHOSEONG KIYEOK (L) ÷ [999.0] HANGUL JONGSEONG KIYEOK (T) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL CHOSEONG KIYEOK (L) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL JUNGSEONG FILLER (V) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u1100\u11A8'
 		expected: [
@@ -4602,8 +4602,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL CHOSEONG KIYEOK (L) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL JONGSEONG KIYEOK (T) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL CHOSEONG KIYEOK (L) ÷ [999.0] HANGUL JONGSEONG KIYEOK (T) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u1100\u0308\u11A8'
 		expected: [
@@ -4618,8 +4618,8 @@ const grapheme_break_test_cases = [
 				offset_end: 8
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL CHOSEONG KIYEOK (L) × [6.0] HANGUL SYLLABLE GA (LV) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL CHOSEONG KIYEOK (L) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL JONGSEONG KIYEOK (T) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u1100\uAC00'
 		expected: [
@@ -4629,8 +4629,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL CHOSEONG KIYEOK (L) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL SYLLABLE GA (LV) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL CHOSEONG KIYEOK (L) × [6.0] HANGUL SYLLABLE GA (LV) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u1100\u0308\uAC00'
 		expected: [
@@ -4645,8 +4645,8 @@ const grapheme_break_test_cases = [
 				offset_end: 8
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL CHOSEONG KIYEOK (L) × [6.0] HANGUL SYLLABLE GAG (LVT) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL CHOSEONG KIYEOK (L) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL SYLLABLE GA (LV) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u1100\uAC01'
 		expected: [
@@ -4656,8 +4656,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL CHOSEONG KIYEOK (L) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL SYLLABLE GAG (LVT) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL CHOSEONG KIYEOK (L) × [6.0] HANGUL SYLLABLE GAG (LVT) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u1100\u0308\uAC01'
 		expected: [
@@ -4672,8 +4672,8 @@ const grapheme_break_test_cases = [
 				offset_end: 8
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL CHOSEONG KIYEOK (L) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL CHOSEONG KIYEOK (L) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL SYLLABLE GAG (LVT) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u1100\u231A'
 		expected: [
@@ -4688,8 +4688,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL CHOSEONG KIYEOK (L) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL CHOSEONG KIYEOK (L) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u1100\u0308\u231A'
 		expected: [
@@ -4704,8 +4704,8 @@ const grapheme_break_test_cases = [
 				offset_end: 8
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL CHOSEONG KIYEOK (L) × [9.0] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL CHOSEONG KIYEOK (L) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u1100\u0300'
 		expected: [
@@ -4715,8 +4715,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL CHOSEONG KIYEOK (L) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL CHOSEONG KIYEOK (L) × [9.0] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u1100\u0308\u0300'
 		expected: [
@@ -4726,8 +4726,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL CHOSEONG KIYEOK (L) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL CHOSEONG KIYEOK (L) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u1100\u200D'
 		expected: [
@@ -4737,8 +4737,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL CHOSEONG KIYEOK (L) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL CHOSEONG KIYEOK (L) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u1100\u0308\u200D'
 		expected: [
@@ -4748,8 +4748,8 @@ const grapheme_break_test_cases = [
 				offset_end: 8
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL CHOSEONG KIYEOK (L) ÷ [999.0] <reserved-0378> (Other) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL CHOSEONG KIYEOK (L) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u1100\u0378'
 		expected: [
@@ -4764,8 +4764,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL CHOSEONG KIYEOK (L) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] <reserved-0378> (Other) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL CHOSEONG KIYEOK (L) ÷ [999.0] <reserved-0378> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u1100\u0308\u0378'
 		expected: [
@@ -4780,8 +4780,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL JUNGSEONG FILLER (V) ÷ [999.0] SPACE (Other) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL CHOSEONG KIYEOK (L) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] <reserved-0378> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u1160\u0020'
 		expected: [
@@ -4796,8 +4796,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL JUNGSEONG FILLER (V) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] SPACE (Other) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL JUNGSEONG FILLER (V) ÷ [999.0] SPACE (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u1160\u0308\u0020'
 		expected: [
@@ -4812,8 +4812,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL JUNGSEONG FILLER (V) ÷ [5.0] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL JUNGSEONG FILLER (V) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] SPACE (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u1160\u000D'
 		expected: [
@@ -4828,8 +4828,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL JUNGSEONG FILLER (V) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL JUNGSEONG FILLER (V) ÷ [5.0] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u1160\u0308\u000D'
 		expected: [
@@ -4844,8 +4844,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL JUNGSEONG FILLER (V) ÷ [5.0] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL JUNGSEONG FILLER (V) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u1160\u000A'
 		expected: [
@@ -4860,8 +4860,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL JUNGSEONG FILLER (V) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL JUNGSEONG FILLER (V) ÷ [5.0] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u1160\u0308\u000A'
 		expected: [
@@ -4876,8 +4876,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL JUNGSEONG FILLER (V) ÷ [5.0] <START OF HEADING> (Control) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL JUNGSEONG FILLER (V) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u1160\u0001'
 		expected: [
@@ -4892,8 +4892,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL JUNGSEONG FILLER (V) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <START OF HEADING> (Control) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL JUNGSEONG FILLER (V) ÷ [5.0] <START OF HEADING> (Control) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u1160\u0308\u0001'
 		expected: [
@@ -4908,8 +4908,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL JUNGSEONG FILLER (V) × [9.0] COMBINING GRAPHEME JOINER (Extend) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL JUNGSEONG FILLER (V) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <START OF HEADING> (Control) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u1160\u034F'
 		expected: [
@@ -4919,8 +4919,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL JUNGSEONG FILLER (V) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] COMBINING GRAPHEME JOINER (Extend) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL JUNGSEONG FILLER (V) × [9.0] COMBINING GRAPHEME JOINER (Extend) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u1160\u0308\u034F'
 		expected: [
@@ -4930,8 +4930,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL JUNGSEONG FILLER (V) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL JUNGSEONG FILLER (V) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] COMBINING GRAPHEME JOINER (Extend) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u1160\U0001F1E6'
 		expected: [
@@ -4946,8 +4946,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL JUNGSEONG FILLER (V) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL JUNGSEONG FILLER (V) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u1160\u0308\U0001F1E6'
 		expected: [
@@ -4962,8 +4962,8 @@ const grapheme_break_test_cases = [
 				offset_end: 9
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL JUNGSEONG FILLER (V) ÷ [999.0] ARABIC NUMBER SIGN (Prepend) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL JUNGSEONG FILLER (V) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u1160\u0600'
 		expected: [
@@ -4978,8 +4978,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL JUNGSEONG FILLER (V) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] ARABIC NUMBER SIGN (Prepend) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL JUNGSEONG FILLER (V) ÷ [999.0] ARABIC NUMBER SIGN (Prepend) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u1160\u0308\u0600'
 		expected: [
@@ -4994,8 +4994,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL JUNGSEONG FILLER (V) × [9.1] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL JUNGSEONG FILLER (V) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] ARABIC NUMBER SIGN (Prepend) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u1160\u0903'
 		expected: [
@@ -5005,8 +5005,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL JUNGSEONG FILLER (V) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.1] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL JUNGSEONG FILLER (V) × [9.1] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u1160\u0308\u0903'
 		expected: [
@@ -5016,8 +5016,8 @@ const grapheme_break_test_cases = [
 				offset_end: 8
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL JUNGSEONG FILLER (V) ÷ [999.0] HANGUL CHOSEONG KIYEOK (L) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL JUNGSEONG FILLER (V) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.1] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u1160\u1100'
 		expected: [
@@ -5032,8 +5032,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL JUNGSEONG FILLER (V) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL CHOSEONG KIYEOK (L) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL JUNGSEONG FILLER (V) ÷ [999.0] HANGUL CHOSEONG KIYEOK (L) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u1160\u0308\u1100'
 		expected: [
@@ -5048,8 +5048,8 @@ const grapheme_break_test_cases = [
 				offset_end: 8
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL JUNGSEONG FILLER (V) × [7.0] HANGUL JUNGSEONG FILLER (V) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL JUNGSEONG FILLER (V) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL CHOSEONG KIYEOK (L) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u1160\u1160'
 		expected: [
@@ -5059,8 +5059,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL JUNGSEONG FILLER (V) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL JUNGSEONG FILLER (V) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL JUNGSEONG FILLER (V) × [7.0] HANGUL JUNGSEONG FILLER (V) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u1160\u0308\u1160'
 		expected: [
@@ -5075,8 +5075,8 @@ const grapheme_break_test_cases = [
 				offset_end: 8
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL JUNGSEONG FILLER (V) × [7.0] HANGUL JONGSEONG KIYEOK (T) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL JUNGSEONG FILLER (V) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL JUNGSEONG FILLER (V) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u1160\u11A8'
 		expected: [
@@ -5086,8 +5086,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL JUNGSEONG FILLER (V) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL JONGSEONG KIYEOK (T) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL JUNGSEONG FILLER (V) × [7.0] HANGUL JONGSEONG KIYEOK (T) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u1160\u0308\u11A8'
 		expected: [
@@ -5102,8 +5102,8 @@ const grapheme_break_test_cases = [
 				offset_end: 8
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL JUNGSEONG FILLER (V) ÷ [999.0] HANGUL SYLLABLE GA (LV) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL JUNGSEONG FILLER (V) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL JONGSEONG KIYEOK (T) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u1160\uAC00'
 		expected: [
@@ -5118,8 +5118,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL JUNGSEONG FILLER (V) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL SYLLABLE GA (LV) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL JUNGSEONG FILLER (V) ÷ [999.0] HANGUL SYLLABLE GA (LV) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u1160\u0308\uAC00'
 		expected: [
@@ -5134,8 +5134,8 @@ const grapheme_break_test_cases = [
 				offset_end: 8
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL JUNGSEONG FILLER (V) ÷ [999.0] HANGUL SYLLABLE GAG (LVT) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL JUNGSEONG FILLER (V) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL SYLLABLE GA (LV) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u1160\uAC01'
 		expected: [
@@ -5150,8 +5150,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL JUNGSEONG FILLER (V) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL SYLLABLE GAG (LVT) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL JUNGSEONG FILLER (V) ÷ [999.0] HANGUL SYLLABLE GAG (LVT) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u1160\u0308\uAC01'
 		expected: [
@@ -5166,8 +5166,8 @@ const grapheme_break_test_cases = [
 				offset_end: 8
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL JUNGSEONG FILLER (V) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL JUNGSEONG FILLER (V) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL SYLLABLE GAG (LVT) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u1160\u231A'
 		expected: [
@@ -5182,8 +5182,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL JUNGSEONG FILLER (V) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL JUNGSEONG FILLER (V) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u1160\u0308\u231A'
 		expected: [
@@ -5198,8 +5198,8 @@ const grapheme_break_test_cases = [
 				offset_end: 8
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL JUNGSEONG FILLER (V) × [9.0] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL JUNGSEONG FILLER (V) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u1160\u0300'
 		expected: [
@@ -5209,8 +5209,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL JUNGSEONG FILLER (V) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL JUNGSEONG FILLER (V) × [9.0] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u1160\u0308\u0300'
 		expected: [
@@ -5220,8 +5220,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL JUNGSEONG FILLER (V) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL JUNGSEONG FILLER (V) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u1160\u200D'
 		expected: [
@@ -5231,8 +5231,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL JUNGSEONG FILLER (V) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL JUNGSEONG FILLER (V) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u1160\u0308\u200D'
 		expected: [
@@ -5242,8 +5242,8 @@ const grapheme_break_test_cases = [
 				offset_end: 8
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL JUNGSEONG FILLER (V) ÷ [999.0] <reserved-0378> (Other) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL JUNGSEONG FILLER (V) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u1160\u0378'
 		expected: [
@@ -5258,8 +5258,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL JUNGSEONG FILLER (V) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] <reserved-0378> (Other) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL JUNGSEONG FILLER (V) ÷ [999.0] <reserved-0378> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u1160\u0308\u0378'
 		expected: [
@@ -5274,8 +5274,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL JONGSEONG KIYEOK (T) ÷ [999.0] SPACE (Other) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL JUNGSEONG FILLER (V) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] <reserved-0378> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u11A8\u0020'
 		expected: [
@@ -5290,8 +5290,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL JONGSEONG KIYEOK (T) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] SPACE (Other) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL JONGSEONG KIYEOK (T) ÷ [999.0] SPACE (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u11A8\u0308\u0020'
 		expected: [
@@ -5306,8 +5306,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL JONGSEONG KIYEOK (T) ÷ [5.0] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL JONGSEONG KIYEOK (T) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] SPACE (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u11A8\u000D'
 		expected: [
@@ -5322,8 +5322,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL JONGSEONG KIYEOK (T) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL JONGSEONG KIYEOK (T) ÷ [5.0] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u11A8\u0308\u000D'
 		expected: [
@@ -5338,8 +5338,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL JONGSEONG KIYEOK (T) ÷ [5.0] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL JONGSEONG KIYEOK (T) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u11A8\u000A'
 		expected: [
@@ -5354,8 +5354,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL JONGSEONG KIYEOK (T) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL JONGSEONG KIYEOK (T) ÷ [5.0] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u11A8\u0308\u000A'
 		expected: [
@@ -5370,8 +5370,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL JONGSEONG KIYEOK (T) ÷ [5.0] <START OF HEADING> (Control) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL JONGSEONG KIYEOK (T) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u11A8\u0001'
 		expected: [
@@ -5386,8 +5386,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL JONGSEONG KIYEOK (T) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <START OF HEADING> (Control) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL JONGSEONG KIYEOK (T) ÷ [5.0] <START OF HEADING> (Control) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u11A8\u0308\u0001'
 		expected: [
@@ -5402,8 +5402,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL JONGSEONG KIYEOK (T) × [9.0] COMBINING GRAPHEME JOINER (Extend) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL JONGSEONG KIYEOK (T) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <START OF HEADING> (Control) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u11A8\u034F'
 		expected: [
@@ -5413,8 +5413,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL JONGSEONG KIYEOK (T) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] COMBINING GRAPHEME JOINER (Extend) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL JONGSEONG KIYEOK (T) × [9.0] COMBINING GRAPHEME JOINER (Extend) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u11A8\u0308\u034F'
 		expected: [
@@ -5424,8 +5424,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL JONGSEONG KIYEOK (T) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL JONGSEONG KIYEOK (T) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] COMBINING GRAPHEME JOINER (Extend) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u11A8\U0001F1E6'
 		expected: [
@@ -5440,8 +5440,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL JONGSEONG KIYEOK (T) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL JONGSEONG KIYEOK (T) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u11A8\u0308\U0001F1E6'
 		expected: [
@@ -5456,8 +5456,8 @@ const grapheme_break_test_cases = [
 				offset_end: 9
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL JONGSEONG KIYEOK (T) ÷ [999.0] ARABIC NUMBER SIGN (Prepend) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL JONGSEONG KIYEOK (T) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u11A8\u0600'
 		expected: [
@@ -5472,8 +5472,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL JONGSEONG KIYEOK (T) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] ARABIC NUMBER SIGN (Prepend) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL JONGSEONG KIYEOK (T) ÷ [999.0] ARABIC NUMBER SIGN (Prepend) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u11A8\u0308\u0600'
 		expected: [
@@ -5488,8 +5488,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL JONGSEONG KIYEOK (T) × [9.1] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL JONGSEONG KIYEOK (T) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] ARABIC NUMBER SIGN (Prepend) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u11A8\u0903'
 		expected: [
@@ -5499,8 +5499,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL JONGSEONG KIYEOK (T) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.1] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL JONGSEONG KIYEOK (T) × [9.1] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u11A8\u0308\u0903'
 		expected: [
@@ -5510,8 +5510,8 @@ const grapheme_break_test_cases = [
 				offset_end: 8
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL JONGSEONG KIYEOK (T) ÷ [999.0] HANGUL CHOSEONG KIYEOK (L) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL JONGSEONG KIYEOK (T) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.1] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u11A8\u1100'
 		expected: [
@@ -5526,8 +5526,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL JONGSEONG KIYEOK (T) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL CHOSEONG KIYEOK (L) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL JONGSEONG KIYEOK (T) ÷ [999.0] HANGUL CHOSEONG KIYEOK (L) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u11A8\u0308\u1100'
 		expected: [
@@ -5542,8 +5542,8 @@ const grapheme_break_test_cases = [
 				offset_end: 8
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL JONGSEONG KIYEOK (T) ÷ [999.0] HANGUL JUNGSEONG FILLER (V) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL JONGSEONG KIYEOK (T) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL CHOSEONG KIYEOK (L) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u11A8\u1160'
 		expected: [
@@ -5558,8 +5558,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL JONGSEONG KIYEOK (T) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL JUNGSEONG FILLER (V) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL JONGSEONG KIYEOK (T) ÷ [999.0] HANGUL JUNGSEONG FILLER (V) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u11A8\u0308\u1160'
 		expected: [
@@ -5574,8 +5574,8 @@ const grapheme_break_test_cases = [
 				offset_end: 8
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL JONGSEONG KIYEOK (T) × [8.0] HANGUL JONGSEONG KIYEOK (T) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL JONGSEONG KIYEOK (T) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL JUNGSEONG FILLER (V) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u11A8\u11A8'
 		expected: [
@@ -5585,8 +5585,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL JONGSEONG KIYEOK (T) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL JONGSEONG KIYEOK (T) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL JONGSEONG KIYEOK (T) × [8.0] HANGUL JONGSEONG KIYEOK (T) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u11A8\u0308\u11A8'
 		expected: [
@@ -5601,8 +5601,8 @@ const grapheme_break_test_cases = [
 				offset_end: 8
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL JONGSEONG KIYEOK (T) ÷ [999.0] HANGUL SYLLABLE GA (LV) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL JONGSEONG KIYEOK (T) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL JONGSEONG KIYEOK (T) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u11A8\uAC00'
 		expected: [
@@ -5617,8 +5617,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL JONGSEONG KIYEOK (T) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL SYLLABLE GA (LV) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL JONGSEONG KIYEOK (T) ÷ [999.0] HANGUL SYLLABLE GA (LV) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u11A8\u0308\uAC00'
 		expected: [
@@ -5633,8 +5633,8 @@ const grapheme_break_test_cases = [
 				offset_end: 8
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL JONGSEONG KIYEOK (T) ÷ [999.0] HANGUL SYLLABLE GAG (LVT) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL JONGSEONG KIYEOK (T) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL SYLLABLE GA (LV) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u11A8\uAC01'
 		expected: [
@@ -5649,8 +5649,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL JONGSEONG KIYEOK (T) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL SYLLABLE GAG (LVT) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL JONGSEONG KIYEOK (T) ÷ [999.0] HANGUL SYLLABLE GAG (LVT) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u11A8\u0308\uAC01'
 		expected: [
@@ -5665,8 +5665,8 @@ const grapheme_break_test_cases = [
 				offset_end: 8
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL JONGSEONG KIYEOK (T) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL JONGSEONG KIYEOK (T) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL SYLLABLE GAG (LVT) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u11A8\u231A'
 		expected: [
@@ -5681,8 +5681,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL JONGSEONG KIYEOK (T) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL JONGSEONG KIYEOK (T) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u11A8\u0308\u231A'
 		expected: [
@@ -5697,8 +5697,8 @@ const grapheme_break_test_cases = [
 				offset_end: 8
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL JONGSEONG KIYEOK (T) × [9.0] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL JONGSEONG KIYEOK (T) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u11A8\u0300'
 		expected: [
@@ -5708,8 +5708,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL JONGSEONG KIYEOK (T) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL JONGSEONG KIYEOK (T) × [9.0] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u11A8\u0308\u0300'
 		expected: [
@@ -5719,8 +5719,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL JONGSEONG KIYEOK (T) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL JONGSEONG KIYEOK (T) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u11A8\u200D'
 		expected: [
@@ -5730,8 +5730,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL JONGSEONG KIYEOK (T) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL JONGSEONG KIYEOK (T) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u11A8\u0308\u200D'
 		expected: [
@@ -5741,8 +5741,8 @@ const grapheme_break_test_cases = [
 				offset_end: 8
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL JONGSEONG KIYEOK (T) ÷ [999.0] <reserved-0378> (Other) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL JONGSEONG KIYEOK (T) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u11A8\u0378'
 		expected: [
@@ -5757,8 +5757,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL JONGSEONG KIYEOK (T) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] <reserved-0378> (Other) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL JONGSEONG KIYEOK (T) ÷ [999.0] <reserved-0378> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u11A8\u0308\u0378'
 		expected: [
@@ -5773,8 +5773,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL SYLLABLE GA (LV) ÷ [999.0] SPACE (Other) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL JONGSEONG KIYEOK (T) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] <reserved-0378> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\uAC00\u0020'
 		expected: [
@@ -5789,8 +5789,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL SYLLABLE GA (LV) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] SPACE (Other) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL SYLLABLE GA (LV) ÷ [999.0] SPACE (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\uAC00\u0308\u0020'
 		expected: [
@@ -5805,8 +5805,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL SYLLABLE GA (LV) ÷ [5.0] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL SYLLABLE GA (LV) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] SPACE (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\uAC00\u000D'
 		expected: [
@@ -5821,8 +5821,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL SYLLABLE GA (LV) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL SYLLABLE GA (LV) ÷ [5.0] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\uAC00\u0308\u000D'
 		expected: [
@@ -5837,8 +5837,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL SYLLABLE GA (LV) ÷ [5.0] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL SYLLABLE GA (LV) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\uAC00\u000A'
 		expected: [
@@ -5853,8 +5853,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL SYLLABLE GA (LV) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL SYLLABLE GA (LV) ÷ [5.0] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\uAC00\u0308\u000A'
 		expected: [
@@ -5869,8 +5869,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL SYLLABLE GA (LV) ÷ [5.0] <START OF HEADING> (Control) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL SYLLABLE GA (LV) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\uAC00\u0001'
 		expected: [
@@ -5885,8 +5885,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL SYLLABLE GA (LV) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <START OF HEADING> (Control) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL SYLLABLE GA (LV) ÷ [5.0] <START OF HEADING> (Control) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\uAC00\u0308\u0001'
 		expected: [
@@ -5901,8 +5901,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL SYLLABLE GA (LV) × [9.0] COMBINING GRAPHEME JOINER (Extend) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL SYLLABLE GA (LV) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <START OF HEADING> (Control) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\uAC00\u034F'
 		expected: [
@@ -5912,8 +5912,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL SYLLABLE GA (LV) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] COMBINING GRAPHEME JOINER (Extend) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL SYLLABLE GA (LV) × [9.0] COMBINING GRAPHEME JOINER (Extend) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\uAC00\u0308\u034F'
 		expected: [
@@ -5923,8 +5923,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL SYLLABLE GA (LV) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL SYLLABLE GA (LV) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] COMBINING GRAPHEME JOINER (Extend) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\uAC00\U0001F1E6'
 		expected: [
@@ -5939,8 +5939,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL SYLLABLE GA (LV) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL SYLLABLE GA (LV) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\uAC00\u0308\U0001F1E6'
 		expected: [
@@ -5955,8 +5955,8 @@ const grapheme_break_test_cases = [
 				offset_end: 9
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL SYLLABLE GA (LV) ÷ [999.0] ARABIC NUMBER SIGN (Prepend) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL SYLLABLE GA (LV) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\uAC00\u0600'
 		expected: [
@@ -5971,8 +5971,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL SYLLABLE GA (LV) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] ARABIC NUMBER SIGN (Prepend) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL SYLLABLE GA (LV) ÷ [999.0] ARABIC NUMBER SIGN (Prepend) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\uAC00\u0308\u0600'
 		expected: [
@@ -5987,8 +5987,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL SYLLABLE GA (LV) × [9.1] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL SYLLABLE GA (LV) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] ARABIC NUMBER SIGN (Prepend) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\uAC00\u0903'
 		expected: [
@@ -5998,8 +5998,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL SYLLABLE GA (LV) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.1] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL SYLLABLE GA (LV) × [9.1] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\uAC00\u0308\u0903'
 		expected: [
@@ -6009,8 +6009,8 @@ const grapheme_break_test_cases = [
 				offset_end: 8
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL SYLLABLE GA (LV) ÷ [999.0] HANGUL CHOSEONG KIYEOK (L) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL SYLLABLE GA (LV) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.1] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\uAC00\u1100'
 		expected: [
@@ -6025,8 +6025,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL SYLLABLE GA (LV) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL CHOSEONG KIYEOK (L) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL SYLLABLE GA (LV) ÷ [999.0] HANGUL CHOSEONG KIYEOK (L) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\uAC00\u0308\u1100'
 		expected: [
@@ -6041,8 +6041,8 @@ const grapheme_break_test_cases = [
 				offset_end: 8
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL SYLLABLE GA (LV) × [7.0] HANGUL JUNGSEONG FILLER (V) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL SYLLABLE GA (LV) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL CHOSEONG KIYEOK (L) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\uAC00\u1160'
 		expected: [
@@ -6052,8 +6052,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL SYLLABLE GA (LV) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL JUNGSEONG FILLER (V) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL SYLLABLE GA (LV) × [7.0] HANGUL JUNGSEONG FILLER (V) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\uAC00\u0308\u1160'
 		expected: [
@@ -6068,8 +6068,8 @@ const grapheme_break_test_cases = [
 				offset_end: 8
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL SYLLABLE GA (LV) × [7.0] HANGUL JONGSEONG KIYEOK (T) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL SYLLABLE GA (LV) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL JUNGSEONG FILLER (V) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\uAC00\u11A8'
 		expected: [
@@ -6079,8 +6079,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL SYLLABLE GA (LV) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL JONGSEONG KIYEOK (T) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL SYLLABLE GA (LV) × [7.0] HANGUL JONGSEONG KIYEOK (T) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\uAC00\u0308\u11A8'
 		expected: [
@@ -6095,8 +6095,8 @@ const grapheme_break_test_cases = [
 				offset_end: 8
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL SYLLABLE GA (LV) ÷ [999.0] HANGUL SYLLABLE GA (LV) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL SYLLABLE GA (LV) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL JONGSEONG KIYEOK (T) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\uAC00\uAC00'
 		expected: [
@@ -6111,8 +6111,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL SYLLABLE GA (LV) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL SYLLABLE GA (LV) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL SYLLABLE GA (LV) ÷ [999.0] HANGUL SYLLABLE GA (LV) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\uAC00\u0308\uAC00'
 		expected: [
@@ -6127,8 +6127,8 @@ const grapheme_break_test_cases = [
 				offset_end: 8
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL SYLLABLE GA (LV) ÷ [999.0] HANGUL SYLLABLE GAG (LVT) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL SYLLABLE GA (LV) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL SYLLABLE GA (LV) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\uAC00\uAC01'
 		expected: [
@@ -6143,8 +6143,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL SYLLABLE GA (LV) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL SYLLABLE GAG (LVT) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL SYLLABLE GA (LV) ÷ [999.0] HANGUL SYLLABLE GAG (LVT) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\uAC00\u0308\uAC01'
 		expected: [
@@ -6159,8 +6159,8 @@ const grapheme_break_test_cases = [
 				offset_end: 8
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL SYLLABLE GA (LV) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL SYLLABLE GA (LV) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL SYLLABLE GAG (LVT) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\uAC00\u231A'
 		expected: [
@@ -6175,8 +6175,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL SYLLABLE GA (LV) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL SYLLABLE GA (LV) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\uAC00\u0308\u231A'
 		expected: [
@@ -6191,8 +6191,8 @@ const grapheme_break_test_cases = [
 				offset_end: 8
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL SYLLABLE GA (LV) × [9.0] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL SYLLABLE GA (LV) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\uAC00\u0300'
 		expected: [
@@ -6202,8 +6202,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL SYLLABLE GA (LV) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL SYLLABLE GA (LV) × [9.0] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\uAC00\u0308\u0300'
 		expected: [
@@ -6213,8 +6213,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL SYLLABLE GA (LV) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL SYLLABLE GA (LV) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\uAC00\u200D'
 		expected: [
@@ -6224,8 +6224,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL SYLLABLE GA (LV) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL SYLLABLE GA (LV) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\uAC00\u0308\u200D'
 		expected: [
@@ -6235,8 +6235,8 @@ const grapheme_break_test_cases = [
 				offset_end: 8
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL SYLLABLE GA (LV) ÷ [999.0] <reserved-0378> (Other) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL SYLLABLE GA (LV) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\uAC00\u0378'
 		expected: [
@@ -6251,8 +6251,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL SYLLABLE GA (LV) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] <reserved-0378> (Other) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL SYLLABLE GA (LV) ÷ [999.0] <reserved-0378> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\uAC00\u0308\u0378'
 		expected: [
@@ -6267,8 +6267,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL SYLLABLE GAG (LVT) ÷ [999.0] SPACE (Other) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL SYLLABLE GA (LV) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] <reserved-0378> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\uAC01\u0020'
 		expected: [
@@ -6283,8 +6283,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL SYLLABLE GAG (LVT) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] SPACE (Other) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL SYLLABLE GAG (LVT) ÷ [999.0] SPACE (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\uAC01\u0308\u0020'
 		expected: [
@@ -6299,8 +6299,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL SYLLABLE GAG (LVT) ÷ [5.0] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL SYLLABLE GAG (LVT) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] SPACE (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\uAC01\u000D'
 		expected: [
@@ -6315,8 +6315,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL SYLLABLE GAG (LVT) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL SYLLABLE GAG (LVT) ÷ [5.0] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\uAC01\u0308\u000D'
 		expected: [
@@ -6331,8 +6331,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL SYLLABLE GAG (LVT) ÷ [5.0] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL SYLLABLE GAG (LVT) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\uAC01\u000A'
 		expected: [
@@ -6347,8 +6347,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL SYLLABLE GAG (LVT) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL SYLLABLE GAG (LVT) ÷ [5.0] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\uAC01\u0308\u000A'
 		expected: [
@@ -6363,8 +6363,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL SYLLABLE GAG (LVT) ÷ [5.0] <START OF HEADING> (Control) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL SYLLABLE GAG (LVT) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\uAC01\u0001'
 		expected: [
@@ -6379,8 +6379,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL SYLLABLE GAG (LVT) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <START OF HEADING> (Control) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL SYLLABLE GAG (LVT) ÷ [5.0] <START OF HEADING> (Control) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\uAC01\u0308\u0001'
 		expected: [
@@ -6395,8 +6395,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL SYLLABLE GAG (LVT) × [9.0] COMBINING GRAPHEME JOINER (Extend) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL SYLLABLE GAG (LVT) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <START OF HEADING> (Control) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\uAC01\u034F'
 		expected: [
@@ -6406,8 +6406,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL SYLLABLE GAG (LVT) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] COMBINING GRAPHEME JOINER (Extend) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL SYLLABLE GAG (LVT) × [9.0] COMBINING GRAPHEME JOINER (Extend) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\uAC01\u0308\u034F'
 		expected: [
@@ -6417,8 +6417,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL SYLLABLE GAG (LVT) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL SYLLABLE GAG (LVT) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] COMBINING GRAPHEME JOINER (Extend) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\uAC01\U0001F1E6'
 		expected: [
@@ -6433,8 +6433,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL SYLLABLE GAG (LVT) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL SYLLABLE GAG (LVT) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\uAC01\u0308\U0001F1E6'
 		expected: [
@@ -6449,8 +6449,8 @@ const grapheme_break_test_cases = [
 				offset_end: 9
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL SYLLABLE GAG (LVT) ÷ [999.0] ARABIC NUMBER SIGN (Prepend) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL SYLLABLE GAG (LVT) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\uAC01\u0600'
 		expected: [
@@ -6465,8 +6465,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL SYLLABLE GAG (LVT) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] ARABIC NUMBER SIGN (Prepend) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL SYLLABLE GAG (LVT) ÷ [999.0] ARABIC NUMBER SIGN (Prepend) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\uAC01\u0308\u0600'
 		expected: [
@@ -6481,8 +6481,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL SYLLABLE GAG (LVT) × [9.1] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL SYLLABLE GAG (LVT) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] ARABIC NUMBER SIGN (Prepend) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\uAC01\u0903'
 		expected: [
@@ -6492,8 +6492,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL SYLLABLE GAG (LVT) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.1] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL SYLLABLE GAG (LVT) × [9.1] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\uAC01\u0308\u0903'
 		expected: [
@@ -6503,8 +6503,8 @@ const grapheme_break_test_cases = [
 				offset_end: 8
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL SYLLABLE GAG (LVT) ÷ [999.0] HANGUL CHOSEONG KIYEOK (L) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL SYLLABLE GAG (LVT) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.1] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\uAC01\u1100'
 		expected: [
@@ -6519,8 +6519,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL SYLLABLE GAG (LVT) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL CHOSEONG KIYEOK (L) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL SYLLABLE GAG (LVT) ÷ [999.0] HANGUL CHOSEONG KIYEOK (L) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\uAC01\u0308\u1100'
 		expected: [
@@ -6535,8 +6535,8 @@ const grapheme_break_test_cases = [
 				offset_end: 8
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL SYLLABLE GAG (LVT) ÷ [999.0] HANGUL JUNGSEONG FILLER (V) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL SYLLABLE GAG (LVT) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL CHOSEONG KIYEOK (L) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\uAC01\u1160'
 		expected: [
@@ -6551,8 +6551,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL SYLLABLE GAG (LVT) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL JUNGSEONG FILLER (V) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL SYLLABLE GAG (LVT) ÷ [999.0] HANGUL JUNGSEONG FILLER (V) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\uAC01\u0308\u1160'
 		expected: [
@@ -6567,8 +6567,8 @@ const grapheme_break_test_cases = [
 				offset_end: 8
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL SYLLABLE GAG (LVT) × [8.0] HANGUL JONGSEONG KIYEOK (T) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL SYLLABLE GAG (LVT) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL JUNGSEONG FILLER (V) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\uAC01\u11A8'
 		expected: [
@@ -6578,8 +6578,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL SYLLABLE GAG (LVT) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL JONGSEONG KIYEOK (T) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL SYLLABLE GAG (LVT) × [8.0] HANGUL JONGSEONG KIYEOK (T) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\uAC01\u0308\u11A8'
 		expected: [
@@ -6594,8 +6594,8 @@ const grapheme_break_test_cases = [
 				offset_end: 8
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL SYLLABLE GAG (LVT) ÷ [999.0] HANGUL SYLLABLE GA (LV) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL SYLLABLE GAG (LVT) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL JONGSEONG KIYEOK (T) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\uAC01\uAC00'
 		expected: [
@@ -6610,8 +6610,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL SYLLABLE GAG (LVT) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL SYLLABLE GA (LV) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL SYLLABLE GAG (LVT) ÷ [999.0] HANGUL SYLLABLE GA (LV) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\uAC01\u0308\uAC00'
 		expected: [
@@ -6626,8 +6626,8 @@ const grapheme_break_test_cases = [
 				offset_end: 8
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL SYLLABLE GAG (LVT) ÷ [999.0] HANGUL SYLLABLE GAG (LVT) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL SYLLABLE GAG (LVT) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL SYLLABLE GA (LV) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\uAC01\uAC01'
 		expected: [
@@ -6642,8 +6642,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL SYLLABLE GAG (LVT) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL SYLLABLE GAG (LVT) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL SYLLABLE GAG (LVT) ÷ [999.0] HANGUL SYLLABLE GAG (LVT) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\uAC01\u0308\uAC01'
 		expected: [
@@ -6658,8 +6658,8 @@ const grapheme_break_test_cases = [
 				offset_end: 8
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL SYLLABLE GAG (LVT) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL SYLLABLE GAG (LVT) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL SYLLABLE GAG (LVT) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\uAC01\u231A'
 		expected: [
@@ -6674,8 +6674,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL SYLLABLE GAG (LVT) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL SYLLABLE GAG (LVT) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\uAC01\u0308\u231A'
 		expected: [
@@ -6690,8 +6690,8 @@ const grapheme_break_test_cases = [
 				offset_end: 8
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL SYLLABLE GAG (LVT) × [9.0] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL SYLLABLE GAG (LVT) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\uAC01\u0300'
 		expected: [
@@ -6701,8 +6701,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL SYLLABLE GAG (LVT) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL SYLLABLE GAG (LVT) × [9.0] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\uAC01\u0308\u0300'
 		expected: [
@@ -6712,8 +6712,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL SYLLABLE GAG (LVT) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL SYLLABLE GAG (LVT) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\uAC01\u200D'
 		expected: [
@@ -6723,8 +6723,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL SYLLABLE GAG (LVT) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL SYLLABLE GAG (LVT) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\uAC01\u0308\u200D'
 		expected: [
@@ -6734,8 +6734,8 @@ const grapheme_break_test_cases = [
 				offset_end: 8
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL SYLLABLE GAG (LVT) ÷ [999.0] <reserved-0378> (Other) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL SYLLABLE GAG (LVT) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\uAC01\u0378'
 		expected: [
@@ -6750,8 +6750,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL SYLLABLE GAG (LVT) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] <reserved-0378> (Other) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL SYLLABLE GAG (LVT) ÷ [999.0] <reserved-0378> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\uAC01\u0308\u0378'
 		expected: [
@@ -6766,8 +6766,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] WATCH (ExtPict) ÷ [999.0] SPACE (Other) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL SYLLABLE GAG (LVT) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] <reserved-0378> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u0020'
 		expected: [
@@ -6782,8 +6782,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] WATCH (ExtPict) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] SPACE (Other) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) ÷ [999.0] SPACE (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u0308\u0020'
 		expected: [
@@ -6798,8 +6798,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] WATCH (ExtPict) ÷ [5.0] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] SPACE (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u000D'
 		expected: [
@@ -6814,8 +6814,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] WATCH (ExtPict) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) ÷ [5.0] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u0308\u000D'
 		expected: [
@@ -6830,8 +6830,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] WATCH (ExtPict) ÷ [5.0] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u000A'
 		expected: [
@@ -6846,8 +6846,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] WATCH (ExtPict) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) ÷ [5.0] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u0308\u000A'
 		expected: [
@@ -6862,8 +6862,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] WATCH (ExtPict) ÷ [5.0] <START OF HEADING> (Control) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u0001'
 		expected: [
@@ -6878,8 +6878,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] WATCH (ExtPict) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <START OF HEADING> (Control) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) ÷ [5.0] <START OF HEADING> (Control) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u0308\u0001'
 		expected: [
@@ -6894,8 +6894,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] WATCH (ExtPict) × [9.0] COMBINING GRAPHEME JOINER (Extend) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <START OF HEADING> (Control) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u034F'
 		expected: [
@@ -6905,8 +6905,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] WATCH (ExtPict) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] COMBINING GRAPHEME JOINER (Extend) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) × [9.0] COMBINING GRAPHEME JOINER (Extend) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u0308\u034F'
 		expected: [
@@ -6916,8 +6916,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] WATCH (ExtPict) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] COMBINING GRAPHEME JOINER (Extend) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\U0001F1E6'
 		expected: [
@@ -6932,8 +6932,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] WATCH (ExtPict) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u0308\U0001F1E6'
 		expected: [
@@ -6948,8 +6948,8 @@ const grapheme_break_test_cases = [
 				offset_end: 9
 			},
 		]
-	}
-	// ÷ [0.2] WATCH (ExtPict) ÷ [999.0] ARABIC NUMBER SIGN (Prepend) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u0600'
 		expected: [
@@ -6964,8 +6964,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] WATCH (ExtPict) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] ARABIC NUMBER SIGN (Prepend) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) ÷ [999.0] ARABIC NUMBER SIGN (Prepend) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u0308\u0600'
 		expected: [
@@ -6980,8 +6980,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] WATCH (ExtPict) × [9.1] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] ARABIC NUMBER SIGN (Prepend) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u0903'
 		expected: [
@@ -6991,8 +6991,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] WATCH (ExtPict) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.1] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) × [9.1] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u0308\u0903'
 		expected: [
@@ -7002,8 +7002,8 @@ const grapheme_break_test_cases = [
 				offset_end: 8
 			},
 		]
-	}
-	// ÷ [0.2] WATCH (ExtPict) ÷ [999.0] HANGUL CHOSEONG KIYEOK (L) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.1] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u1100'
 		expected: [
@@ -7018,8 +7018,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] WATCH (ExtPict) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL CHOSEONG KIYEOK (L) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) ÷ [999.0] HANGUL CHOSEONG KIYEOK (L) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u0308\u1100'
 		expected: [
@@ -7034,8 +7034,8 @@ const grapheme_break_test_cases = [
 				offset_end: 8
 			},
 		]
-	}
-	// ÷ [0.2] WATCH (ExtPict) ÷ [999.0] HANGUL JUNGSEONG FILLER (V) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL CHOSEONG KIYEOK (L) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u1160'
 		expected: [
@@ -7050,8 +7050,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] WATCH (ExtPict) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL JUNGSEONG FILLER (V) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) ÷ [999.0] HANGUL JUNGSEONG FILLER (V) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u0308\u1160'
 		expected: [
@@ -7066,8 +7066,8 @@ const grapheme_break_test_cases = [
 				offset_end: 8
 			},
 		]
-	}
-	// ÷ [0.2] WATCH (ExtPict) ÷ [999.0] HANGUL JONGSEONG KIYEOK (T) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL JUNGSEONG FILLER (V) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u11A8'
 		expected: [
@@ -7082,8 +7082,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] WATCH (ExtPict) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL JONGSEONG KIYEOK (T) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) ÷ [999.0] HANGUL JONGSEONG KIYEOK (T) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u0308\u11A8'
 		expected: [
@@ -7098,8 +7098,8 @@ const grapheme_break_test_cases = [
 				offset_end: 8
 			},
 		]
-	}
-	// ÷ [0.2] WATCH (ExtPict) ÷ [999.0] HANGUL SYLLABLE GA (LV) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL JONGSEONG KIYEOK (T) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\uAC00'
 		expected: [
@@ -7114,8 +7114,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] WATCH (ExtPict) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL SYLLABLE GA (LV) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) ÷ [999.0] HANGUL SYLLABLE GA (LV) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u0308\uAC00'
 		expected: [
@@ -7130,8 +7130,8 @@ const grapheme_break_test_cases = [
 				offset_end: 8
 			},
 		]
-	}
-	// ÷ [0.2] WATCH (ExtPict) ÷ [999.0] HANGUL SYLLABLE GAG (LVT) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL SYLLABLE GA (LV) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\uAC01'
 		expected: [
@@ -7146,8 +7146,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] WATCH (ExtPict) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL SYLLABLE GAG (LVT) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) ÷ [999.0] HANGUL SYLLABLE GAG (LVT) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u0308\uAC01'
 		expected: [
@@ -7162,8 +7162,8 @@ const grapheme_break_test_cases = [
 				offset_end: 8
 			},
 		]
-	}
-	// ÷ [0.2] WATCH (ExtPict) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL SYLLABLE GAG (LVT) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u231A'
 		expected: [
@@ -7178,8 +7178,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] WATCH (ExtPict) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u0308\u231A'
 		expected: [
@@ -7194,8 +7194,8 @@ const grapheme_break_test_cases = [
 				offset_end: 8
 			},
 		]
-	}
-	// ÷ [0.2] WATCH (ExtPict) × [9.0] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u0300'
 		expected: [
@@ -7205,8 +7205,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] WATCH (ExtPict) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) × [9.0] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u0308\u0300'
 		expected: [
@@ -7216,8 +7216,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] WATCH (ExtPict) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u200D'
 		expected: [
@@ -7227,8 +7227,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] WATCH (ExtPict) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u0308\u200D'
 		expected: [
@@ -7238,8 +7238,8 @@ const grapheme_break_test_cases = [
 				offset_end: 8
 			},
 		]
-	}
-	// ÷ [0.2] WATCH (ExtPict) ÷ [999.0] <reserved-0378> (Other) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u0378'
 		expected: [
@@ -7254,8 +7254,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] WATCH (ExtPict) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] <reserved-0378> (Other) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) ÷ [999.0] <reserved-0378> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u0308\u0378'
 		expected: [
@@ -7270,8 +7270,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [999.0] SPACE (Other) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] <reserved-0378> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u0020'
 		expected: [
@@ -7286,8 +7286,8 @@ const grapheme_break_test_cases = [
 				offset_end: 3
 			},
 		]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] SPACE (Other) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [999.0] SPACE (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u0308\u0020'
 		expected: [
@@ -7302,8 +7302,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [5.0] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] SPACE (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u000D'
 		expected: [
@@ -7318,8 +7318,8 @@ const grapheme_break_test_cases = [
 				offset_end: 3
 			},
 		]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [5.0] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u0308\u000D'
 		expected: [
@@ -7334,8 +7334,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [5.0] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u000A'
 		expected: [
@@ -7350,8 +7350,8 @@ const grapheme_break_test_cases = [
 				offset_end: 3
 			},
 		]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [5.0] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u0308\u000A'
 		expected: [
@@ -7366,8 +7366,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [5.0] <START OF HEADING> (Control) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u0001'
 		expected: [
@@ -7382,8 +7382,8 @@ const grapheme_break_test_cases = [
 				offset_end: 3
 			},
 		]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <START OF HEADING> (Control) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [5.0] <START OF HEADING> (Control) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u0308\u0001'
 		expected: [
@@ -7398,8 +7398,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) × [9.0] COMBINING GRAPHEME JOINER (Extend) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <START OF HEADING> (Control) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u034F'
 		expected: [
@@ -7409,8 +7409,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] COMBINING GRAPHEME JOINER (Extend) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) × [9.0] COMBINING GRAPHEME JOINER (Extend) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u0308\u034F'
 		expected: [
@@ -7420,8 +7420,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] COMBINING GRAPHEME JOINER (Extend) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\U0001F1E6'
 		expected: [
@@ -7436,8 +7436,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u0308\U0001F1E6'
 		expected: [
@@ -7452,8 +7452,8 @@ const grapheme_break_test_cases = [
 				offset_end: 8
 			},
 		]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [999.0] ARABIC NUMBER SIGN (Prepend) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u0600'
 		expected: [
@@ -7468,8 +7468,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] ARABIC NUMBER SIGN (Prepend) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [999.0] ARABIC NUMBER SIGN (Prepend) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u0308\u0600'
 		expected: [
@@ -7484,8 +7484,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) × [9.1] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] ARABIC NUMBER SIGN (Prepend) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u0903'
 		expected: [
@@ -7495,8 +7495,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.1] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) × [9.1] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u0308\u0903'
 		expected: [
@@ -7506,8 +7506,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [999.0] HANGUL CHOSEONG KIYEOK (L) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.1] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u1100'
 		expected: [
@@ -7522,8 +7522,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL CHOSEONG KIYEOK (L) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [999.0] HANGUL CHOSEONG KIYEOK (L) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u0308\u1100'
 		expected: [
@@ -7538,8 +7538,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [999.0] HANGUL JUNGSEONG FILLER (V) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL CHOSEONG KIYEOK (L) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u1160'
 		expected: [
@@ -7554,8 +7554,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL JUNGSEONG FILLER (V) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [999.0] HANGUL JUNGSEONG FILLER (V) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u0308\u1160'
 		expected: [
@@ -7570,8 +7570,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [999.0] HANGUL JONGSEONG KIYEOK (T) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL JUNGSEONG FILLER (V) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u11A8'
 		expected: [
@@ -7586,8 +7586,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL JONGSEONG KIYEOK (T) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [999.0] HANGUL JONGSEONG KIYEOK (T) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u0308\u11A8'
 		expected: [
@@ -7602,8 +7602,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [999.0] HANGUL SYLLABLE GA (LV) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL JONGSEONG KIYEOK (T) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\uAC00'
 		expected: [
@@ -7618,8 +7618,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL SYLLABLE GA (LV) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [999.0] HANGUL SYLLABLE GA (LV) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u0308\uAC00'
 		expected: [
@@ -7634,8 +7634,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [999.0] HANGUL SYLLABLE GAG (LVT) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL SYLLABLE GA (LV) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\uAC01'
 		expected: [
@@ -7650,8 +7650,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL SYLLABLE GAG (LVT) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [999.0] HANGUL SYLLABLE GAG (LVT) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u0308\uAC01'
 		expected: [
@@ -7666,8 +7666,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL SYLLABLE GAG (LVT) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u231A'
 		expected: [
@@ -7682,8 +7682,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u0308\u231A'
 		expected: [
@@ -7698,8 +7698,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) × [9.0] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u0300'
 		expected: [
@@ -7709,8 +7709,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) × [9.0] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u0308\u0300'
 		expected: [
@@ -7720,8 +7720,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u200D'
 		expected: [
@@ -7731,8 +7731,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u0308\u200D'
 		expected: [
@@ -7742,8 +7742,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [999.0] <reserved-0378> (Other) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u0378'
 		expected: [
@@ -7758,8 +7758,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] <reserved-0378> (Other) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [999.0] <reserved-0378> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u0308\u0378'
 		expected: [
@@ -7774,8 +7774,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [999.0] SPACE (Other) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] <reserved-0378> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u0020'
 		expected: [
@@ -7790,8 +7790,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] SPACE (Other) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [999.0] SPACE (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u0308\u0020'
 		expected: [
@@ -7806,8 +7806,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [5.0] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] SPACE (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u000D'
 		expected: [
@@ -7822,8 +7822,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [5.0] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u0308\u000D'
 		expected: [
@@ -7838,8 +7838,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [5.0] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u000A'
 		expected: [
@@ -7854,8 +7854,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [5.0] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u0308\u000A'
 		expected: [
@@ -7870,8 +7870,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [5.0] <START OF HEADING> (Control) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u0001'
 		expected: [
@@ -7886,8 +7886,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <START OF HEADING> (Control) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [5.0] <START OF HEADING> (Control) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u0308\u0001'
 		expected: [
@@ -7902,8 +7902,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) × [9.0] COMBINING GRAPHEME JOINER (Extend) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <START OF HEADING> (Control) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u034F'
 		expected: [
@@ -7913,8 +7913,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] COMBINING GRAPHEME JOINER (Extend) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) × [9.0] COMBINING GRAPHEME JOINER (Extend) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u0308\u034F'
 		expected: [
@@ -7924,8 +7924,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] COMBINING GRAPHEME JOINER (Extend) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\U0001F1E6'
 		expected: [
@@ -7940,8 +7940,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u0308\U0001F1E6'
 		expected: [
@@ -7956,8 +7956,8 @@ const grapheme_break_test_cases = [
 				offset_end: 9
 			},
 		]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [999.0] ARABIC NUMBER SIGN (Prepend) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u0600'
 		expected: [
@@ -7972,8 +7972,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] ARABIC NUMBER SIGN (Prepend) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [999.0] ARABIC NUMBER SIGN (Prepend) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u0308\u0600'
 		expected: [
@@ -7988,8 +7988,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) × [9.1] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] ARABIC NUMBER SIGN (Prepend) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u0903'
 		expected: [
@@ -7999,8 +7999,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.1] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) × [9.1] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u0308\u0903'
 		expected: [
@@ -8010,8 +8010,8 @@ const grapheme_break_test_cases = [
 				offset_end: 8
 			},
 		]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [999.0] HANGUL CHOSEONG KIYEOK (L) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.1] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u1100'
 		expected: [
@@ -8026,8 +8026,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL CHOSEONG KIYEOK (L) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [999.0] HANGUL CHOSEONG KIYEOK (L) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u0308\u1100'
 		expected: [
@@ -8042,8 +8042,8 @@ const grapheme_break_test_cases = [
 				offset_end: 8
 			},
 		]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [999.0] HANGUL JUNGSEONG FILLER (V) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL CHOSEONG KIYEOK (L) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u1160'
 		expected: [
@@ -8058,8 +8058,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL JUNGSEONG FILLER (V) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [999.0] HANGUL JUNGSEONG FILLER (V) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u0308\u1160'
 		expected: [
@@ -8074,8 +8074,8 @@ const grapheme_break_test_cases = [
 				offset_end: 8
 			},
 		]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [999.0] HANGUL JONGSEONG KIYEOK (T) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL JUNGSEONG FILLER (V) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u11A8'
 		expected: [
@@ -8090,8 +8090,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL JONGSEONG KIYEOK (T) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [999.0] HANGUL JONGSEONG KIYEOK (T) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u0308\u11A8'
 		expected: [
@@ -8106,8 +8106,8 @@ const grapheme_break_test_cases = [
 				offset_end: 8
 			},
 		]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [999.0] HANGUL SYLLABLE GA (LV) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL JONGSEONG KIYEOK (T) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\uAC00'
 		expected: [
@@ -8122,8 +8122,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL SYLLABLE GA (LV) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [999.0] HANGUL SYLLABLE GA (LV) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u0308\uAC00'
 		expected: [
@@ -8138,8 +8138,8 @@ const grapheme_break_test_cases = [
 				offset_end: 8
 			},
 		]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [999.0] HANGUL SYLLABLE GAG (LVT) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL SYLLABLE GA (LV) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\uAC01'
 		expected: [
@@ -8154,8 +8154,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL SYLLABLE GAG (LVT) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [999.0] HANGUL SYLLABLE GAG (LVT) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u0308\uAC01'
 		expected: [
@@ -8170,8 +8170,8 @@ const grapheme_break_test_cases = [
 				offset_end: 8
 			},
 		]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL SYLLABLE GAG (LVT) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u231A'
 		expected: [
@@ -8186,8 +8186,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u0308\u231A'
 		expected: [
@@ -8202,8 +8202,8 @@ const grapheme_break_test_cases = [
 				offset_end: 8
 			},
 		]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) × [9.0] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u0300'
 		expected: [
@@ -8213,8 +8213,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) × [9.0] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u0308\u0300'
 		expected: [
@@ -8224,8 +8224,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u200D'
 		expected: [
@@ -8235,8 +8235,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u0308\u200D'
 		expected: [
@@ -8246,8 +8246,8 @@ const grapheme_break_test_cases = [
 				offset_end: 8
 			},
 		]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [999.0] <reserved-0378> (Other) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u0378'
 		expected: [
@@ -8262,8 +8262,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] <reserved-0378> (Other) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [999.0] <reserved-0378> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u0308\u0378'
 		expected: [
@@ -8278,8 +8278,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] <reserved-0378> (Other) ÷ [999.0] SPACE (Other) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] <reserved-0378> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0378\u0020'
 		expected: [
@@ -8294,8 +8294,8 @@ const grapheme_break_test_cases = [
 				offset_end: 3
 			},
 		]
-	}
-	// ÷ [0.2] <reserved-0378> (Other) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] SPACE (Other) ÷ [0.3]
+		desc: '÷ [0.2] <reserved-0378> (Other) ÷ [999.0] SPACE (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0378\u0308\u0020'
 		expected: [
@@ -8310,8 +8310,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] <reserved-0378> (Other) ÷ [5.0] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] <reserved-0378> (Other) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] SPACE (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0378\u000D'
 		expected: [
@@ -8326,8 +8326,8 @@ const grapheme_break_test_cases = [
 				offset_end: 3
 			},
 		]
-	}
-	// ÷ [0.2] <reserved-0378> (Other) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] <reserved-0378> (Other) ÷ [5.0] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0378\u0308\u000D'
 		expected: [
@@ -8342,8 +8342,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] <reserved-0378> (Other) ÷ [5.0] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] <reserved-0378> (Other) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0378\u000A'
 		expected: [
@@ -8358,8 +8358,8 @@ const grapheme_break_test_cases = [
 				offset_end: 3
 			},
 		]
-	}
-	// ÷ [0.2] <reserved-0378> (Other) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] <reserved-0378> (Other) ÷ [5.0] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0378\u0308\u000A'
 		expected: [
@@ -8374,8 +8374,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] <reserved-0378> (Other) ÷ [5.0] <START OF HEADING> (Control) ÷ [0.3]
+		desc: '÷ [0.2] <reserved-0378> (Other) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0378\u0001'
 		expected: [
@@ -8390,8 +8390,8 @@ const grapheme_break_test_cases = [
 				offset_end: 3
 			},
 		]
-	}
-	// ÷ [0.2] <reserved-0378> (Other) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <START OF HEADING> (Control) ÷ [0.3]
+		desc: '÷ [0.2] <reserved-0378> (Other) ÷ [5.0] <START OF HEADING> (Control) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0378\u0308\u0001'
 		expected: [
@@ -8406,8 +8406,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] <reserved-0378> (Other) × [9.0] COMBINING GRAPHEME JOINER (Extend) ÷ [0.3]
+		desc: '÷ [0.2] <reserved-0378> (Other) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [5.0] <START OF HEADING> (Control) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0378\u034F'
 		expected: [
@@ -8417,8 +8417,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] <reserved-0378> (Other) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] COMBINING GRAPHEME JOINER (Extend) ÷ [0.3]
+		desc: '÷ [0.2] <reserved-0378> (Other) × [9.0] COMBINING GRAPHEME JOINER (Extend) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0378\u0308\u034F'
 		expected: [
@@ -8428,8 +8428,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] <reserved-0378> (Other) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] <reserved-0378> (Other) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] COMBINING GRAPHEME JOINER (Extend) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0378\U0001F1E6'
 		expected: [
@@ -8444,8 +8444,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] <reserved-0378> (Other) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] <reserved-0378> (Other) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0378\u0308\U0001F1E6'
 		expected: [
@@ -8460,8 +8460,8 @@ const grapheme_break_test_cases = [
 				offset_end: 8
 			},
 		]
-	}
-	// ÷ [0.2] <reserved-0378> (Other) ÷ [999.0] ARABIC NUMBER SIGN (Prepend) ÷ [0.3]
+		desc: '÷ [0.2] <reserved-0378> (Other) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0378\u0600'
 		expected: [
@@ -8476,8 +8476,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] <reserved-0378> (Other) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] ARABIC NUMBER SIGN (Prepend) ÷ [0.3]
+		desc: '÷ [0.2] <reserved-0378> (Other) ÷ [999.0] ARABIC NUMBER SIGN (Prepend) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0378\u0308\u0600'
 		expected: [
@@ -8492,8 +8492,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] <reserved-0378> (Other) × [9.1] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [0.3]
+		desc: '÷ [0.2] <reserved-0378> (Other) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] ARABIC NUMBER SIGN (Prepend) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0378\u0903'
 		expected: [
@@ -8503,8 +8503,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] <reserved-0378> (Other) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.1] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [0.3]
+		desc: '÷ [0.2] <reserved-0378> (Other) × [9.1] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0378\u0308\u0903'
 		expected: [
@@ -8514,8 +8514,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] <reserved-0378> (Other) ÷ [999.0] HANGUL CHOSEONG KIYEOK (L) ÷ [0.3]
+		desc: '÷ [0.2] <reserved-0378> (Other) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.1] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0378\u1100'
 		expected: [
@@ -8530,8 +8530,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] <reserved-0378> (Other) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL CHOSEONG KIYEOK (L) ÷ [0.3]
+		desc: '÷ [0.2] <reserved-0378> (Other) ÷ [999.0] HANGUL CHOSEONG KIYEOK (L) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0378\u0308\u1100'
 		expected: [
@@ -8546,8 +8546,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] <reserved-0378> (Other) ÷ [999.0] HANGUL JUNGSEONG FILLER (V) ÷ [0.3]
+		desc: '÷ [0.2] <reserved-0378> (Other) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL CHOSEONG KIYEOK (L) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0378\u1160'
 		expected: [
@@ -8562,8 +8562,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] <reserved-0378> (Other) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL JUNGSEONG FILLER (V) ÷ [0.3]
+		desc: '÷ [0.2] <reserved-0378> (Other) ÷ [999.0] HANGUL JUNGSEONG FILLER (V) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0378\u0308\u1160'
 		expected: [
@@ -8578,8 +8578,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] <reserved-0378> (Other) ÷ [999.0] HANGUL JONGSEONG KIYEOK (T) ÷ [0.3]
+		desc: '÷ [0.2] <reserved-0378> (Other) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL JUNGSEONG FILLER (V) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0378\u11A8'
 		expected: [
@@ -8594,8 +8594,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] <reserved-0378> (Other) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL JONGSEONG KIYEOK (T) ÷ [0.3]
+		desc: '÷ [0.2] <reserved-0378> (Other) ÷ [999.0] HANGUL JONGSEONG KIYEOK (T) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0378\u0308\u11A8'
 		expected: [
@@ -8610,8 +8610,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] <reserved-0378> (Other) ÷ [999.0] HANGUL SYLLABLE GA (LV) ÷ [0.3]
+		desc: '÷ [0.2] <reserved-0378> (Other) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL JONGSEONG KIYEOK (T) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0378\uAC00'
 		expected: [
@@ -8626,8 +8626,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] <reserved-0378> (Other) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL SYLLABLE GA (LV) ÷ [0.3]
+		desc: '÷ [0.2] <reserved-0378> (Other) ÷ [999.0] HANGUL SYLLABLE GA (LV) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0378\u0308\uAC00'
 		expected: [
@@ -8642,8 +8642,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] <reserved-0378> (Other) ÷ [999.0] HANGUL SYLLABLE GAG (LVT) ÷ [0.3]
+		desc: '÷ [0.2] <reserved-0378> (Other) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL SYLLABLE GA (LV) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0378\uAC01'
 		expected: [
@@ -8658,8 +8658,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] <reserved-0378> (Other) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL SYLLABLE GAG (LVT) ÷ [0.3]
+		desc: '÷ [0.2] <reserved-0378> (Other) ÷ [999.0] HANGUL SYLLABLE GAG (LVT) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0378\u0308\uAC01'
 		expected: [
@@ -8674,8 +8674,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] <reserved-0378> (Other) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] <reserved-0378> (Other) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] HANGUL SYLLABLE GAG (LVT) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0378\u231A'
 		expected: [
@@ -8690,8 +8690,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] <reserved-0378> (Other) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] <reserved-0378> (Other) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0378\u0308\u231A'
 		expected: [
@@ -8706,8 +8706,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] <reserved-0378> (Other) × [9.0] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [0.3]
+		desc: '÷ [0.2] <reserved-0378> (Other) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0378\u0300'
 		expected: [
@@ -8717,8 +8717,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] <reserved-0378> (Other) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [0.3]
+		desc: '÷ [0.2] <reserved-0378> (Other) × [9.0] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0378\u0308\u0300'
 		expected: [
@@ -8728,8 +8728,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] <reserved-0378> (Other) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [0.3]
+		desc: '÷ [0.2] <reserved-0378> (Other) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] COMBINING GRAVE ACCENT (Extend_ExtCccZwj) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0378\u200D'
 		expected: [
@@ -8739,8 +8739,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] <reserved-0378> (Other) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [0.3]
+		desc: '÷ [0.2] <reserved-0378> (Other) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0378\u0308\u200D'
 		expected: [
@@ -8750,8 +8750,8 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
-	}
-	// ÷ [0.2] <reserved-0378> (Other) ÷ [999.0] <reserved-0378> (Other) ÷ [0.3]
+		desc: '÷ [0.2] <reserved-0378> (Other) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0378\u0378'
 		expected: [
@@ -8766,8 +8766,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] <reserved-0378> (Other) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] <reserved-0378> (Other) ÷ [0.3]
+		desc: '÷ [0.2] <reserved-0378> (Other) ÷ [999.0] <reserved-0378> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0378\u0308\u0378'
 		expected: [
@@ -8782,8 +8782,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) × [3.0] <LINE FEED (LF)> (LF) ÷ [4.0] LATIN SMALL LETTER A (Other) ÷ [5.0] <LINE FEED (LF)> (LF) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [0.3]
+		desc: '÷ [0.2] <reserved-0378> (Other) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] <reserved-0378> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u000A\u0061\u000A\u0308'
 		expected: [
@@ -8808,8 +8808,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (Other) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) × [3.0] <LINE FEED (LF)> (LF) ÷ [4.0] LATIN SMALL LETTER A (Other) ÷ [5.0] <LINE FEED (LF)> (LF) ÷ [4.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0308'
 		expected: [
@@ -8819,8 +8819,8 @@ const grapheme_break_test_cases = [
 				offset_end: 3
 			},
 		]
-	}
-	// ÷ [0.2] SPACE (Other) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [999.0] ARABIC LETTER NOON (Other) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (Other) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u200D\u0646'
 		expected: [
@@ -8835,8 +8835,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] ARABIC LETTER NOON (Other) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [999.0] SPACE (Other) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (Other) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [999.0] ARABIC LETTER NOON (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0646\u200D\u0020'
 		expected: [
@@ -8851,8 +8851,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL CHOSEONG KIYEOK (L) × [6.0] HANGUL CHOSEONG KIYEOK (L) ÷ [0.3]
+		desc: '÷ [0.2] ARABIC LETTER NOON (Other) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [999.0] SPACE (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u1100\u1100'
 		expected: [
@@ -8862,8 +8862,8 @@ const grapheme_break_test_cases = [
 				offset_end: 6
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL SYLLABLE GA (LV) × [7.0] HANGUL JONGSEONG KIYEOK (T) ÷ [999.0] HANGUL CHOSEONG KIYEOK (L) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL CHOSEONG KIYEOK (L) × [6.0] HANGUL CHOSEONG KIYEOK (L) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\uAC00\u11A8\u1100'
 		expected: [
@@ -8878,8 +8878,8 @@ const grapheme_break_test_cases = [
 				offset_end: 9
 			},
 		]
-	}
-	// ÷ [0.2] HANGUL SYLLABLE GAG (LVT) × [8.0] HANGUL JONGSEONG KIYEOK (T) ÷ [999.0] HANGUL CHOSEONG KIYEOK (L) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL SYLLABLE GA (LV) × [7.0] HANGUL JONGSEONG KIYEOK (T) ÷ [999.0] HANGUL CHOSEONG KIYEOK (L) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\uAC01\u11A8\u1100'
 		expected: [
@@ -8894,8 +8894,8 @@ const grapheme_break_test_cases = [
 				offset_end: 9
 			},
 		]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [12.0] REGIONAL INDICATOR SYMBOL LETTER B (RI) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER C (RI) ÷ [999.0] LATIN SMALL LETTER B (Other) ÷ [0.3]
+		desc: '÷ [0.2] HANGUL SYLLABLE GAG (LVT) × [8.0] HANGUL JONGSEONG KIYEOK (T) ÷ [999.0] HANGUL CHOSEONG KIYEOK (L) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\U0001F1E7\U0001F1E8\u0062'
 		expected: [
@@ -8915,8 +8915,8 @@ const grapheme_break_test_cases = [
 				offset_end: 13
 			},
 		]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (Other) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [13.0] REGIONAL INDICATOR SYMBOL LETTER B (RI) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER C (RI) ÷ [999.0] LATIN SMALL LETTER B (Other) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [12.0] REGIONAL INDICATOR SYMBOL LETTER B (RI) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER C (RI) ÷ [999.0] LATIN SMALL LETTER B (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\U0001F1E6\U0001F1E7\U0001F1E8\u0062'
 		expected: [
@@ -8941,8 +8941,8 @@ const grapheme_break_test_cases = [
 				offset_end: 14
 			},
 		]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (Other) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [13.0] REGIONAL INDICATOR SYMBOL LETTER B (RI) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER C (RI) ÷ [999.0] LATIN SMALL LETTER B (Other) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (Other) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [13.0] REGIONAL INDICATOR SYMBOL LETTER B (RI) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER C (RI) ÷ [999.0] LATIN SMALL LETTER B (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\U0001F1E6\U0001F1E7\u200D\U0001F1E8\u0062'
 		expected: [
@@ -8967,8 +8967,8 @@ const grapheme_break_test_cases = [
 				offset_end: 17
 			},
 		]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (Other) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER B (RI) × [13.0] REGIONAL INDICATOR SYMBOL LETTER C (RI) ÷ [999.0] LATIN SMALL LETTER B (Other) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (Other) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [13.0] REGIONAL INDICATOR SYMBOL LETTER B (RI) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER C (RI) ÷ [999.0] LATIN SMALL LETTER B (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\U0001F1E6\u200D\U0001F1E7\U0001F1E8\u0062'
 		expected: [
@@ -8993,8 +8993,8 @@ const grapheme_break_test_cases = [
 				offset_end: 17
 			},
 		]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (Other) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [13.0] REGIONAL INDICATOR SYMBOL LETTER B (RI) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER C (RI) × [13.0] REGIONAL INDICATOR SYMBOL LETTER D (RI) ÷ [999.0] LATIN SMALL LETTER B (Other) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (Other) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER B (RI) × [13.0] REGIONAL INDICATOR SYMBOL LETTER C (RI) ÷ [999.0] LATIN SMALL LETTER B (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\U0001F1E6\U0001F1E7\U0001F1E8\U0001F1E9\u0062'
 		expected: [
@@ -9019,8 +9019,8 @@ const grapheme_break_test_cases = [
 				offset_end: 18
 			},
 		]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (Other) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (Other) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [13.0] REGIONAL INDICATOR SYMBOL LETTER B (RI) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER C (RI) × [13.0] REGIONAL INDICATOR SYMBOL LETTER D (RI) ÷ [999.0] LATIN SMALL LETTER B (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u200D'
 		expected: [
@@ -9030,8 +9030,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (Other) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] LATIN SMALL LETTER B (Other) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (Other) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0308\u0062'
 		expected: [
@@ -9046,8 +9046,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (Other) × [9.1] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [999.0] LATIN SMALL LETTER B (Other) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (Other) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) ÷ [999.0] LATIN SMALL LETTER B (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0903\u0062'
 		expected: [
@@ -9062,8 +9062,8 @@ const grapheme_break_test_cases = [
 				offset_end: 5
 			},
 		]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (Other) ÷ [999.0] ARABIC NUMBER SIGN (Prepend) × [9.2] LATIN SMALL LETTER B (Other) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (Other) × [9.1] DEVANAGARI SIGN VISARGA (SpacingMark) ÷ [999.0] LATIN SMALL LETTER B (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0600\u0062'
 		expected: [
@@ -9078,8 +9078,8 @@ const grapheme_break_test_cases = [
 				offset_end: 4
 			},
 		]
-	}
-	// ÷ [0.2] BABY (ExtPict) × [9.0] EMOJI MODIFIER FITZPATRICK TYPE-6 (Extend) ÷ [999.0] BABY (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (Other) ÷ [999.0] ARABIC NUMBER SIGN (Prepend) × [9.2] LATIN SMALL LETTER B (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F476\U0001F3FF\U0001F476'
 		expected: [
@@ -9094,8 +9094,8 @@ const grapheme_break_test_cases = [
 				offset_end: 12
 			},
 		]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (Other) × [9.0] EMOJI MODIFIER FITZPATRICK TYPE-6 (Extend) ÷ [999.0] BABY (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] BABY (ExtPict) × [9.0] EMOJI MODIFIER FITZPATRICK TYPE-6 (Extend) ÷ [999.0] BABY (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\U0001F3FF\U0001F476'
 		expected: [
@@ -9110,8 +9110,8 @@ const grapheme_break_test_cases = [
 				offset_end: 9
 			},
 		]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (Other) × [9.0] EMOJI MODIFIER FITZPATRICK TYPE-6 (Extend) ÷ [999.0] BABY (ExtPict) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) × [11.0] OCTAGONAL SIGN (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (Other) × [9.0] EMOJI MODIFIER FITZPATRICK TYPE-6 (Extend) ÷ [999.0] BABY (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\U0001F3FF\U0001F476\u200D\U0001F6D1'
 		expected: [
@@ -9126,8 +9126,8 @@ const grapheme_break_test_cases = [
 				offset_end: 16
 			},
 		]
-	}
-	// ÷ [0.2] BABY (ExtPict) × [9.0] EMOJI MODIFIER FITZPATRICK TYPE-6 (Extend) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) × [11.0] BABY (ExtPict) × [9.0] EMOJI MODIFIER FITZPATRICK TYPE-6 (Extend) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (Other) × [9.0] EMOJI MODIFIER FITZPATRICK TYPE-6 (Extend) ÷ [999.0] BABY (ExtPict) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) × [11.0] OCTAGONAL SIGN (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F476\U0001F3FF\u0308\u200D\U0001F476\U0001F3FF'
 		expected: [
@@ -9137,8 +9137,8 @@ const grapheme_break_test_cases = [
 				offset_end: 21
 			},
 		]
-	}
-	// ÷ [0.2] OCTAGONAL SIGN (ExtPict) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) × [11.0] OCTAGONAL SIGN (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] BABY (ExtPict) × [9.0] EMOJI MODIFIER FITZPATRICK TYPE-6 (Extend) × [9.0] COMBINING DIAERESIS (Extend_ExtCccZwj) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) × [11.0] BABY (ExtPict) × [9.0] EMOJI MODIFIER FITZPATRICK TYPE-6 (Extend) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F6D1\u200D\U0001F6D1'
 		expected: [
@@ -9148,8 +9148,8 @@ const grapheme_break_test_cases = [
 				offset_end: 11
 			},
 		]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (Other) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [999.0] OCTAGONAL SIGN (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] OCTAGONAL SIGN (ExtPict) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) × [11.0] OCTAGONAL SIGN (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u200D\U0001F6D1'
 		expected: [
@@ -9164,8 +9164,8 @@ const grapheme_break_test_cases = [
 				offset_end: 8
 			},
 		]
-	}
-	// ÷ [0.2] UPPER BLADE SCISSORS (Other) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) × [11.0] UPPER BLADE SCISSORS (Other) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (Other) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [999.0] OCTAGONAL SIGN (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u2701\u200D\u2701'
 		expected: [
@@ -9175,8 +9175,8 @@ const grapheme_break_test_cases = [
 				offset_end: 9
 			},
 		]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (Other) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [999.0] UPPER BLADE SCISSORS (Other) ÷ [0.3]
+		desc: '÷ [0.2] UPPER BLADE SCISSORS (Other) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) × [11.0] UPPER BLADE SCISSORS (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u200D\u2701'
 		expected: [
@@ -9191,5 +9191,6 @@ const grapheme_break_test_cases = [
 				offset_end: 7
 			},
 		]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (Other) × [9.0] ZERO WIDTH JOINER (ZWJ_ExtCccZwj) ÷ [999.0] UPPER BLADE SCISSORS (Other) ÷ [0.3]'
 	},
 ]
