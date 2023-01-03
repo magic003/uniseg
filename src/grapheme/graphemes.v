@@ -7,7 +7,7 @@ import util
 // from_string creates a `Graphemes` instance from a string.
 pub fn from_string(str string) Graphemes {
 	return Graphemes{
-		iter: util.rune_iter_from_string(str)
+		iter: util.rune_iter_from_string(str, false)
 		state: State.st_sot
 	}
 }
@@ -15,7 +15,7 @@ pub fn from_string(str string) Graphemes {
 // from_bytes creates a `Graphemes` instance from a bytes array.
 pub fn from_bytes(bytes []u8) Graphemes {
 	return Graphemes{
-		iter: util.rune_iter_from_bytes(bytes)
+		iter: util.rune_iter_from_bytes(bytes, false)
 		state: State.st_sot
 	}
 }
@@ -23,7 +23,7 @@ pub fn from_bytes(bytes []u8) Graphemes {
 // from_reader creates a `Graphemes` instance from a `io.Reader`.
 pub fn from_reader(reader io.Reader) Graphemes {
 	return Graphemes{
-		iter: util.rune_iter_from_reader(reader)
+		iter: util.rune_iter_from_reader(reader, false)
 		state: State.st_sot
 	}
 }
