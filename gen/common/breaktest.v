@@ -5,12 +5,12 @@ import strings
 // emit_test_case_struct generates the vlang struct for a test case.
 pub fn emit_test_case_struct(expected_struct string) string {
 	return 'struct TestCase {\n' + 'input string [required]\n' +
-		'expected []${expected_struct} [required]\n' + '}'
+		'expected []${expected_struct} [required]\n' + 'desc string\n' + '}'
 }
 
 // emit_test_case generates the vlang code for a single test case.
 pub fn emit_test_case(input string, expected string, comment string) string {
-	return '// ${comment}\nTestCase{ input: ${input}, expected: ${expected} }'
+	return "TestCase{ input: ${input}, expected: ${expected}, desc: '${comment}' }"
 }
 
 // parse_input_and_expectation constructs the input and expectation of a test case from the test string.

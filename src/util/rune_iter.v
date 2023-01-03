@@ -82,6 +82,9 @@ fn (mut self BytesRuneIter) rewind(count int) ! {
 	if count < 0 {
 		return error('the rewind rune count should not be negative')
 	}
+	if count == 0 {
+		return
+	}
 
 	n := math.min(count, self.rune_lens.len)
 	bytes_to_rewind := arrays.sum(self.rune_lens#[-n..]) or { 0 }
@@ -139,6 +142,9 @@ fn (mut self ReaderRuneIter) rewind(count int) ! {
 	}
 	if count < 0 {
 		return error('the rewind rune count should not be negative')
+	}
+	if count == 0 {
+		return
 	}
 
 	n := math.min(count, self.cached_runes.len)

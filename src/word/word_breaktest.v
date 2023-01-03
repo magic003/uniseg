@@ -5,12 +5,12 @@ module word
 struct TestCase {
 	input    string         [required]
 	expected []WordBoundary [required]
+	desc     string
 }
 
 // word_break_test_cases are the word boundary break test cases.
 // They are taken from https://www.unicode.org/Public/15.0.0/ucd/auxiliary/WordBreakTest.txt.
 const word_break_test_cases = [
-	// ÷ [0.2] <START OF HEADING> (Other) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]
 	TestCase{
 		input: '\u0001\u0001'
 		expected: [WordBoundary{
@@ -22,8 +22,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] <START OF HEADING> (Other) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Other) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u0308\u0001'
 		expected: [WordBoundary{
@@ -35,8 +35,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] <START OF HEADING> (Other) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Other) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u000D'
 		expected: [WordBoundary{
@@ -48,8 +48,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] <START OF HEADING> (Other) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Other) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u0308\u000D'
 		expected: [WordBoundary{
@@ -61,8 +61,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] <START OF HEADING> (Other) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Other) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u000A'
 		expected: [WordBoundary{
@@ -74,8 +74,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] <START OF HEADING> (Other) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Other) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u0308\u000A'
 		expected: [WordBoundary{
@@ -87,8 +87,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] <START OF HEADING> (Other) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Other) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u000B'
 		expected: [WordBoundary{
@@ -100,8 +100,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] <START OF HEADING> (Other) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Other) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u0308\u000B'
 		expected: [WordBoundary{
@@ -113,8 +113,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] <START OF HEADING> (Other) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Other) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u3031'
 		expected: [WordBoundary{
@@ -126,8 +126,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] <START OF HEADING> (Other) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Other) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u0308\u3031'
 		expected: [WordBoundary{
@@ -139,8 +139,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] <START OF HEADING> (Other) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Other) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u0041'
 		expected: [WordBoundary{
@@ -152,8 +152,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] <START OF HEADING> (Other) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Other) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u0308\u0041'
 		expected: [WordBoundary{
@@ -165,8 +165,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] <START OF HEADING> (Other) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Other) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u003A'
 		expected: [WordBoundary{
@@ -178,8 +178,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] <START OF HEADING> (Other) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Other) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u0308\u003A'
 		expected: [WordBoundary{
@@ -191,8 +191,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] <START OF HEADING> (Other) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Other) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u002C'
 		expected: [WordBoundary{
@@ -204,8 +204,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] <START OF HEADING> (Other) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Other) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u0308\u002C'
 		expected: [WordBoundary{
@@ -217,8 +217,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] <START OF HEADING> (Other) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Other) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u002E'
 		expected: [WordBoundary{
@@ -230,8 +230,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] <START OF HEADING> (Other) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Other) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u0308\u002E'
 		expected: [WordBoundary{
@@ -243,8 +243,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] <START OF HEADING> (Other) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Other) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u0030'
 		expected: [WordBoundary{
@@ -256,8 +256,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] <START OF HEADING> (Other) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Other) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u0308\u0030'
 		expected: [WordBoundary{
@@ -269,8 +269,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] <START OF HEADING> (Other) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Other) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u005F'
 		expected: [WordBoundary{
@@ -282,8 +282,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] <START OF HEADING> (Other) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Other) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u0308\u005F'
 		expected: [WordBoundary{
@@ -295,8 +295,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] <START OF HEADING> (Other) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Other) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\U0001F1E6'
 		expected: [WordBoundary{
@@ -308,8 +308,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] <START OF HEADING> (Other) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Other) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u0308\U0001F1E6'
 		expected: [WordBoundary{
@@ -321,8 +321,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] <START OF HEADING> (Other) ÷ [999.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Other) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u05D0'
 		expected: [WordBoundary{
@@ -334,8 +334,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] <START OF HEADING> (Other) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Other) ÷ [999.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u0308\u05D0'
 		expected: [WordBoundary{
@@ -347,8 +347,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] <START OF HEADING> (Other) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Other) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u0022'
 		expected: [WordBoundary{
@@ -360,8 +360,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] <START OF HEADING> (Other) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Other) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u0308\u0022'
 		expected: [WordBoundary{
@@ -373,8 +373,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] <START OF HEADING> (Other) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Other) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u0027'
 		expected: [WordBoundary{
@@ -386,8 +386,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] <START OF HEADING> (Other) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Other) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u0308\u0027'
 		expected: [WordBoundary{
@@ -399,8 +399,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] <START OF HEADING> (Other) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Other) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u231A'
 		expected: [WordBoundary{
@@ -412,8 +412,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] <START OF HEADING> (Other) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Other) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u0308\u231A'
 		expected: [WordBoundary{
@@ -425,8 +425,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] <START OF HEADING> (Other) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Other) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u0020'
 		expected: [WordBoundary{
@@ -438,8 +438,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] <START OF HEADING> (Other) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Other) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u0308\u0020'
 		expected: [WordBoundary{
@@ -451,8 +451,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] <START OF HEADING> (Other) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Other) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u00AD'
 		expected: [WordBoundary{
@@ -460,8 +460,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] <START OF HEADING> (Other) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Other) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u0308\u00AD'
 		expected: [WordBoundary{
@@ -469,8 +469,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] <START OF HEADING> (Other) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Other) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u0300'
 		expected: [WordBoundary{
@@ -478,8 +478,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] <START OF HEADING> (Other) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Other) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u0308\u0300'
 		expected: [WordBoundary{
@@ -487,8 +487,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] <START OF HEADING> (Other) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Other) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u200D'
 		expected: [WordBoundary{
@@ -496,8 +496,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] <START OF HEADING> (Other) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Other) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u0308\u200D'
 		expected: [WordBoundary{
@@ -505,8 +505,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] <START OF HEADING> (Other) ÷ [999.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Other) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u0061\u2060'
 		expected: [WordBoundary{
@@ -518,8 +518,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] <START OF HEADING> (Other) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Other) ÷ [999.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u0308\u0061\u2060'
 		expected: [WordBoundary{
@@ -531,8 +531,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] <START OF HEADING> (Other) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Other) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u0061\u003A'
 		expected: [WordBoundary{
@@ -548,8 +548,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] <START OF HEADING> (Other) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Other) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u0308\u0061\u003A'
 		expected: [WordBoundary{
@@ -565,8 +565,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] <START OF HEADING> (Other) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Other) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u0061\u0027'
 		expected: [WordBoundary{
@@ -582,8 +582,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] <START OF HEADING> (Other) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Other) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u0308\u0061\u0027'
 		expected: [WordBoundary{
@@ -599,8 +599,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] <START OF HEADING> (Other) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Other) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u0061\u0027\u2060'
 		expected: [WordBoundary{
@@ -616,8 +616,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] <START OF HEADING> (Other) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Other) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u0308\u0061\u0027\u2060'
 		expected: [WordBoundary{
@@ -633,8 +633,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] <START OF HEADING> (Other) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Other) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u0061\u002C'
 		expected: [WordBoundary{
@@ -650,8 +650,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] <START OF HEADING> (Other) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Other) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u0308\u0061\u002C'
 		expected: [WordBoundary{
@@ -667,8 +667,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] <START OF HEADING> (Other) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Other) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u0031\u003A'
 		expected: [WordBoundary{
@@ -684,8 +684,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] <START OF HEADING> (Other) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Other) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u0308\u0031\u003A'
 		expected: [WordBoundary{
@@ -701,8 +701,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] <START OF HEADING> (Other) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Other) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u0031\u0027'
 		expected: [WordBoundary{
@@ -718,8 +718,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] <START OF HEADING> (Other) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Other) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u0308\u0031\u0027'
 		expected: [WordBoundary{
@@ -735,8 +735,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] <START OF HEADING> (Other) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Other) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u0031\u002C'
 		expected: [WordBoundary{
@@ -752,8 +752,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] <START OF HEADING> (Other) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Other) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u0308\u0031\u002C'
 		expected: [WordBoundary{
@@ -769,8 +769,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] <START OF HEADING> (Other) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Other) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u0031\u002E\u2060'
 		expected: [WordBoundary{
@@ -786,8 +786,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] <START OF HEADING> (Other) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Other) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0001\u0308\u0031\u002E\u2060'
 		expected: [WordBoundary{
@@ -803,8 +803,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] <START OF HEADING> (Other) ÷ [0.3]
+		desc: '÷ [0.2] <START OF HEADING> (Other) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u0001'
 		expected: [WordBoundary{
@@ -816,8 +816,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] <START OF HEADING> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u0308\u0001'
 		expected: [WordBoundary{
@@ -833,8 +833,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u000D'
 		expected: [WordBoundary{
@@ -846,8 +846,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u0308\u000D'
 		expected: [WordBoundary{
@@ -863,8 +863,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) × [3.0] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u000A'
 		expected: [WordBoundary{
@@ -872,8 +872,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) × [3.0] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u0308\u000A'
 		expected: [WordBoundary{
@@ -889,8 +889,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] <LINE TABULATION> (Newline) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u000B'
 		expected: [WordBoundary{
@@ -902,8 +902,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] <LINE TABULATION> (Newline) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u0308\u000B'
 		expected: [WordBoundary{
@@ -919,8 +919,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u3031'
 		expected: [WordBoundary{
@@ -932,8 +932,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u0308\u3031'
 		expected: [WordBoundary{
@@ -949,8 +949,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u0041'
 		expected: [WordBoundary{
@@ -962,8 +962,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u0308\u0041'
 		expected: [WordBoundary{
@@ -979,8 +979,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u003A'
 		expected: [WordBoundary{
@@ -992,8 +992,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u0308\u003A'
 		expected: [WordBoundary{
@@ -1009,8 +1009,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u002C'
 		expected: [WordBoundary{
@@ -1022,8 +1022,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u0308\u002C'
 		expected: [WordBoundary{
@@ -1039,8 +1039,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] FULL STOP (MidNumLet) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u002E'
 		expected: [WordBoundary{
@@ -1052,8 +1052,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] FULL STOP (MidNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u0308\u002E'
 		expected: [WordBoundary{
@@ -1069,8 +1069,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] DIGIT ZERO (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u0030'
 		expected: [WordBoundary{
@@ -1082,8 +1082,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] DIGIT ZERO (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u0308\u0030'
 		expected: [WordBoundary{
@@ -1099,8 +1099,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] LOW LINE (ExtendNumLet) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u005F'
 		expected: [WordBoundary{
@@ -1112,8 +1112,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] LOW LINE (ExtendNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u0308\u005F'
 		expected: [WordBoundary{
@@ -1129,8 +1129,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\U0001F1E6'
 		expected: [WordBoundary{
@@ -1142,8 +1142,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u0308\U0001F1E6'
 		expected: [WordBoundary{
@@ -1159,8 +1159,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u05D0'
 		expected: [WordBoundary{
@@ -1172,8 +1172,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u0308\u05D0'
 		expected: [WordBoundary{
@@ -1189,8 +1189,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] QUOTATION MARK (Double_Quote) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u0022'
 		expected: [WordBoundary{
@@ -1202,8 +1202,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] QUOTATION MARK (Double_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u0308\u0022'
 		expected: [WordBoundary{
@@ -1219,8 +1219,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u0027'
 		expected: [WordBoundary{
@@ -1232,8 +1232,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u0308\u0027'
 		expected: [WordBoundary{
@@ -1249,8 +1249,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u231A'
 		expected: [WordBoundary{
@@ -1262,8 +1262,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u0308\u231A'
 		expected: [WordBoundary{
@@ -1279,8 +1279,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] SPACE (WSegSpace) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u0020'
 		expected: [WordBoundary{
@@ -1292,8 +1292,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] SPACE (WSegSpace) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u0308\u0020'
 		expected: [WordBoundary{
@@ -1309,8 +1309,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] SOFT HYPHEN (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u00AD'
 		expected: [WordBoundary{
@@ -1322,8 +1322,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] SOFT HYPHEN (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u0308\u00AD'
 		expected: [WordBoundary{
@@ -1335,8 +1335,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u0300'
 		expected: [WordBoundary{
@@ -1348,8 +1348,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u0308\u0300'
 		expected: [WordBoundary{
@@ -1361,8 +1361,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u200D'
 		expected: [WordBoundary{
@@ -1374,8 +1374,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u0308\u200D'
 		expected: [WordBoundary{
@@ -1387,8 +1387,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u0061\u2060'
 		expected: [WordBoundary{
@@ -1400,8 +1400,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u0308\u0061\u2060'
 		expected: [WordBoundary{
@@ -1417,8 +1417,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u0061\u003A'
 		expected: [WordBoundary{
@@ -1434,8 +1434,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u0308\u0061\u003A'
 		expected: [WordBoundary{
@@ -1455,8 +1455,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u0061\u0027'
 		expected: [WordBoundary{
@@ -1472,8 +1472,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u0308\u0061\u0027'
 		expected: [WordBoundary{
@@ -1493,8 +1493,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u0061\u0027\u2060'
 		expected: [WordBoundary{
@@ -1510,8 +1510,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u0308\u0061\u0027\u2060'
 		expected: [WordBoundary{
@@ -1531,8 +1531,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u0061\u002C'
 		expected: [WordBoundary{
@@ -1548,8 +1548,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u0308\u0061\u002C'
 		expected: [WordBoundary{
@@ -1569,8 +1569,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u0031\u003A'
 		expected: [WordBoundary{
@@ -1586,8 +1586,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u0308\u0031\u003A'
 		expected: [WordBoundary{
@@ -1607,8 +1607,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u0031\u0027'
 		expected: [WordBoundary{
@@ -1624,8 +1624,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u0308\u0031\u0027'
 		expected: [WordBoundary{
@@ -1645,8 +1645,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u0031\u002C'
 		expected: [WordBoundary{
@@ -1662,8 +1662,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u0308\u0031\u002C'
 		expected: [WordBoundary{
@@ -1683,8 +1683,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u0031\u002E\u2060'
 		expected: [WordBoundary{
@@ -1700,8 +1700,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u0308\u0031\u002E\u2060'
 		expected: [WordBoundary{
@@ -1721,8 +1721,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] <START OF HEADING> (Other) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u0001'
 		expected: [WordBoundary{
@@ -1734,8 +1734,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] <START OF HEADING> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u0308\u0001'
 		expected: [WordBoundary{
@@ -1751,8 +1751,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u000D'
 		expected: [WordBoundary{
@@ -1764,8 +1764,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u0308\u000D'
 		expected: [WordBoundary{
@@ -1781,8 +1781,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u000A'
 		expected: [WordBoundary{
@@ -1794,8 +1794,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u0308\u000A'
 		expected: [WordBoundary{
@@ -1811,8 +1811,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] <LINE TABULATION> (Newline) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u000B'
 		expected: [WordBoundary{
@@ -1824,8 +1824,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] <LINE TABULATION> (Newline) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u0308\u000B'
 		expected: [WordBoundary{
@@ -1841,8 +1841,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u3031'
 		expected: [WordBoundary{
@@ -1854,8 +1854,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u0308\u3031'
 		expected: [WordBoundary{
@@ -1871,8 +1871,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u0041'
 		expected: [WordBoundary{
@@ -1884,8 +1884,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u0308\u0041'
 		expected: [WordBoundary{
@@ -1901,8 +1901,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u003A'
 		expected: [WordBoundary{
@@ -1914,8 +1914,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u0308\u003A'
 		expected: [WordBoundary{
@@ -1931,8 +1931,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u002C'
 		expected: [WordBoundary{
@@ -1944,8 +1944,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u0308\u002C'
 		expected: [WordBoundary{
@@ -1961,8 +1961,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] FULL STOP (MidNumLet) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u002E'
 		expected: [WordBoundary{
@@ -1974,8 +1974,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] FULL STOP (MidNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u0308\u002E'
 		expected: [WordBoundary{
@@ -1991,8 +1991,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] DIGIT ZERO (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u0030'
 		expected: [WordBoundary{
@@ -2004,8 +2004,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] DIGIT ZERO (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u0308\u0030'
 		expected: [WordBoundary{
@@ -2021,8 +2021,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] LOW LINE (ExtendNumLet) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u005F'
 		expected: [WordBoundary{
@@ -2034,8 +2034,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] LOW LINE (ExtendNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u0308\u005F'
 		expected: [WordBoundary{
@@ -2051,8 +2051,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\U0001F1E6'
 		expected: [WordBoundary{
@@ -2064,8 +2064,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u0308\U0001F1E6'
 		expected: [WordBoundary{
@@ -2081,8 +2081,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u05D0'
 		expected: [WordBoundary{
@@ -2094,8 +2094,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u0308\u05D0'
 		expected: [WordBoundary{
@@ -2111,8 +2111,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] QUOTATION MARK (Double_Quote) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u0022'
 		expected: [WordBoundary{
@@ -2124,8 +2124,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] QUOTATION MARK (Double_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u0308\u0022'
 		expected: [WordBoundary{
@@ -2141,8 +2141,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u0027'
 		expected: [WordBoundary{
@@ -2154,8 +2154,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u0308\u0027'
 		expected: [WordBoundary{
@@ -2171,8 +2171,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u231A'
 		expected: [WordBoundary{
@@ -2184,8 +2184,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u0308\u231A'
 		expected: [WordBoundary{
@@ -2201,8 +2201,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] SPACE (WSegSpace) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u0020'
 		expected: [WordBoundary{
@@ -2214,8 +2214,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] SPACE (WSegSpace) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u0308\u0020'
 		expected: [WordBoundary{
@@ -2231,8 +2231,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] SOFT HYPHEN (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u00AD'
 		expected: [WordBoundary{
@@ -2244,8 +2244,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] SOFT HYPHEN (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u0308\u00AD'
 		expected: [WordBoundary{
@@ -2257,8 +2257,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u0300'
 		expected: [WordBoundary{
@@ -2270,8 +2270,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u0308\u0300'
 		expected: [WordBoundary{
@@ -2283,8 +2283,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u200D'
 		expected: [WordBoundary{
@@ -2296,8 +2296,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u0308\u200D'
 		expected: [WordBoundary{
@@ -2309,8 +2309,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u0061\u2060'
 		expected: [WordBoundary{
@@ -2322,8 +2322,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u0308\u0061\u2060'
 		expected: [WordBoundary{
@@ -2339,8 +2339,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u0061\u003A'
 		expected: [WordBoundary{
@@ -2356,8 +2356,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u0308\u0061\u003A'
 		expected: [WordBoundary{
@@ -2377,8 +2377,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u0061\u0027'
 		expected: [WordBoundary{
@@ -2394,8 +2394,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u0308\u0061\u0027'
 		expected: [WordBoundary{
@@ -2415,8 +2415,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u0061\u0027\u2060'
 		expected: [WordBoundary{
@@ -2432,8 +2432,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u0308\u0061\u0027\u2060'
 		expected: [WordBoundary{
@@ -2453,8 +2453,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u0061\u002C'
 		expected: [WordBoundary{
@@ -2470,8 +2470,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u0308\u0061\u002C'
 		expected: [WordBoundary{
@@ -2491,8 +2491,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u0031\u003A'
 		expected: [WordBoundary{
@@ -2508,8 +2508,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u0308\u0031\u003A'
 		expected: [WordBoundary{
@@ -2529,8 +2529,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u0031\u0027'
 		expected: [WordBoundary{
@@ -2546,8 +2546,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u0308\u0031\u0027'
 		expected: [WordBoundary{
@@ -2567,8 +2567,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u0031\u002C'
 		expected: [WordBoundary{
@@ -2584,8 +2584,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u0308\u0031\u002C'
 		expected: [WordBoundary{
@@ -2605,8 +2605,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u0031\u002E\u2060'
 		expected: [WordBoundary{
@@ -2622,8 +2622,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000A\u0308\u0031\u002E\u2060'
 		expected: [WordBoundary{
@@ -2643,8 +2643,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] <START OF HEADING> (Other) ÷ [0.3]
+		desc: '÷ [0.2] <LINE FEED (LF)> (LF) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000B\u0001'
 		expected: [WordBoundary{
@@ -2656,8 +2656,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]
+		desc: '÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] <START OF HEADING> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000B\u0308\u0001'
 		expected: [WordBoundary{
@@ -2673,8 +2673,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000B\u000D'
 		expected: [WordBoundary{
@@ -2686,8 +2686,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000B\u0308\u000D'
 		expected: [WordBoundary{
@@ -2703,8 +2703,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000B\u000A'
 		expected: [WordBoundary{
@@ -2716,8 +2716,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000B\u0308\u000A'
 		expected: [WordBoundary{
@@ -2733,8 +2733,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] <LINE TABULATION> (Newline) ÷ [0.3]
+		desc: '÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000B\u000B'
 		expected: [WordBoundary{
@@ -2746,8 +2746,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]
+		desc: '÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] <LINE TABULATION> (Newline) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000B\u0308\u000B'
 		expected: [WordBoundary{
@@ -2763,8 +2763,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]
+		desc: '÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000B\u3031'
 		expected: [WordBoundary{
@@ -2776,8 +2776,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]
+		desc: '÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000B\u0308\u3031'
 		expected: [WordBoundary{
@@ -2793,8 +2793,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000B\u0041'
 		expected: [WordBoundary{
@@ -2806,8 +2806,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000B\u0308\u0041'
 		expected: [WordBoundary{
@@ -2823,8 +2823,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000B\u003A'
 		expected: [WordBoundary{
@@ -2836,8 +2836,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000B\u0308\u003A'
 		expected: [WordBoundary{
@@ -2853,8 +2853,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000B\u002C'
 		expected: [WordBoundary{
@@ -2866,8 +2866,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000B\u0308\u002C'
 		expected: [WordBoundary{
@@ -2883,8 +2883,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] FULL STOP (MidNumLet) ÷ [0.3]
+		desc: '÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000B\u002E'
 		expected: [WordBoundary{
@@ -2896,8 +2896,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]
+		desc: '÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] FULL STOP (MidNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000B\u0308\u002E'
 		expected: [WordBoundary{
@@ -2913,8 +2913,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] DIGIT ZERO (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000B\u0030'
 		expected: [WordBoundary{
@@ -2926,8 +2926,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] DIGIT ZERO (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000B\u0308\u0030'
 		expected: [WordBoundary{
@@ -2943,8 +2943,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] LOW LINE (ExtendNumLet) ÷ [0.3]
+		desc: '÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000B\u005F'
 		expected: [WordBoundary{
@@ -2956,8 +2956,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]
+		desc: '÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] LOW LINE (ExtendNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000B\u0308\u005F'
 		expected: [WordBoundary{
@@ -2973,8 +2973,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000B\U0001F1E6'
 		expected: [WordBoundary{
@@ -2986,8 +2986,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000B\u0308\U0001F1E6'
 		expected: [WordBoundary{
@@ -3003,8 +3003,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]
+		desc: '÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000B\u05D0'
 		expected: [WordBoundary{
@@ -3016,8 +3016,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]
+		desc: '÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000B\u0308\u05D0'
 		expected: [WordBoundary{
@@ -3033,8 +3033,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] QUOTATION MARK (Double_Quote) ÷ [0.3]
+		desc: '÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000B\u0022'
 		expected: [WordBoundary{
@@ -3046,8 +3046,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]
+		desc: '÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] QUOTATION MARK (Double_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000B\u0308\u0022'
 		expected: [WordBoundary{
@@ -3063,8 +3063,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000B\u0027'
 		expected: [WordBoundary{
@@ -3076,8 +3076,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000B\u0308\u0027'
 		expected: [WordBoundary{
@@ -3093,8 +3093,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000B\u231A'
 		expected: [WordBoundary{
@@ -3106,8 +3106,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000B\u0308\u231A'
 		expected: [WordBoundary{
@@ -3123,8 +3123,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] SPACE (WSegSpace) ÷ [0.3]
+		desc: '÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000B\u0020'
 		expected: [WordBoundary{
@@ -3136,8 +3136,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]
+		desc: '÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] SPACE (WSegSpace) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000B\u0308\u0020'
 		expected: [WordBoundary{
@@ -3153,8 +3153,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] SOFT HYPHEN (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000B\u00AD'
 		expected: [WordBoundary{
@@ -3166,8 +3166,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] SOFT HYPHEN (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000B\u0308\u00AD'
 		expected: [WordBoundary{
@@ -3179,8 +3179,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]
+		desc: '÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000B\u0300'
 		expected: [WordBoundary{
@@ -3192,8 +3192,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]
+		desc: '÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000B\u0308\u0300'
 		expected: [WordBoundary{
@@ -3205,8 +3205,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]
+		desc: '÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000B\u200D'
 		expected: [WordBoundary{
@@ -3218,8 +3218,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]
+		desc: '÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000B\u0308\u200D'
 		expected: [WordBoundary{
@@ -3231,8 +3231,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000B\u0061\u2060'
 		expected: [WordBoundary{
@@ -3244,8 +3244,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000B\u0308\u0061\u2060'
 		expected: [WordBoundary{
@@ -3261,8 +3261,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000B\u0061\u003A'
 		expected: [WordBoundary{
@@ -3278,8 +3278,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000B\u0308\u0061\u003A'
 		expected: [WordBoundary{
@@ -3299,8 +3299,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000B\u0061\u0027'
 		expected: [WordBoundary{
@@ -3316,8 +3316,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000B\u0308\u0061\u0027'
 		expected: [WordBoundary{
@@ -3337,8 +3337,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000B\u0061\u0027\u2060'
 		expected: [WordBoundary{
@@ -3354,8 +3354,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000B\u0308\u0061\u0027\u2060'
 		expected: [WordBoundary{
@@ -3375,8 +3375,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000B\u0061\u002C'
 		expected: [WordBoundary{
@@ -3392,8 +3392,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000B\u0308\u0061\u002C'
 		expected: [WordBoundary{
@@ -3413,8 +3413,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000B\u0031\u003A'
 		expected: [WordBoundary{
@@ -3430,8 +3430,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000B\u0308\u0031\u003A'
 		expected: [WordBoundary{
@@ -3451,8 +3451,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000B\u0031\u0027'
 		expected: [WordBoundary{
@@ -3468,8 +3468,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000B\u0308\u0031\u0027'
 		expected: [WordBoundary{
@@ -3489,8 +3489,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000B\u0031\u002C'
 		expected: [WordBoundary{
@@ -3506,8 +3506,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000B\u0308\u0031\u002C'
 		expected: [WordBoundary{
@@ -3527,8 +3527,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000B\u0031\u002E\u2060'
 		expected: [WordBoundary{
@@ -3544,8 +3544,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000B\u0308\u0031\u002E\u2060'
 		expected: [WordBoundary{
@@ -3565,8 +3565,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]
+		desc: '÷ [0.2] <LINE TABULATION> (Newline) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u3031\u0001'
 		expected: [WordBoundary{
@@ -3578,8 +3578,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]
+		desc: '÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u3031\u0308\u0001'
 		expected: [WordBoundary{
@@ -3591,8 +3591,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u3031\u000D'
 		expected: [WordBoundary{
@@ -3604,8 +3604,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u3031\u0308\u000D'
 		expected: [WordBoundary{
@@ -3617,8 +3617,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u3031\u000A'
 		expected: [WordBoundary{
@@ -3630,8 +3630,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u3031\u0308\u000A'
 		expected: [WordBoundary{
@@ -3643,8 +3643,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]
+		desc: '÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u3031\u000B'
 		expected: [WordBoundary{
@@ -3656,8 +3656,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]
+		desc: '÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u3031\u0308\u000B'
 		expected: [WordBoundary{
@@ -3669,8 +3669,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) × [13.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]
+		desc: '÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u3031\u3031'
 		expected: [WordBoundary{
@@ -3678,8 +3678,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) × [4.0] COMBINING DIAERESIS (Extend_FE) × [13.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]
+		desc: '÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) × [13.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u3031\u0308\u3031'
 		expected: [WordBoundary{
@@ -3687,8 +3687,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) × [4.0] COMBINING DIAERESIS (Extend_FE) × [13.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u3031\u0041'
 		expected: [WordBoundary{
@@ -3700,8 +3700,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u3031\u0308\u0041'
 		expected: [WordBoundary{
@@ -3713,8 +3713,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u3031\u003A'
 		expected: [WordBoundary{
@@ -3726,8 +3726,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u3031\u0308\u003A'
 		expected: [WordBoundary{
@@ -3739,8 +3739,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u3031\u002C'
 		expected: [WordBoundary{
@@ -3752,8 +3752,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u3031\u0308\u002C'
 		expected: [WordBoundary{
@@ -3765,8 +3765,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]
+		desc: '÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u3031\u002E'
 		expected: [WordBoundary{
@@ -3778,8 +3778,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]
+		desc: '÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u3031\u0308\u002E'
 		expected: [WordBoundary{
@@ -3791,8 +3791,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u3031\u0030'
 		expected: [WordBoundary{
@@ -3804,8 +3804,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u3031\u0308\u0030'
 		expected: [WordBoundary{
@@ -3817,8 +3817,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) × [13.1] LOW LINE (ExtendNumLet) ÷ [0.3]
+		desc: '÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u3031\u005F'
 		expected: [WordBoundary{
@@ -3826,8 +3826,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) × [4.0] COMBINING DIAERESIS (Extend_FE) × [13.1] LOW LINE (ExtendNumLet) ÷ [0.3]
+		desc: '÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) × [13.1] LOW LINE (ExtendNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u3031\u0308\u005F'
 		expected: [WordBoundary{
@@ -3835,8 +3835,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) × [4.0] COMBINING DIAERESIS (Extend_FE) × [13.1] LOW LINE (ExtendNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u3031\U0001F1E6'
 		expected: [WordBoundary{
@@ -3848,8 +3848,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u3031\u0308\U0001F1E6'
 		expected: [WordBoundary{
@@ -3861,8 +3861,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 9
 		}]
-	}
-	// ÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) ÷ [999.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]
+		desc: '÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u3031\u05D0'
 		expected: [WordBoundary{
@@ -3874,8 +3874,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]
+		desc: '÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) ÷ [999.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u3031\u0308\u05D0'
 		expected: [WordBoundary{
@@ -3887,8 +3887,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]
+		desc: '÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u3031\u0022'
 		expected: [WordBoundary{
@@ -3900,8 +3900,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]
+		desc: '÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u3031\u0308\u0022'
 		expected: [WordBoundary{
@@ -3913,8 +3913,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u3031\u0027'
 		expected: [WordBoundary{
@@ -3926,8 +3926,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u3031\u0308\u0027'
 		expected: [WordBoundary{
@@ -3939,8 +3939,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u3031\u231A'
 		expected: [WordBoundary{
@@ -3952,8 +3952,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u3031\u0308\u231A'
 		expected: [WordBoundary{
@@ -3965,8 +3965,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]
+		desc: '÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u3031\u0020'
 		expected: [WordBoundary{
@@ -3978,8 +3978,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]
+		desc: '÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u3031\u0308\u0020'
 		expected: [WordBoundary{
@@ -3991,8 +3991,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u3031\u00AD'
 		expected: [WordBoundary{
@@ -4000,8 +4000,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u3031\u0308\u00AD'
 		expected: [WordBoundary{
@@ -4009,8 +4009,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]
+		desc: '÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u3031\u0300'
 		expected: [WordBoundary{
@@ -4018,8 +4018,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]
+		desc: '÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u3031\u0308\u0300'
 		expected: [WordBoundary{
@@ -4027,8 +4027,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]
+		desc: '÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u3031\u200D'
 		expected: [WordBoundary{
@@ -4036,8 +4036,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]
+		desc: '÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u3031\u0308\u200D'
 		expected: [WordBoundary{
@@ -4045,8 +4045,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) ÷ [999.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u3031\u0061\u2060'
 		expected: [WordBoundary{
@@ -4058,8 +4058,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) ÷ [999.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u3031\u0308\u0061\u2060'
 		expected: [WordBoundary{
@@ -4071,8 +4071,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 9
 		}]
-	}
-	// ÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u3031\u0061\u003A'
 		expected: [WordBoundary{
@@ -4088,8 +4088,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u3031\u0308\u0061\u003A'
 		expected: [WordBoundary{
@@ -4105,8 +4105,8 @@ const word_break_test_cases = [
 			offset_start: 6
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u3031\u0061\u0027'
 		expected: [WordBoundary{
@@ -4122,8 +4122,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u3031\u0308\u0061\u0027'
 		expected: [WordBoundary{
@@ -4139,8 +4139,8 @@ const word_break_test_cases = [
 			offset_start: 6
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u3031\u0061\u0027\u2060'
 		expected: [WordBoundary{
@@ -4156,8 +4156,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u3031\u0308\u0061\u0027\u2060'
 		expected: [WordBoundary{
@@ -4173,8 +4173,8 @@ const word_break_test_cases = [
 			offset_start: 6
 			offset_end: 10
 		}]
-	}
-	// ÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u3031\u0061\u002C'
 		expected: [WordBoundary{
@@ -4190,8 +4190,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u3031\u0308\u0061\u002C'
 		expected: [WordBoundary{
@@ -4207,8 +4207,8 @@ const word_break_test_cases = [
 			offset_start: 6
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u3031\u0031\u003A'
 		expected: [WordBoundary{
@@ -4224,8 +4224,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u3031\u0308\u0031\u003A'
 		expected: [WordBoundary{
@@ -4241,8 +4241,8 @@ const word_break_test_cases = [
 			offset_start: 6
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u3031\u0031\u0027'
 		expected: [WordBoundary{
@@ -4258,8 +4258,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u3031\u0308\u0031\u0027'
 		expected: [WordBoundary{
@@ -4275,8 +4275,8 @@ const word_break_test_cases = [
 			offset_start: 6
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u3031\u0031\u002C'
 		expected: [WordBoundary{
@@ -4292,8 +4292,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u3031\u0308\u0031\u002C'
 		expected: [WordBoundary{
@@ -4309,8 +4309,8 @@ const word_break_test_cases = [
 			offset_start: 6
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u3031\u0031\u002E\u2060'
 		expected: [WordBoundary{
@@ -4326,8 +4326,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u3031\u0308\u0031\u002E\u2060'
 		expected: [WordBoundary{
@@ -4343,8 +4343,8 @@ const word_break_test_cases = [
 			offset_start: 6
 			offset_end: 10
 		}]
-	}
-	// ÷ [0.2] LATIN CAPITAL LETTER A (ALetter) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]
+		desc: '÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0041\u0001'
 		expected: [WordBoundary{
@@ -4356,8 +4356,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]
+		desc: '÷ [0.2] LATIN CAPITAL LETTER A (ALetter) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0041\u0308\u0001'
 		expected: [WordBoundary{
@@ -4369,8 +4369,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] LATIN CAPITAL LETTER A (ALetter) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0041\u000D'
 		expected: [WordBoundary{
@@ -4382,8 +4382,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] LATIN CAPITAL LETTER A (ALetter) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0041\u0308\u000D'
 		expected: [WordBoundary{
@@ -4395,8 +4395,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] LATIN CAPITAL LETTER A (ALetter) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0041\u000A'
 		expected: [WordBoundary{
@@ -4408,8 +4408,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] LATIN CAPITAL LETTER A (ALetter) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0041\u0308\u000A'
 		expected: [WordBoundary{
@@ -4421,8 +4421,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] LATIN CAPITAL LETTER A (ALetter) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]
+		desc: '÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0041\u000B'
 		expected: [WordBoundary{
@@ -4434,8 +4434,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]
+		desc: '÷ [0.2] LATIN CAPITAL LETTER A (ALetter) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0041\u0308\u000B'
 		expected: [WordBoundary{
@@ -4447,8 +4447,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] LATIN CAPITAL LETTER A (ALetter) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]
+		desc: '÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0041\u3031'
 		expected: [WordBoundary{
@@ -4460,8 +4460,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]
+		desc: '÷ [0.2] LATIN CAPITAL LETTER A (ALetter) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0041\u0308\u3031'
 		expected: [WordBoundary{
@@ -4473,8 +4473,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [5.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0041\u0041'
 		expected: [WordBoundary{
@@ -4482,8 +4482,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [5.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [5.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0041\u0308\u0041'
 		expected: [WordBoundary{
@@ -4491,8 +4491,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] LATIN CAPITAL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [5.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0041\u003A'
 		expected: [WordBoundary{
@@ -4504,8 +4504,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN CAPITAL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0041\u0308\u003A'
 		expected: [WordBoundary{
@@ -4517,8 +4517,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] LATIN CAPITAL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0041\u002C'
 		expected: [WordBoundary{
@@ -4530,8 +4530,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] LATIN CAPITAL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0041\u0308\u002C'
 		expected: [WordBoundary{
@@ -4543,8 +4543,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] LATIN CAPITAL LETTER A (ALetter) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]
+		desc: '÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0041\u002E'
 		expected: [WordBoundary{
@@ -4556,8 +4556,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]
+		desc: '÷ [0.2] LATIN CAPITAL LETTER A (ALetter) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0041\u0308\u002E'
 		expected: [WordBoundary{
@@ -4569,8 +4569,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [9.0] DIGIT ZERO (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0041\u0030'
 		expected: [WordBoundary{
@@ -4578,8 +4578,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [9.0] DIGIT ZERO (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [9.0] DIGIT ZERO (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0041\u0308\u0030'
 		expected: [WordBoundary{
@@ -4587,8 +4587,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [13.1] LOW LINE (ExtendNumLet) ÷ [0.3]
+		desc: '÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [9.0] DIGIT ZERO (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0041\u005F'
 		expected: [WordBoundary{
@@ -4596,8 +4596,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [13.1] LOW LINE (ExtendNumLet) ÷ [0.3]
+		desc: '÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [13.1] LOW LINE (ExtendNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0041\u0308\u005F'
 		expected: [WordBoundary{
@@ -4605,8 +4605,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] LATIN CAPITAL LETTER A (ALetter) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [13.1] LOW LINE (ExtendNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0041\U0001F1E6'
 		expected: [WordBoundary{
@@ -4618,8 +4618,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] LATIN CAPITAL LETTER A (ALetter) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0041\u0308\U0001F1E6'
 		expected: [WordBoundary{
@@ -4631,8 +4631,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [5.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0041\u05D0'
 		expected: [WordBoundary{
@@ -4640,8 +4640,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [5.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [5.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0041\u0308\u05D0'
 		expected: [WordBoundary{
@@ -4649,8 +4649,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LATIN CAPITAL LETTER A (ALetter) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]
+		desc: '÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [5.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0041\u0022'
 		expected: [WordBoundary{
@@ -4662,8 +4662,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]
+		desc: '÷ [0.2] LATIN CAPITAL LETTER A (ALetter) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0041\u0308\u0022'
 		expected: [WordBoundary{
@@ -4675,8 +4675,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] LATIN CAPITAL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0041\u0027'
 		expected: [WordBoundary{
@@ -4688,8 +4688,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] LATIN CAPITAL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0041\u0308\u0027'
 		expected: [WordBoundary{
@@ -4701,8 +4701,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] LATIN CAPITAL LETTER A (ALetter) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0041\u231A'
 		expected: [WordBoundary{
@@ -4714,8 +4714,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] LATIN CAPITAL LETTER A (ALetter) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0041\u0308\u231A'
 		expected: [WordBoundary{
@@ -4727,8 +4727,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN CAPITAL LETTER A (ALetter) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]
+		desc: '÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0041\u0020'
 		expected: [WordBoundary{
@@ -4740,8 +4740,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]
+		desc: '÷ [0.2] LATIN CAPITAL LETTER A (ALetter) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0041\u0308\u0020'
 		expected: [WordBoundary{
@@ -4753,8 +4753,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0041\u00AD'
 		expected: [WordBoundary{
@@ -4762,8 +4762,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0041\u0308\u00AD'
 		expected: [WordBoundary{
@@ -4771,8 +4771,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]
+		desc: '÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0041\u0300'
 		expected: [WordBoundary{
@@ -4780,8 +4780,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]
+		desc: '÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0041\u0308\u0300'
 		expected: [WordBoundary{
@@ -4789,8 +4789,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]
+		desc: '÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0041\u200D'
 		expected: [WordBoundary{
@@ -4798,8 +4798,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]
+		desc: '÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0041\u0308\u200D'
 		expected: [WordBoundary{
@@ -4807,8 +4807,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [5.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0041\u0061\u2060'
 		expected: [WordBoundary{
@@ -4816,8 +4816,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [5.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [5.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0041\u0308\u0061\u2060'
 		expected: [WordBoundary{
@@ -4825,8 +4825,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [5.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [5.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0041\u0061\u003A'
 		expected: [WordBoundary{
@@ -4838,8 +4838,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [5.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [5.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0041\u0308\u0061\u003A'
 		expected: [WordBoundary{
@@ -4851,8 +4851,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [5.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [5.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0041\u0061\u0027'
 		expected: [WordBoundary{
@@ -4864,8 +4864,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [5.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [5.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0041\u0308\u0061\u0027'
 		expected: [WordBoundary{
@@ -4877,8 +4877,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [5.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [5.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0041\u0061\u0027\u2060'
 		expected: [WordBoundary{
@@ -4890,8 +4890,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [5.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [5.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0041\u0308\u0061\u0027\u2060'
 		expected: [WordBoundary{
@@ -4903,8 +4903,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [5.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [5.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0041\u0061\u002C'
 		expected: [WordBoundary{
@@ -4916,8 +4916,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [5.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [5.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0041\u0308\u0061\u002C'
 		expected: [WordBoundary{
@@ -4929,8 +4929,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [9.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [5.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0041\u0031\u003A'
 		expected: [WordBoundary{
@@ -4942,8 +4942,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [9.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [9.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0041\u0308\u0031\u003A'
 		expected: [WordBoundary{
@@ -4955,8 +4955,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [9.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [9.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0041\u0031\u0027'
 		expected: [WordBoundary{
@@ -4968,8 +4968,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [9.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [9.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0041\u0308\u0031\u0027'
 		expected: [WordBoundary{
@@ -4981,8 +4981,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [9.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [9.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0041\u0031\u002C'
 		expected: [WordBoundary{
@@ -4994,8 +4994,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [9.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [9.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0041\u0308\u0031\u002C'
 		expected: [WordBoundary{
@@ -5007,8 +5007,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [9.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [9.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0041\u0031\u002E\u2060'
 		expected: [WordBoundary{
@@ -5020,8 +5020,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [9.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [9.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0041\u0308\u0031\u002E\u2060'
 		expected: [WordBoundary{
@@ -5033,8 +5033,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] COLON (MidLetter) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]
+		desc: '÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [9.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u003A\u0001'
 		expected: [WordBoundary{
@@ -5046,8 +5046,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]
+		desc: '÷ [0.2] COLON (MidLetter) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u003A\u0308\u0001'
 		expected: [WordBoundary{
@@ -5059,8 +5059,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] COLON (MidLetter) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u003A\u000D'
 		expected: [WordBoundary{
@@ -5072,8 +5072,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] COLON (MidLetter) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u003A\u0308\u000D'
 		expected: [WordBoundary{
@@ -5085,8 +5085,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] COLON (MidLetter) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u003A\u000A'
 		expected: [WordBoundary{
@@ -5098,8 +5098,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] COLON (MidLetter) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u003A\u0308\u000A'
 		expected: [WordBoundary{
@@ -5111,8 +5111,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] COLON (MidLetter) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]
+		desc: '÷ [0.2] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u003A\u000B'
 		expected: [WordBoundary{
@@ -5124,8 +5124,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]
+		desc: '÷ [0.2] COLON (MidLetter) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u003A\u0308\u000B'
 		expected: [WordBoundary{
@@ -5137,8 +5137,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] COLON (MidLetter) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]
+		desc: '÷ [0.2] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u003A\u3031'
 		expected: [WordBoundary{
@@ -5150,8 +5150,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]
+		desc: '÷ [0.2] COLON (MidLetter) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u003A\u0308\u3031'
 		expected: [WordBoundary{
@@ -5163,8 +5163,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] COLON (MidLetter) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u003A\u0041'
 		expected: [WordBoundary{
@@ -5176,8 +5176,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] COLON (MidLetter) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u003A\u0308\u0041'
 		expected: [WordBoundary{
@@ -5189,8 +5189,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] COLON (MidLetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u003A\u003A'
 		expected: [WordBoundary{
@@ -5202,8 +5202,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] COLON (MidLetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u003A\u0308\u003A'
 		expected: [WordBoundary{
@@ -5215,8 +5215,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] COLON (MidLetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u003A\u002C'
 		expected: [WordBoundary{
@@ -5228,8 +5228,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] COLON (MidLetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u003A\u0308\u002C'
 		expected: [WordBoundary{
@@ -5241,8 +5241,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] COLON (MidLetter) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]
+		desc: '÷ [0.2] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u003A\u002E'
 		expected: [WordBoundary{
@@ -5254,8 +5254,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]
+		desc: '÷ [0.2] COLON (MidLetter) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u003A\u0308\u002E'
 		expected: [WordBoundary{
@@ -5267,8 +5267,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] COLON (MidLetter) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u003A\u0030'
 		expected: [WordBoundary{
@@ -5280,8 +5280,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] COLON (MidLetter) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u003A\u0308\u0030'
 		expected: [WordBoundary{
@@ -5293,8 +5293,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] COLON (MidLetter) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]
+		desc: '÷ [0.2] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u003A\u005F'
 		expected: [WordBoundary{
@@ -5306,8 +5306,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]
+		desc: '÷ [0.2] COLON (MidLetter) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u003A\u0308\u005F'
 		expected: [WordBoundary{
@@ -5319,8 +5319,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] COLON (MidLetter) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u003A\U0001F1E6'
 		expected: [WordBoundary{
@@ -5332,8 +5332,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] COLON (MidLetter) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u003A\u0308\U0001F1E6'
 		expected: [WordBoundary{
@@ -5345,8 +5345,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] COLON (MidLetter) ÷ [999.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]
+		desc: '÷ [0.2] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u003A\u05D0'
 		expected: [WordBoundary{
@@ -5358,8 +5358,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]
+		desc: '÷ [0.2] COLON (MidLetter) ÷ [999.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u003A\u0308\u05D0'
 		expected: [WordBoundary{
@@ -5371,8 +5371,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] COLON (MidLetter) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]
+		desc: '÷ [0.2] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u003A\u0022'
 		expected: [WordBoundary{
@@ -5384,8 +5384,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]
+		desc: '÷ [0.2] COLON (MidLetter) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u003A\u0308\u0022'
 		expected: [WordBoundary{
@@ -5397,8 +5397,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] COLON (MidLetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u003A\u0027'
 		expected: [WordBoundary{
@@ -5410,8 +5410,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] COLON (MidLetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u003A\u0308\u0027'
 		expected: [WordBoundary{
@@ -5423,8 +5423,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] COLON (MidLetter) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u003A\u231A'
 		expected: [WordBoundary{
@@ -5436,8 +5436,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] COLON (MidLetter) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u003A\u0308\u231A'
 		expected: [WordBoundary{
@@ -5449,8 +5449,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] COLON (MidLetter) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]
+		desc: '÷ [0.2] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u003A\u0020'
 		expected: [WordBoundary{
@@ -5462,8 +5462,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]
+		desc: '÷ [0.2] COLON (MidLetter) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u003A\u0308\u0020'
 		expected: [WordBoundary{
@@ -5475,8 +5475,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] COLON (MidLetter) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u003A\u00AD'
 		expected: [WordBoundary{
@@ -5484,8 +5484,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] COLON (MidLetter) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u003A\u0308\u00AD'
 		expected: [WordBoundary{
@@ -5493,8 +5493,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] COLON (MidLetter) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]
+		desc: '÷ [0.2] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u003A\u0300'
 		expected: [WordBoundary{
@@ -5502,8 +5502,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]
+		desc: '÷ [0.2] COLON (MidLetter) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u003A\u0308\u0300'
 		expected: [WordBoundary{
@@ -5511,8 +5511,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] COLON (MidLetter) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]
+		desc: '÷ [0.2] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u003A\u200D'
 		expected: [WordBoundary{
@@ -5520,8 +5520,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]
+		desc: '÷ [0.2] COLON (MidLetter) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u003A\u0308\u200D'
 		expected: [WordBoundary{
@@ -5529,8 +5529,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] COLON (MidLetter) ÷ [999.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u003A\u0061\u2060'
 		expected: [WordBoundary{
@@ -5542,8 +5542,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] COLON (MidLetter) ÷ [999.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u003A\u0308\u0061\u2060'
 		expected: [WordBoundary{
@@ -5555,8 +5555,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] COLON (MidLetter) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u003A\u0061\u003A'
 		expected: [WordBoundary{
@@ -5572,8 +5572,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] COLON (MidLetter) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u003A\u0308\u0061\u003A'
 		expected: [WordBoundary{
@@ -5589,8 +5589,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] COLON (MidLetter) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u003A\u0061\u0027'
 		expected: [WordBoundary{
@@ -5606,8 +5606,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] COLON (MidLetter) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u003A\u0308\u0061\u0027'
 		expected: [WordBoundary{
@@ -5623,8 +5623,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] COLON (MidLetter) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u003A\u0061\u0027\u2060'
 		expected: [WordBoundary{
@@ -5640,8 +5640,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] COLON (MidLetter) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u003A\u0308\u0061\u0027\u2060'
 		expected: [WordBoundary{
@@ -5657,8 +5657,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] COLON (MidLetter) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u003A\u0061\u002C'
 		expected: [WordBoundary{
@@ -5674,8 +5674,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] COLON (MidLetter) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u003A\u0308\u0061\u002C'
 		expected: [WordBoundary{
@@ -5691,8 +5691,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] COLON (MidLetter) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u003A\u0031\u003A'
 		expected: [WordBoundary{
@@ -5708,8 +5708,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] COLON (MidLetter) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u003A\u0308\u0031\u003A'
 		expected: [WordBoundary{
@@ -5725,8 +5725,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] COLON (MidLetter) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u003A\u0031\u0027'
 		expected: [WordBoundary{
@@ -5742,8 +5742,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] COLON (MidLetter) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u003A\u0308\u0031\u0027'
 		expected: [WordBoundary{
@@ -5759,8 +5759,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] COLON (MidLetter) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u003A\u0031\u002C'
 		expected: [WordBoundary{
@@ -5776,8 +5776,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] COLON (MidLetter) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u003A\u0308\u0031\u002C'
 		expected: [WordBoundary{
@@ -5793,8 +5793,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] COLON (MidLetter) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u003A\u0031\u002E\u2060'
 		expected: [WordBoundary{
@@ -5810,8 +5810,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] COLON (MidLetter) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u003A\u0308\u0031\u002E\u2060'
 		expected: [WordBoundary{
@@ -5827,8 +5827,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] COMMA (MidNum) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]
+		desc: '÷ [0.2] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002C\u0001'
 		expected: [WordBoundary{
@@ -5840,8 +5840,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]
+		desc: '÷ [0.2] COMMA (MidNum) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002C\u0308\u0001'
 		expected: [WordBoundary{
@@ -5853,8 +5853,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] COMMA (MidNum) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002C\u000D'
 		expected: [WordBoundary{
@@ -5866,8 +5866,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] COMMA (MidNum) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002C\u0308\u000D'
 		expected: [WordBoundary{
@@ -5879,8 +5879,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] COMMA (MidNum) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002C\u000A'
 		expected: [WordBoundary{
@@ -5892,8 +5892,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] COMMA (MidNum) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002C\u0308\u000A'
 		expected: [WordBoundary{
@@ -5905,8 +5905,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] COMMA (MidNum) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]
+		desc: '÷ [0.2] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002C\u000B'
 		expected: [WordBoundary{
@@ -5918,8 +5918,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]
+		desc: '÷ [0.2] COMMA (MidNum) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002C\u0308\u000B'
 		expected: [WordBoundary{
@@ -5931,8 +5931,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] COMMA (MidNum) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]
+		desc: '÷ [0.2] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002C\u3031'
 		expected: [WordBoundary{
@@ -5944,8 +5944,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]
+		desc: '÷ [0.2] COMMA (MidNum) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002C\u0308\u3031'
 		expected: [WordBoundary{
@@ -5957,8 +5957,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] COMMA (MidNum) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002C\u0041'
 		expected: [WordBoundary{
@@ -5970,8 +5970,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] COMMA (MidNum) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002C\u0308\u0041'
 		expected: [WordBoundary{
@@ -5983,8 +5983,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] COMMA (MidNum) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002C\u003A'
 		expected: [WordBoundary{
@@ -5996,8 +5996,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] COMMA (MidNum) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002C\u0308\u003A'
 		expected: [WordBoundary{
@@ -6009,8 +6009,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] COMMA (MidNum) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002C\u002C'
 		expected: [WordBoundary{
@@ -6022,8 +6022,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] COMMA (MidNum) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002C\u0308\u002C'
 		expected: [WordBoundary{
@@ -6035,8 +6035,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] COMMA (MidNum) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]
+		desc: '÷ [0.2] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002C\u002E'
 		expected: [WordBoundary{
@@ -6048,8 +6048,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]
+		desc: '÷ [0.2] COMMA (MidNum) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002C\u0308\u002E'
 		expected: [WordBoundary{
@@ -6061,8 +6061,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] COMMA (MidNum) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002C\u0030'
 		expected: [WordBoundary{
@@ -6074,8 +6074,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] COMMA (MidNum) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002C\u0308\u0030'
 		expected: [WordBoundary{
@@ -6087,8 +6087,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] COMMA (MidNum) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]
+		desc: '÷ [0.2] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002C\u005F'
 		expected: [WordBoundary{
@@ -6100,8 +6100,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]
+		desc: '÷ [0.2] COMMA (MidNum) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002C\u0308\u005F'
 		expected: [WordBoundary{
@@ -6113,8 +6113,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] COMMA (MidNum) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002C\U0001F1E6'
 		expected: [WordBoundary{
@@ -6126,8 +6126,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] COMMA (MidNum) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002C\u0308\U0001F1E6'
 		expected: [WordBoundary{
@@ -6139,8 +6139,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] COMMA (MidNum) ÷ [999.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]
+		desc: '÷ [0.2] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002C\u05D0'
 		expected: [WordBoundary{
@@ -6152,8 +6152,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]
+		desc: '÷ [0.2] COMMA (MidNum) ÷ [999.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002C\u0308\u05D0'
 		expected: [WordBoundary{
@@ -6165,8 +6165,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] COMMA (MidNum) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]
+		desc: '÷ [0.2] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002C\u0022'
 		expected: [WordBoundary{
@@ -6178,8 +6178,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]
+		desc: '÷ [0.2] COMMA (MidNum) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002C\u0308\u0022'
 		expected: [WordBoundary{
@@ -6191,8 +6191,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] COMMA (MidNum) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002C\u0027'
 		expected: [WordBoundary{
@@ -6204,8 +6204,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] COMMA (MidNum) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002C\u0308\u0027'
 		expected: [WordBoundary{
@@ -6217,8 +6217,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] COMMA (MidNum) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002C\u231A'
 		expected: [WordBoundary{
@@ -6230,8 +6230,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] COMMA (MidNum) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002C\u0308\u231A'
 		expected: [WordBoundary{
@@ -6243,8 +6243,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] COMMA (MidNum) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]
+		desc: '÷ [0.2] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002C\u0020'
 		expected: [WordBoundary{
@@ -6256,8 +6256,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]
+		desc: '÷ [0.2] COMMA (MidNum) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002C\u0308\u0020'
 		expected: [WordBoundary{
@@ -6269,8 +6269,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] COMMA (MidNum) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002C\u00AD'
 		expected: [WordBoundary{
@@ -6278,8 +6278,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] COMMA (MidNum) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002C\u0308\u00AD'
 		expected: [WordBoundary{
@@ -6287,8 +6287,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] COMMA (MidNum) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]
+		desc: '÷ [0.2] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002C\u0300'
 		expected: [WordBoundary{
@@ -6296,8 +6296,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]
+		desc: '÷ [0.2] COMMA (MidNum) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002C\u0308\u0300'
 		expected: [WordBoundary{
@@ -6305,8 +6305,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] COMMA (MidNum) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]
+		desc: '÷ [0.2] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002C\u200D'
 		expected: [WordBoundary{
@@ -6314,8 +6314,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]
+		desc: '÷ [0.2] COMMA (MidNum) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002C\u0308\u200D'
 		expected: [WordBoundary{
@@ -6323,8 +6323,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] COMMA (MidNum) ÷ [999.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002C\u0061\u2060'
 		expected: [WordBoundary{
@@ -6336,8 +6336,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] COMMA (MidNum) ÷ [999.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002C\u0308\u0061\u2060'
 		expected: [WordBoundary{
@@ -6349,8 +6349,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] COMMA (MidNum) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002C\u0061\u003A'
 		expected: [WordBoundary{
@@ -6366,8 +6366,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] COMMA (MidNum) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002C\u0308\u0061\u003A'
 		expected: [WordBoundary{
@@ -6383,8 +6383,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] COMMA (MidNum) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002C\u0061\u0027'
 		expected: [WordBoundary{
@@ -6400,8 +6400,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] COMMA (MidNum) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002C\u0308\u0061\u0027'
 		expected: [WordBoundary{
@@ -6417,8 +6417,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] COMMA (MidNum) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002C\u0061\u0027\u2060'
 		expected: [WordBoundary{
@@ -6434,8 +6434,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] COMMA (MidNum) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002C\u0308\u0061\u0027\u2060'
 		expected: [WordBoundary{
@@ -6451,8 +6451,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] COMMA (MidNum) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002C\u0061\u002C'
 		expected: [WordBoundary{
@@ -6468,8 +6468,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] COMMA (MidNum) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002C\u0308\u0061\u002C'
 		expected: [WordBoundary{
@@ -6485,8 +6485,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] COMMA (MidNum) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002C\u0031\u003A'
 		expected: [WordBoundary{
@@ -6502,8 +6502,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] COMMA (MidNum) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002C\u0308\u0031\u003A'
 		expected: [WordBoundary{
@@ -6519,8 +6519,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] COMMA (MidNum) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002C\u0031\u0027'
 		expected: [WordBoundary{
@@ -6536,8 +6536,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] COMMA (MidNum) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002C\u0308\u0031\u0027'
 		expected: [WordBoundary{
@@ -6553,8 +6553,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] COMMA (MidNum) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002C\u0031\u002C'
 		expected: [WordBoundary{
@@ -6570,8 +6570,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] COMMA (MidNum) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002C\u0308\u0031\u002C'
 		expected: [WordBoundary{
@@ -6587,8 +6587,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] COMMA (MidNum) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002C\u0031\u002E\u2060'
 		expected: [WordBoundary{
@@ -6604,8 +6604,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] COMMA (MidNum) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002C\u0308\u0031\u002E\u2060'
 		expected: [WordBoundary{
@@ -6621,8 +6621,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] FULL STOP (MidNumLet) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]
+		desc: '÷ [0.2] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002E\u0001'
 		expected: [WordBoundary{
@@ -6634,8 +6634,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] FULL STOP (MidNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]
+		desc: '÷ [0.2] FULL STOP (MidNumLet) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002E\u0308\u0001'
 		expected: [WordBoundary{
@@ -6647,8 +6647,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] FULL STOP (MidNumLet) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] FULL STOP (MidNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002E\u000D'
 		expected: [WordBoundary{
@@ -6660,8 +6660,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] FULL STOP (MidNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] FULL STOP (MidNumLet) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002E\u0308\u000D'
 		expected: [WordBoundary{
@@ -6673,8 +6673,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] FULL STOP (MidNumLet) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] FULL STOP (MidNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002E\u000A'
 		expected: [WordBoundary{
@@ -6686,8 +6686,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] FULL STOP (MidNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] FULL STOP (MidNumLet) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002E\u0308\u000A'
 		expected: [WordBoundary{
@@ -6699,8 +6699,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] FULL STOP (MidNumLet) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]
+		desc: '÷ [0.2] FULL STOP (MidNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002E\u000B'
 		expected: [WordBoundary{
@@ -6712,8 +6712,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] FULL STOP (MidNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]
+		desc: '÷ [0.2] FULL STOP (MidNumLet) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002E\u0308\u000B'
 		expected: [WordBoundary{
@@ -6725,8 +6725,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] FULL STOP (MidNumLet) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]
+		desc: '÷ [0.2] FULL STOP (MidNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002E\u3031'
 		expected: [WordBoundary{
@@ -6738,8 +6738,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] FULL STOP (MidNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]
+		desc: '÷ [0.2] FULL STOP (MidNumLet) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002E\u0308\u3031'
 		expected: [WordBoundary{
@@ -6751,8 +6751,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] FULL STOP (MidNumLet) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] FULL STOP (MidNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002E\u0041'
 		expected: [WordBoundary{
@@ -6764,8 +6764,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] FULL STOP (MidNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] FULL STOP (MidNumLet) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002E\u0308\u0041'
 		expected: [WordBoundary{
@@ -6777,8 +6777,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] FULL STOP (MidNumLet) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] FULL STOP (MidNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002E\u003A'
 		expected: [WordBoundary{
@@ -6790,8 +6790,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] FULL STOP (MidNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] FULL STOP (MidNumLet) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002E\u0308\u003A'
 		expected: [WordBoundary{
@@ -6803,8 +6803,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] FULL STOP (MidNumLet) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] FULL STOP (MidNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002E\u002C'
 		expected: [WordBoundary{
@@ -6816,8 +6816,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] FULL STOP (MidNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] FULL STOP (MidNumLet) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002E\u0308\u002C'
 		expected: [WordBoundary{
@@ -6829,8 +6829,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] FULL STOP (MidNumLet) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]
+		desc: '÷ [0.2] FULL STOP (MidNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002E\u002E'
 		expected: [WordBoundary{
@@ -6842,8 +6842,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] FULL STOP (MidNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]
+		desc: '÷ [0.2] FULL STOP (MidNumLet) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002E\u0308\u002E'
 		expected: [WordBoundary{
@@ -6855,8 +6855,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] FULL STOP (MidNumLet) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] FULL STOP (MidNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002E\u0030'
 		expected: [WordBoundary{
@@ -6868,8 +6868,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] FULL STOP (MidNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] FULL STOP (MidNumLet) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002E\u0308\u0030'
 		expected: [WordBoundary{
@@ -6881,8 +6881,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] FULL STOP (MidNumLet) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]
+		desc: '÷ [0.2] FULL STOP (MidNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002E\u005F'
 		expected: [WordBoundary{
@@ -6894,8 +6894,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] FULL STOP (MidNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]
+		desc: '÷ [0.2] FULL STOP (MidNumLet) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002E\u0308\u005F'
 		expected: [WordBoundary{
@@ -6907,8 +6907,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] FULL STOP (MidNumLet) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] FULL STOP (MidNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002E\U0001F1E6'
 		expected: [WordBoundary{
@@ -6920,8 +6920,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] FULL STOP (MidNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] FULL STOP (MidNumLet) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002E\u0308\U0001F1E6'
 		expected: [WordBoundary{
@@ -6933,8 +6933,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] FULL STOP (MidNumLet) ÷ [999.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]
+		desc: '÷ [0.2] FULL STOP (MidNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002E\u05D0'
 		expected: [WordBoundary{
@@ -6946,8 +6946,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] FULL STOP (MidNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]
+		desc: '÷ [0.2] FULL STOP (MidNumLet) ÷ [999.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002E\u0308\u05D0'
 		expected: [WordBoundary{
@@ -6959,8 +6959,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] FULL STOP (MidNumLet) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]
+		desc: '÷ [0.2] FULL STOP (MidNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002E\u0022'
 		expected: [WordBoundary{
@@ -6972,8 +6972,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] FULL STOP (MidNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]
+		desc: '÷ [0.2] FULL STOP (MidNumLet) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002E\u0308\u0022'
 		expected: [WordBoundary{
@@ -6985,8 +6985,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] FULL STOP (MidNumLet) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] FULL STOP (MidNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002E\u0027'
 		expected: [WordBoundary{
@@ -6998,8 +6998,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] FULL STOP (MidNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] FULL STOP (MidNumLet) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002E\u0308\u0027'
 		expected: [WordBoundary{
@@ -7011,8 +7011,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] FULL STOP (MidNumLet) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] FULL STOP (MidNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002E\u231A'
 		expected: [WordBoundary{
@@ -7024,8 +7024,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] FULL STOP (MidNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] FULL STOP (MidNumLet) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002E\u0308\u231A'
 		expected: [WordBoundary{
@@ -7037,8 +7037,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] FULL STOP (MidNumLet) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]
+		desc: '÷ [0.2] FULL STOP (MidNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002E\u0020'
 		expected: [WordBoundary{
@@ -7050,8 +7050,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] FULL STOP (MidNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]
+		desc: '÷ [0.2] FULL STOP (MidNumLet) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002E\u0308\u0020'
 		expected: [WordBoundary{
@@ -7063,8 +7063,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] FULL STOP (MidNumLet) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] FULL STOP (MidNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002E\u00AD'
 		expected: [WordBoundary{
@@ -7072,8 +7072,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] FULL STOP (MidNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] FULL STOP (MidNumLet) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002E\u0308\u00AD'
 		expected: [WordBoundary{
@@ -7081,8 +7081,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] FULL STOP (MidNumLet) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]
+		desc: '÷ [0.2] FULL STOP (MidNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002E\u0300'
 		expected: [WordBoundary{
@@ -7090,8 +7090,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] FULL STOP (MidNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]
+		desc: '÷ [0.2] FULL STOP (MidNumLet) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002E\u0308\u0300'
 		expected: [WordBoundary{
@@ -7099,8 +7099,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] FULL STOP (MidNumLet) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]
+		desc: '÷ [0.2] FULL STOP (MidNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002E\u200D'
 		expected: [WordBoundary{
@@ -7108,8 +7108,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] FULL STOP (MidNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]
+		desc: '÷ [0.2] FULL STOP (MidNumLet) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002E\u0308\u200D'
 		expected: [WordBoundary{
@@ -7117,8 +7117,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] FULL STOP (MidNumLet) ÷ [999.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] FULL STOP (MidNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002E\u0061\u2060'
 		expected: [WordBoundary{
@@ -7130,8 +7130,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] FULL STOP (MidNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] FULL STOP (MidNumLet) ÷ [999.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002E\u0308\u0061\u2060'
 		expected: [WordBoundary{
@@ -7143,8 +7143,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] FULL STOP (MidNumLet) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] FULL STOP (MidNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002E\u0061\u003A'
 		expected: [WordBoundary{
@@ -7160,8 +7160,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] FULL STOP (MidNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] FULL STOP (MidNumLet) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002E\u0308\u0061\u003A'
 		expected: [WordBoundary{
@@ -7177,8 +7177,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] FULL STOP (MidNumLet) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] FULL STOP (MidNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002E\u0061\u0027'
 		expected: [WordBoundary{
@@ -7194,8 +7194,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] FULL STOP (MidNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] FULL STOP (MidNumLet) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002E\u0308\u0061\u0027'
 		expected: [WordBoundary{
@@ -7211,8 +7211,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] FULL STOP (MidNumLet) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] FULL STOP (MidNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002E\u0061\u0027\u2060'
 		expected: [WordBoundary{
@@ -7228,8 +7228,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] FULL STOP (MidNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] FULL STOP (MidNumLet) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002E\u0308\u0061\u0027\u2060'
 		expected: [WordBoundary{
@@ -7245,8 +7245,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] FULL STOP (MidNumLet) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] FULL STOP (MidNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002E\u0061\u002C'
 		expected: [WordBoundary{
@@ -7262,8 +7262,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] FULL STOP (MidNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] FULL STOP (MidNumLet) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002E\u0308\u0061\u002C'
 		expected: [WordBoundary{
@@ -7279,8 +7279,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] FULL STOP (MidNumLet) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] FULL STOP (MidNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002E\u0031\u003A'
 		expected: [WordBoundary{
@@ -7296,8 +7296,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] FULL STOP (MidNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] FULL STOP (MidNumLet) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002E\u0308\u0031\u003A'
 		expected: [WordBoundary{
@@ -7313,8 +7313,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] FULL STOP (MidNumLet) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] FULL STOP (MidNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002E\u0031\u0027'
 		expected: [WordBoundary{
@@ -7330,8 +7330,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] FULL STOP (MidNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] FULL STOP (MidNumLet) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002E\u0308\u0031\u0027'
 		expected: [WordBoundary{
@@ -7347,8 +7347,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] FULL STOP (MidNumLet) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] FULL STOP (MidNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002E\u0031\u002C'
 		expected: [WordBoundary{
@@ -7364,8 +7364,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] FULL STOP (MidNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] FULL STOP (MidNumLet) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002E\u0308\u0031\u002C'
 		expected: [WordBoundary{
@@ -7381,8 +7381,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] FULL STOP (MidNumLet) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] FULL STOP (MidNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002E\u0031\u002E\u2060'
 		expected: [WordBoundary{
@@ -7398,8 +7398,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] FULL STOP (MidNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] FULL STOP (MidNumLet) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u002E\u0308\u0031\u002E\u2060'
 		expected: [WordBoundary{
@@ -7415,8 +7415,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] DIGIT ZERO (Numeric) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]
+		desc: '÷ [0.2] FULL STOP (MidNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0030\u0001'
 		expected: [WordBoundary{
@@ -7428,8 +7428,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] DIGIT ZERO (Numeric) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ZERO (Numeric) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0030\u0308\u0001'
 		expected: [WordBoundary{
@@ -7441,8 +7441,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] DIGIT ZERO (Numeric) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ZERO (Numeric) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0030\u000D'
 		expected: [WordBoundary{
@@ -7454,8 +7454,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] DIGIT ZERO (Numeric) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ZERO (Numeric) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0030\u0308\u000D'
 		expected: [WordBoundary{
@@ -7467,8 +7467,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] DIGIT ZERO (Numeric) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ZERO (Numeric) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0030\u000A'
 		expected: [WordBoundary{
@@ -7480,8 +7480,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] DIGIT ZERO (Numeric) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ZERO (Numeric) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0030\u0308\u000A'
 		expected: [WordBoundary{
@@ -7493,8 +7493,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] DIGIT ZERO (Numeric) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ZERO (Numeric) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0030\u000B'
 		expected: [WordBoundary{
@@ -7506,8 +7506,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] DIGIT ZERO (Numeric) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ZERO (Numeric) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0030\u0308\u000B'
 		expected: [WordBoundary{
@@ -7519,8 +7519,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] DIGIT ZERO (Numeric) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ZERO (Numeric) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0030\u3031'
 		expected: [WordBoundary{
@@ -7532,8 +7532,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] DIGIT ZERO (Numeric) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ZERO (Numeric) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0030\u0308\u3031'
 		expected: [WordBoundary{
@@ -7545,8 +7545,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ZERO (Numeric) × [10.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ZERO (Numeric) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0030\u0041'
 		expected: [WordBoundary{
@@ -7554,8 +7554,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] DIGIT ZERO (Numeric) × [4.0] COMBINING DIAERESIS (Extend_FE) × [10.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ZERO (Numeric) × [10.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0030\u0308\u0041'
 		expected: [WordBoundary{
@@ -7563,8 +7563,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] DIGIT ZERO (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ZERO (Numeric) × [4.0] COMBINING DIAERESIS (Extend_FE) × [10.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0030\u003A'
 		expected: [WordBoundary{
@@ -7576,8 +7576,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] DIGIT ZERO (Numeric) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ZERO (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0030\u0308\u003A'
 		expected: [WordBoundary{
@@ -7589,8 +7589,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] DIGIT ZERO (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ZERO (Numeric) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0030\u002C'
 		expected: [WordBoundary{
@@ -7602,8 +7602,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] DIGIT ZERO (Numeric) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ZERO (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0030\u0308\u002C'
 		expected: [WordBoundary{
@@ -7615,8 +7615,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] DIGIT ZERO (Numeric) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ZERO (Numeric) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0030\u002E'
 		expected: [WordBoundary{
@@ -7628,8 +7628,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] DIGIT ZERO (Numeric) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ZERO (Numeric) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0030\u0308\u002E'
 		expected: [WordBoundary{
@@ -7641,8 +7641,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] DIGIT ZERO (Numeric) × [8.0] DIGIT ZERO (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ZERO (Numeric) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0030\u0030'
 		expected: [WordBoundary{
@@ -7650,8 +7650,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] DIGIT ZERO (Numeric) × [4.0] COMBINING DIAERESIS (Extend_FE) × [8.0] DIGIT ZERO (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ZERO (Numeric) × [8.0] DIGIT ZERO (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0030\u0308\u0030'
 		expected: [WordBoundary{
@@ -7659,8 +7659,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] DIGIT ZERO (Numeric) × [13.1] LOW LINE (ExtendNumLet) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ZERO (Numeric) × [4.0] COMBINING DIAERESIS (Extend_FE) × [8.0] DIGIT ZERO (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0030\u005F'
 		expected: [WordBoundary{
@@ -7668,8 +7668,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] DIGIT ZERO (Numeric) × [4.0] COMBINING DIAERESIS (Extend_FE) × [13.1] LOW LINE (ExtendNumLet) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ZERO (Numeric) × [13.1] LOW LINE (ExtendNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0030\u0308\u005F'
 		expected: [WordBoundary{
@@ -7677,8 +7677,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] DIGIT ZERO (Numeric) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ZERO (Numeric) × [4.0] COMBINING DIAERESIS (Extend_FE) × [13.1] LOW LINE (ExtendNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0030\U0001F1E6'
 		expected: [WordBoundary{
@@ -7690,8 +7690,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] DIGIT ZERO (Numeric) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ZERO (Numeric) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0030\u0308\U0001F1E6'
 		expected: [WordBoundary{
@@ -7703,8 +7703,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] DIGIT ZERO (Numeric) × [10.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ZERO (Numeric) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0030\u05D0'
 		expected: [WordBoundary{
@@ -7712,8 +7712,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] DIGIT ZERO (Numeric) × [4.0] COMBINING DIAERESIS (Extend_FE) × [10.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ZERO (Numeric) × [10.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0030\u0308\u05D0'
 		expected: [WordBoundary{
@@ -7721,8 +7721,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] DIGIT ZERO (Numeric) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ZERO (Numeric) × [4.0] COMBINING DIAERESIS (Extend_FE) × [10.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0030\u0022'
 		expected: [WordBoundary{
@@ -7734,8 +7734,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] DIGIT ZERO (Numeric) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ZERO (Numeric) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0030\u0308\u0022'
 		expected: [WordBoundary{
@@ -7747,8 +7747,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] DIGIT ZERO (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ZERO (Numeric) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0030\u0027'
 		expected: [WordBoundary{
@@ -7760,8 +7760,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] DIGIT ZERO (Numeric) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ZERO (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0030\u0308\u0027'
 		expected: [WordBoundary{
@@ -7773,8 +7773,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] DIGIT ZERO (Numeric) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ZERO (Numeric) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0030\u231A'
 		expected: [WordBoundary{
@@ -7786,8 +7786,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] DIGIT ZERO (Numeric) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ZERO (Numeric) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0030\u0308\u231A'
 		expected: [WordBoundary{
@@ -7799,8 +7799,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ZERO (Numeric) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ZERO (Numeric) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0030\u0020'
 		expected: [WordBoundary{
@@ -7812,8 +7812,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] DIGIT ZERO (Numeric) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ZERO (Numeric) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0030\u0308\u0020'
 		expected: [WordBoundary{
@@ -7825,8 +7825,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] DIGIT ZERO (Numeric) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ZERO (Numeric) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0030\u00AD'
 		expected: [WordBoundary{
@@ -7834,8 +7834,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] DIGIT ZERO (Numeric) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ZERO (Numeric) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0030\u0308\u00AD'
 		expected: [WordBoundary{
@@ -7843,8 +7843,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] DIGIT ZERO (Numeric) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ZERO (Numeric) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0030\u0300'
 		expected: [WordBoundary{
@@ -7852,8 +7852,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] DIGIT ZERO (Numeric) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ZERO (Numeric) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0030\u0308\u0300'
 		expected: [WordBoundary{
@@ -7861,8 +7861,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] DIGIT ZERO (Numeric) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ZERO (Numeric) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0030\u200D'
 		expected: [WordBoundary{
@@ -7870,8 +7870,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] DIGIT ZERO (Numeric) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ZERO (Numeric) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0030\u0308\u200D'
 		expected: [WordBoundary{
@@ -7879,8 +7879,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ZERO (Numeric) × [10.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ZERO (Numeric) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0030\u0061\u2060'
 		expected: [WordBoundary{
@@ -7888,8 +7888,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] DIGIT ZERO (Numeric) × [4.0] COMBINING DIAERESIS (Extend_FE) × [10.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ZERO (Numeric) × [10.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0030\u0308\u0061\u2060'
 		expected: [WordBoundary{
@@ -7897,8 +7897,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] DIGIT ZERO (Numeric) × [10.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ZERO (Numeric) × [4.0] COMBINING DIAERESIS (Extend_FE) × [10.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0030\u0061\u003A'
 		expected: [WordBoundary{
@@ -7910,8 +7910,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] DIGIT ZERO (Numeric) × [4.0] COMBINING DIAERESIS (Extend_FE) × [10.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ZERO (Numeric) × [10.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0030\u0308\u0061\u003A'
 		expected: [WordBoundary{
@@ -7923,8 +7923,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] DIGIT ZERO (Numeric) × [10.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ZERO (Numeric) × [4.0] COMBINING DIAERESIS (Extend_FE) × [10.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0030\u0061\u0027'
 		expected: [WordBoundary{
@@ -7936,8 +7936,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] DIGIT ZERO (Numeric) × [4.0] COMBINING DIAERESIS (Extend_FE) × [10.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ZERO (Numeric) × [10.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0030\u0308\u0061\u0027'
 		expected: [WordBoundary{
@@ -7949,8 +7949,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] DIGIT ZERO (Numeric) × [10.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ZERO (Numeric) × [4.0] COMBINING DIAERESIS (Extend_FE) × [10.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0030\u0061\u0027\u2060'
 		expected: [WordBoundary{
@@ -7962,8 +7962,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ZERO (Numeric) × [4.0] COMBINING DIAERESIS (Extend_FE) × [10.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ZERO (Numeric) × [10.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0030\u0308\u0061\u0027\u2060'
 		expected: [WordBoundary{
@@ -7975,8 +7975,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] DIGIT ZERO (Numeric) × [10.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ZERO (Numeric) × [4.0] COMBINING DIAERESIS (Extend_FE) × [10.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0030\u0061\u002C'
 		expected: [WordBoundary{
@@ -7988,8 +7988,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] DIGIT ZERO (Numeric) × [4.0] COMBINING DIAERESIS (Extend_FE) × [10.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ZERO (Numeric) × [10.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0030\u0308\u0061\u002C'
 		expected: [WordBoundary{
@@ -8001,8 +8001,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] DIGIT ZERO (Numeric) × [8.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ZERO (Numeric) × [4.0] COMBINING DIAERESIS (Extend_FE) × [10.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0030\u0031\u003A'
 		expected: [WordBoundary{
@@ -8014,8 +8014,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] DIGIT ZERO (Numeric) × [4.0] COMBINING DIAERESIS (Extend_FE) × [8.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ZERO (Numeric) × [8.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0030\u0308\u0031\u003A'
 		expected: [WordBoundary{
@@ -8027,8 +8027,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] DIGIT ZERO (Numeric) × [8.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ZERO (Numeric) × [4.0] COMBINING DIAERESIS (Extend_FE) × [8.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0030\u0031\u0027'
 		expected: [WordBoundary{
@@ -8040,8 +8040,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] DIGIT ZERO (Numeric) × [4.0] COMBINING DIAERESIS (Extend_FE) × [8.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ZERO (Numeric) × [8.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0030\u0308\u0031\u0027'
 		expected: [WordBoundary{
@@ -8053,8 +8053,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] DIGIT ZERO (Numeric) × [8.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ZERO (Numeric) × [4.0] COMBINING DIAERESIS (Extend_FE) × [8.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0030\u0031\u002C'
 		expected: [WordBoundary{
@@ -8066,8 +8066,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] DIGIT ZERO (Numeric) × [4.0] COMBINING DIAERESIS (Extend_FE) × [8.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ZERO (Numeric) × [8.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0030\u0308\u0031\u002C'
 		expected: [WordBoundary{
@@ -8079,8 +8079,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] DIGIT ZERO (Numeric) × [8.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ZERO (Numeric) × [4.0] COMBINING DIAERESIS (Extend_FE) × [8.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0030\u0031\u002E\u2060'
 		expected: [WordBoundary{
@@ -8092,8 +8092,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ZERO (Numeric) × [4.0] COMBINING DIAERESIS (Extend_FE) × [8.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ZERO (Numeric) × [8.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0030\u0308\u0031\u002E\u2060'
 		expected: [WordBoundary{
@@ -8105,8 +8105,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] LOW LINE (ExtendNumLet) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ZERO (Numeric) × [4.0] COMBINING DIAERESIS (Extend_FE) × [8.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u005F\u0001'
 		expected: [WordBoundary{
@@ -8118,8 +8118,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] LOW LINE (ExtendNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]
+		desc: '÷ [0.2] LOW LINE (ExtendNumLet) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u005F\u0308\u0001'
 		expected: [WordBoundary{
@@ -8131,8 +8131,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] LOW LINE (ExtendNumLet) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] LOW LINE (ExtendNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u005F\u000D'
 		expected: [WordBoundary{
@@ -8144,8 +8144,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] LOW LINE (ExtendNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] LOW LINE (ExtendNumLet) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u005F\u0308\u000D'
 		expected: [WordBoundary{
@@ -8157,8 +8157,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] LOW LINE (ExtendNumLet) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] LOW LINE (ExtendNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u005F\u000A'
 		expected: [WordBoundary{
@@ -8170,8 +8170,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] LOW LINE (ExtendNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] LOW LINE (ExtendNumLet) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u005F\u0308\u000A'
 		expected: [WordBoundary{
@@ -8183,8 +8183,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] LOW LINE (ExtendNumLet) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]
+		desc: '÷ [0.2] LOW LINE (ExtendNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u005F\u000B'
 		expected: [WordBoundary{
@@ -8196,8 +8196,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] LOW LINE (ExtendNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]
+		desc: '÷ [0.2] LOW LINE (ExtendNumLet) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u005F\u0308\u000B'
 		expected: [WordBoundary{
@@ -8209,8 +8209,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] LOW LINE (ExtendNumLet) × [13.2] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]
+		desc: '÷ [0.2] LOW LINE (ExtendNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u005F\u3031'
 		expected: [WordBoundary{
@@ -8218,8 +8218,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] LOW LINE (ExtendNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) × [13.2] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]
+		desc: '÷ [0.2] LOW LINE (ExtendNumLet) × [13.2] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u005F\u0308\u3031'
 		expected: [WordBoundary{
@@ -8227,8 +8227,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LOW LINE (ExtendNumLet) × [13.2] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] LOW LINE (ExtendNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) × [13.2] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u005F\u0041'
 		expected: [WordBoundary{
@@ -8236,8 +8236,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] LOW LINE (ExtendNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) × [13.2] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] LOW LINE (ExtendNumLet) × [13.2] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u005F\u0308\u0041'
 		expected: [WordBoundary{
@@ -8245,8 +8245,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] LOW LINE (ExtendNumLet) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] LOW LINE (ExtendNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) × [13.2] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u005F\u003A'
 		expected: [WordBoundary{
@@ -8258,8 +8258,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] LOW LINE (ExtendNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] LOW LINE (ExtendNumLet) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u005F\u0308\u003A'
 		expected: [WordBoundary{
@@ -8271,8 +8271,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] LOW LINE (ExtendNumLet) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] LOW LINE (ExtendNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u005F\u002C'
 		expected: [WordBoundary{
@@ -8284,8 +8284,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] LOW LINE (ExtendNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] LOW LINE (ExtendNumLet) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u005F\u0308\u002C'
 		expected: [WordBoundary{
@@ -8297,8 +8297,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] LOW LINE (ExtendNumLet) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]
+		desc: '÷ [0.2] LOW LINE (ExtendNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u005F\u002E'
 		expected: [WordBoundary{
@@ -8310,8 +8310,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] LOW LINE (ExtendNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]
+		desc: '÷ [0.2] LOW LINE (ExtendNumLet) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u005F\u0308\u002E'
 		expected: [WordBoundary{
@@ -8323,8 +8323,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] LOW LINE (ExtendNumLet) × [13.2] DIGIT ZERO (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] LOW LINE (ExtendNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u005F\u0030'
 		expected: [WordBoundary{
@@ -8332,8 +8332,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] LOW LINE (ExtendNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) × [13.2] DIGIT ZERO (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] LOW LINE (ExtendNumLet) × [13.2] DIGIT ZERO (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u005F\u0308\u0030'
 		expected: [WordBoundary{
@@ -8341,8 +8341,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] LOW LINE (ExtendNumLet) × [13.1] LOW LINE (ExtendNumLet) ÷ [0.3]
+		desc: '÷ [0.2] LOW LINE (ExtendNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) × [13.2] DIGIT ZERO (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u005F\u005F'
 		expected: [WordBoundary{
@@ -8350,8 +8350,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] LOW LINE (ExtendNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) × [13.1] LOW LINE (ExtendNumLet) ÷ [0.3]
+		desc: '÷ [0.2] LOW LINE (ExtendNumLet) × [13.1] LOW LINE (ExtendNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u005F\u0308\u005F'
 		expected: [WordBoundary{
@@ -8359,8 +8359,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] LOW LINE (ExtendNumLet) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] LOW LINE (ExtendNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) × [13.1] LOW LINE (ExtendNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u005F\U0001F1E6'
 		expected: [WordBoundary{
@@ -8372,8 +8372,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LOW LINE (ExtendNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] LOW LINE (ExtendNumLet) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u005F\u0308\U0001F1E6'
 		expected: [WordBoundary{
@@ -8385,8 +8385,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] LOW LINE (ExtendNumLet) × [13.2] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]
+		desc: '÷ [0.2] LOW LINE (ExtendNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u005F\u05D0'
 		expected: [WordBoundary{
@@ -8394,8 +8394,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] LOW LINE (ExtendNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) × [13.2] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]
+		desc: '÷ [0.2] LOW LINE (ExtendNumLet) × [13.2] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u005F\u0308\u05D0'
 		expected: [WordBoundary{
@@ -8403,8 +8403,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LOW LINE (ExtendNumLet) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]
+		desc: '÷ [0.2] LOW LINE (ExtendNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) × [13.2] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u005F\u0022'
 		expected: [WordBoundary{
@@ -8416,8 +8416,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] LOW LINE (ExtendNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]
+		desc: '÷ [0.2] LOW LINE (ExtendNumLet) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u005F\u0308\u0022'
 		expected: [WordBoundary{
@@ -8429,8 +8429,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] LOW LINE (ExtendNumLet) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] LOW LINE (ExtendNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u005F\u0027'
 		expected: [WordBoundary{
@@ -8442,8 +8442,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] LOW LINE (ExtendNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] LOW LINE (ExtendNumLet) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u005F\u0308\u0027'
 		expected: [WordBoundary{
@@ -8455,8 +8455,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] LOW LINE (ExtendNumLet) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] LOW LINE (ExtendNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u005F\u231A'
 		expected: [WordBoundary{
@@ -8468,8 +8468,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] LOW LINE (ExtendNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] LOW LINE (ExtendNumLet) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u005F\u0308\u231A'
 		expected: [WordBoundary{
@@ -8481,8 +8481,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LOW LINE (ExtendNumLet) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]
+		desc: '÷ [0.2] LOW LINE (ExtendNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u005F\u0020'
 		expected: [WordBoundary{
@@ -8494,8 +8494,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] LOW LINE (ExtendNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]
+		desc: '÷ [0.2] LOW LINE (ExtendNumLet) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u005F\u0308\u0020'
 		expected: [WordBoundary{
@@ -8507,8 +8507,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] LOW LINE (ExtendNumLet) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] LOW LINE (ExtendNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u005F\u00AD'
 		expected: [WordBoundary{
@@ -8516,8 +8516,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] LOW LINE (ExtendNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] LOW LINE (ExtendNumLet) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u005F\u0308\u00AD'
 		expected: [WordBoundary{
@@ -8525,8 +8525,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LOW LINE (ExtendNumLet) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]
+		desc: '÷ [0.2] LOW LINE (ExtendNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u005F\u0300'
 		expected: [WordBoundary{
@@ -8534,8 +8534,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] LOW LINE (ExtendNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]
+		desc: '÷ [0.2] LOW LINE (ExtendNumLet) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u005F\u0308\u0300'
 		expected: [WordBoundary{
@@ -8543,8 +8543,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LOW LINE (ExtendNumLet) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]
+		desc: '÷ [0.2] LOW LINE (ExtendNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u005F\u200D'
 		expected: [WordBoundary{
@@ -8552,8 +8552,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] LOW LINE (ExtendNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]
+		desc: '÷ [0.2] LOW LINE (ExtendNumLet) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u005F\u0308\u200D'
 		expected: [WordBoundary{
@@ -8561,8 +8561,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] LOW LINE (ExtendNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u005F\u0061\u2060'
 		expected: [WordBoundary{
@@ -8570,8 +8570,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LOW LINE (ExtendNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) × [13.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u005F\u0308\u0061\u2060'
 		expected: [WordBoundary{
@@ -8579,8 +8579,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] LOW LINE (ExtendNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) × [13.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u005F\u0061\u003A'
 		expected: [WordBoundary{
@@ -8592,8 +8592,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] LOW LINE (ExtendNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u005F\u0308\u0061\u003A'
 		expected: [WordBoundary{
@@ -8605,8 +8605,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] LOW LINE (ExtendNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u005F\u0061\u0027'
 		expected: [WordBoundary{
@@ -8618,8 +8618,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] LOW LINE (ExtendNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u005F\u0308\u0061\u0027'
 		expected: [WordBoundary{
@@ -8631,8 +8631,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] LOW LINE (ExtendNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u005F\u0061\u0027\u2060'
 		expected: [WordBoundary{
@@ -8644,8 +8644,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LOW LINE (ExtendNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u005F\u0308\u0061\u0027\u2060'
 		expected: [WordBoundary{
@@ -8657,8 +8657,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] LOW LINE (ExtendNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u005F\u0061\u002C'
 		expected: [WordBoundary{
@@ -8670,8 +8670,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] LOW LINE (ExtendNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u005F\u0308\u0061\u002C'
 		expected: [WordBoundary{
@@ -8683,8 +8683,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] LOW LINE (ExtendNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u005F\u0031\u003A'
 		expected: [WordBoundary{
@@ -8696,8 +8696,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] LOW LINE (ExtendNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u005F\u0308\u0031\u003A'
 		expected: [WordBoundary{
@@ -8709,8 +8709,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] LOW LINE (ExtendNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u005F\u0031\u0027'
 		expected: [WordBoundary{
@@ -8722,8 +8722,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] LOW LINE (ExtendNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u005F\u0308\u0031\u0027'
 		expected: [WordBoundary{
@@ -8735,8 +8735,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] LOW LINE (ExtendNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u005F\u0031\u002C'
 		expected: [WordBoundary{
@@ -8748,8 +8748,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] LOW LINE (ExtendNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u005F\u0308\u0031\u002C'
 		expected: [WordBoundary{
@@ -8761,8 +8761,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] LOW LINE (ExtendNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u005F\u0031\u002E\u2060'
 		expected: [WordBoundary{
@@ -8774,8 +8774,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LOW LINE (ExtendNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u005F\u0308\u0031\u002E\u2060'
 		expected: [WordBoundary{
@@ -8787,8 +8787,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]
+		desc: '÷ [0.2] LOW LINE (ExtendNumLet) × [4.0] COMBINING DIAERESIS (Extend_FE) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u0001'
 		expected: [WordBoundary{
@@ -8800,8 +8800,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u0308\u0001'
 		expected: [WordBoundary{
@@ -8813,8 +8813,8 @@ const word_break_test_cases = [
 			offset_start: 6
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u000D'
 		expected: [WordBoundary{
@@ -8826,8 +8826,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u0308\u000D'
 		expected: [WordBoundary{
@@ -8839,8 +8839,8 @@ const word_break_test_cases = [
 			offset_start: 6
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u000A'
 		expected: [WordBoundary{
@@ -8852,8 +8852,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u0308\u000A'
 		expected: [WordBoundary{
@@ -8865,8 +8865,8 @@ const word_break_test_cases = [
 			offset_start: 6
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u000B'
 		expected: [WordBoundary{
@@ -8878,8 +8878,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u0308\u000B'
 		expected: [WordBoundary{
@@ -8891,8 +8891,8 @@ const word_break_test_cases = [
 			offset_start: 6
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u3031'
 		expected: [WordBoundary{
@@ -8904,8 +8904,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u0308\u3031'
 		expected: [WordBoundary{
@@ -8917,8 +8917,8 @@ const word_break_test_cases = [
 			offset_start: 6
 			offset_end: 9
 		}]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u0041'
 		expected: [WordBoundary{
@@ -8930,8 +8930,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u0308\u0041'
 		expected: [WordBoundary{
@@ -8943,8 +8943,8 @@ const word_break_test_cases = [
 			offset_start: 6
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u003A'
 		expected: [WordBoundary{
@@ -8956,8 +8956,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u0308\u003A'
 		expected: [WordBoundary{
@@ -8969,8 +8969,8 @@ const word_break_test_cases = [
 			offset_start: 6
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u002C'
 		expected: [WordBoundary{
@@ -8982,8 +8982,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u0308\u002C'
 		expected: [WordBoundary{
@@ -8995,8 +8995,8 @@ const word_break_test_cases = [
 			offset_start: 6
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u002E'
 		expected: [WordBoundary{
@@ -9008,8 +9008,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u0308\u002E'
 		expected: [WordBoundary{
@@ -9021,8 +9021,8 @@ const word_break_test_cases = [
 			offset_start: 6
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u0030'
 		expected: [WordBoundary{
@@ -9034,8 +9034,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u0308\u0030'
 		expected: [WordBoundary{
@@ -9047,8 +9047,8 @@ const word_break_test_cases = [
 			offset_start: 6
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u005F'
 		expected: [WordBoundary{
@@ -9060,8 +9060,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u0308\u005F'
 		expected: [WordBoundary{
@@ -9073,8 +9073,8 @@ const word_break_test_cases = [
 			offset_start: 6
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [15.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\U0001F1E6'
 		expected: [WordBoundary{
@@ -9082,8 +9082,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [4.0] COMBINING DIAERESIS (Extend_FE) × [15.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [15.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u0308\U0001F1E6'
 		expected: [WordBoundary{
@@ -9091,8 +9091,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 10
 		}]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [999.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [4.0] COMBINING DIAERESIS (Extend_FE) × [15.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u05D0'
 		expected: [WordBoundary{
@@ -9104,8 +9104,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [999.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u0308\u05D0'
 		expected: [WordBoundary{
@@ -9117,8 +9117,8 @@ const word_break_test_cases = [
 			offset_start: 6
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u0022'
 		expected: [WordBoundary{
@@ -9130,8 +9130,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u0308\u0022'
 		expected: [WordBoundary{
@@ -9143,8 +9143,8 @@ const word_break_test_cases = [
 			offset_start: 6
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u0027'
 		expected: [WordBoundary{
@@ -9156,8 +9156,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u0308\u0027'
 		expected: [WordBoundary{
@@ -9169,8 +9169,8 @@ const word_break_test_cases = [
 			offset_start: 6
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u231A'
 		expected: [WordBoundary{
@@ -9182,8 +9182,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u0308\u231A'
 		expected: [WordBoundary{
@@ -9195,8 +9195,8 @@ const word_break_test_cases = [
 			offset_start: 6
 			offset_end: 9
 		}]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u0020'
 		expected: [WordBoundary{
@@ -9208,8 +9208,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u0308\u0020'
 		expected: [WordBoundary{
@@ -9221,8 +9221,8 @@ const word_break_test_cases = [
 			offset_start: 6
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u00AD'
 		expected: [WordBoundary{
@@ -9230,8 +9230,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u0308\u00AD'
 		expected: [WordBoundary{
@@ -9239,8 +9239,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u0300'
 		expected: [WordBoundary{
@@ -9248,8 +9248,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u0308\u0300'
 		expected: [WordBoundary{
@@ -9257,8 +9257,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u200D'
 		expected: [WordBoundary{
@@ -9266,8 +9266,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u0308\u200D'
 		expected: [WordBoundary{
@@ -9275,8 +9275,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 9
 		}]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [999.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u0061\u2060'
 		expected: [WordBoundary{
@@ -9288,8 +9288,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [999.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u0308\u0061\u2060'
 		expected: [WordBoundary{
@@ -9301,8 +9301,8 @@ const word_break_test_cases = [
 			offset_start: 6
 			offset_end: 10
 		}]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u0061\u003A'
 		expected: [WordBoundary{
@@ -9318,8 +9318,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u0308\u0061\u003A'
 		expected: [WordBoundary{
@@ -9335,8 +9335,8 @@ const word_break_test_cases = [
 			offset_start: 7
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u0061\u0027'
 		expected: [WordBoundary{
@@ -9352,8 +9352,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u0308\u0061\u0027'
 		expected: [WordBoundary{
@@ -9369,8 +9369,8 @@ const word_break_test_cases = [
 			offset_start: 7
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u0061\u0027\u2060'
 		expected: [WordBoundary{
@@ -9386,8 +9386,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 9
 		}]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u0308\u0061\u0027\u2060'
 		expected: [WordBoundary{
@@ -9403,8 +9403,8 @@ const word_break_test_cases = [
 			offset_start: 7
 			offset_end: 11
 		}]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u0061\u002C'
 		expected: [WordBoundary{
@@ -9420,8 +9420,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u0308\u0061\u002C'
 		expected: [WordBoundary{
@@ -9437,8 +9437,8 @@ const word_break_test_cases = [
 			offset_start: 7
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u0031\u003A'
 		expected: [WordBoundary{
@@ -9454,8 +9454,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u0308\u0031\u003A'
 		expected: [WordBoundary{
@@ -9471,8 +9471,8 @@ const word_break_test_cases = [
 			offset_start: 7
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u0031\u0027'
 		expected: [WordBoundary{
@@ -9488,8 +9488,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u0308\u0031\u0027'
 		expected: [WordBoundary{
@@ -9505,8 +9505,8 @@ const word_break_test_cases = [
 			offset_start: 7
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u0031\u002C'
 		expected: [WordBoundary{
@@ -9522,8 +9522,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u0308\u0031\u002C'
 		expected: [WordBoundary{
@@ -9539,8 +9539,8 @@ const word_break_test_cases = [
 			offset_start: 7
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u0031\u002E\u2060'
 		expected: [WordBoundary{
@@ -9556,8 +9556,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 9
 		}]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\u0308\u0031\u002E\u2060'
 		expected: [WordBoundary{
@@ -9573,8 +9573,8 @@ const word_break_test_cases = [
 			offset_start: 7
 			offset_end: 11
 		}]
-	}
-	// ÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u05D0\u0001'
 		expected: [WordBoundary{
@@ -9586,8 +9586,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]
+		desc: '÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u05D0\u0308\u0001'
 		expected: [WordBoundary{
@@ -9599,8 +9599,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u05D0\u000D'
 		expected: [WordBoundary{
@@ -9612,8 +9612,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u05D0\u0308\u000D'
 		expected: [WordBoundary{
@@ -9625,8 +9625,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u05D0\u000A'
 		expected: [WordBoundary{
@@ -9638,8 +9638,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u05D0\u0308\u000A'
 		expected: [WordBoundary{
@@ -9651,8 +9651,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]
+		desc: '÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u05D0\u000B'
 		expected: [WordBoundary{
@@ -9664,8 +9664,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]
+		desc: '÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u05D0\u0308\u000B'
 		expected: [WordBoundary{
@@ -9677,8 +9677,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]
+		desc: '÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u05D0\u3031'
 		expected: [WordBoundary{
@@ -9690,8 +9690,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]
+		desc: '÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u05D0\u0308\u3031'
 		expected: [WordBoundary{
@@ -9703,8 +9703,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [5.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u05D0\u0041'
 		expected: [WordBoundary{
@@ -9712,8 +9712,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [5.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [5.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u05D0\u0308\u0041'
 		expected: [WordBoundary{
@@ -9721,8 +9721,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [5.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u05D0\u003A'
 		expected: [WordBoundary{
@@ -9734,8 +9734,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u05D0\u0308\u003A'
 		expected: [WordBoundary{
@@ -9747,8 +9747,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u05D0\u002C'
 		expected: [WordBoundary{
@@ -9760,8 +9760,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u05D0\u0308\u002C'
 		expected: [WordBoundary{
@@ -9773,8 +9773,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]
+		desc: '÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u05D0\u002E'
 		expected: [WordBoundary{
@@ -9786,8 +9786,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]
+		desc: '÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u05D0\u0308\u002E'
 		expected: [WordBoundary{
@@ -9799,8 +9799,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [9.0] DIGIT ZERO (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u05D0\u0030'
 		expected: [WordBoundary{
@@ -9808,8 +9808,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [9.0] DIGIT ZERO (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [9.0] DIGIT ZERO (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u05D0\u0308\u0030'
 		expected: [WordBoundary{
@@ -9817,8 +9817,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [13.1] LOW LINE (ExtendNumLet) ÷ [0.3]
+		desc: '÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [9.0] DIGIT ZERO (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u05D0\u005F'
 		expected: [WordBoundary{
@@ -9826,8 +9826,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [13.1] LOW LINE (ExtendNumLet) ÷ [0.3]
+		desc: '÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [13.1] LOW LINE (ExtendNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u05D0\u0308\u005F'
 		expected: [WordBoundary{
@@ -9835,8 +9835,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [13.1] LOW LINE (ExtendNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u05D0\U0001F1E6'
 		expected: [WordBoundary{
@@ -9848,8 +9848,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u05D0\u0308\U0001F1E6'
 		expected: [WordBoundary{
@@ -9861,8 +9861,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [5.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]
+		desc: '÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u05D0\u05D0'
 		expected: [WordBoundary{
@@ -9870,8 +9870,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [5.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]
+		desc: '÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [5.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u05D0\u0308\u05D0'
 		expected: [WordBoundary{
@@ -9879,8 +9879,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]
+		desc: '÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [5.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u05D0\u0022'
 		expected: [WordBoundary{
@@ -9892,8 +9892,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]
+		desc: '÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u05D0\u0308\u0022'
 		expected: [WordBoundary{
@@ -9905,8 +9905,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [7.1] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u05D0\u0027'
 		expected: [WordBoundary{
@@ -9914,8 +9914,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [7.1] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [7.1] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u05D0\u0308\u0027'
 		expected: [WordBoundary{
@@ -9923,8 +9923,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [7.1] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u05D0\u231A'
 		expected: [WordBoundary{
@@ -9936,8 +9936,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u05D0\u0308\u231A'
 		expected: [WordBoundary{
@@ -9949,8 +9949,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]
+		desc: '÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u05D0\u0020'
 		expected: [WordBoundary{
@@ -9962,8 +9962,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]
+		desc: '÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u05D0\u0308\u0020'
 		expected: [WordBoundary{
@@ -9975,8 +9975,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u05D0\u00AD'
 		expected: [WordBoundary{
@@ -9984,8 +9984,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u05D0\u0308\u00AD'
 		expected: [WordBoundary{
@@ -9993,8 +9993,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]
+		desc: '÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u05D0\u0300'
 		expected: [WordBoundary{
@@ -10002,8 +10002,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]
+		desc: '÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u05D0\u0308\u0300'
 		expected: [WordBoundary{
@@ -10011,8 +10011,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]
+		desc: '÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u05D0\u200D'
 		expected: [WordBoundary{
@@ -10020,8 +10020,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]
+		desc: '÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u05D0\u0308\u200D'
 		expected: [WordBoundary{
@@ -10029,8 +10029,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [5.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u05D0\u0061\u2060'
 		expected: [WordBoundary{
@@ -10038,8 +10038,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [5.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [5.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u05D0\u0308\u0061\u2060'
 		expected: [WordBoundary{
@@ -10047,8 +10047,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [5.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [5.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u05D0\u0061\u003A'
 		expected: [WordBoundary{
@@ -10060,8 +10060,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [5.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [5.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u05D0\u0308\u0061\u003A'
 		expected: [WordBoundary{
@@ -10073,8 +10073,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [5.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [5.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u05D0\u0061\u0027'
 		expected: [WordBoundary{
@@ -10086,8 +10086,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [5.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [5.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u05D0\u0308\u0061\u0027'
 		expected: [WordBoundary{
@@ -10099,8 +10099,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [5.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [5.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u05D0\u0061\u0027\u2060'
 		expected: [WordBoundary{
@@ -10112,8 +10112,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [5.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [5.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u05D0\u0308\u0061\u0027\u2060'
 		expected: [WordBoundary{
@@ -10125,8 +10125,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 9
 		}]
-	}
-	// ÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [5.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [5.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u05D0\u0061\u002C'
 		expected: [WordBoundary{
@@ -10138,8 +10138,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [5.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [5.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u05D0\u0308\u0061\u002C'
 		expected: [WordBoundary{
@@ -10151,8 +10151,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [9.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [5.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u05D0\u0031\u003A'
 		expected: [WordBoundary{
@@ -10164,8 +10164,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [9.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [9.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u05D0\u0308\u0031\u003A'
 		expected: [WordBoundary{
@@ -10177,8 +10177,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [9.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [9.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u05D0\u0031\u0027'
 		expected: [WordBoundary{
@@ -10190,8 +10190,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [9.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [9.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u05D0\u0308\u0031\u0027'
 		expected: [WordBoundary{
@@ -10203,8 +10203,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [9.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [9.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u05D0\u0031\u002C'
 		expected: [WordBoundary{
@@ -10216,8 +10216,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [9.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [9.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u05D0\u0308\u0031\u002C'
 		expected: [WordBoundary{
@@ -10229,8 +10229,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [9.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [9.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u05D0\u0031\u002E\u2060'
 		expected: [WordBoundary{
@@ -10242,8 +10242,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [9.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [9.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u05D0\u0308\u0031\u002E\u2060'
 		expected: [WordBoundary{
@@ -10255,8 +10255,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 9
 		}]
-	}
-	// ÷ [0.2] QUOTATION MARK (Double_Quote) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]
+		desc: '÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [9.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0022\u0001'
 		expected: [WordBoundary{
@@ -10268,8 +10268,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] QUOTATION MARK (Double_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]
+		desc: '÷ [0.2] QUOTATION MARK (Double_Quote) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0022\u0308\u0001'
 		expected: [WordBoundary{
@@ -10281,8 +10281,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] QUOTATION MARK (Double_Quote) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] QUOTATION MARK (Double_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0022\u000D'
 		expected: [WordBoundary{
@@ -10294,8 +10294,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] QUOTATION MARK (Double_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] QUOTATION MARK (Double_Quote) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0022\u0308\u000D'
 		expected: [WordBoundary{
@@ -10307,8 +10307,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] QUOTATION MARK (Double_Quote) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] QUOTATION MARK (Double_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0022\u000A'
 		expected: [WordBoundary{
@@ -10320,8 +10320,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] QUOTATION MARK (Double_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] QUOTATION MARK (Double_Quote) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0022\u0308\u000A'
 		expected: [WordBoundary{
@@ -10333,8 +10333,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] QUOTATION MARK (Double_Quote) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]
+		desc: '÷ [0.2] QUOTATION MARK (Double_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0022\u000B'
 		expected: [WordBoundary{
@@ -10346,8 +10346,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] QUOTATION MARK (Double_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]
+		desc: '÷ [0.2] QUOTATION MARK (Double_Quote) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0022\u0308\u000B'
 		expected: [WordBoundary{
@@ -10359,8 +10359,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] QUOTATION MARK (Double_Quote) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]
+		desc: '÷ [0.2] QUOTATION MARK (Double_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0022\u3031'
 		expected: [WordBoundary{
@@ -10372,8 +10372,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] QUOTATION MARK (Double_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]
+		desc: '÷ [0.2] QUOTATION MARK (Double_Quote) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0022\u0308\u3031'
 		expected: [WordBoundary{
@@ -10385,8 +10385,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] QUOTATION MARK (Double_Quote) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] QUOTATION MARK (Double_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0022\u0041'
 		expected: [WordBoundary{
@@ -10398,8 +10398,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] QUOTATION MARK (Double_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] QUOTATION MARK (Double_Quote) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0022\u0308\u0041'
 		expected: [WordBoundary{
@@ -10411,8 +10411,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] QUOTATION MARK (Double_Quote) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] QUOTATION MARK (Double_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0022\u003A'
 		expected: [WordBoundary{
@@ -10424,8 +10424,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] QUOTATION MARK (Double_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] QUOTATION MARK (Double_Quote) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0022\u0308\u003A'
 		expected: [WordBoundary{
@@ -10437,8 +10437,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] QUOTATION MARK (Double_Quote) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] QUOTATION MARK (Double_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0022\u002C'
 		expected: [WordBoundary{
@@ -10450,8 +10450,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] QUOTATION MARK (Double_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] QUOTATION MARK (Double_Quote) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0022\u0308\u002C'
 		expected: [WordBoundary{
@@ -10463,8 +10463,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] QUOTATION MARK (Double_Quote) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]
+		desc: '÷ [0.2] QUOTATION MARK (Double_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0022\u002E'
 		expected: [WordBoundary{
@@ -10476,8 +10476,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] QUOTATION MARK (Double_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]
+		desc: '÷ [0.2] QUOTATION MARK (Double_Quote) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0022\u0308\u002E'
 		expected: [WordBoundary{
@@ -10489,8 +10489,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] QUOTATION MARK (Double_Quote) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] QUOTATION MARK (Double_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0022\u0030'
 		expected: [WordBoundary{
@@ -10502,8 +10502,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] QUOTATION MARK (Double_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] QUOTATION MARK (Double_Quote) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0022\u0308\u0030'
 		expected: [WordBoundary{
@@ -10515,8 +10515,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] QUOTATION MARK (Double_Quote) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]
+		desc: '÷ [0.2] QUOTATION MARK (Double_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0022\u005F'
 		expected: [WordBoundary{
@@ -10528,8 +10528,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] QUOTATION MARK (Double_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]
+		desc: '÷ [0.2] QUOTATION MARK (Double_Quote) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0022\u0308\u005F'
 		expected: [WordBoundary{
@@ -10541,8 +10541,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] QUOTATION MARK (Double_Quote) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] QUOTATION MARK (Double_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0022\U0001F1E6'
 		expected: [WordBoundary{
@@ -10554,8 +10554,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] QUOTATION MARK (Double_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] QUOTATION MARK (Double_Quote) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0022\u0308\U0001F1E6'
 		expected: [WordBoundary{
@@ -10567,8 +10567,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] QUOTATION MARK (Double_Quote) ÷ [999.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]
+		desc: '÷ [0.2] QUOTATION MARK (Double_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0022\u05D0'
 		expected: [WordBoundary{
@@ -10580,8 +10580,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] QUOTATION MARK (Double_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]
+		desc: '÷ [0.2] QUOTATION MARK (Double_Quote) ÷ [999.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0022\u0308\u05D0'
 		expected: [WordBoundary{
@@ -10593,8 +10593,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] QUOTATION MARK (Double_Quote) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]
+		desc: '÷ [0.2] QUOTATION MARK (Double_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0022\u0022'
 		expected: [WordBoundary{
@@ -10606,8 +10606,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] QUOTATION MARK (Double_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]
+		desc: '÷ [0.2] QUOTATION MARK (Double_Quote) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0022\u0308\u0022'
 		expected: [WordBoundary{
@@ -10619,8 +10619,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] QUOTATION MARK (Double_Quote) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] QUOTATION MARK (Double_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0022\u0027'
 		expected: [WordBoundary{
@@ -10632,8 +10632,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] QUOTATION MARK (Double_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] QUOTATION MARK (Double_Quote) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0022\u0308\u0027'
 		expected: [WordBoundary{
@@ -10645,8 +10645,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] QUOTATION MARK (Double_Quote) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] QUOTATION MARK (Double_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0022\u231A'
 		expected: [WordBoundary{
@@ -10658,8 +10658,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] QUOTATION MARK (Double_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] QUOTATION MARK (Double_Quote) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0022\u0308\u231A'
 		expected: [WordBoundary{
@@ -10671,8 +10671,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] QUOTATION MARK (Double_Quote) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]
+		desc: '÷ [0.2] QUOTATION MARK (Double_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0022\u0020'
 		expected: [WordBoundary{
@@ -10684,8 +10684,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] QUOTATION MARK (Double_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]
+		desc: '÷ [0.2] QUOTATION MARK (Double_Quote) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0022\u0308\u0020'
 		expected: [WordBoundary{
@@ -10697,8 +10697,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] QUOTATION MARK (Double_Quote) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] QUOTATION MARK (Double_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0022\u00AD'
 		expected: [WordBoundary{
@@ -10706,8 +10706,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] QUOTATION MARK (Double_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] QUOTATION MARK (Double_Quote) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0022\u0308\u00AD'
 		expected: [WordBoundary{
@@ -10715,8 +10715,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] QUOTATION MARK (Double_Quote) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]
+		desc: '÷ [0.2] QUOTATION MARK (Double_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0022\u0300'
 		expected: [WordBoundary{
@@ -10724,8 +10724,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] QUOTATION MARK (Double_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]
+		desc: '÷ [0.2] QUOTATION MARK (Double_Quote) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0022\u0308\u0300'
 		expected: [WordBoundary{
@@ -10733,8 +10733,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] QUOTATION MARK (Double_Quote) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]
+		desc: '÷ [0.2] QUOTATION MARK (Double_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0022\u200D'
 		expected: [WordBoundary{
@@ -10742,8 +10742,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] QUOTATION MARK (Double_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]
+		desc: '÷ [0.2] QUOTATION MARK (Double_Quote) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0022\u0308\u200D'
 		expected: [WordBoundary{
@@ -10751,8 +10751,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] QUOTATION MARK (Double_Quote) ÷ [999.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] QUOTATION MARK (Double_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0022\u0061\u2060'
 		expected: [WordBoundary{
@@ -10764,8 +10764,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] QUOTATION MARK (Double_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] QUOTATION MARK (Double_Quote) ÷ [999.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0022\u0308\u0061\u2060'
 		expected: [WordBoundary{
@@ -10777,8 +10777,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] QUOTATION MARK (Double_Quote) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] QUOTATION MARK (Double_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0022\u0061\u003A'
 		expected: [WordBoundary{
@@ -10794,8 +10794,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] QUOTATION MARK (Double_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] QUOTATION MARK (Double_Quote) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0022\u0308\u0061\u003A'
 		expected: [WordBoundary{
@@ -10811,8 +10811,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] QUOTATION MARK (Double_Quote) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] QUOTATION MARK (Double_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0022\u0061\u0027'
 		expected: [WordBoundary{
@@ -10828,8 +10828,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] QUOTATION MARK (Double_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] QUOTATION MARK (Double_Quote) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0022\u0308\u0061\u0027'
 		expected: [WordBoundary{
@@ -10845,8 +10845,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] QUOTATION MARK (Double_Quote) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] QUOTATION MARK (Double_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0022\u0061\u0027\u2060'
 		expected: [WordBoundary{
@@ -10862,8 +10862,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] QUOTATION MARK (Double_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] QUOTATION MARK (Double_Quote) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0022\u0308\u0061\u0027\u2060'
 		expected: [WordBoundary{
@@ -10879,8 +10879,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] QUOTATION MARK (Double_Quote) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] QUOTATION MARK (Double_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0022\u0061\u002C'
 		expected: [WordBoundary{
@@ -10896,8 +10896,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] QUOTATION MARK (Double_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] QUOTATION MARK (Double_Quote) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0022\u0308\u0061\u002C'
 		expected: [WordBoundary{
@@ -10913,8 +10913,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] QUOTATION MARK (Double_Quote) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] QUOTATION MARK (Double_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0022\u0031\u003A'
 		expected: [WordBoundary{
@@ -10930,8 +10930,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] QUOTATION MARK (Double_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] QUOTATION MARK (Double_Quote) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0022\u0308\u0031\u003A'
 		expected: [WordBoundary{
@@ -10947,8 +10947,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] QUOTATION MARK (Double_Quote) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] QUOTATION MARK (Double_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0022\u0031\u0027'
 		expected: [WordBoundary{
@@ -10964,8 +10964,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] QUOTATION MARK (Double_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] QUOTATION MARK (Double_Quote) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0022\u0308\u0031\u0027'
 		expected: [WordBoundary{
@@ -10981,8 +10981,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] QUOTATION MARK (Double_Quote) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] QUOTATION MARK (Double_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0022\u0031\u002C'
 		expected: [WordBoundary{
@@ -10998,8 +10998,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] QUOTATION MARK (Double_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] QUOTATION MARK (Double_Quote) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0022\u0308\u0031\u002C'
 		expected: [WordBoundary{
@@ -11015,8 +11015,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] QUOTATION MARK (Double_Quote) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] QUOTATION MARK (Double_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0022\u0031\u002E\u2060'
 		expected: [WordBoundary{
@@ -11032,8 +11032,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] QUOTATION MARK (Double_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] QUOTATION MARK (Double_Quote) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0022\u0308\u0031\u002E\u2060'
 		expected: [WordBoundary{
@@ -11049,8 +11049,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] APOSTROPHE (Single_Quote) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]
+		desc: '÷ [0.2] QUOTATION MARK (Double_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0027\u0001'
 		expected: [WordBoundary{
@@ -11062,8 +11062,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]
+		desc: '÷ [0.2] APOSTROPHE (Single_Quote) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0027\u0308\u0001'
 		expected: [WordBoundary{
@@ -11075,8 +11075,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] APOSTROPHE (Single_Quote) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0027\u000D'
 		expected: [WordBoundary{
@@ -11088,8 +11088,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] APOSTROPHE (Single_Quote) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0027\u0308\u000D'
 		expected: [WordBoundary{
@@ -11101,8 +11101,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] APOSTROPHE (Single_Quote) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0027\u000A'
 		expected: [WordBoundary{
@@ -11114,8 +11114,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] APOSTROPHE (Single_Quote) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0027\u0308\u000A'
 		expected: [WordBoundary{
@@ -11127,8 +11127,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] APOSTROPHE (Single_Quote) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]
+		desc: '÷ [0.2] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0027\u000B'
 		expected: [WordBoundary{
@@ -11140,8 +11140,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]
+		desc: '÷ [0.2] APOSTROPHE (Single_Quote) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0027\u0308\u000B'
 		expected: [WordBoundary{
@@ -11153,8 +11153,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] APOSTROPHE (Single_Quote) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]
+		desc: '÷ [0.2] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0027\u3031'
 		expected: [WordBoundary{
@@ -11166,8 +11166,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]
+		desc: '÷ [0.2] APOSTROPHE (Single_Quote) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0027\u0308\u3031'
 		expected: [WordBoundary{
@@ -11179,8 +11179,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] APOSTROPHE (Single_Quote) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0027\u0041'
 		expected: [WordBoundary{
@@ -11192,8 +11192,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] APOSTROPHE (Single_Quote) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0027\u0308\u0041'
 		expected: [WordBoundary{
@@ -11205,8 +11205,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] APOSTROPHE (Single_Quote) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0027\u003A'
 		expected: [WordBoundary{
@@ -11218,8 +11218,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] APOSTROPHE (Single_Quote) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0027\u0308\u003A'
 		expected: [WordBoundary{
@@ -11231,8 +11231,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] APOSTROPHE (Single_Quote) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0027\u002C'
 		expected: [WordBoundary{
@@ -11244,8 +11244,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] APOSTROPHE (Single_Quote) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0027\u0308\u002C'
 		expected: [WordBoundary{
@@ -11257,8 +11257,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] APOSTROPHE (Single_Quote) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]
+		desc: '÷ [0.2] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0027\u002E'
 		expected: [WordBoundary{
@@ -11270,8 +11270,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]
+		desc: '÷ [0.2] APOSTROPHE (Single_Quote) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0027\u0308\u002E'
 		expected: [WordBoundary{
@@ -11283,8 +11283,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] APOSTROPHE (Single_Quote) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0027\u0030'
 		expected: [WordBoundary{
@@ -11296,8 +11296,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] APOSTROPHE (Single_Quote) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0027\u0308\u0030'
 		expected: [WordBoundary{
@@ -11309,8 +11309,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] APOSTROPHE (Single_Quote) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]
+		desc: '÷ [0.2] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0027\u005F'
 		expected: [WordBoundary{
@@ -11322,8 +11322,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]
+		desc: '÷ [0.2] APOSTROPHE (Single_Quote) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0027\u0308\u005F'
 		expected: [WordBoundary{
@@ -11335,8 +11335,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] APOSTROPHE (Single_Quote) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0027\U0001F1E6'
 		expected: [WordBoundary{
@@ -11348,8 +11348,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] APOSTROPHE (Single_Quote) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0027\u0308\U0001F1E6'
 		expected: [WordBoundary{
@@ -11361,8 +11361,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] APOSTROPHE (Single_Quote) ÷ [999.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]
+		desc: '÷ [0.2] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0027\u05D0'
 		expected: [WordBoundary{
@@ -11374,8 +11374,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]
+		desc: '÷ [0.2] APOSTROPHE (Single_Quote) ÷ [999.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0027\u0308\u05D0'
 		expected: [WordBoundary{
@@ -11387,8 +11387,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] APOSTROPHE (Single_Quote) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]
+		desc: '÷ [0.2] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0027\u0022'
 		expected: [WordBoundary{
@@ -11400,8 +11400,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]
+		desc: '÷ [0.2] APOSTROPHE (Single_Quote) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0027\u0308\u0022'
 		expected: [WordBoundary{
@@ -11413,8 +11413,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] APOSTROPHE (Single_Quote) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0027\u0027'
 		expected: [WordBoundary{
@@ -11426,8 +11426,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] APOSTROPHE (Single_Quote) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0027\u0308\u0027'
 		expected: [WordBoundary{
@@ -11439,8 +11439,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] APOSTROPHE (Single_Quote) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0027\u231A'
 		expected: [WordBoundary{
@@ -11452,8 +11452,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] APOSTROPHE (Single_Quote) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0027\u0308\u231A'
 		expected: [WordBoundary{
@@ -11465,8 +11465,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] APOSTROPHE (Single_Quote) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]
+		desc: '÷ [0.2] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0027\u0020'
 		expected: [WordBoundary{
@@ -11478,8 +11478,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]
+		desc: '÷ [0.2] APOSTROPHE (Single_Quote) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0027\u0308\u0020'
 		expected: [WordBoundary{
@@ -11491,8 +11491,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] APOSTROPHE (Single_Quote) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0027\u00AD'
 		expected: [WordBoundary{
@@ -11500,8 +11500,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] APOSTROPHE (Single_Quote) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0027\u0308\u00AD'
 		expected: [WordBoundary{
@@ -11509,8 +11509,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] APOSTROPHE (Single_Quote) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]
+		desc: '÷ [0.2] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0027\u0300'
 		expected: [WordBoundary{
@@ -11518,8 +11518,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]
+		desc: '÷ [0.2] APOSTROPHE (Single_Quote) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0027\u0308\u0300'
 		expected: [WordBoundary{
@@ -11527,8 +11527,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] APOSTROPHE (Single_Quote) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]
+		desc: '÷ [0.2] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0027\u200D'
 		expected: [WordBoundary{
@@ -11536,8 +11536,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]
+		desc: '÷ [0.2] APOSTROPHE (Single_Quote) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0027\u0308\u200D'
 		expected: [WordBoundary{
@@ -11545,8 +11545,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] APOSTROPHE (Single_Quote) ÷ [999.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0027\u0061\u2060'
 		expected: [WordBoundary{
@@ -11558,8 +11558,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] APOSTROPHE (Single_Quote) ÷ [999.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0027\u0308\u0061\u2060'
 		expected: [WordBoundary{
@@ -11571,8 +11571,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] APOSTROPHE (Single_Quote) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0027\u0061\u003A'
 		expected: [WordBoundary{
@@ -11588,8 +11588,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] APOSTROPHE (Single_Quote) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0027\u0308\u0061\u003A'
 		expected: [WordBoundary{
@@ -11605,8 +11605,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] APOSTROPHE (Single_Quote) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0027\u0061\u0027'
 		expected: [WordBoundary{
@@ -11622,8 +11622,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] APOSTROPHE (Single_Quote) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0027\u0308\u0061\u0027'
 		expected: [WordBoundary{
@@ -11639,8 +11639,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] APOSTROPHE (Single_Quote) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0027\u0061\u0027\u2060'
 		expected: [WordBoundary{
@@ -11656,8 +11656,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] APOSTROPHE (Single_Quote) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0027\u0308\u0061\u0027\u2060'
 		expected: [WordBoundary{
@@ -11673,8 +11673,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] APOSTROPHE (Single_Quote) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0027\u0061\u002C'
 		expected: [WordBoundary{
@@ -11690,8 +11690,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] APOSTROPHE (Single_Quote) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0027\u0308\u0061\u002C'
 		expected: [WordBoundary{
@@ -11707,8 +11707,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] APOSTROPHE (Single_Quote) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0027\u0031\u003A'
 		expected: [WordBoundary{
@@ -11724,8 +11724,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] APOSTROPHE (Single_Quote) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0027\u0308\u0031\u003A'
 		expected: [WordBoundary{
@@ -11741,8 +11741,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] APOSTROPHE (Single_Quote) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0027\u0031\u0027'
 		expected: [WordBoundary{
@@ -11758,8 +11758,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] APOSTROPHE (Single_Quote) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0027\u0308\u0031\u0027'
 		expected: [WordBoundary{
@@ -11775,8 +11775,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] APOSTROPHE (Single_Quote) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0027\u0031\u002C'
 		expected: [WordBoundary{
@@ -11792,8 +11792,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] APOSTROPHE (Single_Quote) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0027\u0308\u0031\u002C'
 		expected: [WordBoundary{
@@ -11809,8 +11809,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] APOSTROPHE (Single_Quote) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0027\u0031\u002E\u2060'
 		expected: [WordBoundary{
@@ -11826,8 +11826,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] APOSTROPHE (Single_Quote) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0027\u0308\u0031\u002E\u2060'
 		expected: [WordBoundary{
@@ -11843,8 +11843,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] WATCH (ExtPict) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]
+		desc: '÷ [0.2] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u0001'
 		expected: [WordBoundary{
@@ -11856,8 +11856,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] WATCH (ExtPict) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u0308\u0001'
 		expected: [WordBoundary{
@@ -11869,8 +11869,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] WATCH (ExtPict) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u000D'
 		expected: [WordBoundary{
@@ -11882,8 +11882,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] WATCH (ExtPict) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u0308\u000D'
 		expected: [WordBoundary{
@@ -11895,8 +11895,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] WATCH (ExtPict) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u000A'
 		expected: [WordBoundary{
@@ -11908,8 +11908,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] WATCH (ExtPict) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u0308\u000A'
 		expected: [WordBoundary{
@@ -11921,8 +11921,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] WATCH (ExtPict) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u000B'
 		expected: [WordBoundary{
@@ -11934,8 +11934,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] WATCH (ExtPict) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u0308\u000B'
 		expected: [WordBoundary{
@@ -11947,8 +11947,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] WATCH (ExtPict) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u3031'
 		expected: [WordBoundary{
@@ -11960,8 +11960,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] WATCH (ExtPict) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u0308\u3031'
 		expected: [WordBoundary{
@@ -11973,8 +11973,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] WATCH (ExtPict) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u0041'
 		expected: [WordBoundary{
@@ -11986,8 +11986,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] WATCH (ExtPict) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u0308\u0041'
 		expected: [WordBoundary{
@@ -11999,8 +11999,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] WATCH (ExtPict) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u003A'
 		expected: [WordBoundary{
@@ -12012,8 +12012,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] WATCH (ExtPict) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u0308\u003A'
 		expected: [WordBoundary{
@@ -12025,8 +12025,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] WATCH (ExtPict) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u002C'
 		expected: [WordBoundary{
@@ -12038,8 +12038,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] WATCH (ExtPict) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u0308\u002C'
 		expected: [WordBoundary{
@@ -12051,8 +12051,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] WATCH (ExtPict) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u002E'
 		expected: [WordBoundary{
@@ -12064,8 +12064,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] WATCH (ExtPict) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u0308\u002E'
 		expected: [WordBoundary{
@@ -12077,8 +12077,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] WATCH (ExtPict) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u0030'
 		expected: [WordBoundary{
@@ -12090,8 +12090,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] WATCH (ExtPict) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u0308\u0030'
 		expected: [WordBoundary{
@@ -12103,8 +12103,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] WATCH (ExtPict) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u005F'
 		expected: [WordBoundary{
@@ -12116,8 +12116,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] WATCH (ExtPict) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u0308\u005F'
 		expected: [WordBoundary{
@@ -12129,8 +12129,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] WATCH (ExtPict) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\U0001F1E6'
 		expected: [WordBoundary{
@@ -12142,8 +12142,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] WATCH (ExtPict) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u0308\U0001F1E6'
 		expected: [WordBoundary{
@@ -12155,8 +12155,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 9
 		}]
-	}
-	// ÷ [0.2] WATCH (ExtPict) ÷ [999.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u05D0'
 		expected: [WordBoundary{
@@ -12168,8 +12168,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] WATCH (ExtPict) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) ÷ [999.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u0308\u05D0'
 		expected: [WordBoundary{
@@ -12181,8 +12181,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] WATCH (ExtPict) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u0022'
 		expected: [WordBoundary{
@@ -12194,8 +12194,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] WATCH (ExtPict) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u0308\u0022'
 		expected: [WordBoundary{
@@ -12207,8 +12207,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] WATCH (ExtPict) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u0027'
 		expected: [WordBoundary{
@@ -12220,8 +12220,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] WATCH (ExtPict) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u0308\u0027'
 		expected: [WordBoundary{
@@ -12233,8 +12233,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] WATCH (ExtPict) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u231A'
 		expected: [WordBoundary{
@@ -12246,8 +12246,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] WATCH (ExtPict) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u0308\u231A'
 		expected: [WordBoundary{
@@ -12259,8 +12259,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] WATCH (ExtPict) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u0020'
 		expected: [WordBoundary{
@@ -12272,8 +12272,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] WATCH (ExtPict) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u0308\u0020'
 		expected: [WordBoundary{
@@ -12285,8 +12285,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] WATCH (ExtPict) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u00AD'
 		expected: [WordBoundary{
@@ -12294,8 +12294,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] WATCH (ExtPict) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u0308\u00AD'
 		expected: [WordBoundary{
@@ -12303,8 +12303,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] WATCH (ExtPict) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u0300'
 		expected: [WordBoundary{
@@ -12312,8 +12312,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] WATCH (ExtPict) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u0308\u0300'
 		expected: [WordBoundary{
@@ -12321,8 +12321,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] WATCH (ExtPict) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u200D'
 		expected: [WordBoundary{
@@ -12330,8 +12330,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] WATCH (ExtPict) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u0308\u200D'
 		expected: [WordBoundary{
@@ -12339,8 +12339,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] WATCH (ExtPict) ÷ [999.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u0061\u2060'
 		expected: [WordBoundary{
@@ -12352,8 +12352,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] WATCH (ExtPict) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) ÷ [999.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u0308\u0061\u2060'
 		expected: [WordBoundary{
@@ -12365,8 +12365,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 9
 		}]
-	}
-	// ÷ [0.2] WATCH (ExtPict) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u0061\u003A'
 		expected: [WordBoundary{
@@ -12382,8 +12382,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] WATCH (ExtPict) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u0308\u0061\u003A'
 		expected: [WordBoundary{
@@ -12399,8 +12399,8 @@ const word_break_test_cases = [
 			offset_start: 6
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] WATCH (ExtPict) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u0061\u0027'
 		expected: [WordBoundary{
@@ -12416,8 +12416,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] WATCH (ExtPict) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u0308\u0061\u0027'
 		expected: [WordBoundary{
@@ -12433,8 +12433,8 @@ const word_break_test_cases = [
 			offset_start: 6
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] WATCH (ExtPict) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u0061\u0027\u2060'
 		expected: [WordBoundary{
@@ -12450,8 +12450,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] WATCH (ExtPict) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u0308\u0061\u0027\u2060'
 		expected: [WordBoundary{
@@ -12467,8 +12467,8 @@ const word_break_test_cases = [
 			offset_start: 6
 			offset_end: 10
 		}]
-	}
-	// ÷ [0.2] WATCH (ExtPict) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u0061\u002C'
 		expected: [WordBoundary{
@@ -12484,8 +12484,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] WATCH (ExtPict) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u0308\u0061\u002C'
 		expected: [WordBoundary{
@@ -12501,8 +12501,8 @@ const word_break_test_cases = [
 			offset_start: 6
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] WATCH (ExtPict) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u0031\u003A'
 		expected: [WordBoundary{
@@ -12518,8 +12518,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] WATCH (ExtPict) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u0308\u0031\u003A'
 		expected: [WordBoundary{
@@ -12535,8 +12535,8 @@ const word_break_test_cases = [
 			offset_start: 6
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] WATCH (ExtPict) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u0031\u0027'
 		expected: [WordBoundary{
@@ -12552,8 +12552,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] WATCH (ExtPict) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u0308\u0031\u0027'
 		expected: [WordBoundary{
@@ -12569,8 +12569,8 @@ const word_break_test_cases = [
 			offset_start: 6
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] WATCH (ExtPict) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u0031\u002C'
 		expected: [WordBoundary{
@@ -12586,8 +12586,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] WATCH (ExtPict) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u0308\u0031\u002C'
 		expected: [WordBoundary{
@@ -12603,8 +12603,8 @@ const word_break_test_cases = [
 			offset_start: 6
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] WATCH (ExtPict) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u0031\u002E\u2060'
 		expected: [WordBoundary{
@@ -12620,8 +12620,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] WATCH (ExtPict) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u231A\u0308\u0031\u002E\u2060'
 		expected: [WordBoundary{
@@ -12637,8 +12637,8 @@ const word_break_test_cases = [
 			offset_start: 6
 			offset_end: 10
 		}]
-	}
-	// ÷ [0.2] SPACE (WSegSpace) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]
+		desc: '÷ [0.2] WATCH (ExtPict) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u0001'
 		expected: [WordBoundary{
@@ -12650,8 +12650,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] SPACE (WSegSpace) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (WSegSpace) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u0308\u0001'
 		expected: [WordBoundary{
@@ -12663,8 +12663,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] SPACE (WSegSpace) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (WSegSpace) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u000D'
 		expected: [WordBoundary{
@@ -12676,8 +12676,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] SPACE (WSegSpace) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (WSegSpace) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u0308\u000D'
 		expected: [WordBoundary{
@@ -12689,8 +12689,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] SPACE (WSegSpace) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (WSegSpace) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u000A'
 		expected: [WordBoundary{
@@ -12702,8 +12702,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] SPACE (WSegSpace) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (WSegSpace) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u0308\u000A'
 		expected: [WordBoundary{
@@ -12715,8 +12715,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] SPACE (WSegSpace) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (WSegSpace) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u000B'
 		expected: [WordBoundary{
@@ -12728,8 +12728,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] SPACE (WSegSpace) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (WSegSpace) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u0308\u000B'
 		expected: [WordBoundary{
@@ -12741,8 +12741,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] SPACE (WSegSpace) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (WSegSpace) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u3031'
 		expected: [WordBoundary{
@@ -12754,8 +12754,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] SPACE (WSegSpace) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (WSegSpace) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u0308\u3031'
 		expected: [WordBoundary{
@@ -12767,8 +12767,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] SPACE (WSegSpace) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (WSegSpace) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u0041'
 		expected: [WordBoundary{
@@ -12780,8 +12780,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] SPACE (WSegSpace) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (WSegSpace) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u0308\u0041'
 		expected: [WordBoundary{
@@ -12793,8 +12793,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] SPACE (WSegSpace) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (WSegSpace) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u003A'
 		expected: [WordBoundary{
@@ -12806,8 +12806,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] SPACE (WSegSpace) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (WSegSpace) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u0308\u003A'
 		expected: [WordBoundary{
@@ -12819,8 +12819,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] SPACE (WSegSpace) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (WSegSpace) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u002C'
 		expected: [WordBoundary{
@@ -12832,8 +12832,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] SPACE (WSegSpace) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (WSegSpace) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u0308\u002C'
 		expected: [WordBoundary{
@@ -12845,8 +12845,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] SPACE (WSegSpace) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (WSegSpace) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u002E'
 		expected: [WordBoundary{
@@ -12858,8 +12858,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] SPACE (WSegSpace) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (WSegSpace) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u0308\u002E'
 		expected: [WordBoundary{
@@ -12871,8 +12871,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] SPACE (WSegSpace) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (WSegSpace) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u0030'
 		expected: [WordBoundary{
@@ -12884,8 +12884,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] SPACE (WSegSpace) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (WSegSpace) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u0308\u0030'
 		expected: [WordBoundary{
@@ -12897,8 +12897,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] SPACE (WSegSpace) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (WSegSpace) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u005F'
 		expected: [WordBoundary{
@@ -12910,8 +12910,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] SPACE (WSegSpace) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (WSegSpace) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u0308\u005F'
 		expected: [WordBoundary{
@@ -12923,8 +12923,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] SPACE (WSegSpace) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (WSegSpace) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\U0001F1E6'
 		expected: [WordBoundary{
@@ -12936,8 +12936,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] SPACE (WSegSpace) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (WSegSpace) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u0308\U0001F1E6'
 		expected: [WordBoundary{
@@ -12949,8 +12949,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] SPACE (WSegSpace) ÷ [999.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (WSegSpace) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u05D0'
 		expected: [WordBoundary{
@@ -12962,8 +12962,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] SPACE (WSegSpace) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (WSegSpace) ÷ [999.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u0308\u05D0'
 		expected: [WordBoundary{
@@ -12975,8 +12975,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] SPACE (WSegSpace) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (WSegSpace) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u0022'
 		expected: [WordBoundary{
@@ -12988,8 +12988,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] SPACE (WSegSpace) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (WSegSpace) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u0308\u0022'
 		expected: [WordBoundary{
@@ -13001,8 +13001,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] SPACE (WSegSpace) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (WSegSpace) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u0027'
 		expected: [WordBoundary{
@@ -13014,8 +13014,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] SPACE (WSegSpace) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (WSegSpace) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u0308\u0027'
 		expected: [WordBoundary{
@@ -13027,8 +13027,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] SPACE (WSegSpace) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (WSegSpace) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u231A'
 		expected: [WordBoundary{
@@ -13040,8 +13040,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] SPACE (WSegSpace) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (WSegSpace) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u0308\u231A'
 		expected: [WordBoundary{
@@ -13053,8 +13053,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] SPACE (WSegSpace) × [3.4] SPACE (WSegSpace) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (WSegSpace) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u0020'
 		expected: [WordBoundary{
@@ -13062,8 +13062,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 2
 		}]
-	}
-	// ÷ [0.2] SPACE (WSegSpace) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (WSegSpace) × [3.4] SPACE (WSegSpace) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u0308\u0020'
 		expected: [WordBoundary{
@@ -13075,8 +13075,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] SPACE (WSegSpace) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (WSegSpace) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u00AD'
 		expected: [WordBoundary{
@@ -13084,8 +13084,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] SPACE (WSegSpace) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (WSegSpace) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u0308\u00AD'
 		expected: [WordBoundary{
@@ -13093,8 +13093,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] SPACE (WSegSpace) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (WSegSpace) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u0300'
 		expected: [WordBoundary{
@@ -13102,8 +13102,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] SPACE (WSegSpace) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (WSegSpace) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u0308\u0300'
 		expected: [WordBoundary{
@@ -13111,8 +13111,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] SPACE (WSegSpace) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (WSegSpace) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u200D'
 		expected: [WordBoundary{
@@ -13120,8 +13120,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] SPACE (WSegSpace) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (WSegSpace) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u0308\u200D'
 		expected: [WordBoundary{
@@ -13129,8 +13129,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] SPACE (WSegSpace) ÷ [999.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (WSegSpace) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u0061\u2060'
 		expected: [WordBoundary{
@@ -13142,8 +13142,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] SPACE (WSegSpace) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (WSegSpace) ÷ [999.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u0308\u0061\u2060'
 		expected: [WordBoundary{
@@ -13155,8 +13155,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] SPACE (WSegSpace) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (WSegSpace) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u0061\u003A'
 		expected: [WordBoundary{
@@ -13172,8 +13172,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] SPACE (WSegSpace) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (WSegSpace) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u0308\u0061\u003A'
 		expected: [WordBoundary{
@@ -13189,8 +13189,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] SPACE (WSegSpace) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (WSegSpace) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u0061\u0027'
 		expected: [WordBoundary{
@@ -13206,8 +13206,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] SPACE (WSegSpace) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (WSegSpace) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u0308\u0061\u0027'
 		expected: [WordBoundary{
@@ -13223,8 +13223,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] SPACE (WSegSpace) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (WSegSpace) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u0061\u0027\u2060'
 		expected: [WordBoundary{
@@ -13240,8 +13240,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] SPACE (WSegSpace) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (WSegSpace) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u0308\u0061\u0027\u2060'
 		expected: [WordBoundary{
@@ -13257,8 +13257,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] SPACE (WSegSpace) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (WSegSpace) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u0061\u002C'
 		expected: [WordBoundary{
@@ -13274,8 +13274,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] SPACE (WSegSpace) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (WSegSpace) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u0308\u0061\u002C'
 		expected: [WordBoundary{
@@ -13291,8 +13291,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] SPACE (WSegSpace) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (WSegSpace) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u0031\u003A'
 		expected: [WordBoundary{
@@ -13308,8 +13308,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] SPACE (WSegSpace) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (WSegSpace) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u0308\u0031\u003A'
 		expected: [WordBoundary{
@@ -13325,8 +13325,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] SPACE (WSegSpace) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (WSegSpace) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u0031\u0027'
 		expected: [WordBoundary{
@@ -13342,8 +13342,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] SPACE (WSegSpace) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (WSegSpace) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u0308\u0031\u0027'
 		expected: [WordBoundary{
@@ -13359,8 +13359,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] SPACE (WSegSpace) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (WSegSpace) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u0031\u002C'
 		expected: [WordBoundary{
@@ -13376,8 +13376,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] SPACE (WSegSpace) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (WSegSpace) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u0308\u0031\u002C'
 		expected: [WordBoundary{
@@ -13393,8 +13393,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] SPACE (WSegSpace) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (WSegSpace) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u0031\u002E\u2060'
 		expected: [WordBoundary{
@@ -13410,8 +13410,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] SPACE (WSegSpace) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (WSegSpace) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u0308\u0031\u002E\u2060'
 		expected: [WordBoundary{
@@ -13427,8 +13427,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] SOFT HYPHEN (Format_FE) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (WSegSpace) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u00AD\u0001'
 		expected: [WordBoundary{
@@ -13440,8 +13440,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] SOFT HYPHEN (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]
+		desc: '÷ [0.2] SOFT HYPHEN (Format_FE) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u00AD\u0308\u0001'
 		expected: [WordBoundary{
@@ -13453,8 +13453,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] SOFT HYPHEN (Format_FE) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] SOFT HYPHEN (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u00AD\u000D'
 		expected: [WordBoundary{
@@ -13466,8 +13466,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] SOFT HYPHEN (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] SOFT HYPHEN (Format_FE) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u00AD\u0308\u000D'
 		expected: [WordBoundary{
@@ -13479,8 +13479,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] SOFT HYPHEN (Format_FE) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] SOFT HYPHEN (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u00AD\u000A'
 		expected: [WordBoundary{
@@ -13492,8 +13492,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] SOFT HYPHEN (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] SOFT HYPHEN (Format_FE) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u00AD\u0308\u000A'
 		expected: [WordBoundary{
@@ -13505,8 +13505,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] SOFT HYPHEN (Format_FE) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]
+		desc: '÷ [0.2] SOFT HYPHEN (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u00AD\u000B'
 		expected: [WordBoundary{
@@ -13518,8 +13518,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] SOFT HYPHEN (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]
+		desc: '÷ [0.2] SOFT HYPHEN (Format_FE) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u00AD\u0308\u000B'
 		expected: [WordBoundary{
@@ -13531,8 +13531,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] SOFT HYPHEN (Format_FE) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]
+		desc: '÷ [0.2] SOFT HYPHEN (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u00AD\u3031'
 		expected: [WordBoundary{
@@ -13544,8 +13544,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] SOFT HYPHEN (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]
+		desc: '÷ [0.2] SOFT HYPHEN (Format_FE) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u00AD\u0308\u3031'
 		expected: [WordBoundary{
@@ -13557,8 +13557,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] SOFT HYPHEN (Format_FE) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] SOFT HYPHEN (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u00AD\u0041'
 		expected: [WordBoundary{
@@ -13570,8 +13570,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] SOFT HYPHEN (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] SOFT HYPHEN (Format_FE) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u00AD\u0308\u0041'
 		expected: [WordBoundary{
@@ -13583,8 +13583,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] SOFT HYPHEN (Format_FE) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] SOFT HYPHEN (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u00AD\u003A'
 		expected: [WordBoundary{
@@ -13596,8 +13596,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] SOFT HYPHEN (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] SOFT HYPHEN (Format_FE) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u00AD\u0308\u003A'
 		expected: [WordBoundary{
@@ -13609,8 +13609,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] SOFT HYPHEN (Format_FE) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] SOFT HYPHEN (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u00AD\u002C'
 		expected: [WordBoundary{
@@ -13622,8 +13622,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] SOFT HYPHEN (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] SOFT HYPHEN (Format_FE) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u00AD\u0308\u002C'
 		expected: [WordBoundary{
@@ -13635,8 +13635,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] SOFT HYPHEN (Format_FE) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]
+		desc: '÷ [0.2] SOFT HYPHEN (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u00AD\u002E'
 		expected: [WordBoundary{
@@ -13648,8 +13648,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] SOFT HYPHEN (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]
+		desc: '÷ [0.2] SOFT HYPHEN (Format_FE) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u00AD\u0308\u002E'
 		expected: [WordBoundary{
@@ -13661,8 +13661,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] SOFT HYPHEN (Format_FE) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] SOFT HYPHEN (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u00AD\u0030'
 		expected: [WordBoundary{
@@ -13674,8 +13674,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] SOFT HYPHEN (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] SOFT HYPHEN (Format_FE) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u00AD\u0308\u0030'
 		expected: [WordBoundary{
@@ -13687,8 +13687,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] SOFT HYPHEN (Format_FE) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]
+		desc: '÷ [0.2] SOFT HYPHEN (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u00AD\u005F'
 		expected: [WordBoundary{
@@ -13700,8 +13700,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] SOFT HYPHEN (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]
+		desc: '÷ [0.2] SOFT HYPHEN (Format_FE) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u00AD\u0308\u005F'
 		expected: [WordBoundary{
@@ -13713,8 +13713,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] SOFT HYPHEN (Format_FE) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] SOFT HYPHEN (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u00AD\U0001F1E6'
 		expected: [WordBoundary{
@@ -13726,8 +13726,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] SOFT HYPHEN (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] SOFT HYPHEN (Format_FE) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u00AD\u0308\U0001F1E6'
 		expected: [WordBoundary{
@@ -13739,8 +13739,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] SOFT HYPHEN (Format_FE) ÷ [999.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]
+		desc: '÷ [0.2] SOFT HYPHEN (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u00AD\u05D0'
 		expected: [WordBoundary{
@@ -13752,8 +13752,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] SOFT HYPHEN (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]
+		desc: '÷ [0.2] SOFT HYPHEN (Format_FE) ÷ [999.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u00AD\u0308\u05D0'
 		expected: [WordBoundary{
@@ -13765,8 +13765,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] SOFT HYPHEN (Format_FE) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]
+		desc: '÷ [0.2] SOFT HYPHEN (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u00AD\u0022'
 		expected: [WordBoundary{
@@ -13778,8 +13778,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] SOFT HYPHEN (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]
+		desc: '÷ [0.2] SOFT HYPHEN (Format_FE) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u00AD\u0308\u0022'
 		expected: [WordBoundary{
@@ -13791,8 +13791,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] SOFT HYPHEN (Format_FE) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] SOFT HYPHEN (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u00AD\u0027'
 		expected: [WordBoundary{
@@ -13804,8 +13804,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] SOFT HYPHEN (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] SOFT HYPHEN (Format_FE) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u00AD\u0308\u0027'
 		expected: [WordBoundary{
@@ -13817,8 +13817,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] SOFT HYPHEN (Format_FE) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] SOFT HYPHEN (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u00AD\u231A'
 		expected: [WordBoundary{
@@ -13830,8 +13830,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] SOFT HYPHEN (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] SOFT HYPHEN (Format_FE) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u00AD\u0308\u231A'
 		expected: [WordBoundary{
@@ -13843,8 +13843,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] SOFT HYPHEN (Format_FE) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]
+		desc: '÷ [0.2] SOFT HYPHEN (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u00AD\u0020'
 		expected: [WordBoundary{
@@ -13856,8 +13856,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] SOFT HYPHEN (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]
+		desc: '÷ [0.2] SOFT HYPHEN (Format_FE) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u00AD\u0308\u0020'
 		expected: [WordBoundary{
@@ -13869,8 +13869,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] SOFT HYPHEN (Format_FE) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] SOFT HYPHEN (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u00AD\u00AD'
 		expected: [WordBoundary{
@@ -13878,8 +13878,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] SOFT HYPHEN (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] SOFT HYPHEN (Format_FE) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u00AD\u0308\u00AD'
 		expected: [WordBoundary{
@@ -13887,8 +13887,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] SOFT HYPHEN (Format_FE) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]
+		desc: '÷ [0.2] SOFT HYPHEN (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u00AD\u0300'
 		expected: [WordBoundary{
@@ -13896,8 +13896,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] SOFT HYPHEN (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]
+		desc: '÷ [0.2] SOFT HYPHEN (Format_FE) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u00AD\u0308\u0300'
 		expected: [WordBoundary{
@@ -13905,8 +13905,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] SOFT HYPHEN (Format_FE) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]
+		desc: '÷ [0.2] SOFT HYPHEN (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u00AD\u200D'
 		expected: [WordBoundary{
@@ -13914,8 +13914,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] SOFT HYPHEN (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]
+		desc: '÷ [0.2] SOFT HYPHEN (Format_FE) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u00AD\u0308\u200D'
 		expected: [WordBoundary{
@@ -13923,8 +13923,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] SOFT HYPHEN (Format_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] SOFT HYPHEN (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u00AD\u0061\u2060'
 		expected: [WordBoundary{
@@ -13936,8 +13936,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] SOFT HYPHEN (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] SOFT HYPHEN (Format_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u00AD\u0308\u0061\u2060'
 		expected: [WordBoundary{
@@ -13949,8 +13949,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] SOFT HYPHEN (Format_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] SOFT HYPHEN (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u00AD\u0061\u003A'
 		expected: [WordBoundary{
@@ -13966,8 +13966,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] SOFT HYPHEN (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] SOFT HYPHEN (Format_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u00AD\u0308\u0061\u003A'
 		expected: [WordBoundary{
@@ -13983,8 +13983,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] SOFT HYPHEN (Format_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] SOFT HYPHEN (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u00AD\u0061\u0027'
 		expected: [WordBoundary{
@@ -14000,8 +14000,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] SOFT HYPHEN (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] SOFT HYPHEN (Format_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u00AD\u0308\u0061\u0027'
 		expected: [WordBoundary{
@@ -14017,8 +14017,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] SOFT HYPHEN (Format_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] SOFT HYPHEN (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u00AD\u0061\u0027\u2060'
 		expected: [WordBoundary{
@@ -14034,8 +14034,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] SOFT HYPHEN (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] SOFT HYPHEN (Format_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u00AD\u0308\u0061\u0027\u2060'
 		expected: [WordBoundary{
@@ -14051,8 +14051,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 9
 		}]
-	}
-	// ÷ [0.2] SOFT HYPHEN (Format_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] SOFT HYPHEN (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u00AD\u0061\u002C'
 		expected: [WordBoundary{
@@ -14068,8 +14068,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] SOFT HYPHEN (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] SOFT HYPHEN (Format_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u00AD\u0308\u0061\u002C'
 		expected: [WordBoundary{
@@ -14085,8 +14085,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] SOFT HYPHEN (Format_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] SOFT HYPHEN (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u00AD\u0031\u003A'
 		expected: [WordBoundary{
@@ -14102,8 +14102,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] SOFT HYPHEN (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] SOFT HYPHEN (Format_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u00AD\u0308\u0031\u003A'
 		expected: [WordBoundary{
@@ -14119,8 +14119,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] SOFT HYPHEN (Format_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] SOFT HYPHEN (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u00AD\u0031\u0027'
 		expected: [WordBoundary{
@@ -14136,8 +14136,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] SOFT HYPHEN (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] SOFT HYPHEN (Format_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u00AD\u0308\u0031\u0027'
 		expected: [WordBoundary{
@@ -14153,8 +14153,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] SOFT HYPHEN (Format_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] SOFT HYPHEN (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u00AD\u0031\u002C'
 		expected: [WordBoundary{
@@ -14170,8 +14170,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] SOFT HYPHEN (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] SOFT HYPHEN (Format_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u00AD\u0308\u0031\u002C'
 		expected: [WordBoundary{
@@ -14187,8 +14187,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] SOFT HYPHEN (Format_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] SOFT HYPHEN (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u00AD\u0031\u002E\u2060'
 		expected: [WordBoundary{
@@ -14204,8 +14204,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] SOFT HYPHEN (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] SOFT HYPHEN (Format_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u00AD\u0308\u0031\u002E\u2060'
 		expected: [WordBoundary{
@@ -14221,8 +14221,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 9
 		}]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]
+		desc: '÷ [0.2] SOFT HYPHEN (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u0001'
 		expected: [WordBoundary{
@@ -14234,8 +14234,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u0308\u0001'
 		expected: [WordBoundary{
@@ -14247,8 +14247,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u000D'
 		expected: [WordBoundary{
@@ -14260,8 +14260,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u0308\u000D'
 		expected: [WordBoundary{
@@ -14273,8 +14273,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u000A'
 		expected: [WordBoundary{
@@ -14286,8 +14286,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u0308\u000A'
 		expected: [WordBoundary{
@@ -14299,8 +14299,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u000B'
 		expected: [WordBoundary{
@@ -14312,8 +14312,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u0308\u000B'
 		expected: [WordBoundary{
@@ -14325,8 +14325,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u3031'
 		expected: [WordBoundary{
@@ -14338,8 +14338,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u0308\u3031'
 		expected: [WordBoundary{
@@ -14351,8 +14351,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u0041'
 		expected: [WordBoundary{
@@ -14364,8 +14364,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u0308\u0041'
 		expected: [WordBoundary{
@@ -14377,8 +14377,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u003A'
 		expected: [WordBoundary{
@@ -14390,8 +14390,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u0308\u003A'
 		expected: [WordBoundary{
@@ -14403,8 +14403,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u002C'
 		expected: [WordBoundary{
@@ -14416,8 +14416,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u0308\u002C'
 		expected: [WordBoundary{
@@ -14429,8 +14429,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u002E'
 		expected: [WordBoundary{
@@ -14442,8 +14442,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u0308\u002E'
 		expected: [WordBoundary{
@@ -14455,8 +14455,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u0030'
 		expected: [WordBoundary{
@@ -14468,8 +14468,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u0308\u0030'
 		expected: [WordBoundary{
@@ -14481,8 +14481,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u005F'
 		expected: [WordBoundary{
@@ -14494,8 +14494,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u0308\u005F'
 		expected: [WordBoundary{
@@ -14507,8 +14507,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\U0001F1E6'
 		expected: [WordBoundary{
@@ -14520,8 +14520,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u0308\U0001F1E6'
 		expected: [WordBoundary{
@@ -14533,8 +14533,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) ÷ [999.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u05D0'
 		expected: [WordBoundary{
@@ -14546,8 +14546,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) ÷ [999.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u0308\u05D0'
 		expected: [WordBoundary{
@@ -14559,8 +14559,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u0022'
 		expected: [WordBoundary{
@@ -14572,8 +14572,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u0308\u0022'
 		expected: [WordBoundary{
@@ -14585,8 +14585,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u0027'
 		expected: [WordBoundary{
@@ -14598,8 +14598,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u0308\u0027'
 		expected: [WordBoundary{
@@ -14611,8 +14611,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u231A'
 		expected: [WordBoundary{
@@ -14624,8 +14624,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u0308\u231A'
 		expected: [WordBoundary{
@@ -14637,8 +14637,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u0020'
 		expected: [WordBoundary{
@@ -14650,8 +14650,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u0308\u0020'
 		expected: [WordBoundary{
@@ -14663,8 +14663,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u00AD'
 		expected: [WordBoundary{
@@ -14672,8 +14672,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u0308\u00AD'
 		expected: [WordBoundary{
@@ -14681,8 +14681,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u0300'
 		expected: [WordBoundary{
@@ -14690,8 +14690,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u0308\u0300'
 		expected: [WordBoundary{
@@ -14699,8 +14699,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u200D'
 		expected: [WordBoundary{
@@ -14708,8 +14708,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u0308\u200D'
 		expected: [WordBoundary{
@@ -14717,8 +14717,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u0061\u2060'
 		expected: [WordBoundary{
@@ -14730,8 +14730,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u0308\u0061\u2060'
 		expected: [WordBoundary{
@@ -14743,8 +14743,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u0061\u003A'
 		expected: [WordBoundary{
@@ -14760,8 +14760,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u0308\u0061\u003A'
 		expected: [WordBoundary{
@@ -14777,8 +14777,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u0061\u0027'
 		expected: [WordBoundary{
@@ -14794,8 +14794,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u0308\u0061\u0027'
 		expected: [WordBoundary{
@@ -14811,8 +14811,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u0061\u0027\u2060'
 		expected: [WordBoundary{
@@ -14828,8 +14828,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u0308\u0061\u0027\u2060'
 		expected: [WordBoundary{
@@ -14845,8 +14845,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 9
 		}]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u0061\u002C'
 		expected: [WordBoundary{
@@ -14862,8 +14862,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u0308\u0061\u002C'
 		expected: [WordBoundary{
@@ -14879,8 +14879,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u0031\u003A'
 		expected: [WordBoundary{
@@ -14896,8 +14896,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u0308\u0031\u003A'
 		expected: [WordBoundary{
@@ -14913,8 +14913,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u0031\u0027'
 		expected: [WordBoundary{
@@ -14930,8 +14930,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u0308\u0031\u0027'
 		expected: [WordBoundary{
@@ -14947,8 +14947,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u0031\u002C'
 		expected: [WordBoundary{
@@ -14964,8 +14964,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u0308\u0031\u002C'
 		expected: [WordBoundary{
@@ -14981,8 +14981,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u0031\u002E\u2060'
 		expected: [WordBoundary{
@@ -14998,8 +14998,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0300\u0308\u0031\u002E\u2060'
 		expected: [WordBoundary{
@@ -15015,8 +15015,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 9
 		}]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]
+		desc: '÷ [0.2] COMBINING GRAVE ACCENT (Extend_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u0001'
 		expected: [WordBoundary{
@@ -15028,8 +15028,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u0308\u0001'
 		expected: [WordBoundary{
@@ -15041,8 +15041,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u000D'
 		expected: [WordBoundary{
@@ -15054,8 +15054,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u0308\u000D'
 		expected: [WordBoundary{
@@ -15067,8 +15067,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u000A'
 		expected: [WordBoundary{
@@ -15080,8 +15080,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u0308\u000A'
 		expected: [WordBoundary{
@@ -15093,8 +15093,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u000B'
 		expected: [WordBoundary{
@@ -15106,8 +15106,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u0308\u000B'
 		expected: [WordBoundary{
@@ -15119,8 +15119,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u3031'
 		expected: [WordBoundary{
@@ -15132,8 +15132,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u0308\u3031'
 		expected: [WordBoundary{
@@ -15145,8 +15145,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u0041'
 		expected: [WordBoundary{
@@ -15158,8 +15158,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u0308\u0041'
 		expected: [WordBoundary{
@@ -15171,8 +15171,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u003A'
 		expected: [WordBoundary{
@@ -15184,8 +15184,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u0308\u003A'
 		expected: [WordBoundary{
@@ -15197,8 +15197,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u002C'
 		expected: [WordBoundary{
@@ -15210,8 +15210,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u0308\u002C'
 		expected: [WordBoundary{
@@ -15223,8 +15223,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u002E'
 		expected: [WordBoundary{
@@ -15236,8 +15236,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u0308\u002E'
 		expected: [WordBoundary{
@@ -15249,8 +15249,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u0030'
 		expected: [WordBoundary{
@@ -15262,8 +15262,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u0308\u0030'
 		expected: [WordBoundary{
@@ -15275,8 +15275,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u005F'
 		expected: [WordBoundary{
@@ -15288,8 +15288,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u0308\u005F'
 		expected: [WordBoundary{
@@ -15301,8 +15301,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\U0001F1E6'
 		expected: [WordBoundary{
@@ -15314,8 +15314,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u0308\U0001F1E6'
 		expected: [WordBoundary{
@@ -15327,8 +15327,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 9
 		}]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) ÷ [999.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u05D0'
 		expected: [WordBoundary{
@@ -15340,8 +15340,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) ÷ [999.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u0308\u05D0'
 		expected: [WordBoundary{
@@ -15353,8 +15353,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u0022'
 		expected: [WordBoundary{
@@ -15366,8 +15366,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u0308\u0022'
 		expected: [WordBoundary{
@@ -15379,8 +15379,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u0027'
 		expected: [WordBoundary{
@@ -15392,8 +15392,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u0308\u0027'
 		expected: [WordBoundary{
@@ -15405,8 +15405,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) × [3.3] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u231A'
 		expected: [WordBoundary{
@@ -15414,8 +15414,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) × [3.3] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u0308\u231A'
 		expected: [WordBoundary{
@@ -15427,8 +15427,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u0020'
 		expected: [WordBoundary{
@@ -15440,8 +15440,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u0308\u0020'
 		expected: [WordBoundary{
@@ -15453,8 +15453,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u00AD'
 		expected: [WordBoundary{
@@ -15462,8 +15462,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u0308\u00AD'
 		expected: [WordBoundary{
@@ -15471,8 +15471,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u0300'
 		expected: [WordBoundary{
@@ -15480,8 +15480,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u0308\u0300'
 		expected: [WordBoundary{
@@ -15489,8 +15489,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u200D'
 		expected: [WordBoundary{
@@ -15498,8 +15498,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u0308\u200D'
 		expected: [WordBoundary{
@@ -15507,8 +15507,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u0061\u2060'
 		expected: [WordBoundary{
@@ -15520,8 +15520,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u0308\u0061\u2060'
 		expected: [WordBoundary{
@@ -15533,8 +15533,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 9
 		}]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u0061\u003A'
 		expected: [WordBoundary{
@@ -15550,8 +15550,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u0308\u0061\u003A'
 		expected: [WordBoundary{
@@ -15567,8 +15567,8 @@ const word_break_test_cases = [
 			offset_start: 6
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u0061\u0027'
 		expected: [WordBoundary{
@@ -15584,8 +15584,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u0308\u0061\u0027'
 		expected: [WordBoundary{
@@ -15601,8 +15601,8 @@ const word_break_test_cases = [
 			offset_start: 6
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u0061\u0027\u2060'
 		expected: [WordBoundary{
@@ -15618,8 +15618,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u0308\u0061\u0027\u2060'
 		expected: [WordBoundary{
@@ -15635,8 +15635,8 @@ const word_break_test_cases = [
 			offset_start: 6
 			offset_end: 10
 		}]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u0061\u002C'
 		expected: [WordBoundary{
@@ -15652,8 +15652,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u0308\u0061\u002C'
 		expected: [WordBoundary{
@@ -15669,8 +15669,8 @@ const word_break_test_cases = [
 			offset_start: 6
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u0031\u003A'
 		expected: [WordBoundary{
@@ -15686,8 +15686,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u0308\u0031\u003A'
 		expected: [WordBoundary{
@@ -15703,8 +15703,8 @@ const word_break_test_cases = [
 			offset_start: 6
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u0031\u0027'
 		expected: [WordBoundary{
@@ -15720,8 +15720,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u0308\u0031\u0027'
 		expected: [WordBoundary{
@@ -15737,8 +15737,8 @@ const word_break_test_cases = [
 			offset_start: 6
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u0031\u002C'
 		expected: [WordBoundary{
@@ -15754,8 +15754,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u0308\u0031\u002C'
 		expected: [WordBoundary{
@@ -15771,8 +15771,8 @@ const word_break_test_cases = [
 			offset_start: 6
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u0031\u002E\u2060'
 		expected: [WordBoundary{
@@ -15788,8 +15788,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\u0308\u0031\u002E\u2060'
 		expected: [WordBoundary{
@@ -15805,8 +15805,8 @@ const word_break_test_cases = [
 			offset_start: 6
 			offset_end: 10
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u2060\u0001'
 		expected: [WordBoundary{
@@ -15818,8 +15818,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u2060\u0308\u0001'
 		expected: [WordBoundary{
@@ -15831,8 +15831,8 @@ const word_break_test_cases = [
 			offset_start: 6
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u2060\u000D'
 		expected: [WordBoundary{
@@ -15844,8 +15844,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u2060\u0308\u000D'
 		expected: [WordBoundary{
@@ -15857,8 +15857,8 @@ const word_break_test_cases = [
 			offset_start: 6
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u2060\u000A'
 		expected: [WordBoundary{
@@ -15870,8 +15870,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u2060\u0308\u000A'
 		expected: [WordBoundary{
@@ -15883,8 +15883,8 @@ const word_break_test_cases = [
 			offset_start: 6
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u2060\u000B'
 		expected: [WordBoundary{
@@ -15896,8 +15896,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u2060\u0308\u000B'
 		expected: [WordBoundary{
@@ -15909,8 +15909,8 @@ const word_break_test_cases = [
 			offset_start: 6
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u2060\u3031'
 		expected: [WordBoundary{
@@ -15922,8 +15922,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u2060\u0308\u3031'
 		expected: [WordBoundary{
@@ -15935,8 +15935,8 @@ const word_break_test_cases = [
 			offset_start: 6
 			offset_end: 9
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [5.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u2060\u0041'
 		expected: [WordBoundary{
@@ -15944,8 +15944,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [5.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [5.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u2060\u0308\u0041'
 		expected: [WordBoundary{
@@ -15953,8 +15953,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [5.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u2060\u003A'
 		expected: [WordBoundary{
@@ -15966,8 +15966,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u2060\u0308\u003A'
 		expected: [WordBoundary{
@@ -15979,8 +15979,8 @@ const word_break_test_cases = [
 			offset_start: 6
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u2060\u002C'
 		expected: [WordBoundary{
@@ -15992,8 +15992,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u2060\u0308\u002C'
 		expected: [WordBoundary{
@@ -16005,8 +16005,8 @@ const word_break_test_cases = [
 			offset_start: 6
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u2060\u002E'
 		expected: [WordBoundary{
@@ -16018,8 +16018,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u2060\u0308\u002E'
 		expected: [WordBoundary{
@@ -16031,8 +16031,8 @@ const word_break_test_cases = [
 			offset_start: 6
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [9.0] DIGIT ZERO (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u2060\u0030'
 		expected: [WordBoundary{
@@ -16040,8 +16040,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [9.0] DIGIT ZERO (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [9.0] DIGIT ZERO (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u2060\u0308\u0030'
 		expected: [WordBoundary{
@@ -16049,8 +16049,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [13.1] LOW LINE (ExtendNumLet) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [9.0] DIGIT ZERO (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u2060\u005F'
 		expected: [WordBoundary{
@@ -16058,8 +16058,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [13.1] LOW LINE (ExtendNumLet) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [13.1] LOW LINE (ExtendNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u2060\u0308\u005F'
 		expected: [WordBoundary{
@@ -16067,8 +16067,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [13.1] LOW LINE (ExtendNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u2060\U0001F1E6'
 		expected: [WordBoundary{
@@ -16080,8 +16080,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u2060\u0308\U0001F1E6'
 		expected: [WordBoundary{
@@ -16093,8 +16093,8 @@ const word_break_test_cases = [
 			offset_start: 6
 			offset_end: 10
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [5.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u2060\u05D0'
 		expected: [WordBoundary{
@@ -16102,8 +16102,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [5.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [5.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u2060\u0308\u05D0'
 		expected: [WordBoundary{
@@ -16111,8 +16111,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [5.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u2060\u0022'
 		expected: [WordBoundary{
@@ -16124,8 +16124,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u2060\u0308\u0022'
 		expected: [WordBoundary{
@@ -16137,8 +16137,8 @@ const word_break_test_cases = [
 			offset_start: 6
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u2060\u0027'
 		expected: [WordBoundary{
@@ -16150,8 +16150,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u2060\u0308\u0027'
 		expected: [WordBoundary{
@@ -16163,8 +16163,8 @@ const word_break_test_cases = [
 			offset_start: 6
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u2060\u231A'
 		expected: [WordBoundary{
@@ -16176,8 +16176,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u2060\u0308\u231A'
 		expected: [WordBoundary{
@@ -16189,8 +16189,8 @@ const word_break_test_cases = [
 			offset_start: 6
 			offset_end: 9
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u2060\u0020'
 		expected: [WordBoundary{
@@ -16202,8 +16202,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u2060\u0308\u0020'
 		expected: [WordBoundary{
@@ -16215,8 +16215,8 @@ const word_break_test_cases = [
 			offset_start: 6
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u2060\u00AD'
 		expected: [WordBoundary{
@@ -16224,8 +16224,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u2060\u0308\u00AD'
 		expected: [WordBoundary{
@@ -16233,8 +16233,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u2060\u0300'
 		expected: [WordBoundary{
@@ -16242,8 +16242,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u2060\u0308\u0300'
 		expected: [WordBoundary{
@@ -16251,8 +16251,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u2060\u200D'
 		expected: [WordBoundary{
@@ -16260,8 +16260,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u2060\u0308\u200D'
 		expected: [WordBoundary{
@@ -16269,8 +16269,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 9
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [5.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u2060\u0061\u2060'
 		expected: [WordBoundary{
@@ -16278,8 +16278,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [5.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [5.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u2060\u0308\u0061\u2060'
 		expected: [WordBoundary{
@@ -16287,8 +16287,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 10
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [5.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [5.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u2060\u0061\u003A'
 		expected: [WordBoundary{
@@ -16300,8 +16300,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [5.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [5.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u2060\u0308\u0061\u003A'
 		expected: [WordBoundary{
@@ -16313,8 +16313,8 @@ const word_break_test_cases = [
 			offset_start: 7
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [5.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [5.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u2060\u0061\u0027'
 		expected: [WordBoundary{
@@ -16326,8 +16326,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [5.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [5.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u2060\u0308\u0061\u0027'
 		expected: [WordBoundary{
@@ -16339,8 +16339,8 @@ const word_break_test_cases = [
 			offset_start: 7
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [5.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [5.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u2060\u0061\u0027\u2060'
 		expected: [WordBoundary{
@@ -16352,8 +16352,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 9
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [5.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [5.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u2060\u0308\u0061\u0027\u2060'
 		expected: [WordBoundary{
@@ -16365,8 +16365,8 @@ const word_break_test_cases = [
 			offset_start: 7
 			offset_end: 11
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [5.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [5.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u2060\u0061\u002C'
 		expected: [WordBoundary{
@@ -16378,8 +16378,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [5.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [5.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u2060\u0308\u0061\u002C'
 		expected: [WordBoundary{
@@ -16391,8 +16391,8 @@ const word_break_test_cases = [
 			offset_start: 7
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [9.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [5.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u2060\u0031\u003A'
 		expected: [WordBoundary{
@@ -16404,8 +16404,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [9.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [9.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u2060\u0308\u0031\u003A'
 		expected: [WordBoundary{
@@ -16417,8 +16417,8 @@ const word_break_test_cases = [
 			offset_start: 7
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [9.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [9.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u2060\u0031\u0027'
 		expected: [WordBoundary{
@@ -16430,8 +16430,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [9.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [9.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u2060\u0308\u0031\u0027'
 		expected: [WordBoundary{
@@ -16443,8 +16443,8 @@ const word_break_test_cases = [
 			offset_start: 7
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [9.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [9.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u2060\u0031\u002C'
 		expected: [WordBoundary{
@@ -16456,8 +16456,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [9.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [9.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u2060\u0308\u0031\u002C'
 		expected: [WordBoundary{
@@ -16469,8 +16469,8 @@ const word_break_test_cases = [
 			offset_start: 7
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [9.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [9.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u2060\u0031\u002E\u2060'
 		expected: [WordBoundary{
@@ -16482,8 +16482,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 9
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [9.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [9.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u2060\u0308\u0031\u002E\u2060'
 		expected: [WordBoundary{
@@ -16495,8 +16495,8 @@ const word_break_test_cases = [
 			offset_start: 7
 			offset_end: 11
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [9.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u003A\u0001'
 		expected: [WordBoundary{
@@ -16512,8 +16512,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u003A\u0308\u0001'
 		expected: [WordBoundary{
@@ -16529,8 +16529,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u003A\u000D'
 		expected: [WordBoundary{
@@ -16546,8 +16546,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u003A\u0308\u000D'
 		expected: [WordBoundary{
@@ -16563,8 +16563,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u003A\u000A'
 		expected: [WordBoundary{
@@ -16580,8 +16580,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u003A\u0308\u000A'
 		expected: [WordBoundary{
@@ -16597,8 +16597,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u003A\u000B'
 		expected: [WordBoundary{
@@ -16614,8 +16614,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u003A\u0308\u000B'
 		expected: [WordBoundary{
@@ -16631,8 +16631,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u003A\u3031'
 		expected: [WordBoundary{
@@ -16648,8 +16648,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u003A\u0308\u3031'
 		expected: [WordBoundary{
@@ -16665,8 +16665,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] COLON (MidLetter) × [7.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u003A\u0041'
 		expected: [WordBoundary{
@@ -16674,8 +16674,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [7.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] COLON (MidLetter) × [7.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u003A\u0308\u0041'
 		expected: [WordBoundary{
@@ -16683,8 +16683,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [7.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u003A\u003A'
 		expected: [WordBoundary{
@@ -16700,8 +16700,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u003A\u0308\u003A'
 		expected: [WordBoundary{
@@ -16717,8 +16717,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u003A\u002C'
 		expected: [WordBoundary{
@@ -16734,8 +16734,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u003A\u0308\u002C'
 		expected: [WordBoundary{
@@ -16751,8 +16751,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u003A\u002E'
 		expected: [WordBoundary{
@@ -16768,8 +16768,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u003A\u0308\u002E'
 		expected: [WordBoundary{
@@ -16785,8 +16785,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u003A\u0030'
 		expected: [WordBoundary{
@@ -16802,8 +16802,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u003A\u0308\u0030'
 		expected: [WordBoundary{
@@ -16819,8 +16819,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u003A\u005F'
 		expected: [WordBoundary{
@@ -16836,8 +16836,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u003A\u0308\u005F'
 		expected: [WordBoundary{
@@ -16853,8 +16853,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u003A\U0001F1E6'
 		expected: [WordBoundary{
@@ -16870,8 +16870,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u003A\u0308\U0001F1E6'
 		expected: [WordBoundary{
@@ -16887,8 +16887,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] COLON (MidLetter) × [7.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u003A\u05D0'
 		expected: [WordBoundary{
@@ -16896,8 +16896,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [7.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] COLON (MidLetter) × [7.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u003A\u0308\u05D0'
 		expected: [WordBoundary{
@@ -16905,8 +16905,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [7.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u003A\u0022'
 		expected: [WordBoundary{
@@ -16922,8 +16922,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u003A\u0308\u0022'
 		expected: [WordBoundary{
@@ -16939,8 +16939,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u003A\u0027'
 		expected: [WordBoundary{
@@ -16956,8 +16956,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u003A\u0308\u0027'
 		expected: [WordBoundary{
@@ -16973,8 +16973,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u003A\u231A'
 		expected: [WordBoundary{
@@ -16990,8 +16990,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u003A\u0308\u231A'
 		expected: [WordBoundary{
@@ -17007,8 +17007,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u003A\u0020'
 		expected: [WordBoundary{
@@ -17024,8 +17024,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u003A\u0308\u0020'
 		expected: [WordBoundary{
@@ -17041,8 +17041,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u003A\u00AD'
 		expected: [WordBoundary{
@@ -17054,8 +17054,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u003A\u0308\u00AD'
 		expected: [WordBoundary{
@@ -17067,8 +17067,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u003A\u0300'
 		expected: [WordBoundary{
@@ -17080,8 +17080,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u003A\u0308\u0300'
 		expected: [WordBoundary{
@@ -17093,8 +17093,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u003A\u200D'
 		expected: [WordBoundary{
@@ -17106,8 +17106,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u003A\u0308\u200D'
 		expected: [WordBoundary{
@@ -17119,8 +17119,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] COLON (MidLetter) × [7.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u003A\u0061\u2060'
 		expected: [WordBoundary{
@@ -17128,8 +17128,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [7.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] COLON (MidLetter) × [7.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u003A\u0308\u0061\u2060'
 		expected: [WordBoundary{
@@ -17137,8 +17137,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] COLON (MidLetter) × [7.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [7.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u003A\u0061\u003A'
 		expected: [WordBoundary{
@@ -17150,8 +17150,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [7.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] COLON (MidLetter) × [7.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u003A\u0308\u0061\u003A'
 		expected: [WordBoundary{
@@ -17163,8 +17163,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] COLON (MidLetter) × [7.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [7.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u003A\u0061\u0027'
 		expected: [WordBoundary{
@@ -17176,8 +17176,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [7.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] COLON (MidLetter) × [7.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u003A\u0308\u0061\u0027'
 		expected: [WordBoundary{
@@ -17189,8 +17189,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] COLON (MidLetter) × [7.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [7.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u003A\u0061\u0027\u2060'
 		expected: [WordBoundary{
@@ -17202,8 +17202,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [7.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] COLON (MidLetter) × [7.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u003A\u0308\u0061\u0027\u2060'
 		expected: [WordBoundary{
@@ -17215,8 +17215,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 9
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] COLON (MidLetter) × [7.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [7.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u003A\u0061\u002C'
 		expected: [WordBoundary{
@@ -17228,8 +17228,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [7.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] COLON (MidLetter) × [7.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u003A\u0308\u0061\u002C'
 		expected: [WordBoundary{
@@ -17241,8 +17241,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [7.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u003A\u0031\u003A'
 		expected: [WordBoundary{
@@ -17262,8 +17262,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u003A\u0308\u0031\u003A'
 		expected: [WordBoundary{
@@ -17283,8 +17283,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u003A\u0031\u0027'
 		expected: [WordBoundary{
@@ -17304,8 +17304,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u003A\u0308\u0031\u0027'
 		expected: [WordBoundary{
@@ -17325,8 +17325,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u003A\u0031\u002C'
 		expected: [WordBoundary{
@@ -17346,8 +17346,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u003A\u0308\u0031\u002C'
 		expected: [WordBoundary{
@@ -17367,8 +17367,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u003A\u0031\u002E\u2060'
 		expected: [WordBoundary{
@@ -17388,8 +17388,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u003A\u0308\u0031\u002E\u2060'
 		expected: [WordBoundary{
@@ -17409,8 +17409,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 9
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u0001'
 		expected: [WordBoundary{
@@ -17426,8 +17426,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u0308\u0001'
 		expected: [WordBoundary{
@@ -17443,8 +17443,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u000D'
 		expected: [WordBoundary{
@@ -17460,8 +17460,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u0308\u000D'
 		expected: [WordBoundary{
@@ -17477,8 +17477,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u000A'
 		expected: [WordBoundary{
@@ -17494,8 +17494,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u0308\u000A'
 		expected: [WordBoundary{
@@ -17511,8 +17511,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u000B'
 		expected: [WordBoundary{
@@ -17528,8 +17528,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u0308\u000B'
 		expected: [WordBoundary{
@@ -17545,8 +17545,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u3031'
 		expected: [WordBoundary{
@@ -17562,8 +17562,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u0308\u3031'
 		expected: [WordBoundary{
@@ -17579,8 +17579,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] APOSTROPHE (Single_Quote) × [7.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u0041'
 		expected: [WordBoundary{
@@ -17588,8 +17588,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) × [7.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] APOSTROPHE (Single_Quote) × [7.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u0308\u0041'
 		expected: [WordBoundary{
@@ -17597,8 +17597,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) × [7.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u003A'
 		expected: [WordBoundary{
@@ -17614,8 +17614,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u0308\u003A'
 		expected: [WordBoundary{
@@ -17631,8 +17631,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u002C'
 		expected: [WordBoundary{
@@ -17648,8 +17648,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u0308\u002C'
 		expected: [WordBoundary{
@@ -17665,8 +17665,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u002E'
 		expected: [WordBoundary{
@@ -17682,8 +17682,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u0308\u002E'
 		expected: [WordBoundary{
@@ -17699,8 +17699,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u0030'
 		expected: [WordBoundary{
@@ -17716,8 +17716,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u0308\u0030'
 		expected: [WordBoundary{
@@ -17733,8 +17733,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u005F'
 		expected: [WordBoundary{
@@ -17750,8 +17750,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u0308\u005F'
 		expected: [WordBoundary{
@@ -17767,8 +17767,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\U0001F1E6'
 		expected: [WordBoundary{
@@ -17784,8 +17784,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u0308\U0001F1E6'
 		expected: [WordBoundary{
@@ -17801,8 +17801,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] APOSTROPHE (Single_Quote) × [7.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u05D0'
 		expected: [WordBoundary{
@@ -17810,8 +17810,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) × [7.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] APOSTROPHE (Single_Quote) × [7.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u0308\u05D0'
 		expected: [WordBoundary{
@@ -17819,8 +17819,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) × [7.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u0022'
 		expected: [WordBoundary{
@@ -17836,8 +17836,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u0308\u0022'
 		expected: [WordBoundary{
@@ -17853,8 +17853,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u0027'
 		expected: [WordBoundary{
@@ -17870,8 +17870,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u0308\u0027'
 		expected: [WordBoundary{
@@ -17887,8 +17887,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u231A'
 		expected: [WordBoundary{
@@ -17904,8 +17904,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u0308\u231A'
 		expected: [WordBoundary{
@@ -17921,8 +17921,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u0020'
 		expected: [WordBoundary{
@@ -17938,8 +17938,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u0308\u0020'
 		expected: [WordBoundary{
@@ -17955,8 +17955,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u00AD'
 		expected: [WordBoundary{
@@ -17968,8 +17968,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u0308\u00AD'
 		expected: [WordBoundary{
@@ -17981,8 +17981,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u0300'
 		expected: [WordBoundary{
@@ -17994,8 +17994,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u0308\u0300'
 		expected: [WordBoundary{
@@ -18007,8 +18007,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u200D'
 		expected: [WordBoundary{
@@ -18020,8 +18020,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u0308\u200D'
 		expected: [WordBoundary{
@@ -18033,8 +18033,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] APOSTROPHE (Single_Quote) × [7.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u0061\u2060'
 		expected: [WordBoundary{
@@ -18042,8 +18042,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) × [7.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] APOSTROPHE (Single_Quote) × [7.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u0308\u0061\u2060'
 		expected: [WordBoundary{
@@ -18051,8 +18051,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] APOSTROPHE (Single_Quote) × [7.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) × [7.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u0061\u003A'
 		expected: [WordBoundary{
@@ -18064,8 +18064,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) × [7.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] APOSTROPHE (Single_Quote) × [7.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u0308\u0061\u003A'
 		expected: [WordBoundary{
@@ -18077,8 +18077,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] APOSTROPHE (Single_Quote) × [7.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) × [7.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u0061\u0027'
 		expected: [WordBoundary{
@@ -18090,8 +18090,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) × [7.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] APOSTROPHE (Single_Quote) × [7.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u0308\u0061\u0027'
 		expected: [WordBoundary{
@@ -18103,8 +18103,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] APOSTROPHE (Single_Quote) × [7.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) × [7.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u0061\u0027\u2060'
 		expected: [WordBoundary{
@@ -18116,8 +18116,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) × [7.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] APOSTROPHE (Single_Quote) × [7.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u0308\u0061\u0027\u2060'
 		expected: [WordBoundary{
@@ -18129,8 +18129,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 9
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] APOSTROPHE (Single_Quote) × [7.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) × [7.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u0061\u002C'
 		expected: [WordBoundary{
@@ -18142,8 +18142,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) × [7.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] APOSTROPHE (Single_Quote) × [7.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u0308\u0061\u002C'
 		expected: [WordBoundary{
@@ -18155,8 +18155,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) × [7.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u0031\u003A'
 		expected: [WordBoundary{
@@ -18176,8 +18176,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u0308\u0031\u003A'
 		expected: [WordBoundary{
@@ -18197,8 +18197,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u0031\u0027'
 		expected: [WordBoundary{
@@ -18218,8 +18218,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u0308\u0031\u0027'
 		expected: [WordBoundary{
@@ -18239,8 +18239,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u0031\u002C'
 		expected: [WordBoundary{
@@ -18260,8 +18260,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u0308\u0031\u002C'
 		expected: [WordBoundary{
@@ -18281,8 +18281,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u0031\u002E\u2060'
 		expected: [WordBoundary{
@@ -18302,8 +18302,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u0308\u0031\u002E\u2060'
 		expected: [WordBoundary{
@@ -18323,8 +18323,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 9
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u2060\u0001'
 		expected: [WordBoundary{
@@ -18340,8 +18340,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u2060\u0308\u0001'
 		expected: [WordBoundary{
@@ -18357,8 +18357,8 @@ const word_break_test_cases = [
 			offset_start: 7
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u2060\u000D'
 		expected: [WordBoundary{
@@ -18374,8 +18374,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u2060\u0308\u000D'
 		expected: [WordBoundary{
@@ -18391,8 +18391,8 @@ const word_break_test_cases = [
 			offset_start: 7
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u2060\u000A'
 		expected: [WordBoundary{
@@ -18408,8 +18408,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u2060\u0308\u000A'
 		expected: [WordBoundary{
@@ -18425,8 +18425,8 @@ const word_break_test_cases = [
 			offset_start: 7
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u2060\u000B'
 		expected: [WordBoundary{
@@ -18442,8 +18442,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u2060\u0308\u000B'
 		expected: [WordBoundary{
@@ -18459,8 +18459,8 @@ const word_break_test_cases = [
 			offset_start: 7
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u2060\u3031'
 		expected: [WordBoundary{
@@ -18476,8 +18476,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u2060\u0308\u3031'
 		expected: [WordBoundary{
@@ -18493,8 +18493,8 @@ const word_break_test_cases = [
 			offset_start: 7
 			offset_end: 10
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) × [7.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u2060\u0041'
 		expected: [WordBoundary{
@@ -18502,8 +18502,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [7.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) × [7.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u2060\u0308\u0041'
 		expected: [WordBoundary{
@@ -18511,8 +18511,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [7.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u2060\u003A'
 		expected: [WordBoundary{
@@ -18528,8 +18528,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u2060\u0308\u003A'
 		expected: [WordBoundary{
@@ -18545,8 +18545,8 @@ const word_break_test_cases = [
 			offset_start: 7
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u2060\u002C'
 		expected: [WordBoundary{
@@ -18562,8 +18562,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u2060\u0308\u002C'
 		expected: [WordBoundary{
@@ -18579,8 +18579,8 @@ const word_break_test_cases = [
 			offset_start: 7
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u2060\u002E'
 		expected: [WordBoundary{
@@ -18596,8 +18596,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u2060\u0308\u002E'
 		expected: [WordBoundary{
@@ -18613,8 +18613,8 @@ const word_break_test_cases = [
 			offset_start: 7
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u2060\u0030'
 		expected: [WordBoundary{
@@ -18630,8 +18630,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u2060\u0308\u0030'
 		expected: [WordBoundary{
@@ -18647,8 +18647,8 @@ const word_break_test_cases = [
 			offset_start: 7
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u2060\u005F'
 		expected: [WordBoundary{
@@ -18664,8 +18664,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u2060\u0308\u005F'
 		expected: [WordBoundary{
@@ -18681,8 +18681,8 @@ const word_break_test_cases = [
 			offset_start: 7
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u2060\U0001F1E6'
 		expected: [WordBoundary{
@@ -18698,8 +18698,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 9
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u2060\u0308\U0001F1E6'
 		expected: [WordBoundary{
@@ -18715,8 +18715,8 @@ const word_break_test_cases = [
 			offset_start: 7
 			offset_end: 11
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) × [7.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u2060\u05D0'
 		expected: [WordBoundary{
@@ -18724,8 +18724,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [7.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) × [7.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u2060\u0308\u05D0'
 		expected: [WordBoundary{
@@ -18733,8 +18733,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 9
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [7.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u2060\u0022'
 		expected: [WordBoundary{
@@ -18750,8 +18750,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u2060\u0308\u0022'
 		expected: [WordBoundary{
@@ -18767,8 +18767,8 @@ const word_break_test_cases = [
 			offset_start: 7
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u2060\u0027'
 		expected: [WordBoundary{
@@ -18784,8 +18784,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u2060\u0308\u0027'
 		expected: [WordBoundary{
@@ -18801,8 +18801,8 @@ const word_break_test_cases = [
 			offset_start: 7
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u2060\u231A'
 		expected: [WordBoundary{
@@ -18818,8 +18818,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u2060\u0308\u231A'
 		expected: [WordBoundary{
@@ -18835,8 +18835,8 @@ const word_break_test_cases = [
 			offset_start: 7
 			offset_end: 10
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u2060\u0020'
 		expected: [WordBoundary{
@@ -18852,8 +18852,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u2060\u0308\u0020'
 		expected: [WordBoundary{
@@ -18869,8 +18869,8 @@ const word_break_test_cases = [
 			offset_start: 7
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u2060\u00AD'
 		expected: [WordBoundary{
@@ -18882,8 +18882,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u2060\u0308\u00AD'
 		expected: [WordBoundary{
@@ -18895,8 +18895,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 9
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u2060\u0300'
 		expected: [WordBoundary{
@@ -18908,8 +18908,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u2060\u0308\u0300'
 		expected: [WordBoundary{
@@ -18921,8 +18921,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 9
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u2060\u200D'
 		expected: [WordBoundary{
@@ -18934,8 +18934,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u2060\u0308\u200D'
 		expected: [WordBoundary{
@@ -18947,8 +18947,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 10
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) × [7.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u2060\u0061\u2060'
 		expected: [WordBoundary{
@@ -18956,8 +18956,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 9
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [7.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) × [7.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u2060\u0308\u0061\u2060'
 		expected: [WordBoundary{
@@ -18965,8 +18965,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 11
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) × [7.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [7.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u2060\u0061\u003A'
 		expected: [WordBoundary{
@@ -18978,8 +18978,8 @@ const word_break_test_cases = [
 			offset_start: 6
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [7.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) × [7.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u2060\u0308\u0061\u003A'
 		expected: [WordBoundary{
@@ -18991,8 +18991,8 @@ const word_break_test_cases = [
 			offset_start: 8
 			offset_end: 9
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) × [7.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [7.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u2060\u0061\u0027'
 		expected: [WordBoundary{
@@ -19004,8 +19004,8 @@ const word_break_test_cases = [
 			offset_start: 6
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [7.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) × [7.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u2060\u0308\u0061\u0027'
 		expected: [WordBoundary{
@@ -19017,8 +19017,8 @@ const word_break_test_cases = [
 			offset_start: 8
 			offset_end: 9
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) × [7.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [7.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u2060\u0061\u0027\u2060'
 		expected: [WordBoundary{
@@ -19030,8 +19030,8 @@ const word_break_test_cases = [
 			offset_start: 6
 			offset_end: 10
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [7.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) × [7.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u2060\u0308\u0061\u0027\u2060'
 		expected: [WordBoundary{
@@ -19043,8 +19043,8 @@ const word_break_test_cases = [
 			offset_start: 8
 			offset_end: 12
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) × [7.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [7.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u2060\u0061\u002C'
 		expected: [WordBoundary{
@@ -19056,8 +19056,8 @@ const word_break_test_cases = [
 			offset_start: 6
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [7.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) × [7.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u2060\u0308\u0061\u002C'
 		expected: [WordBoundary{
@@ -19069,8 +19069,8 @@ const word_break_test_cases = [
 			offset_start: 8
 			offset_end: 9
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [6.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [7.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u2060\u0031\u003A'
 		expected: [WordBoundary{
@@ -19090,8 +19090,8 @@ const word_break_test_cases = [
 			offset_start: 6
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u2060\u0308\u0031\u003A'
 		expected: [WordBoundary{
@@ -19111,8 +19111,8 @@ const word_break_test_cases = [
 			offset_start: 8
 			offset_end: 9
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u2060\u0031\u0027'
 		expected: [WordBoundary{
@@ -19132,8 +19132,8 @@ const word_break_test_cases = [
 			offset_start: 6
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u2060\u0308\u0031\u0027'
 		expected: [WordBoundary{
@@ -19153,8 +19153,8 @@ const word_break_test_cases = [
 			offset_start: 8
 			offset_end: 9
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u2060\u0031\u002C'
 		expected: [WordBoundary{
@@ -19174,8 +19174,8 @@ const word_break_test_cases = [
 			offset_start: 6
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u2060\u0308\u0031\u002C'
 		expected: [WordBoundary{
@@ -19195,8 +19195,8 @@ const word_break_test_cases = [
 			offset_start: 8
 			offset_end: 9
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u2060\u0031\u002E\u2060'
 		expected: [WordBoundary{
@@ -19216,8 +19216,8 @@ const word_break_test_cases = [
 			offset_start: 6
 			offset_end: 10
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0027\u2060\u0308\u0031\u002E\u2060'
 		expected: [WordBoundary{
@@ -19237,8 +19237,8 @@ const word_break_test_cases = [
 			offset_start: 8
 			offset_end: 12
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u002C\u0001'
 		expected: [WordBoundary{
@@ -19254,8 +19254,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u002C\u0308\u0001'
 		expected: [WordBoundary{
@@ -19271,8 +19271,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u002C\u000D'
 		expected: [WordBoundary{
@@ -19288,8 +19288,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u002C\u0308\u000D'
 		expected: [WordBoundary{
@@ -19305,8 +19305,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u002C\u000A'
 		expected: [WordBoundary{
@@ -19322,8 +19322,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u002C\u0308\u000A'
 		expected: [WordBoundary{
@@ -19339,8 +19339,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u002C\u000B'
 		expected: [WordBoundary{
@@ -19356,8 +19356,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u002C\u0308\u000B'
 		expected: [WordBoundary{
@@ -19373,8 +19373,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u002C\u3031'
 		expected: [WordBoundary{
@@ -19390,8 +19390,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u002C\u0308\u3031'
 		expected: [WordBoundary{
@@ -19407,8 +19407,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u002C\u0041'
 		expected: [WordBoundary{
@@ -19424,8 +19424,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u002C\u0308\u0041'
 		expected: [WordBoundary{
@@ -19441,8 +19441,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u002C\u003A'
 		expected: [WordBoundary{
@@ -19458,8 +19458,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u002C\u0308\u003A'
 		expected: [WordBoundary{
@@ -19475,8 +19475,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u002C\u002C'
 		expected: [WordBoundary{
@@ -19492,8 +19492,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u002C\u0308\u002C'
 		expected: [WordBoundary{
@@ -19509,8 +19509,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u002C\u002E'
 		expected: [WordBoundary{
@@ -19526,8 +19526,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u002C\u0308\u002E'
 		expected: [WordBoundary{
@@ -19543,8 +19543,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u002C\u0030'
 		expected: [WordBoundary{
@@ -19560,8 +19560,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u002C\u0308\u0030'
 		expected: [WordBoundary{
@@ -19577,8 +19577,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u002C\u005F'
 		expected: [WordBoundary{
@@ -19594,8 +19594,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u002C\u0308\u005F'
 		expected: [WordBoundary{
@@ -19611,8 +19611,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u002C\U0001F1E6'
 		expected: [WordBoundary{
@@ -19628,8 +19628,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u002C\u0308\U0001F1E6'
 		expected: [WordBoundary{
@@ -19645,8 +19645,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u002C\u05D0'
 		expected: [WordBoundary{
@@ -19662,8 +19662,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u002C\u0308\u05D0'
 		expected: [WordBoundary{
@@ -19679,8 +19679,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u002C\u0022'
 		expected: [WordBoundary{
@@ -19696,8 +19696,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u002C\u0308\u0022'
 		expected: [WordBoundary{
@@ -19713,8 +19713,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u002C\u0027'
 		expected: [WordBoundary{
@@ -19730,8 +19730,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u002C\u0308\u0027'
 		expected: [WordBoundary{
@@ -19747,8 +19747,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u002C\u231A'
 		expected: [WordBoundary{
@@ -19764,8 +19764,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u002C\u0308\u231A'
 		expected: [WordBoundary{
@@ -19781,8 +19781,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u002C\u0020'
 		expected: [WordBoundary{
@@ -19798,8 +19798,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u002C\u0308\u0020'
 		expected: [WordBoundary{
@@ -19815,8 +19815,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u002C\u00AD'
 		expected: [WordBoundary{
@@ -19828,8 +19828,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u002C\u0308\u00AD'
 		expected: [WordBoundary{
@@ -19841,8 +19841,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u002C\u0300'
 		expected: [WordBoundary{
@@ -19854,8 +19854,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u002C\u0308\u0300'
 		expected: [WordBoundary{
@@ -19867,8 +19867,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u002C\u200D'
 		expected: [WordBoundary{
@@ -19880,8 +19880,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u002C\u0308\u200D'
 		expected: [WordBoundary{
@@ -19893,8 +19893,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u002C\u0061\u2060'
 		expected: [WordBoundary{
@@ -19910,8 +19910,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u002C\u0308\u0061\u2060'
 		expected: [WordBoundary{
@@ -19927,8 +19927,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u002C\u0061\u003A'
 		expected: [WordBoundary{
@@ -19948,8 +19948,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u002C\u0308\u0061\u003A'
 		expected: [WordBoundary{
@@ -19969,8 +19969,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u002C\u0061\u0027'
 		expected: [WordBoundary{
@@ -19990,8 +19990,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u002C\u0308\u0061\u0027'
 		expected: [WordBoundary{
@@ -20011,8 +20011,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u002C\u0061\u0027\u2060'
 		expected: [WordBoundary{
@@ -20032,8 +20032,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u002C\u0308\u0061\u0027\u2060'
 		expected: [WordBoundary{
@@ -20053,8 +20053,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 9
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u002C\u0061\u002C'
 		expected: [WordBoundary{
@@ -20074,8 +20074,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u002C\u0308\u0061\u002C'
 		expected: [WordBoundary{
@@ -20095,8 +20095,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u002C\u0031\u003A'
 		expected: [WordBoundary{
@@ -20116,8 +20116,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u002C\u0308\u0031\u003A'
 		expected: [WordBoundary{
@@ -20137,8 +20137,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u002C\u0031\u0027'
 		expected: [WordBoundary{
@@ -20158,8 +20158,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u002C\u0308\u0031\u0027'
 		expected: [WordBoundary{
@@ -20179,8 +20179,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u002C\u0031\u002C'
 		expected: [WordBoundary{
@@ -20200,8 +20200,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u002C\u0308\u0031\u002C'
 		expected: [WordBoundary{
@@ -20221,8 +20221,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u002C\u0031\u002E\u2060'
 		expected: [WordBoundary{
@@ -20242,8 +20242,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u002C\u0308\u0031\u002E\u2060'
 		expected: [WordBoundary{
@@ -20263,8 +20263,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 9
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u003A\u0001'
 		expected: [WordBoundary{
@@ -20280,8 +20280,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u003A\u0308\u0001'
 		expected: [WordBoundary{
@@ -20297,8 +20297,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u003A\u000D'
 		expected: [WordBoundary{
@@ -20314,8 +20314,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u003A\u0308\u000D'
 		expected: [WordBoundary{
@@ -20331,8 +20331,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u003A\u000A'
 		expected: [WordBoundary{
@@ -20348,8 +20348,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u003A\u0308\u000A'
 		expected: [WordBoundary{
@@ -20365,8 +20365,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u003A\u000B'
 		expected: [WordBoundary{
@@ -20382,8 +20382,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u003A\u0308\u000B'
 		expected: [WordBoundary{
@@ -20399,8 +20399,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u003A\u3031'
 		expected: [WordBoundary{
@@ -20416,8 +20416,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u003A\u0308\u3031'
 		expected: [WordBoundary{
@@ -20433,8 +20433,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u003A\u0041'
 		expected: [WordBoundary{
@@ -20450,8 +20450,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u003A\u0308\u0041'
 		expected: [WordBoundary{
@@ -20467,8 +20467,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u003A\u003A'
 		expected: [WordBoundary{
@@ -20484,8 +20484,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u003A\u0308\u003A'
 		expected: [WordBoundary{
@@ -20501,8 +20501,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u003A\u002C'
 		expected: [WordBoundary{
@@ -20518,8 +20518,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u003A\u0308\u002C'
 		expected: [WordBoundary{
@@ -20535,8 +20535,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u003A\u002E'
 		expected: [WordBoundary{
@@ -20552,8 +20552,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u003A\u0308\u002E'
 		expected: [WordBoundary{
@@ -20569,8 +20569,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u003A\u0030'
 		expected: [WordBoundary{
@@ -20586,8 +20586,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u003A\u0308\u0030'
 		expected: [WordBoundary{
@@ -20603,8 +20603,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u003A\u005F'
 		expected: [WordBoundary{
@@ -20620,8 +20620,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u003A\u0308\u005F'
 		expected: [WordBoundary{
@@ -20637,8 +20637,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u003A\U0001F1E6'
 		expected: [WordBoundary{
@@ -20654,8 +20654,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u003A\u0308\U0001F1E6'
 		expected: [WordBoundary{
@@ -20671,8 +20671,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u003A\u05D0'
 		expected: [WordBoundary{
@@ -20688,8 +20688,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u003A\u0308\u05D0'
 		expected: [WordBoundary{
@@ -20705,8 +20705,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u003A\u0022'
 		expected: [WordBoundary{
@@ -20722,8 +20722,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u003A\u0308\u0022'
 		expected: [WordBoundary{
@@ -20739,8 +20739,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u003A\u0027'
 		expected: [WordBoundary{
@@ -20756,8 +20756,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u003A\u0308\u0027'
 		expected: [WordBoundary{
@@ -20773,8 +20773,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u003A\u231A'
 		expected: [WordBoundary{
@@ -20790,8 +20790,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u003A\u0308\u231A'
 		expected: [WordBoundary{
@@ -20807,8 +20807,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u003A\u0020'
 		expected: [WordBoundary{
@@ -20824,8 +20824,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u003A\u0308\u0020'
 		expected: [WordBoundary{
@@ -20841,8 +20841,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u003A\u00AD'
 		expected: [WordBoundary{
@@ -20854,8 +20854,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u003A\u0308\u00AD'
 		expected: [WordBoundary{
@@ -20867,8 +20867,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u003A\u0300'
 		expected: [WordBoundary{
@@ -20880,8 +20880,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u003A\u0308\u0300'
 		expected: [WordBoundary{
@@ -20893,8 +20893,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u003A\u200D'
 		expected: [WordBoundary{
@@ -20906,8 +20906,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u003A\u0308\u200D'
 		expected: [WordBoundary{
@@ -20919,8 +20919,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u003A\u0061\u2060'
 		expected: [WordBoundary{
@@ -20936,8 +20936,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u003A\u0308\u0061\u2060'
 		expected: [WordBoundary{
@@ -20953,8 +20953,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u003A\u0061\u003A'
 		expected: [WordBoundary{
@@ -20974,8 +20974,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u003A\u0308\u0061\u003A'
 		expected: [WordBoundary{
@@ -20995,8 +20995,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u003A\u0061\u0027'
 		expected: [WordBoundary{
@@ -21016,8 +21016,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u003A\u0308\u0061\u0027'
 		expected: [WordBoundary{
@@ -21037,8 +21037,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u003A\u0061\u0027\u2060'
 		expected: [WordBoundary{
@@ -21058,8 +21058,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u003A\u0308\u0061\u0027\u2060'
 		expected: [WordBoundary{
@@ -21079,8 +21079,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 9
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u003A\u0061\u002C'
 		expected: [WordBoundary{
@@ -21100,8 +21100,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u003A\u0308\u0061\u002C'
 		expected: [WordBoundary{
@@ -21121,8 +21121,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u003A\u0031\u003A'
 		expected: [WordBoundary{
@@ -21142,8 +21142,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u003A\u0308\u0031\u003A'
 		expected: [WordBoundary{
@@ -21163,8 +21163,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u003A\u0031\u0027'
 		expected: [WordBoundary{
@@ -21184,8 +21184,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u003A\u0308\u0031\u0027'
 		expected: [WordBoundary{
@@ -21205,8 +21205,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u003A\u0031\u002C'
 		expected: [WordBoundary{
@@ -21226,8 +21226,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u003A\u0308\u0031\u002C'
 		expected: [WordBoundary{
@@ -21247,8 +21247,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u003A\u0031\u002E\u2060'
 		expected: [WordBoundary{
@@ -21268,8 +21268,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u003A\u0308\u0031\u002E\u2060'
 		expected: [WordBoundary{
@@ -21289,8 +21289,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 9
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u0027\u0001'
 		expected: [WordBoundary{
@@ -21306,8 +21306,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u0027\u0308\u0001'
 		expected: [WordBoundary{
@@ -21323,8 +21323,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u0027\u000D'
 		expected: [WordBoundary{
@@ -21340,8 +21340,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u0027\u0308\u000D'
 		expected: [WordBoundary{
@@ -21357,8 +21357,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u0027\u000A'
 		expected: [WordBoundary{
@@ -21374,8 +21374,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u0027\u0308\u000A'
 		expected: [WordBoundary{
@@ -21391,8 +21391,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u0027\u000B'
 		expected: [WordBoundary{
@@ -21408,8 +21408,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u0027\u0308\u000B'
 		expected: [WordBoundary{
@@ -21425,8 +21425,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u0027\u3031'
 		expected: [WordBoundary{
@@ -21442,8 +21442,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u0027\u0308\u3031'
 		expected: [WordBoundary{
@@ -21459,8 +21459,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u0027\u0041'
 		expected: [WordBoundary{
@@ -21476,8 +21476,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u0027\u0308\u0041'
 		expected: [WordBoundary{
@@ -21493,8 +21493,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u0027\u003A'
 		expected: [WordBoundary{
@@ -21510,8 +21510,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u0027\u0308\u003A'
 		expected: [WordBoundary{
@@ -21527,8 +21527,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u0027\u002C'
 		expected: [WordBoundary{
@@ -21544,8 +21544,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u0027\u0308\u002C'
 		expected: [WordBoundary{
@@ -21561,8 +21561,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u0027\u002E'
 		expected: [WordBoundary{
@@ -21578,8 +21578,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u0027\u0308\u002E'
 		expected: [WordBoundary{
@@ -21595,8 +21595,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) × [12.0] APOSTROPHE (Single_Quote) × [11.0] DIGIT ZERO (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u0027\u0030'
 		expected: [WordBoundary{
@@ -21604,8 +21604,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) × [12.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) × [11.0] DIGIT ZERO (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) × [12.0] APOSTROPHE (Single_Quote) × [11.0] DIGIT ZERO (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u0027\u0308\u0030'
 		expected: [WordBoundary{
@@ -21613,8 +21613,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) × [12.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) × [11.0] DIGIT ZERO (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u0027\u005F'
 		expected: [WordBoundary{
@@ -21630,8 +21630,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u0027\u0308\u005F'
 		expected: [WordBoundary{
@@ -21647,8 +21647,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u0027\U0001F1E6'
 		expected: [WordBoundary{
@@ -21664,8 +21664,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u0027\u0308\U0001F1E6'
 		expected: [WordBoundary{
@@ -21681,8 +21681,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [999.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u0027\u05D0'
 		expected: [WordBoundary{
@@ -21698,8 +21698,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [999.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u0027\u0308\u05D0'
 		expected: [WordBoundary{
@@ -21715,8 +21715,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u0027\u0022'
 		expected: [WordBoundary{
@@ -21732,8 +21732,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u0027\u0308\u0022'
 		expected: [WordBoundary{
@@ -21749,8 +21749,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u0027\u0027'
 		expected: [WordBoundary{
@@ -21766,8 +21766,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u0027\u0308\u0027'
 		expected: [WordBoundary{
@@ -21783,8 +21783,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u0027\u231A'
 		expected: [WordBoundary{
@@ -21800,8 +21800,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u0027\u0308\u231A'
 		expected: [WordBoundary{
@@ -21817,8 +21817,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u0027\u0020'
 		expected: [WordBoundary{
@@ -21834,8 +21834,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u0027\u0308\u0020'
 		expected: [WordBoundary{
@@ -21851,8 +21851,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u0027\u00AD'
 		expected: [WordBoundary{
@@ -21864,8 +21864,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u0027\u0308\u00AD'
 		expected: [WordBoundary{
@@ -21877,8 +21877,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u0027\u0300'
 		expected: [WordBoundary{
@@ -21890,8 +21890,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u0027\u0308\u0300'
 		expected: [WordBoundary{
@@ -21903,8 +21903,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u0027\u200D'
 		expected: [WordBoundary{
@@ -21916,8 +21916,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u0027\u0308\u200D'
 		expected: [WordBoundary{
@@ -21929,8 +21929,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [999.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u0027\u0061\u2060'
 		expected: [WordBoundary{
@@ -21946,8 +21946,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [999.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u0027\u0308\u0061\u2060'
 		expected: [WordBoundary{
@@ -21963,8 +21963,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u0027\u0061\u003A'
 		expected: [WordBoundary{
@@ -21984,8 +21984,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u0027\u0308\u0061\u003A'
 		expected: [WordBoundary{
@@ -22005,8 +22005,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u0027\u0061\u0027'
 		expected: [WordBoundary{
@@ -22026,8 +22026,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u0027\u0308\u0061\u0027'
 		expected: [WordBoundary{
@@ -22047,8 +22047,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u0027\u0061\u0027\u2060'
 		expected: [WordBoundary{
@@ -22068,8 +22068,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u0027\u0308\u0061\u0027\u2060'
 		expected: [WordBoundary{
@@ -22089,8 +22089,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 9
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u0027\u0061\u002C'
 		expected: [WordBoundary{
@@ -22110,8 +22110,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u0027\u0308\u0061\u002C'
 		expected: [WordBoundary{
@@ -22131,8 +22131,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) × [12.0] APOSTROPHE (Single_Quote) × [11.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u0027\u0031\u003A'
 		expected: [WordBoundary{
@@ -22144,8 +22144,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) × [12.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) × [11.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) × [12.0] APOSTROPHE (Single_Quote) × [11.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u0027\u0308\u0031\u003A'
 		expected: [WordBoundary{
@@ -22157,8 +22157,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) × [12.0] APOSTROPHE (Single_Quote) × [11.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) × [12.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) × [11.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u0027\u0031\u0027'
 		expected: [WordBoundary{
@@ -22170,8 +22170,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) × [12.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) × [11.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) × [12.0] APOSTROPHE (Single_Quote) × [11.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u0027\u0308\u0031\u0027'
 		expected: [WordBoundary{
@@ -22183,8 +22183,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) × [12.0] APOSTROPHE (Single_Quote) × [11.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) × [12.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) × [11.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u0027\u0031\u002C'
 		expected: [WordBoundary{
@@ -22196,8 +22196,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) × [12.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) × [11.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) × [12.0] APOSTROPHE (Single_Quote) × [11.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u0027\u0308\u0031\u002C'
 		expected: [WordBoundary{
@@ -22209,8 +22209,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) × [12.0] APOSTROPHE (Single_Quote) × [11.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) × [12.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) × [11.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u0027\u0031\u002E\u2060'
 		expected: [WordBoundary{
@@ -22222,8 +22222,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) × [12.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) × [11.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) × [12.0] APOSTROPHE (Single_Quote) × [11.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u0027\u0308\u0031\u002E\u2060'
 		expected: [WordBoundary{
@@ -22235,8 +22235,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 9
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) × [12.0] APOSTROPHE (Single_Quote) × [4.0] COMBINING DIAERESIS (Extend_FE) × [11.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002C\u0001'
 		expected: [WordBoundary{
@@ -22252,8 +22252,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002C\u0308\u0001'
 		expected: [WordBoundary{
@@ -22269,8 +22269,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002C\u000D'
 		expected: [WordBoundary{
@@ -22286,8 +22286,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002C\u0308\u000D'
 		expected: [WordBoundary{
@@ -22303,8 +22303,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002C\u000A'
 		expected: [WordBoundary{
@@ -22320,8 +22320,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002C\u0308\u000A'
 		expected: [WordBoundary{
@@ -22337,8 +22337,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002C\u000B'
 		expected: [WordBoundary{
@@ -22354,8 +22354,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002C\u0308\u000B'
 		expected: [WordBoundary{
@@ -22371,8 +22371,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002C\u3031'
 		expected: [WordBoundary{
@@ -22388,8 +22388,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002C\u0308\u3031'
 		expected: [WordBoundary{
@@ -22405,8 +22405,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002C\u0041'
 		expected: [WordBoundary{
@@ -22422,8 +22422,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002C\u0308\u0041'
 		expected: [WordBoundary{
@@ -22439,8 +22439,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002C\u003A'
 		expected: [WordBoundary{
@@ -22456,8 +22456,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002C\u0308\u003A'
 		expected: [WordBoundary{
@@ -22473,8 +22473,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002C\u002C'
 		expected: [WordBoundary{
@@ -22490,8 +22490,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002C\u0308\u002C'
 		expected: [WordBoundary{
@@ -22507,8 +22507,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002C\u002E'
 		expected: [WordBoundary{
@@ -22524,8 +22524,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002C\u0308\u002E'
 		expected: [WordBoundary{
@@ -22541,8 +22541,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) × [12.0] COMMA (MidNum) × [11.0] DIGIT ZERO (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002C\u0030'
 		expected: [WordBoundary{
@@ -22550,8 +22550,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) × [12.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) × [11.0] DIGIT ZERO (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) × [12.0] COMMA (MidNum) × [11.0] DIGIT ZERO (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002C\u0308\u0030'
 		expected: [WordBoundary{
@@ -22559,8 +22559,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) × [12.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) × [11.0] DIGIT ZERO (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002C\u005F'
 		expected: [WordBoundary{
@@ -22576,8 +22576,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002C\u0308\u005F'
 		expected: [WordBoundary{
@@ -22593,8 +22593,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002C\U0001F1E6'
 		expected: [WordBoundary{
@@ -22610,8 +22610,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002C\u0308\U0001F1E6'
 		expected: [WordBoundary{
@@ -22627,8 +22627,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [999.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002C\u05D0'
 		expected: [WordBoundary{
@@ -22644,8 +22644,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [999.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002C\u0308\u05D0'
 		expected: [WordBoundary{
@@ -22661,8 +22661,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002C\u0022'
 		expected: [WordBoundary{
@@ -22678,8 +22678,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002C\u0308\u0022'
 		expected: [WordBoundary{
@@ -22695,8 +22695,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002C\u0027'
 		expected: [WordBoundary{
@@ -22712,8 +22712,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002C\u0308\u0027'
 		expected: [WordBoundary{
@@ -22729,8 +22729,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002C\u231A'
 		expected: [WordBoundary{
@@ -22746,8 +22746,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002C\u0308\u231A'
 		expected: [WordBoundary{
@@ -22763,8 +22763,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002C\u0020'
 		expected: [WordBoundary{
@@ -22780,8 +22780,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002C\u0308\u0020'
 		expected: [WordBoundary{
@@ -22797,8 +22797,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002C\u00AD'
 		expected: [WordBoundary{
@@ -22810,8 +22810,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002C\u0308\u00AD'
 		expected: [WordBoundary{
@@ -22823,8 +22823,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002C\u0300'
 		expected: [WordBoundary{
@@ -22836,8 +22836,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002C\u0308\u0300'
 		expected: [WordBoundary{
@@ -22849,8 +22849,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002C\u200D'
 		expected: [WordBoundary{
@@ -22862,8 +22862,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002C\u0308\u200D'
 		expected: [WordBoundary{
@@ -22875,8 +22875,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [999.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002C\u0061\u2060'
 		expected: [WordBoundary{
@@ -22892,8 +22892,8 @@ const word_break_test_cases = [
 			offset_start: 2
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [999.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002C\u0308\u0061\u2060'
 		expected: [WordBoundary{
@@ -22909,8 +22909,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002C\u0061\u003A'
 		expected: [WordBoundary{
@@ -22930,8 +22930,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002C\u0308\u0061\u003A'
 		expected: [WordBoundary{
@@ -22951,8 +22951,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002C\u0061\u0027'
 		expected: [WordBoundary{
@@ -22972,8 +22972,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002C\u0308\u0061\u0027'
 		expected: [WordBoundary{
@@ -22993,8 +22993,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002C\u0061\u0027\u2060'
 		expected: [WordBoundary{
@@ -23014,8 +23014,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002C\u0308\u0061\u0027\u2060'
 		expected: [WordBoundary{
@@ -23035,8 +23035,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 9
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002C\u0061\u002C'
 		expected: [WordBoundary{
@@ -23056,8 +23056,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002C\u0308\u0061\u002C'
 		expected: [WordBoundary{
@@ -23077,8 +23077,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) × [12.0] COMMA (MidNum) × [11.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002C\u0031\u003A'
 		expected: [WordBoundary{
@@ -23090,8 +23090,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) × [12.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) × [11.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) × [12.0] COMMA (MidNum) × [11.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002C\u0308\u0031\u003A'
 		expected: [WordBoundary{
@@ -23103,8 +23103,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) × [12.0] COMMA (MidNum) × [11.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) × [12.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) × [11.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002C\u0031\u0027'
 		expected: [WordBoundary{
@@ -23116,8 +23116,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) × [12.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) × [11.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) × [12.0] COMMA (MidNum) × [11.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002C\u0308\u0031\u0027'
 		expected: [WordBoundary{
@@ -23129,8 +23129,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) × [12.0] COMMA (MidNum) × [11.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) × [12.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) × [11.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002C\u0031\u002C'
 		expected: [WordBoundary{
@@ -23142,8 +23142,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) × [12.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) × [11.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) × [12.0] COMMA (MidNum) × [11.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002C\u0308\u0031\u002C'
 		expected: [WordBoundary{
@@ -23155,8 +23155,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) × [12.0] COMMA (MidNum) × [11.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) × [12.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) × [11.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002C\u0031\u002E\u2060'
 		expected: [WordBoundary{
@@ -23168,8 +23168,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) × [12.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) × [11.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) × [12.0] COMMA (MidNum) × [11.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002C\u0308\u0031\u002E\u2060'
 		expected: [WordBoundary{
@@ -23181,8 +23181,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 9
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) × [12.0] COMMA (MidNum) × [4.0] COMBINING DIAERESIS (Extend_FE) × [11.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002E\u2060\u0001'
 		expected: [WordBoundary{
@@ -23198,8 +23198,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002E\u2060\u0308\u0001'
 		expected: [WordBoundary{
@@ -23215,8 +23215,8 @@ const word_break_test_cases = [
 			offset_start: 7
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] <START OF HEADING> (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002E\u2060\u000D'
 		expected: [WordBoundary{
@@ -23232,8 +23232,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002E\u2060\u0308\u000D'
 		expected: [WordBoundary{
@@ -23249,8 +23249,8 @@ const word_break_test_cases = [
 			offset_start: 7
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <CARRIAGE RETURN (CR)> (CR) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002E\u2060\u000A'
 		expected: [WordBoundary{
@@ -23266,8 +23266,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002E\u2060\u0308\u000A'
 		expected: [WordBoundary{
@@ -23283,8 +23283,8 @@ const word_break_test_cases = [
 			offset_start: 7
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002E\u2060\u000B'
 		expected: [WordBoundary{
@@ -23300,8 +23300,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002E\u2060\u0308\u000B'
 		expected: [WordBoundary{
@@ -23317,8 +23317,8 @@ const word_break_test_cases = [
 			offset_start: 7
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [3.2] <LINE TABULATION> (Newline) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002E\u2060\u3031'
 		expected: [WordBoundary{
@@ -23334,8 +23334,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002E\u2060\u0308\u3031'
 		expected: [WordBoundary{
@@ -23351,8 +23351,8 @@ const word_break_test_cases = [
 			offset_start: 7
 			offset_end: 10
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002E\u2060\u0041'
 		expected: [WordBoundary{
@@ -23368,8 +23368,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002E\u2060\u0308\u0041'
 		expected: [WordBoundary{
@@ -23385,8 +23385,8 @@ const word_break_test_cases = [
 			offset_start: 7
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002E\u2060\u003A'
 		expected: [WordBoundary{
@@ -23402,8 +23402,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002E\u2060\u0308\u003A'
 		expected: [WordBoundary{
@@ -23419,8 +23419,8 @@ const word_break_test_cases = [
 			offset_start: 7
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002E\u2060\u002C'
 		expected: [WordBoundary{
@@ -23436,8 +23436,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002E\u2060\u0308\u002C'
 		expected: [WordBoundary{
@@ -23453,8 +23453,8 @@ const word_break_test_cases = [
 			offset_start: 7
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002E\u2060\u002E'
 		expected: [WordBoundary{
@@ -23470,8 +23470,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002E\u2060\u0308\u002E'
 		expected: [WordBoundary{
@@ -23487,8 +23487,8 @@ const word_break_test_cases = [
 			offset_start: 7
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) × [12.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) × [11.0] DIGIT ZERO (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] FULL STOP (MidNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002E\u2060\u0030'
 		expected: [WordBoundary{
@@ -23496,8 +23496,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) × [12.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [11.0] DIGIT ZERO (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) × [12.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) × [11.0] DIGIT ZERO (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002E\u2060\u0308\u0030'
 		expected: [WordBoundary{
@@ -23505,8 +23505,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) × [12.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [11.0] DIGIT ZERO (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002E\u2060\u005F'
 		expected: [WordBoundary{
@@ -23522,8 +23522,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002E\u2060\u0308\u005F'
 		expected: [WordBoundary{
@@ -23539,8 +23539,8 @@ const word_break_test_cases = [
 			offset_start: 7
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LOW LINE (ExtendNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002E\u2060\U0001F1E6'
 		expected: [WordBoundary{
@@ -23556,8 +23556,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 9
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002E\u2060\u0308\U0001F1E6'
 		expected: [WordBoundary{
@@ -23573,8 +23573,8 @@ const word_break_test_cases = [
 			offset_start: 7
 			offset_end: 11
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002E\u2060\u05D0'
 		expected: [WordBoundary{
@@ -23590,8 +23590,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002E\u2060\u0308\u05D0'
 		expected: [WordBoundary{
@@ -23607,8 +23607,8 @@ const word_break_test_cases = [
 			offset_start: 7
 			offset_end: 9
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002E\u2060\u0022'
 		expected: [WordBoundary{
@@ -23624,8 +23624,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002E\u2060\u0308\u0022'
 		expected: [WordBoundary{
@@ -23641,8 +23641,8 @@ const word_break_test_cases = [
 			offset_start: 7
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] QUOTATION MARK (Double_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002E\u2060\u0027'
 		expected: [WordBoundary{
@@ -23658,8 +23658,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002E\u2060\u0308\u0027'
 		expected: [WordBoundary{
@@ -23675,8 +23675,8 @@ const word_break_test_cases = [
 			offset_start: 7
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002E\u2060\u231A'
 		expected: [WordBoundary{
@@ -23692,8 +23692,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002E\u2060\u0308\u231A'
 		expected: [WordBoundary{
@@ -23709,8 +23709,8 @@ const word_break_test_cases = [
 			offset_start: 7
 			offset_end: 10
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] WATCH (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002E\u2060\u0020'
 		expected: [WordBoundary{
@@ -23726,8 +23726,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002E\u2060\u0308\u0020'
 		expected: [WordBoundary{
@@ -23743,8 +23743,8 @@ const word_break_test_cases = [
 			offset_start: 7
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002E\u2060\u00AD'
 		expected: [WordBoundary{
@@ -23756,8 +23756,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002E\u2060\u0308\u00AD'
 		expected: [WordBoundary{
@@ -23769,8 +23769,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 9
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] SOFT HYPHEN (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002E\u2060\u0300'
 		expected: [WordBoundary{
@@ -23782,8 +23782,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002E\u2060\u0308\u0300'
 		expected: [WordBoundary{
@@ -23795,8 +23795,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 9
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] COMBINING GRAVE ACCENT (Extend_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002E\u2060\u200D'
 		expected: [WordBoundary{
@@ -23808,8 +23808,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002E\u2060\u0308\u200D'
 		expected: [WordBoundary{
@@ -23821,8 +23821,8 @@ const word_break_test_cases = [
 			offset_start: 1
 			offset_end: 10
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002E\u2060\u0061\u2060'
 		expected: [WordBoundary{
@@ -23838,8 +23838,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 9
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002E\u2060\u0308\u0061\u2060'
 		expected: [WordBoundary{
@@ -23855,8 +23855,8 @@ const word_break_test_cases = [
 			offset_start: 7
 			offset_end: 11
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002E\u2060\u0061\u003A'
 		expected: [WordBoundary{
@@ -23876,8 +23876,8 @@ const word_break_test_cases = [
 			offset_start: 6
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002E\u2060\u0308\u0061\u003A'
 		expected: [WordBoundary{
@@ -23897,8 +23897,8 @@ const word_break_test_cases = [
 			offset_start: 8
 			offset_end: 9
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002E\u2060\u0061\u0027'
 		expected: [WordBoundary{
@@ -23918,8 +23918,8 @@ const word_break_test_cases = [
 			offset_start: 6
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002E\u2060\u0308\u0061\u0027'
 		expected: [WordBoundary{
@@ -23939,8 +23939,8 @@ const word_break_test_cases = [
 			offset_start: 8
 			offset_end: 9
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002E\u2060\u0061\u0027\u2060'
 		expected: [WordBoundary{
@@ -23960,8 +23960,8 @@ const word_break_test_cases = [
 			offset_start: 6
 			offset_end: 10
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002E\u2060\u0308\u0061\u0027\u2060'
 		expected: [WordBoundary{
@@ -23981,8 +23981,8 @@ const word_break_test_cases = [
 			offset_start: 8
 			offset_end: 12
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] APOSTROPHE (Single_Quote) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002E\u2060\u0061\u002C'
 		expected: [WordBoundary{
@@ -24002,8 +24002,8 @@ const word_break_test_cases = [
 			offset_start: 6
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002E\u2060\u0308\u0061\u002C'
 		expected: [WordBoundary{
@@ -24023,8 +24023,8 @@ const word_break_test_cases = [
 			offset_start: 8
 			offset_end: 9
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) × [12.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) × [11.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002E\u2060\u0031\u003A'
 		expected: [WordBoundary{
@@ -24036,8 +24036,8 @@ const word_break_test_cases = [
 			offset_start: 6
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) × [12.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [11.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) × [12.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) × [11.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002E\u2060\u0308\u0031\u003A'
 		expected: [WordBoundary{
@@ -24049,8 +24049,8 @@ const word_break_test_cases = [
 			offset_start: 8
 			offset_end: 9
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) × [12.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) × [11.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) × [12.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [11.0] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002E\u2060\u0031\u0027'
 		expected: [WordBoundary{
@@ -24062,8 +24062,8 @@ const word_break_test_cases = [
 			offset_start: 6
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) × [12.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [11.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) × [12.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) × [11.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002E\u2060\u0308\u0031\u0027'
 		expected: [WordBoundary{
@@ -24075,8 +24075,8 @@ const word_break_test_cases = [
 			offset_start: 8
 			offset_end: 9
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) × [12.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) × [11.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) × [12.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [11.0] DIGIT ONE (Numeric) ÷ [999.0] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002E\u2060\u0031\u002C'
 		expected: [WordBoundary{
@@ -24088,8 +24088,8 @@ const word_break_test_cases = [
 			offset_start: 6
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) × [12.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [11.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) × [12.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) × [11.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002E\u2060\u0308\u0031\u002C'
 		expected: [WordBoundary{
@@ -24101,8 +24101,8 @@ const word_break_test_cases = [
 			offset_start: 8
 			offset_end: 9
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) × [12.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) × [11.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) × [12.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [11.0] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002E\u2060\u0031\u002E\u2060'
 		expected: [WordBoundary{
@@ -24114,8 +24114,8 @@ const word_break_test_cases = [
 			offset_start: 6
 			offset_end: 10
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) × [12.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [11.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) × [12.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) × [11.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002E\u2060\u0308\u0031\u002E\u2060'
 		expected: [WordBoundary{
@@ -24127,8 +24127,8 @@ const word_break_test_cases = [
 			offset_start: 8
 			offset_end: 12
 		}]
-	}
-	// ÷ [0.2] <CARRIAGE RETURN (CR)> (CR) × [3.0] <LINE FEED (LF)> (LF) ÷ [3.1] LATIN SMALL LETTER A (ALetter) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) × [12.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [11.0] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) × [4.0] WORD JOINER (Format_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u000D\u000A\u0061\u000A\u0308'
 		expected: [WordBoundary{
@@ -24148,8 +24148,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [0.3]
+		desc: '÷ [0.2] <CARRIAGE RETURN (CR)> (CR) × [3.0] <LINE FEED (LF)> (LF) ÷ [3.1] LATIN SMALL LETTER A (ALetter) ÷ [3.2] <LINE FEED (LF)> (LF) ÷ [3.1] COMBINING DIAERESIS (Extend_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0308'
 		expected: [WordBoundary{
@@ -24157,8 +24157,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] SPACE (WSegSpace) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [999.0] ARABIC LETTER NOON (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0020\u200D\u0646'
 		expected: [WordBoundary{
@@ -24170,8 +24170,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] ARABIC LETTER NOON (ALetter) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]
+		desc: '÷ [0.2] SPACE (WSegSpace) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [999.0] ARABIC LETTER NOON (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0646\u200D\u0020'
 		expected: [WordBoundary{
@@ -24183,8 +24183,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [5.0] LATIN CAPITAL LETTER A (ALetter) × [5.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] ARABIC LETTER NOON (ALetter) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0041\u0041\u0041'
 		expected: [WordBoundary{
@@ -24192,8 +24192,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [6.0] COLON (MidLetter) × [7.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [5.0] LATIN CAPITAL LETTER A (ALetter) × [5.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0041\u003A\u0041'
 		expected: [WordBoundary{
@@ -24201,8 +24201,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] LATIN CAPITAL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [6.0] COLON (MidLetter) × [7.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0041\u003A\u003A\u0041'
 		expected: [WordBoundary{
@@ -24222,8 +24222,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [7.1] APOSTROPHE (Single_Quote) ÷ [0.3]
+		desc: '÷ [0.2] LATIN CAPITAL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u05D0\u0027'
 		expected: [WordBoundary{
@@ -24231,8 +24231,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [7.2] QUOTATION MARK (Double_Quote) × [7.3] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]
+		desc: '÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [7.1] APOSTROPHE (Single_Quote) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u05D0\u0022\u05D0'
 		expected: [WordBoundary{
@@ -24240,8 +24240,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 5
 		}]
-	}
-	// ÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [9.0] DIGIT ZERO (Numeric) × [8.0] DIGIT ZERO (Numeric) × [10.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] HEBREW LETTER ALEF (Hebrew_Letter) × [7.2] QUOTATION MARK (Double_Quote) × [7.3] HEBREW LETTER ALEF (Hebrew_Letter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0041\u0030\u0030\u0041'
 		expected: [WordBoundary{
@@ -24249,8 +24249,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] DIGIT ZERO (Numeric) × [12.0] COMMA (MidNum) × [11.0] DIGIT ZERO (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [9.0] DIGIT ZERO (Numeric) × [8.0] DIGIT ZERO (Numeric) × [10.0] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0030\u002C\u0030'
 		expected: [WordBoundary{
@@ -24258,8 +24258,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 3
 		}]
-	}
-	// ÷ [0.2] DIGIT ZERO (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [999.0] COMMA (MidNum) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ZERO (Numeric) × [12.0] COMMA (MidNum) × [11.0] DIGIT ZERO (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0030\u002C\u002C\u0030'
 		expected: [WordBoundary{
@@ -24279,8 +24279,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) × [13.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ZERO (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [999.0] COMMA (MidNum) ÷ [999.0] DIGIT ZERO (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u3031\u3031'
 		expected: [WordBoundary{
@@ -24288,8 +24288,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [13.1] LOW LINE (ExtendNumLet) × [13.2] DIGIT ZERO (Numeric) × [13.1] LOW LINE (ExtendNumLet) × [13.2] VERTICAL KANA REPEAT MARK (Katakana) × [13.1] LOW LINE (ExtendNumLet) ÷ [0.3]
+		desc: '÷ [0.2] VERTICAL KANA REPEAT MARK (Katakana) × [13.0] VERTICAL KANA REPEAT MARK (Katakana) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0041\u005F\u0030\u005F\u3031\u005F'
 		expected: [WordBoundary{
@@ -24297,8 +24297,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [13.1] LOW LINE (ExtendNumLet) × [13.1] LOW LINE (ExtendNumLet) × [13.2] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [13.1] LOW LINE (ExtendNumLet) × [13.2] DIGIT ZERO (Numeric) × [13.1] LOW LINE (ExtendNumLet) × [13.2] VERTICAL KANA REPEAT MARK (Katakana) × [13.1] LOW LINE (ExtendNumLet) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0041\u005F\u005F\u0041'
 		expected: [WordBoundary{
@@ -24306,8 +24306,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [15.0] REGIONAL INDICATOR SYMBOL LETTER B (RI) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER C (RI) ÷ [999.0] LATIN SMALL LETTER B (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN CAPITAL LETTER A (ALetter) × [13.1] LOW LINE (ExtendNumLet) × [13.1] LOW LINE (ExtendNumLet) × [13.2] LATIN CAPITAL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F1E6\U0001F1E7\U0001F1E8\u0062'
 		expected: [WordBoundary{
@@ -24323,8 +24323,8 @@ const word_break_test_cases = [
 			offset_start: 12
 			offset_end: 13
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [16.0] REGIONAL INDICATOR SYMBOL LETTER B (RI) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER C (RI) ÷ [999.0] LATIN SMALL LETTER B (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [15.0] REGIONAL INDICATOR SYMBOL LETTER B (RI) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER C (RI) ÷ [999.0] LATIN SMALL LETTER B (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\U0001F1E6\U0001F1E7\U0001F1E8\u0062'
 		expected: [WordBoundary{
@@ -24344,8 +24344,8 @@ const word_break_test_cases = [
 			offset_start: 13
 			offset_end: 14
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [16.0] REGIONAL INDICATOR SYMBOL LETTER B (RI) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER C (RI) ÷ [999.0] LATIN SMALL LETTER B (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [16.0] REGIONAL INDICATOR SYMBOL LETTER B (RI) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER C (RI) ÷ [999.0] LATIN SMALL LETTER B (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\U0001F1E6\U0001F1E7\u200D\U0001F1E8\u0062'
 		expected: [WordBoundary{
@@ -24365,8 +24365,8 @@ const word_break_test_cases = [
 			offset_start: 16
 			offset_end: 17
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) × [16.0] REGIONAL INDICATOR SYMBOL LETTER B (RI) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER C (RI) ÷ [999.0] LATIN SMALL LETTER B (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [16.0] REGIONAL INDICATOR SYMBOL LETTER B (RI) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER C (RI) ÷ [999.0] LATIN SMALL LETTER B (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\U0001F1E6\u200D\U0001F1E7\U0001F1E8\u0062'
 		expected: [WordBoundary{
@@ -24386,8 +24386,8 @@ const word_break_test_cases = [
 			offset_start: 16
 			offset_end: 17
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [16.0] REGIONAL INDICATOR SYMBOL LETTER B (RI) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER C (RI) × [16.0] REGIONAL INDICATOR SYMBOL LETTER D (RI) ÷ [999.0] LATIN SMALL LETTER B (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) × [16.0] REGIONAL INDICATOR SYMBOL LETTER B (RI) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER C (RI) ÷ [999.0] LATIN SMALL LETTER B (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\U0001F1E6\U0001F1E7\U0001F1E8\U0001F1E9\u0062'
 		expected: [WordBoundary{
@@ -24407,8 +24407,8 @@ const word_break_test_cases = [
 			offset_start: 17
 			offset_end: 18
 		}]
-	}
-	// ÷ [0.2] BABY (ExtPict) × [4.0] EMOJI MODIFIER FITZPATRICK TYPE-6 (Extend_FE) ÷ [999.0] BABY (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER A (RI) × [16.0] REGIONAL INDICATOR SYMBOL LETTER B (RI) ÷ [999.0] REGIONAL INDICATOR SYMBOL LETTER C (RI) × [16.0] REGIONAL INDICATOR SYMBOL LETTER D (RI) ÷ [999.0] LATIN SMALL LETTER B (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F476\U0001F3FF\U0001F476'
 		expected: [WordBoundary{
@@ -24420,8 +24420,8 @@ const word_break_test_cases = [
 			offset_start: 8
 			offset_end: 12
 		}]
-	}
-	// ÷ [0.2] OCTAGONAL SIGN (ExtPict) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) × [3.3] OCTAGONAL SIGN (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] BABY (ExtPict) × [4.0] EMOJI MODIFIER FITZPATRICK TYPE-6 (Extend_FE) ÷ [999.0] BABY (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F6D1\u200D\U0001F6D1'
 		expected: [WordBoundary{
@@ -24429,8 +24429,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 11
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) × [3.3] OCTAGONAL SIGN (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] OCTAGONAL SIGN (ExtPict) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) × [3.3] OCTAGONAL SIGN (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u200D\U0001F6D1'
 		expected: [WordBoundary{
@@ -24438,8 +24438,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] UPPER BLADE SCISSORS (Other) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) × [3.3] UPPER BLADE SCISSORS (Other) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) × [3.3] OCTAGONAL SIGN (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u2701\u200D\u2701'
 		expected: [WordBoundary{
@@ -24447,8 +24447,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 9
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) × [3.3] UPPER BLADE SCISSORS (Other) ÷ [0.3]
+		desc: '÷ [0.2] UPPER BLADE SCISSORS (Other) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) × [3.3] UPPER BLADE SCISSORS (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u200D\u2701'
 		expected: [WordBoundary{
@@ -24456,8 +24456,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] BABY (ExtPict) × [4.0] EMOJI MODIFIER FITZPATRICK TYPE-6 (Extend_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) × [3.3] BABY (ExtPict) × [4.0] EMOJI MODIFIER FITZPATRICK TYPE-6 (Extend_FE) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) × [3.3] UPPER BLADE SCISSORS (Other) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F476\U0001F3FF\u0308\u200D\U0001F476\U0001F3FF'
 		expected: [WordBoundary{
@@ -24465,8 +24465,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 21
 		}]
-	}
-	// ÷ [0.2] OCTAGONAL SIGN (ExtPict) × [4.0] EMOJI MODIFIER FITZPATRICK TYPE-6 (Extend_FE) ÷ [0.3]
+		desc: '÷ [0.2] BABY (ExtPict) × [4.0] EMOJI MODIFIER FITZPATRICK TYPE-6 (Extend_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) × [3.3] BABY (ExtPict) × [4.0] EMOJI MODIFIER FITZPATRICK TYPE-6 (Extend_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F6D1\U0001F3FF'
 		expected: [WordBoundary{
@@ -24474,8 +24474,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) × [3.3] OCTAGONAL SIGN (ExtPict) × [4.0] EMOJI MODIFIER FITZPATRICK TYPE-6 (Extend_FE) ÷ [0.3]
+		desc: '÷ [0.2] OCTAGONAL SIGN (ExtPict) × [4.0] EMOJI MODIFIER FITZPATRICK TYPE-6 (Extend_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\U0001F6D1\U0001F3FF'
 		expected: [WordBoundary{
@@ -24483,8 +24483,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 11
 		}]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) × [3.3] OCTAGONAL SIGN (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) × [3.3] OCTAGONAL SIGN (ExtPict) × [4.0] EMOJI MODIFIER FITZPATRICK TYPE-6 (Extend_FE) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\U0001F6D1'
 		expected: [WordBoundary{
@@ -24492,8 +24492,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) × [3.3] OCTAGONAL SIGN (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) × [3.3] OCTAGONAL SIGN (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u200D\U0001F6D1'
 		expected: [WordBoundary{
@@ -24501,8 +24501,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 7
 		}]
-	}
-	// ÷ [0.2] OCTAGONAL SIGN (ExtPict) ÷ [999.0] OCTAGONAL SIGN (ExtPict) ÷ [0.3]
+		desc: '÷ [0.2] ZERO WIDTH JOINER (ZWJ_FE) × [3.3] OCTAGONAL SIGN (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\U0001F6D1\U0001F6D1'
 		expected: [WordBoundary{
@@ -24514,8 +24514,8 @@ const word_break_test_cases = [
 			offset_start: 4
 			offset_end: 8
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [5.0] LATIN SMALL LETTER B (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] OCTAGONAL SIGN (ExtPict) ÷ [999.0] OCTAGONAL SIGN (ExtPict) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0308\u200D\u0308\u0062'
 		expected: [WordBoundary{
@@ -24523,8 +24523,8 @@ const word_break_test_cases = [
 			offset_start: 0
 			offset_end: 9
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] SPACE (WSegSpace) × [3.4] SPACE (WSegSpace) ÷ [999.0] LATIN SMALL LETTER B (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [4.0] COMBINING DIAERESIS (Extend_FE) × [4.0] ZERO WIDTH JOINER (ZWJ_FE) × [4.0] COMBINING DIAERESIS (Extend_FE) × [5.0] LATIN SMALL LETTER B (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u0020\u0020\u0062'
 		expected: [WordBoundary{
@@ -24540,8 +24540,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] SPACE (WSegSpace) × [3.4] SPACE (WSegSpace) ÷ [999.0] LATIN SMALL LETTER B (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u003A\u003A\u0031'
 		expected: [WordBoundary{
@@ -24561,8 +24561,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) × [13.1] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u005F\u0031\u003A\u003A\u0031'
 		expected: [WordBoundary{
@@ -24582,8 +24582,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) × [13.1] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) × [13.1] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u005F\u0061\u003A\u003A\u0031'
 		expected: [WordBoundary{
@@ -24603,8 +24603,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) × [13.1] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u003A\u003A\u0061'
 		expected: [WordBoundary{
@@ -24624,8 +24624,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) × [13.1] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u005F\u0031\u003A\u003A\u0061'
 		expected: [WordBoundary{
@@ -24645,8 +24645,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) × [13.1] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) × [13.1] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u005F\u0061\u003A\u003A\u0061'
 		expected: [WordBoundary{
@@ -24666,8 +24666,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) × [13.1] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u003A\u002E\u0031'
 		expected: [WordBoundary{
@@ -24687,8 +24687,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) × [13.1] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u005F\u0031\u003A\u002E\u0031'
 		expected: [WordBoundary{
@@ -24708,8 +24708,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) × [13.1] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) × [13.1] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u005F\u0061\u003A\u002E\u0031'
 		expected: [WordBoundary{
@@ -24729,8 +24729,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) × [13.1] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u003A\u002E\u0061'
 		expected: [WordBoundary{
@@ -24750,8 +24750,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) × [13.1] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u005F\u0031\u003A\u002E\u0061'
 		expected: [WordBoundary{
@@ -24771,8 +24771,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) × [13.1] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) × [13.1] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u005F\u0061\u003A\u002E\u0061'
 		expected: [WordBoundary{
@@ -24792,8 +24792,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) × [13.1] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u003A\u002C\u0031'
 		expected: [WordBoundary{
@@ -24813,8 +24813,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) × [13.1] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u005F\u0031\u003A\u002C\u0031'
 		expected: [WordBoundary{
@@ -24834,8 +24834,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) × [13.1] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) × [13.1] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u005F\u0061\u003A\u002C\u0031'
 		expected: [WordBoundary{
@@ -24855,8 +24855,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) × [13.1] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u003A\u002C\u0061'
 		expected: [WordBoundary{
@@ -24876,8 +24876,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) × [13.1] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u005F\u0031\u003A\u002C\u0061'
 		expected: [WordBoundary{
@@ -24897,8 +24897,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) × [13.1] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) × [13.1] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u005F\u0061\u003A\u002C\u0061'
 		expected: [WordBoundary{
@@ -24918,8 +24918,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] COLON (MidLetter) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) × [13.1] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002E\u003A\u0031'
 		expected: [WordBoundary{
@@ -24939,8 +24939,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) × [13.1] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] COLON (MidLetter) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] COLON (MidLetter) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u005F\u0031\u002E\u003A\u0031'
 		expected: [WordBoundary{
@@ -24960,8 +24960,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) × [13.1] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] COLON (MidLetter) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) × [13.1] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] COLON (MidLetter) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u005F\u0061\u002E\u003A\u0031'
 		expected: [WordBoundary{
@@ -24981,8 +24981,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] COLON (MidLetter) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) × [13.1] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] COLON (MidLetter) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002E\u003A\u0061'
 		expected: [WordBoundary{
@@ -25002,8 +25002,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) × [13.1] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] COLON (MidLetter) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] COLON (MidLetter) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u005F\u0031\u002E\u003A\u0061'
 		expected: [WordBoundary{
@@ -25023,8 +25023,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) × [13.1] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] COLON (MidLetter) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) × [13.1] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] COLON (MidLetter) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u005F\u0061\u002E\u003A\u0061'
 		expected: [WordBoundary{
@@ -25044,8 +25044,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) × [13.1] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] COLON (MidLetter) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002E\u002E\u0031'
 		expected: [WordBoundary{
@@ -25065,8 +25065,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) × [13.1] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u005F\u0031\u002E\u002E\u0031'
 		expected: [WordBoundary{
@@ -25086,8 +25086,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) × [13.1] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) × [13.1] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u005F\u0061\u002E\u002E\u0031'
 		expected: [WordBoundary{
@@ -25107,8 +25107,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) × [13.1] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002E\u002E\u0061'
 		expected: [WordBoundary{
@@ -25128,8 +25128,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) × [13.1] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u005F\u0031\u002E\u002E\u0061'
 		expected: [WordBoundary{
@@ -25149,8 +25149,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) × [13.1] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) × [13.1] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u005F\u0061\u002E\u002E\u0061'
 		expected: [WordBoundary{
@@ -25170,8 +25170,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] COMMA (MidNum) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) × [13.1] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002E\u002C\u0031'
 		expected: [WordBoundary{
@@ -25191,8 +25191,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) × [13.1] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] COMMA (MidNum) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] COMMA (MidNum) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u005F\u0031\u002E\u002C\u0031'
 		expected: [WordBoundary{
@@ -25212,8 +25212,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) × [13.1] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] COMMA (MidNum) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) × [13.1] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] COMMA (MidNum) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u005F\u0061\u002E\u002C\u0031'
 		expected: [WordBoundary{
@@ -25233,8 +25233,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] COMMA (MidNum) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) × [13.1] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] COMMA (MidNum) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002E\u002C\u0061'
 		expected: [WordBoundary{
@@ -25254,8 +25254,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) × [13.1] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] COMMA (MidNum) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] COMMA (MidNum) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u005F\u0031\u002E\u002C\u0061'
 		expected: [WordBoundary{
@@ -25275,8 +25275,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) × [13.1] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] COMMA (MidNum) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) × [13.1] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] COMMA (MidNum) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u005F\u0061\u002E\u002C\u0061'
 		expected: [WordBoundary{
@@ -25296,8 +25296,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [999.0] COLON (MidLetter) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) × [13.1] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] COMMA (MidNum) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002C\u003A\u0031'
 		expected: [WordBoundary{
@@ -25317,8 +25317,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) × [13.1] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [999.0] COLON (MidLetter) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [999.0] COLON (MidLetter) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u005F\u0031\u002C\u003A\u0031'
 		expected: [WordBoundary{
@@ -25338,8 +25338,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) × [13.1] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] COLON (MidLetter) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) × [13.1] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [999.0] COLON (MidLetter) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u005F\u0061\u002C\u003A\u0031'
 		expected: [WordBoundary{
@@ -25359,8 +25359,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [999.0] COLON (MidLetter) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) × [13.1] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] COLON (MidLetter) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002C\u003A\u0061'
 		expected: [WordBoundary{
@@ -25380,8 +25380,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) × [13.1] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [999.0] COLON (MidLetter) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [999.0] COLON (MidLetter) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u005F\u0031\u002C\u003A\u0061'
 		expected: [WordBoundary{
@@ -25401,8 +25401,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) × [13.1] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] COLON (MidLetter) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) × [13.1] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [999.0] COLON (MidLetter) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u005F\u0061\u002C\u003A\u0061'
 		expected: [WordBoundary{
@@ -25422,8 +25422,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) × [13.1] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] COLON (MidLetter) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002C\u002E\u0031'
 		expected: [WordBoundary{
@@ -25443,8 +25443,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) × [13.1] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u005F\u0031\u002C\u002E\u0031'
 		expected: [WordBoundary{
@@ -25464,8 +25464,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) × [13.1] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) × [13.1] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u005F\u0061\u002C\u002E\u0031'
 		expected: [WordBoundary{
@@ -25485,8 +25485,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) × [13.1] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002C\u002E\u0061'
 		expected: [WordBoundary{
@@ -25506,8 +25506,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) × [13.1] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u005F\u0031\u002C\u002E\u0061'
 		expected: [WordBoundary{
@@ -25527,8 +25527,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) × [13.1] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) × [13.1] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u005F\u0061\u002C\u002E\u0061'
 		expected: [WordBoundary{
@@ -25548,8 +25548,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [999.0] COMMA (MidNum) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) × [13.1] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002C\u002C\u0031'
 		expected: [WordBoundary{
@@ -25569,8 +25569,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) × [13.1] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [999.0] COMMA (MidNum) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [999.0] COMMA (MidNum) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u005F\u0031\u002C\u002C\u0031'
 		expected: [WordBoundary{
@@ -25590,8 +25590,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) × [13.1] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] COMMA (MidNum) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) × [13.1] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [999.0] COMMA (MidNum) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u005F\u0061\u002C\u002C\u0031'
 		expected: [WordBoundary{
@@ -25611,8 +25611,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [999.0] COMMA (MidNum) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) × [13.1] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] COMMA (MidNum) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u002C\u002C\u0061'
 		expected: [WordBoundary{
@@ -25632,8 +25632,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) × [13.1] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [999.0] COMMA (MidNum) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [999.0] COMMA (MidNum) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u005F\u0031\u002C\u002C\u0061'
 		expected: [WordBoundary{
@@ -25653,8 +25653,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] DIGIT ONE (Numeric) × [13.1] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] COMMA (MidNum) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) × [13.1] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [999.0] COMMA (MidNum) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0031\u005F\u0061\u002C\u002C\u0061'
 		expected: [WordBoundary{
@@ -25674,8 +25674,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] DIGIT ONE (Numeric) × [13.1] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] COMMA (MidNum) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u003A\u003A\u0031'
 		expected: [WordBoundary{
@@ -25695,8 +25695,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [13.1] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u005F\u0031\u003A\u003A\u0031'
 		expected: [WordBoundary{
@@ -25716,8 +25716,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [13.1] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [13.1] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u005F\u0061\u003A\u003A\u0031'
 		expected: [WordBoundary{
@@ -25737,8 +25737,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [13.1] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u003A\u003A\u0061'
 		expected: [WordBoundary{
@@ -25758,8 +25758,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [13.1] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u005F\u0031\u003A\u003A\u0061'
 		expected: [WordBoundary{
@@ -25779,8 +25779,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [13.1] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [13.1] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u005F\u0061\u003A\u003A\u0061'
 		expected: [WordBoundary{
@@ -25800,8 +25800,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [13.1] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u003A\u002E\u0031'
 		expected: [WordBoundary{
@@ -25821,8 +25821,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [13.1] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u005F\u0031\u003A\u002E\u0031'
 		expected: [WordBoundary{
@@ -25842,8 +25842,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [13.1] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [13.1] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u005F\u0061\u003A\u002E\u0031'
 		expected: [WordBoundary{
@@ -25863,8 +25863,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [13.1] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u003A\u002E\u0061'
 		expected: [WordBoundary{
@@ -25884,8 +25884,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [13.1] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u005F\u0031\u003A\u002E\u0061'
 		expected: [WordBoundary{
@@ -25905,8 +25905,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [13.1] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [13.1] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u005F\u0061\u003A\u002E\u0061'
 		expected: [WordBoundary{
@@ -25926,8 +25926,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [13.1] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u003A\u002C\u0031'
 		expected: [WordBoundary{
@@ -25947,8 +25947,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [13.1] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u005F\u0031\u003A\u002C\u0031'
 		expected: [WordBoundary{
@@ -25968,8 +25968,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [13.1] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [13.1] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u005F\u0061\u003A\u002C\u0031'
 		expected: [WordBoundary{
@@ -25989,8 +25989,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [13.1] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u003A\u002C\u0061'
 		expected: [WordBoundary{
@@ -26010,8 +26010,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [13.1] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u005F\u0031\u003A\u002C\u0061'
 		expected: [WordBoundary{
@@ -26031,8 +26031,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [13.1] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [13.1] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] COLON (MidLetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u005F\u0061\u003A\u002C\u0061'
 		expected: [WordBoundary{
@@ -26052,8 +26052,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] COLON (MidLetter) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [13.1] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COLON (MidLetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u002E\u003A\u0031'
 		expected: [WordBoundary{
@@ -26073,8 +26073,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [13.1] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] COLON (MidLetter) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] COLON (MidLetter) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u005F\u0031\u002E\u003A\u0031'
 		expected: [WordBoundary{
@@ -26094,8 +26094,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [13.1] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] COLON (MidLetter) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [13.1] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] COLON (MidLetter) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u005F\u0061\u002E\u003A\u0031'
 		expected: [WordBoundary{
@@ -26115,8 +26115,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] COLON (MidLetter) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [13.1] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] COLON (MidLetter) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u002E\u003A\u0061'
 		expected: [WordBoundary{
@@ -26136,8 +26136,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [13.1] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] COLON (MidLetter) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] COLON (MidLetter) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u005F\u0031\u002E\u003A\u0061'
 		expected: [WordBoundary{
@@ -26157,8 +26157,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [13.1] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] COLON (MidLetter) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [13.1] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] COLON (MidLetter) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u005F\u0061\u002E\u003A\u0061'
 		expected: [WordBoundary{
@@ -26178,8 +26178,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [13.1] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] COLON (MidLetter) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u002E\u002E\u0031'
 		expected: [WordBoundary{
@@ -26199,8 +26199,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [13.1] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u005F\u0031\u002E\u002E\u0031'
 		expected: [WordBoundary{
@@ -26220,8 +26220,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [13.1] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [13.1] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u005F\u0061\u002E\u002E\u0031'
 		expected: [WordBoundary{
@@ -26241,8 +26241,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [13.1] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u002E\u002E\u0061'
 		expected: [WordBoundary{
@@ -26262,8 +26262,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [13.1] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u005F\u0031\u002E\u002E\u0061'
 		expected: [WordBoundary{
@@ -26283,8 +26283,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [13.1] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [13.1] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u005F\u0061\u002E\u002E\u0061'
 		expected: [WordBoundary{
@@ -26304,8 +26304,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] COMMA (MidNum) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [13.1] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u002E\u002C\u0031'
 		expected: [WordBoundary{
@@ -26325,8 +26325,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [13.1] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] COMMA (MidNum) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] COMMA (MidNum) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u005F\u0031\u002E\u002C\u0031'
 		expected: [WordBoundary{
@@ -26346,8 +26346,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [13.1] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] COMMA (MidNum) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [13.1] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] COMMA (MidNum) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u005F\u0061\u002E\u002C\u0031'
 		expected: [WordBoundary{
@@ -26367,8 +26367,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] COMMA (MidNum) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [13.1] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] COMMA (MidNum) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u002E\u002C\u0061'
 		expected: [WordBoundary{
@@ -26388,8 +26388,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [13.1] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] COMMA (MidNum) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] COMMA (MidNum) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u005F\u0031\u002E\u002C\u0061'
 		expected: [WordBoundary{
@@ -26409,8 +26409,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [13.1] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] COMMA (MidNum) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [13.1] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] COMMA (MidNum) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u005F\u0061\u002E\u002C\u0061'
 		expected: [WordBoundary{
@@ -26430,8 +26430,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] COLON (MidLetter) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [13.1] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] COMMA (MidNum) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u002C\u003A\u0031'
 		expected: [WordBoundary{
@@ -26451,8 +26451,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [13.1] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [999.0] COLON (MidLetter) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] COLON (MidLetter) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u005F\u0031\u002C\u003A\u0031'
 		expected: [WordBoundary{
@@ -26472,8 +26472,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [13.1] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] COLON (MidLetter) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [13.1] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [999.0] COLON (MidLetter) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u005F\u0061\u002C\u003A\u0031'
 		expected: [WordBoundary{
@@ -26493,8 +26493,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] COLON (MidLetter) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [13.1] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] COLON (MidLetter) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u002C\u003A\u0061'
 		expected: [WordBoundary{
@@ -26514,8 +26514,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [13.1] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [999.0] COLON (MidLetter) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] COLON (MidLetter) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u005F\u0031\u002C\u003A\u0061'
 		expected: [WordBoundary{
@@ -26535,8 +26535,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [13.1] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] COLON (MidLetter) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [13.1] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [999.0] COLON (MidLetter) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u005F\u0061\u002C\u003A\u0061'
 		expected: [WordBoundary{
@@ -26556,8 +26556,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [13.1] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] COLON (MidLetter) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u002C\u002E\u0031'
 		expected: [WordBoundary{
@@ -26577,8 +26577,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [13.1] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u005F\u0031\u002C\u002E\u0031'
 		expected: [WordBoundary{
@@ -26598,8 +26598,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [13.1] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [13.1] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u005F\u0061\u002C\u002E\u0031'
 		expected: [WordBoundary{
@@ -26619,8 +26619,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [13.1] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u002C\u002E\u0061'
 		expected: [WordBoundary{
@@ -26640,8 +26640,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [13.1] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u005F\u0031\u002C\u002E\u0061'
 		expected: [WordBoundary{
@@ -26661,8 +26661,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [13.1] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [13.1] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u005F\u0061\u002C\u002E\u0061'
 		expected: [WordBoundary{
@@ -26682,8 +26682,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] COMMA (MidNum) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [13.1] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] FULL STOP (MidNumLet) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u002C\u002C\u0031'
 		expected: [WordBoundary{
@@ -26703,8 +26703,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [13.1] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [999.0] COMMA (MidNum) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] COMMA (MidNum) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u005F\u0031\u002C\u002C\u0031'
 		expected: [WordBoundary{
@@ -26724,8 +26724,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [13.1] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] COMMA (MidNum) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [13.1] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [999.0] COMMA (MidNum) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u005F\u0061\u002C\u002C\u0031'
 		expected: [WordBoundary{
@@ -26745,8 +26745,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] COMMA (MidNum) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [13.1] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] COMMA (MidNum) ÷ [999.0] DIGIT ONE (Numeric) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u002C\u002C\u0061'
 		expected: [WordBoundary{
@@ -26766,8 +26766,8 @@ const word_break_test_cases = [
 			offset_start: 3
 			offset_end: 4
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [13.1] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [999.0] COMMA (MidNum) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] COMMA (MidNum) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u005F\u0031\u002C\u002C\u0061'
 		expected: [WordBoundary{
@@ -26787,8 +26787,8 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
-	}
-	// ÷ [0.2] LATIN SMALL LETTER A (ALetter) × [13.1] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] COMMA (MidNum) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [13.1] LOW LINE (ExtendNumLet) × [13.2] DIGIT ONE (Numeric) ÷ [999.0] COMMA (MidNum) ÷ [999.0] COMMA (MidNum) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]'
+	},
 	TestCase{
 		input: '\u0061\u005F\u0061\u002C\u002C\u0061'
 		expected: [WordBoundary{
@@ -26808,5 +26808,6 @@ const word_break_test_cases = [
 			offset_start: 5
 			offset_end: 6
 		}]
+		desc: '÷ [0.2] LATIN SMALL LETTER A (ALetter) × [13.1] LOW LINE (ExtendNumLet) × [13.2] LATIN SMALL LETTER A (ALetter) ÷ [999.0] COMMA (MidNum) ÷ [999.0] COMMA (MidNum) ÷ [999.0] LATIN SMALL LETTER A (ALetter) ÷ [0.3]'
 	},
 ]

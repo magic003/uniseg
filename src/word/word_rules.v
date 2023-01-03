@@ -32,7 +32,7 @@ fn check_boundary(state State, mut rune_iter util.RuneIter) (State, bool, []rune
 	r, _, _ := rune_iter.next() or { return State.st_eot, true, []rune{} }
 	wp := get_word_property(r)
 	// special logic for ZWJ character because it is used in both WB3c and WB4.
-	if wp == WordProp.wp_zwj {
+	if wp == WordProp.wp_zwj && state !in [State.st_zwj, State.st_extend_format] {
 		// WB4: ZWJ should not be ignored after sot, CR, LF and Newline.
 		if state in [State.st_cr, State.st_newline_lf] {
 			return State.st_zwj, true, [r]
@@ -51,17 +51,27 @@ fn check_boundary(state State, mut rune_iter util.RuneIter) (State, bool, []rune
 		} else {
 			// WB4: ignore ZWJ and return the previous state.
 			rune_iter.rewind(1) or { panic(error) }
+
+			if state == State.st_wsegspace {
+				return State.st_any, false, [r]
+			}
 			return state, false, [r]
 		}
 	}
 
 	// special logic for format and extend characters, so it doesn't repeat in each state below.
-	if wp == WordProp.wp_format || wp == WordProp.wp_extend {
+	if (wp == WordProp.wp_format || wp == WordProp.wp_extend)
+		&& state !in [State.st_zwj, State.st_extend_format] {
 		// WB4: Format and Extend should not be ignored after sot, CR, LF and Newline.
 		if state in [State.st_cr, State.st_newline_lf] {
 			return State.st_extend_format, true, [r]
 		} else if state == State.st_sot {
 			return State.st_extend_format, false, [r]
+		}
+
+		// for test case: ÷ [0.2] SPACE (WSegSpace) × [4.0] COMBINING DIAERESIS (Extend_FE) ÷ [999.0] SPACE (WSegSpace) ÷ [0.3]
+		if state == State.st_wsegspace {
+			return State.st_any, false, [r]
 		}
 
 		// WB4: ignore Format and Extend, and return the previous state.
@@ -123,13 +133,26 @@ fn check_boundary(state State, mut rune_iter util.RuneIter) (State, bool, []rune
 			}
 			// WB6, WB7
 			if wp in [WordProp.wp_midletter, WordProp.wp_midnumlet, WordProp.wp_single_quote] {
-				next_rune, _, _ := rune_iter.next() or { return next_state, true, [r] }
-				next_prop := get_word_property(next_rune)
-				if next_prop == WordProp.wp_aletter || next_prop == WordProp.wp_hebrew_letter {
-					return transition_state(next_state, next_prop), false, [r, next_rune]
+				mut look_ahead_runes := []rune{}
+				for {
+					next_rune, _, _ := rune_iter.next() or {
+						rune_iter.rewind(look_ahead_runes.len) or { panic(error) }
+						return next_state, true, [r]
+					}
+					next_prop := get_word_property(next_rune)
+					look_ahead_runes << next_rune
+					// WB4
+					if next_prop in [WordProp.wp_format, WordProp.wp_extend, WordProp.wp_zwj] {
+						continue
+					}
+					if next_prop == WordProp.wp_aletter || next_prop == WordProp.wp_hebrew_letter {
+						look_ahead_runes.prepend(r)
+						return transition_state(next_state, next_prop), false, look_ahead_runes
+					}
+					break
 				}
 
-				rune_iter.rewind(1) or { panic(error) }
+				rune_iter.rewind(look_ahead_runes.len) or { panic(error) }
 			}
 			return next_state, true, [r]
 		}
@@ -147,14 +170,27 @@ fn check_boundary(state State, mut rune_iter util.RuneIter) (State, bool, []rune
 				return next_state, false, [r]
 			}
 			// WB6, WB7
-			if wp in [WordProp.wp_midletter, WordProp.wp_midnumlet, WordProp.wp_single_quote] {
-				next_rune, _, _ := rune_iter.next() or { return next_state, true, [r] }
-				next_prop := get_word_property(next_rune)
-				if next_prop == WordProp.wp_aletter || next_prop == WordProp.wp_hebrew_letter {
-					return transition_state(next_state, next_prop), false, [r, next_rune]
+			if wp in [WordProp.wp_midletter, WordProp.wp_midnumlet] {
+				mut look_ahead_runes := []rune{}
+				for {
+					next_rune, _, _ := rune_iter.next() or {
+						rune_iter.rewind(look_ahead_runes.len) or { panic(error) }
+						return next_state, true, [r]
+					}
+					next_prop := get_word_property(next_rune)
+					look_ahead_runes << next_rune
+					// WB4
+					if next_prop in [WordProp.wp_format, WordProp.wp_extend, WordProp.wp_zwj] {
+						continue
+					}
+					if next_prop == WordProp.wp_aletter || next_prop == WordProp.wp_hebrew_letter {
+						look_ahead_runes.prepend(r)
+						return transition_state(next_state, next_prop), false, look_ahead_runes
+					}
+					break
 				}
 
-				rune_iter.rewind(1) or { panic(error) }
+				rune_iter.rewind(look_ahead_runes.len) or { panic(error) }
 			}
 			// WB7a
 			if wp == WordProp.wp_single_quote {
@@ -162,13 +198,26 @@ fn check_boundary(state State, mut rune_iter util.RuneIter) (State, bool, []rune
 			}
 			// WB7b, WB7c
 			if wp == WordProp.wp_double_quote {
-				next_rune, _, _ := rune_iter.next() or { return next_state, true, [r] }
-				next_prop := get_word_property(next_rune)
-				if next_prop == WordProp.wp_hebrew_letter {
-					return transition_state(next_state, next_prop), false, [r, next_rune]
+				mut look_ahead_runes := []rune{}
+				for {
+					next_rune, _, _ := rune_iter.next() or {
+						rune_iter.rewind(look_ahead_runes.len) or { panic(error) }
+						return next_state, true, [r]
+					}
+					next_prop := get_word_property(next_rune)
+					look_ahead_runes << next_rune
+					// WB4
+					if next_prop in [WordProp.wp_format, WordProp.wp_extend, WordProp.wp_zwj] {
+						continue
+					}
+					if next_prop == WordProp.wp_hebrew_letter {
+						look_ahead_runes.prepend(r)
+						return transition_state(next_state, next_prop), false, look_ahead_runes
+					}
+					break
 				}
 
-				rune_iter.rewind(1) or { panic(error) }
+				rune_iter.rewind(look_ahead_runes.len) or { panic(error) }
 			}
 			return next_state, true, [r]
 		}
@@ -183,13 +232,26 @@ fn check_boundary(state State, mut rune_iter util.RuneIter) (State, bool, []rune
 			}
 			// WB11, WB12
 			if wp in [WordProp.wp_midnum, WordProp.wp_midnumlet, WordProp.wp_single_quote] {
-				next_rune, _, _ := rune_iter.next() or { return next_state, true, [r] }
-				next_prop := get_word_property(next_rune)
-				if next_prop == WordProp.wp_numeric {
-					return transition_state(next_state, next_prop), false, [r, next_rune]
+				mut look_ahead_runes := []rune{}
+				for {
+					next_rune, _, _ := rune_iter.next() or {
+						rune_iter.rewind(look_ahead_runes.len) or { panic(error) }
+						return next_state, true, [r]
+					}
+					next_prop := get_word_property(next_rune)
+					look_ahead_runes << next_rune
+					// WB4
+					if next_prop in [WordProp.wp_format, WordProp.wp_extend, WordProp.wp_zwj] {
+						continue
+					}
+					if next_prop == WordProp.wp_numeric {
+						look_ahead_runes.prepend(r)
+						return transition_state(next_state, next_prop), false, look_ahead_runes
+					}
+					break
 				}
 
-				rune_iter.rewind(1) or { panic(error) }
+				rune_iter.rewind(look_ahead_runes.len) or { panic(error) }
 			}
 
 			// WB13a

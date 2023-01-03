@@ -59,15 +59,14 @@ pub fn (mut self Words) next() ?WordBoundary {
 
 	for {
 		next_state, is_boundary, runes := check_boundary(self.state, mut self.iter)
-		defer {
-			self.state = next_state
-		}
 		if next_state == State.st_eot {
+			self.state = State.st_eot
 			if self.state == State.st_sot {
 				return none
 			}
 			return WordBoundary{self.offset_start, self.offset_end, self.builder.str()}
 		}
+		self.state = next_state
 		total_bytes_count := arrays.sum(runes.map(fn (r rune) int {
 			return r.bytes().len
 		})) or { 0 }
