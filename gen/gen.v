@@ -6,6 +6,7 @@ module main
 //   - grapheme: grapheme properties
 //   - grapheme_breaktest: grapheme break test cases
 //   - word: word properties
+//   - word_breaktest: word break test cases
 import gen.grapheme
 import gen.word
 import os
@@ -26,6 +27,9 @@ fn main() {
 		}
 		'word' {
 			word.gen_word_properties()
+		}
+		'word_breaktest' {
+			word.gen_word_breaktest()
 		}
 		else {
 			println('Unrecognized argument: ${file_type}')

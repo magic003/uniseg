@@ -10,6 +10,8 @@ gen-word:
 	v gen/.
 	./gen/gen word 
 	v fmt -w src/word/word_properties.v
+	./gen/gen word_breaktest
+	v fmt -w src/word/word_breaktest.v
 	rm ./gen/gen
 
 test:
