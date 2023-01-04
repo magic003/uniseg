@@ -12,7 +12,7 @@ v install magic003.unicode_segmentation
 ```
 
 ## Examples
-Check the `examples` folder.
+Check out the `examples` folder.
 
 ## Documentation
 Refer to http://magic003.github.io/unicode_segmentation for the documentation.
