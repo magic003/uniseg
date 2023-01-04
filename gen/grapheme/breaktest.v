@@ -28,7 +28,7 @@ pub fn gen_grapheme_breaktest() {
 
 // write_grapheme_breaktest writes the test cases to a grapheme break test vlang file.
 fn write_grapheme_breaktest(tests [][]string) ! {
-	vfile_path := 'src/grapheme/grapheme_breaktest.v'
+	vfile_path := 'grapheme/grapheme_breaktest.v'
 	println('Saving to file ${vfile_path}...')
 	mut file := os.create(vfile_path)!
 	defer {

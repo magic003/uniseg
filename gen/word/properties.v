@@ -29,7 +29,7 @@ pub fn gen_word_properties() {
 
 // write_word_properties writes the properties to a word properties vlang file.
 fn write_word_properties(properties []common.Property) ! {
-	vfile_path := 'src/word/word_properties.v'
+	vfile_path := 'word/word_properties.v'
 	println('Saving to file ${vfile_path}...')
 	mut file := os.create(vfile_path)!
 	defer {

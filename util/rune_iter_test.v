@@ -181,7 +181,7 @@ fn test_rune_iter_from_bytes_rewindable() {
 }
 
 fn test_rune_iter_from_reader() {
-	mut f := os.open('src/util/rune_iter_test_file.txt') or {
+	mut f := os.open('util/rune_iter_test_file.txt') or {
 		panic('cannot open text file for testing')
 	}
 	defer {
@@ -236,7 +236,7 @@ fn test_rune_iter_from_reader() {
 }
 
 fn test_rune_iter_from_reader_rewindable() {
-	mut f := os.open('src/util/rune_iter_test_file.txt') or {
+	mut f := os.open('util/rune_iter_test_file.txt') or {
 		panic('cannot open text file for testing')
 	}
 	defer {

@@ -28,7 +28,7 @@ pub fn gen_word_breaktest() {
 
 // write_word_breaktest writes the test cases to a word boundary break test vlang file.
 fn write_word_breaktest(tests [][]string) ! {
-	vfile_path := 'src/word/word_breaktest.v'
+	vfile_path := 'word/word_breaktest.v'
 	println('Saving to file ${vfile_path}...')
 	mut file := os.create(vfile_path)!
 	defer {

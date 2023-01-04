@@ -29,7 +29,7 @@ pub fn gen_grapheme_properties() {
 
 // write_grapheme_properties writes the properties to a grapheme properties vlang file.
 fn write_grapheme_properties(properties []common.Property) ! {
-	vfile_path := 'src/grapheme/grapheme_properties.v'
+	vfile_path := 'grapheme/grapheme_properties.v'
 	println('Saving to file ${vfile_path}...')
 	mut file := os.create(vfile_path)!
 	defer {
