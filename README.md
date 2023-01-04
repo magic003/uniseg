@@ -8,14 +8,14 @@ This vlang package implements Unicode Text Segmentation according to [Unicode St
 
 ## Installation
 ```shell
-v install magic003.unicode_segmentation
+v install magic003.uniseg
 ```
 
 ## Examples
 Check out the `examples` folder.
 
 ## Documentation
-Refer to http://magic003.github.io/unicode_segmentation for the documentation.
+Refer to http://magic003.github.io/uniseg for the documentation.
 
 ## References
 - [Unicode Standard Annex #29](http://www.unicode.org/reports/tr29/).

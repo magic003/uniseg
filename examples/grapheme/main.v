@@ -1,6 +1,6 @@
 module main
 
-import magic003.unicode_segmentation.grapheme
+import magic003.uniseg.grapheme
 
 fn main() {
 	mut graphemes := grapheme.from_string('🇩🇪🏳️‍🌈!')

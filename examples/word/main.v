@@ -1,6 +1,6 @@
 module main
 
-import magic003.unicode_segmentation.word
+import magic003.uniseg.word
 
 fn main() {
 	mut words := word.from_string('Hello, world!')
