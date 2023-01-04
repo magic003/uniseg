@@ -1,4 +1,4 @@
-# Unicode Text Segmentation for V
+# Unicode Text Segmentation in V
 This vlang package implements Unicode Text Segmentation according to [Unicode Standard Annex #29](http://www.unicode.org/reports/tr29/).
 
 ## Status
