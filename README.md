@@ -1,1 +1,22 @@
-# unicode-segmentation
+# Unicode Text Segmentation for V
+This vlang package implements Unicode Text Segmentation according to [Unicode Standard Annex #29](http://www.unicode.org/reports/tr29/).
+
+## Status
+* [Grapheme cluster boundaries](http://www.unicode.org/reports/tr29/#Grapheme_Cluster_Boundaries): supported and passed official break tests.
+* [Word boundaries](http://www.unicode.org/reports/tr29/#Word_Boundaries): supported and passed official break tests.
+* [Sentence boundaries](http://www.unicode.org/reports/tr29/#Sentence_Boundaries): __not__ supported yet.
+
+## Installation
+```shell
+v install magic003.unicode_segmentation
+```
+
+## Examples
+Check the `examples` folder.
+
+## Documentation
+Refer to http://magic003.github.io/unicode_segmentation for the documentation.
+
+## References
+- [Unicode Standard Annex #29](http://www.unicode.org/reports/tr29/).
+- The design and implementation of this library is heavily influenced by [uniseg in Go](https://github.com/rivo/uniseg) and [unicode-segmentation in Rust](https://github.com/unicode-rs/unicode-segmentation).
