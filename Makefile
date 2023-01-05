@@ -14,6 +14,12 @@ gen-word:
 	v fmt -w word/word_breaktest.v
 	rm ./gen/gen
 
+gen-sentence:
+	v gen/.
+	./gen/gen sentence
+	v fmt -w sentence/sentence_properties.v
+	rm ./gen/gen
+
 test:
 	v -stats test .
 
