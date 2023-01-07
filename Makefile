@@ -18,6 +18,8 @@ gen-sentence:
 	v gen/.
 	./gen/gen sentence
 	v fmt -w sentence/sentence_properties.v
+	./gen/gen sentence_breaktest
+	v fmt -w sentence/sentence_breaktest.v
 	rm ./gen/gen
 
 test:

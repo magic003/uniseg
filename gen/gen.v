@@ -8,6 +8,7 @@ module main
 //   - word: word properties
 //   - word_breaktest: word break test cases
 //   - sentence: sentence properties
+//   - sentence_breaktest: sentence break test cases
 import gen.grapheme
 import gen.word
 import gen.sentence
@@ -35,6 +36,9 @@ fn main() {
 		}
 		'sentence' {
 			sentence.gen_sentence_properties()
+		}
+		'sentence_breaktest' {
+			sentence.gen_sentence_breaktest()
 		}
 		else {
 			println('Unrecognized argument: ${file_type}')
