@@ -59,7 +59,8 @@ fn check_boundary(state State, mut rune_iter util.RuneIter) (State, bool, []rune
 			mut runes_to_return := []rune{}
 			mut next_rune := r
 			mut next_sp := sp
-			for next_sp == SentenceProp.sp_close {
+			for next_sp == SentenceProp.sp_close || next_sp == SentenceProp.sp_format
+				|| next_sp == SentenceProp.sp_extend {
 				runes_to_return << next_rune
 				next_rune, _, _ = rune_iter.next() or {
 					return State.st_any, false, runes_to_return
@@ -67,7 +68,8 @@ fn check_boundary(state State, mut rune_iter util.RuneIter) (State, bool, []rune
 				next_sp = get_sentence_property(next_rune)
 			}
 
-			for next_sp == SentenceProp.sp_sp {
+			for next_sp == SentenceProp.sp_sp || next_sp == SentenceProp.sp_format
+				|| next_sp == SentenceProp.sp_extend {
 				runes_to_return << next_rune
 				next_rune, _, _ = rune_iter.next() or {
 					return State.st_any, false, runes_to_return
@@ -78,7 +80,7 @@ fn check_boundary(state State, mut rune_iter util.RuneIter) (State, bool, []rune
 			// SB8a
 			if next_sp in [SentenceProp.sp_scontinue, SentenceProp.sp_aterm, SentenceProp.sp_sterm] {
 				runes_to_return << next_rune
-				return transition(next_sp), false, runes_to_return
+				return transition_state(next_sp), false, runes_to_return
 			}
 			// SB8
 			mut look_ahead_runes := [next_rune]
@@ -88,7 +90,7 @@ fn check_boundary(state State, mut rune_iter util.RuneIter) (State, bool, []rune
 				next_rune, _, _ = rune_iter.next() or {
 					rune_iter.rewind(look_ahead_runes.len - 1) or { panic(error) }
 					runes_to_return << look_ahead_runes[0]
-					return transition(get_sentence_property(look_ahead_runes[0])), true, runes_to_return
+					return transition_state(get_sentence_property(look_ahead_runes[0])), true, runes_to_return
 				}
 				look_ahead_runes << next_rune
 				next_sp = get_sentence_property(next_rune)
@@ -100,18 +102,19 @@ fn check_boundary(state State, mut rune_iter util.RuneIter) (State, bool, []rune
 			// SB11
 			if next_sp in [SentenceProp.sp_lf, SentenceProp.sp_cr, SentenceProp.sp_sep] {
 				runes_to_return << look_ahead_runes
-				return transition(next_sp), false, runes_to_return
+				return transition_state(next_sp), false, runes_to_return
 			}
 
 			rune_iter.rewind(look_ahead_runes.len - 1) or { panic(error) }
 			runes_to_return << look_ahead_runes[0]
-			return transition(get_sentence_property(look_ahead_runes[0])), true, runes_to_return
+			return transition_state(get_sentence_property(look_ahead_runes[0])), true, runes_to_return
 		}
 		.st_sterm {
 			mut runes_to_return := []rune{}
 			mut next_rune := r
 			mut next_sp := sp
-			for next_sp == SentenceProp.sp_close {
+			for next_sp == SentenceProp.sp_close || next_sp == SentenceProp.sp_format
+				|| next_sp == SentenceProp.sp_extend {
 				runes_to_return << next_rune
 				next_rune, _, _ = rune_iter.next() or {
 					return State.st_any, false, runes_to_return
@@ -119,7 +122,8 @@ fn check_boundary(state State, mut rune_iter util.RuneIter) (State, bool, []rune
 				next_sp = get_sentence_property(next_rune)
 			}
 
-			for next_sp == SentenceProp.sp_sp {
+			for next_sp == SentenceProp.sp_sp || next_sp == SentenceProp.sp_format
+				|| next_sp == SentenceProp.sp_extend {
 				runes_to_return << next_rune
 				next_rune, _, _ = rune_iter.next() or {
 					return State.st_any, false, runes_to_return
@@ -130,27 +134,36 @@ fn check_boundary(state State, mut rune_iter util.RuneIter) (State, bool, []rune
 			runes_to_return << next_rune
 			// SB8a
 			if next_sp in [SentenceProp.sp_scontinue, SentenceProp.sp_aterm, SentenceProp.sp_sterm] {
-				return transition(next_sp), false, runes_to_return
+				return transition_state(next_sp), false, runes_to_return
 			}
 			// SB11
 			if next_sp in [SentenceProp.sp_lf, SentenceProp.sp_cr, SentenceProp.sp_sep] {
-				return transition(next_sp), false, runes_to_return
+				return transition_state(next_sp), false, runes_to_return
 			}
 
-			return transition(next_sp), true, runes_to_return
+			return transition_state(next_sp), true, runes_to_return
 		}
 		.st_upper, .st_lower {
 			// SB7
 			if sp == SentenceProp.sp_aterm {
-				look_ahead_rune, _, _ := rune_iter.next()
-				{
-					return State.st_aterm, false, [r]
+				mut look_ahead_runes := []rune{}
+				for {
+					look_ahead_rune, _, _ := rune_iter.next() or {
+						rune_iter.rewind(look_ahead_runes.len) or { panic(error) }
+						return State.st_aterm, false, [r]
+					}
+					look_ahead_prop := get_sentence_property(look_ahead_rune)
+					look_ahead_runes << look_ahead_rune
+					if look_ahead_prop in [SentenceProp.sp_format, SentenceProp.sp_extend] {
+						continue
+					}
+					if look_ahead_prop == SentenceProp.sp_upper {
+						look_ahead_runes.prepend(r)
+						return State.st_upper, false, look_ahead_runes
+					}
+					break
 				}
-				look_ahead_prop := get_sentence_property(look_ahead_rune)
-				if look_ahead_prop == SentenceProp.sp_upper {
-					return State.st_upper, false, [r, look_ahead_rune]
-				}
-				rune_iter.rewind(1) or { panic(error) }
+				rune_iter.rewind(look_ahead_runes.len) or { panic(error) }
 				return State.st_aterm, false, [r]
 			}
 			return next_state, false, [r]
