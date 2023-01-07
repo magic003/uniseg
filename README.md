@@ -4,7 +4,7 @@ This vlang package implements Unicode Text Segmentation according to [Unicode St
 ## Status
 * [Grapheme cluster boundaries](http://www.unicode.org/reports/tr29/#Grapheme_Cluster_Boundaries): supported and passed official break tests.
 * [Word boundaries](http://www.unicode.org/reports/tr29/#Word_Boundaries): supported and passed official break tests.
-* [Sentence boundaries](http://www.unicode.org/reports/tr29/#Sentence_Boundaries): __not__ supported yet.
+* [Sentence boundaries](http://www.unicode.org/reports/tr29/#Sentence_Boundaries): supported and passed official break tests.
 
 ## Installation
 ```shell
