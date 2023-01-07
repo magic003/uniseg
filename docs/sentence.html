@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="x-ua-compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>word | vdoc</title>
+  <title>sentence | vdoc</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -46,45 +46,45 @@
       <nav class="search hidden"></nav>
       <nav class="content hidden">
         <ul>
-          <li class="open"><div class="menu-row"><a href="./index.html">README</a></div></li><li class="open"><div class="menu-row"><svg xmlns="http://www.w3.org/2000/svg" class="dropdown-arrow" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7 10l5 5 5-5z"/></svg><a href="#">gen</a></div><ul><li><a href="./gen.common.html">common</a></li><li><a href="./gen.grapheme.html">grapheme</a></li><li><a href="./gen.sentence.html">sentence</a></li><li><a href="./gen.word.html">word</a></li></ul></li><li class="open"><div class="menu-row"><a href="./grapheme.html">grapheme</a></div></li><li class="open"><div class="menu-row"><a href="./sentence.html">sentence</a></div></li><li class="open"><div class="menu-row"><a href="./util.html">util</a></div></li><li class="open active"><div class="menu-row"><a href="./word.html">word</a></div></li>
+          <li class="open"><div class="menu-row"><a href="./index.html">README</a></div></li><li class="open"><div class="menu-row"><svg xmlns="http://www.w3.org/2000/svg" class="dropdown-arrow" height="24" viewBox="0 0 24 24" width="24"><path d="M0 0h24v24H0z" fill="none"/><path d="M7 10l5 5 5-5z"/></svg><a href="#">gen</a></div><ul><li><a href="./gen.common.html">common</a></li><li><a href="./gen.grapheme.html">grapheme</a></li><li><a href="./gen.sentence.html">sentence</a></li><li><a href="./gen.word.html">word</a></li></ul></li><li class="open"><div class="menu-row"><a href="./grapheme.html">grapheme</a></div></li><li class="open active"><div class="menu-row"><a href="./sentence.html">sentence</a></div></li><li class="open"><div class="menu-row"><a href="./util.html">util</a></div></li><li class="open"><div class="menu-row"><a href="./word.html">word</a></div></li>
         </ul>
       </nav>
     </header>
     <div class="doc-scrollview" id="main-content">
       <div class="doc-container">
         <div class="doc-content">
-          						<section id="readme_word" class="doc-node">
-							<div class="title"><h1> word <a href="#readme_word">#</a></h1></div>
+          						<section id="readme_sentence" class="doc-node">
+							<div class="title"><h1> sentence <a href="#readme_sentence">#</a></h1></div>
 
 </section>
 
 						<section id="from_bytes" class="doc-node">
-							<div class="title"><h2>fn from_bytes <a href="#from_bytes">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token function">from_bytes</span><span class="token punctuation">(</span>bytes <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">u8</span><span class="token punctuation">)</span> Words</code></pre>
-<p>from_bytes creates a <code>Words</code> instance from a bytes array.</p>
+							<div class="title"><h2>fn from_bytes <a href="#from_bytes">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token function">from_bytes</span><span class="token punctuation">(</span>bytes <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">u8</span><span class="token punctuation">)</span> Sentences</code></pre>
+<p>from_bytes creates a <code>Sentences</code> instance from a bytes array.</p>
 
 </section>
 						<section id="from_reader" class="doc-node">
-							<div class="title"><h2>fn from_reader <a href="#from_reader">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token function">from_reader</span><span class="token punctuation">(</span>reader io<span class="token punctuation">.</span>Reader<span class="token punctuation">)</span> Words</code></pre>
-<p>from_reader creates a <code>Words</code> instance from a <code>io.Reader</code>.</p>
+							<div class="title"><h2>fn from_reader <a href="#from_reader">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token function">from_reader</span><span class="token punctuation">(</span>reader io<span class="token punctuation">.</span>Reader<span class="token punctuation">)</span> Sentences</code></pre>
+<p>from_reader creates a <code>Sentences</code> instance from a <code>io.Reader</code>.</p>
 
 </section>
 						<section id="from_string" class="doc-node">
-							<div class="title"><h2>fn from_string <a href="#from_string">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token function">from_string</span><span class="token punctuation">(</span>str <span class="token builtin">string</span><span class="token punctuation">)</span> Words</code></pre>
-<p>from_string creates a <code>Words</code> instance from a string.</p>
+							<div class="title"><h2>fn from_string <a href="#from_string">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token function">from_string</span><span class="token punctuation">(</span>str <span class="token builtin">string</span><span class="token punctuation">)</span> Sentences</code></pre>
+<p>from_string creates a <code>Sentences</code> instance from a string.</p>
 
 </section>
-						<section id="WordBoundary" class="doc-node">
-							<div class="title"><h2>struct WordBoundary <a href="#WordBoundary">#</a></h2></div><pre class="signature"><code><span class="token keyword">struct</span> <span class="token symbol">WordBoundary</span> <span class="token punctuation">{</span>
+						<section id="SentenceBoundary" class="doc-node">
+							<div class="title"><h2>struct SentenceBoundary <a href="#SentenceBoundary">#</a></h2></div><pre class="signature"><code><span class="token keyword">struct</span> <span class="token symbol">SentenceBoundary</span> <span class="token punctuation">{</span>
 <span class="token keyword">pub</span><span class="token punctuation">:</span>
-	offset_start <span class="token builtin">int</span>    <span class="token punctuation">[</span>required<span class="token punctuation">]</span> <span class="token comment">// offset of the first byte in word</span>
-	offset_end   <span class="token builtin">int</span>    <span class="token punctuation">[</span>required<span class="token punctuation">]</span> <span class="token comment">// offset of the first byte doesn't belong to the word</span>
-	word         <span class="token builtin">string</span> <span class="token punctuation">[</span>required<span class="token punctuation">]</span>
+	offset_start <span class="token builtin">int</span>    <span class="token punctuation">[</span>required<span class="token punctuation">]</span> <span class="token comment">// offset of the first byte in sentence</span>
+	offset_end   <span class="token builtin">int</span>    <span class="token punctuation">[</span>required<span class="token punctuation">]</span> <span class="token comment">// offset of the first byte doesn't belong to the sentence</span>
+	sentence     <span class="token builtin">string</span> <span class="token punctuation">[</span>required<span class="token punctuation">]</span>
 <span class="token punctuation">}</span></code></pre>
-<p>WordBoundary represents a word boundary.</p>
+<p>SentenceBoundary represents a sentence boundary.</p>
 
 </section>
-						<section id="Words" class="doc-node">
-							<div class="title"><h2>struct Words <a href="#Words">#</a></h2></div><pre class="signature"><code><span class="token keyword">struct</span> <span class="token symbol">Words</span> <span class="token punctuation">{</span>
+						<section id="Sentences" class="doc-node">
+							<div class="title"><h2>struct Sentences <a href="#Sentences">#</a></h2></div><pre class="signature"><code><span class="token keyword">struct</span> <span class="token symbol">Sentences</span> <span class="token punctuation">{</span>
 <span class="token keyword">mut</span><span class="token punctuation">:</span>
 	iter         util<span class="token punctuation">.</span>RuneIter   <span class="token punctuation">[</span>required<span class="token punctuation">]</span>
 	state        State           <span class="token punctuation">[</span>required<span class="token punctuation">]</span>
@@ -92,14 +92,14 @@
 	offset_start <span class="token builtin">int</span> <span class="token comment">// offset of the first byte of the builder</span>
 	offset_end   <span class="token builtin">int</span> <span class="token comment">// offset which doesn't include the last byte of the builder</span>
 <span class="token punctuation">}</span></code></pre>
-<p>Word breaks a string into Unicode words. It implements the iteration interface.</p>
+<p>Sentences breaks a string into Unicode sentences. It implements the iteration interface.</p>
 <p>The instance can be constructed using <code>from_string()</code>, <code>from_bytes()</code> or <code>from_reader()</code>. The <code>next()</code> method
-can be called to get the next word boundary.</p>
+can be called to get the next sentence boundary.</p>
 
 </section>
-						<section id="Words.next" class="doc-node">
-							<div class="title"><h2>fn (Words) next <a href="#Words.next">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span><span class="token keyword">mut</span> self Words<span class="token punctuation">)</span> <span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">?</span>WordBoundary</code></pre>
-<p>next implements the iteration interface, returning the next word boundary.</p>
+						<section id="Sentences.next" class="doc-node">
+							<div class="title"><h2>fn (Sentences) next <a href="#Sentences.next">#</a></h2></div><pre class="signature"><code><span class="token keyword">fn</span> <span class="token punctuation">(</span><span class="token keyword">mut</span> self Sentences<span class="token punctuation">)</span> <span class="token function">next</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">?</span>SentenceBoundary</code></pre>
+<p>next implements the iteration interface, returning the next sentence boundary.</p>
 
 </section>
 
@@ -116,11 +116,11 @@ can be called to get the next word boundary.</p>
 <li class="open"><a href="#from_string">fn from_string</a>        <ul>
 </ul>
 </li>
-<li class="open"><a href="#WordBoundary">struct WordBoundary</a>        <ul>
+<li class="open"><a href="#SentenceBoundary">struct SentenceBoundary</a>        <ul>
 </ul>
 </li>
-<li class="open"><a href="#Words">struct Words</a>        <ul>
-<li><a href="#Words.next">fn next</a></li>
+<li class="open"><a href="#Sentences">struct Sentences</a>        <ul>
+<li><a href="#Sentences.next">fn next</a></li>
 </ul>
 </li>
 </ul></div>
