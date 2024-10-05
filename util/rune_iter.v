@@ -43,9 +43,9 @@ pub fn rune_iter_from_reader(reader io.Reader, rewindable bool) RuneIter {
 }
 
 // BytesRuneIter is a `RuneIter` backed by an array of bytes.
-[noinit]
+@[noinit]
 struct BytesRuneIter {
-	bytes      []u8 [required]
+	bytes      []u8 @[required]
 	rewindable bool
 mut:
 	current_index int
@@ -64,7 +64,7 @@ fn (mut self BytesRuneIter) next() ?(rune, int, int) {
 	for i in start .. end {
 		ch_bytes << self.bytes[i]
 	}
-	r := ch_bytes.byterune()?
+	r := ch_bytes.byterune() or { return none }
 	self.current_index = end
 
 	if self.rewindable {
@@ -93,11 +93,11 @@ fn (mut self BytesRuneIter) rewind(count int) ! {
 }
 
 // ReaderRuneIter is a `RuneIter` backed by a `io.Reader`.
-[noinit]
+@[noinit]
 struct ReaderRuneIter {
 	rewindable bool
 mut:
-	reader        io.Reader [required]
+	reader        io.Reader @[required]
 	current_index int
 	cached_runes  []rune
 	cached_index  int
@@ -125,7 +125,7 @@ fn (mut self ReaderRuneIter) next() ?(rune, int, int) {
 		self.reader.read(mut buf) or { return none }
 		ch_bytes << buf[0]
 	}
-	r := ch_bytes.byterune()?
+	r := ch_bytes.byterune() or { return none }
 	self.current_index = end
 
 	if self.rewindable {

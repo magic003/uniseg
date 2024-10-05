@@ -31,9 +31,9 @@ pub fn from_reader(reader io.Reader) Graphemes {
 // GraphemeCluster represents a grapheme cluster.
 pub struct GraphemeCluster {
 pub:
-	offset_start int    [required] // offset of the first byte in cluster
-	offset_end   int    [required] // offset of the first byte doesn't belong to the cluster
-	cluster      string [required]
+	offset_start int    @[required] // offset of the first byte in cluster
+	offset_end   int    @[required] // offset of the first byte doesn't belong to the cluster
+	cluster      string @[required]
 }
 
 // Graphemes breaks a string into Unicode grapheme clusters, or user-perceived characters. It implements the
@@ -41,11 +41,11 @@ pub:
 //
 // The instance can be constructed using `from_string()`, `from_bytes()` or `from_reader()`. The `next()` method
 // can be called to get the next grapheme cluster.
-[noinit]
+@[noinit]
 pub struct Graphemes {
 mut:
-	iter         util.RuneIter   [required]
-	state        State           [required]
+	iter         util.RuneIter   @[required]
+	state        State           @[required]
 	builder      strings.Builder = strings.new_builder(1) // keep the rune seen so far
 	offset_start int // offset of the first byte of the builder
 	offset_end   int // offset which doesn't include the last byte of the builder

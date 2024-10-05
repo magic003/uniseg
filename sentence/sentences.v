@@ -32,20 +32,20 @@ pub fn from_reader(reader io.Reader) Sentences {
 // SentenceBoundary represents a sentence boundary.
 pub struct SentenceBoundary {
 pub:
-	offset_start int    [required] // offset of the first byte in sentence
-	offset_end   int    [required] // offset of the first byte doesn't belong to the sentence
-	sentence     string [required]
+	offset_start int    @[required] // offset of the first byte in sentence
+	offset_end   int    @[required] // offset of the first byte doesn't belong to the sentence
+	sentence     string @[required]
 }
 
 // Sentences breaks a string into Unicode sentences. It implements the iteration interface.
 //
 // The instance can be constructed using `from_string()`, `from_bytes()` or `from_reader()`. The `next()` method
 // can be called to get the next sentence boundary.
-[noinit]
+@[noinit]
 pub struct Sentences {
 mut:
-	iter         util.RuneIter   [required]
-	state        State           [required]
+	iter         util.RuneIter   @[required]
+	state        State           @[required]
 	builder      strings.Builder = strings.new_builder(1) // keep the runes seen so far
 	offset_start int // offset of the first byte of the builder
 	offset_end   int // offset which doesn't include the last byte of the builder

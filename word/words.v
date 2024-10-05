@@ -32,20 +32,20 @@ pub fn from_reader(reader io.Reader) Words {
 // WordBoundary represents a word boundary.
 pub struct WordBoundary {
 pub:
-	offset_start int    [required] // offset of the first byte in word
-	offset_end   int    [required] // offset of the first byte doesn't belong to the word
-	word         string [required]
+	offset_start int    @[required] // offset of the first byte in word
+	offset_end   int    @[required] // offset of the first byte doesn't belong to the word
+	word         string @[required]
 }
 
 // Word breaks a string into Unicode words. It implements the iteration interface.
 //
 // The instance can be constructed using `from_string()`, `from_bytes()` or `from_reader()`. The `next()` method
 // can be called to get the next word boundary.
-[noinit]
+@[noinit]
 pub struct Words {
 mut:
-	iter         util.RuneIter   [required]
-	state        State           [required]
+	iter         util.RuneIter   @[required]
+	state        State           @[required]
 	builder      strings.Builder = strings.new_builder(1) // keep the runes seen so far
 	offset_start int // offset of the first byte of the builder
 	offset_end   int // offset which doesn't include the last byte of the builder
