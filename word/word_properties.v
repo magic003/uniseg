@@ -654,8 +654,8 @@ const word_properties = [
 	WordCodePoint{0x212A, 0x212D, WordProp.wp_aletter}, // L&   [4] KELVIN SIGN..BLACK-LETTER CAPITAL C
 	WordCodePoint{0x212F, 0x2134, WordProp.wp_aletter}, // L&   [6] SCRIPT SMALL E..SCRIPT SMALL O
 	WordCodePoint{0x2135, 0x2138, WordProp.wp_aletter}, // Lo   [4] ALEF SYMBOL..DALET SYMBOL
-	WordCodePoint{0x2139, 0x2139, WordProp.wp_extended_pictographic}, // E0.6   [1] (ℹ️)       information
 	WordCodePoint{0x2139, 0x2139, WordProp.wp_aletter}, // L&       INFORMATION SOURCE
+	WordCodePoint{0x2139, 0x2139, WordProp.wp_extended_pictographic}, // E0.6   [1] (ℹ️)       information
 	WordCodePoint{0x213C, 0x213F, WordProp.wp_aletter}, // L&   [4] DOUBLE-STRUCK SMALL PI..DOUBLE-STRUCK CAPITAL PI
 	WordCodePoint{0x2145, 0x2149, WordProp.wp_aletter}, // L&   [5] DOUBLE-STRUCK ITALIC CAPITAL D..DOUBLE-STRUCK ITALIC SMALL J
 	WordCodePoint{0x214E, 0x214E, WordProp.wp_aletter}, // L&       TURNED SMALL F

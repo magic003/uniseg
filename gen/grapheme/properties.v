@@ -3,20 +3,18 @@ module grapheme
 import common
 import os
 
-const (
-	grapheme_property_url = 'https://www.unicode.org/Public/${common.unicode_version}/ucd/auxiliary/GraphemeBreakProperty.txt'
-	emoji_property_url    = 'https://unicode.org/Public/${common.unicode_version}/ucd/emoji/emoji-data.txt'
-)
+const grapheme_property_url = 'https://www.unicode.org/Public/${common.unicode_version}/ucd/auxiliary/GraphemeBreakProperty.txt'
+const emoji_property_url = 'https://unicode.org/Public/${common.unicode_version}/ucd/emoji/emoji-data.txt'
 
 // gen_grapheme_properties fetches properties and generates a vlang file used by grapheme cluster boundary rules.
 pub fn gen_grapheme_properties() {
 	mut properties := []common.Property{}
 
-	properties << common.parse_properties(grapheme.grapheme_property_url, fn (line string) bool {
+	properties << common.parse_properties(grapheme_property_url, fn (line string) bool {
 		return true
 	})
 
-	properties << common.parse_properties(grapheme.emoji_property_url, fn (line string) bool {
+	properties << common.parse_properties(emoji_property_url, fn (line string) bool {
 		return line.contains('Extended_Pictographic')
 	})
 
@@ -45,7 +43,7 @@ fn write_grapheme_properties(properties []common.Property) ! {
 	file.writeln('// GraphemeCodePoint defines the code point range for a property.')!
 	file.writeln(common.emit_code_points_struct('GraphemeCodePoint', 'GraphemeProp') + '\n')!
 	file.writeln('// grapheme_properties are the properties used for grapheme cluster boundary detection.')!
-	file.writeln('// They are taken from ${grapheme.grapheme_property_url}\n// and\n// ${grapheme.emoji_property_url}\n// ("Extended_Pictographic" only).')!
+	file.writeln('// They are taken from ${grapheme_property_url}\n// and\n// ${emoji_property_url}\n// ("Extended_Pictographic" only).')!
 	file.writeln(
 		common.emit_property_array('grapheme_properties', properties, 'GraphemeCodePoint', 'GraphemeProp', 'gp') +
 		'\n')!

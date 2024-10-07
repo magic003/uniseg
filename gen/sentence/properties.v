@@ -3,15 +3,13 @@ module sentence
 import common
 import os
 
-const (
-	sentence_property_url = 'https://www.unicode.org/Public/${common.unicode_version}/ucd/auxiliary/SentenceBreakProperty.txt'
-)
+const sentence_property_url = 'https://www.unicode.org/Public/${common.unicode_version}/ucd/auxiliary/SentenceBreakProperty.txt'
 
 // gen_sentence_properties fetches properties and generates a vlang file used by sentence boundary rules.
 pub fn gen_sentence_properties() {
 	mut properties := []common.Property{}
 
-	properties << common.parse_properties(sentence.sentence_property_url, fn (line string) bool {
+	properties << common.parse_properties(sentence_property_url, fn (line string) bool {
 		return true
 	})
 
@@ -40,7 +38,7 @@ fn write_sentence_properties(properties []common.Property) ! {
 	file.writeln('// SentenceCodePoint defines the code point range for a property.')!
 	file.writeln(common.emit_code_points_struct('SentenceCodePoint', 'SentenceProp') + '\n')!
 	file.writeln('// sentence_properties are the properties used for sentence boundary detection.')!
-	file.writeln('// They are taken from ${sentence.sentence_property_url}.\n')!
+	file.writeln('// They are taken from ${sentence_property_url}.\n')!
 	file.writeln(
 		common.emit_property_array('sentence_properties', properties, 'SentenceCodePoint', 'SentenceProp', 'sp') +
 		'\n')!

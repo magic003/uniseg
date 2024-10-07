@@ -4,8 +4,8 @@ import strings
 
 // emit_test_case_struct generates the vlang struct for a test case.
 pub fn emit_test_case_struct(expected_struct string) string {
-	return 'struct TestCase {\n' + 'input string [required]\n' +
-		'expected []${expected_struct} [required]\n' + 'desc string\n' + '}'
+	return 'struct TestCase {\n' + 'input string @[required]\n' +
+		'expected []${expected_struct} @[required]\n' + 'desc string\n' + '}'
 }
 
 // emit_test_case generates the vlang code for a single test case.

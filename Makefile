@@ -1,3 +1,5 @@
+.DEFAULT_GOAL := all
+
 gen-grapheme:
 	v gen/.
 	./gen/gen grapheme
@@ -21,6 +23,8 @@ gen-sentence:
 	./gen/gen sentence_breaktest
 	v fmt -w sentence/sentence_breaktest.v
 	rm ./gen/gen
+
+all: gen-grapheme gen-word gen-sentence
 
 test:
 	v -stats test .

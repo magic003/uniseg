@@ -3,20 +3,18 @@ module word
 import common
 import os
 
-const (
-	word_property_url  = 'https://www.unicode.org/Public/${common.unicode_version}/ucd/auxiliary/WordBreakProperty.txt'
-	emoji_property_url = 'https://unicode.org/Public/${common.unicode_version}/ucd/emoji/emoji-data.txt'
-)
+const word_property_url = 'https://www.unicode.org/Public/${common.unicode_version}/ucd/auxiliary/WordBreakProperty.txt'
+const emoji_property_url = 'https://unicode.org/Public/${common.unicode_version}/ucd/emoji/emoji-data.txt'
 
 // gen_word_properties fetches properties and generates a vlang file used by word boundary rules.
 pub fn gen_word_properties() {
 	mut properties := []common.Property{}
 
-	properties << common.parse_properties(word.word_property_url, fn (line string) bool {
+	properties << common.parse_properties(word_property_url, fn (line string) bool {
 		return true
 	})
 
-	properties << common.parse_properties(word.emoji_property_url, fn (line string) bool {
+	properties << common.parse_properties(emoji_property_url, fn (line string) bool {
 		return line.contains('Extended_Pictographic')
 	})
 
@@ -44,7 +42,7 @@ fn write_word_properties(properties []common.Property) ! {
 	file.writeln('// WordCodePoint defines the code point range for a property.')!
 	file.writeln(common.emit_code_points_struct('WordCodePoint', 'WordProp') + '\n')!
 	file.writeln('// word_properties are the properties used for word boundary detection.')!
-	file.writeln('// They are taken from ${word.word_property_url}\n// and\n// ${word.emoji_property_url}\n// ("Extended_Pictographic" only).')!
+	file.writeln('// They are taken from ${word_property_url}\n// and\n// ${emoji_property_url}\n// ("Extended_Pictographic" only).')!
 	file.writeln(
 		common.emit_property_array('word_properties', properties, 'WordCodePoint', 'WordProp', 'wp') +
 		'\n')!

@@ -4,14 +4,12 @@ import common
 import net.http
 import os
 
-const (
-	grapheme_breaktest_url = 'https://www.unicode.org/Public/${common.unicode_version}/ucd/auxiliary/GraphemeBreakTest.txt'
-)
+const grapheme_breaktest_url = 'https://www.unicode.org/Public/${common.unicode_version}/ucd/auxiliary/GraphemeBreakTest.txt'
 
 // gen_grapheme_breaktest generates a vlang file containing the grapheme cluster break test cases.
 pub fn gen_grapheme_breaktest() {
-	println('Fetching ${grapheme.grapheme_breaktest_url}...')
-	lines := http.get_text(grapheme.grapheme_breaktest_url).split_into_lines()
+	println('Fetching ${grapheme_breaktest_url}...')
+	lines := http.get_text(grapheme_breaktest_url).split_into_lines()
 	mut tests := [][]string{}
 	for line in lines {
 		if line.len == 0 || line.starts_with('#') {
@@ -21,7 +19,7 @@ pub fn gen_grapheme_breaktest() {
 		comment := line.all_after('#').trim_space()
 		tests << [str, comment]
 	}
-	println('Finish parsing ${grapheme.grapheme_breaktest_url}.')
+	println('Finish parsing ${grapheme_breaktest_url}.')
 
 	write_grapheme_breaktest(tests) or { panic(error) }
 }
@@ -39,7 +37,7 @@ fn write_grapheme_breaktest(tests [][]string) ! {
 	file.writeln(common.emit_preamble('gen/gen.v grapheme_breaktest') + '\n')!
 	file.writeln(common.emit_test_case_struct('GraphemeCluster') + '\n')!
 	file.writeln('// grapheme_break_test_cases are the grapheme cluster break test cases.')!
-	file.writeln('// They are taken from ${grapheme.grapheme_breaktest_url}.')!
+	file.writeln('// They are taken from ${grapheme_breaktest_url}.')!
 	file.writeln('const grapheme_break_test_cases = [')!
 	for test in tests {
 		input, expected := common.parse_input_and_expectation(test[0], 'GraphemeCluster',

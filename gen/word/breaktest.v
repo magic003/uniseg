@@ -4,14 +4,12 @@ import common
 import net.http
 import os
 
-const (
-	word_breaktest_url = 'https://www.unicode.org/Public/${common.unicode_version}/ucd/auxiliary/WordBreakTest.txt'
-)
+const word_breaktest_url = 'https://www.unicode.org/Public/${common.unicode_version}/ucd/auxiliary/WordBreakTest.txt'
 
 // gen_word_breaktest generates a vlang file containing the word boundary break test cases.
 pub fn gen_word_breaktest() {
-	println('Fetching ${word.word_breaktest_url}...')
-	lines := http.get_text(word.word_breaktest_url).split_into_lines()
+	println('Fetching ${word_breaktest_url}...')
+	lines := http.get_text(word_breaktest_url).split_into_lines()
 	mut tests := [][]string{}
 	for line in lines {
 		if line.len == 0 || line.starts_with('#') {
@@ -21,7 +19,7 @@ pub fn gen_word_breaktest() {
 		comment := line.all_after('#').trim_space()
 		tests << [str, comment]
 	}
-	println('Finish parsing ${word.word_breaktest_url}.')
+	println('Finish parsing ${word_breaktest_url}.')
 
 	write_word_breaktest(tests) or { panic(error) }
 }
@@ -39,7 +37,7 @@ fn write_word_breaktest(tests [][]string) ! {
 	file.writeln(common.emit_preamble('gen/gen.v word_breaktest') + '\n')!
 	file.writeln(common.emit_test_case_struct('WordBoundary') + '\n')!
 	file.writeln('// word_break_test_cases are the word boundary break test cases.')!
-	file.writeln('// They are taken from ${word.word_breaktest_url}.')!
+	file.writeln('// They are taken from ${word_breaktest_url}.')!
 	file.writeln('const word_break_test_cases = [')!
 	for test in tests {
 		input, expected := common.parse_input_and_expectation(test[0], 'WordBoundary',
